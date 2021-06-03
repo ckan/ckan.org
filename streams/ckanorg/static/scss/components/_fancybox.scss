@@ -1,0 +1,23 @@
+.fancybox-content{
+  max-width: 560px;
+  width: 100%;
+  background: $white;
+  padding: 48px 64px;
+  @media all and (max-width: 767px){
+    padding: 48px 15px;
+  }
+  h3,
+  h4{
+    margin-bottom: 8px;
+  }
+}
+
+.fancybox-slide--html .fancybox-close-small{
+  padding: 5px;
+  color: $blue;
+}
+.thanks-box{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

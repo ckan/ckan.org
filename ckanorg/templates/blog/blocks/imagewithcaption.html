@@ -1,0 +1,13 @@
+{% load static wagtailimages_tags %}
+{% image self.image scale-100 as image %}
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <figure class="text-center">   
+          <img src="{{ image.url }}" alt="{{ image.alt }}"> 
+          <figcaption>{{ self.caption }}</figcaption>
+      </figure>
+    </div>
+  </div>
+</div>

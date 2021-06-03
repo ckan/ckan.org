@@ -1,0 +1,112 @@
+// Colors
+$black: #000;
+$dark-gray: #333;
+$medium-gray: #666;
+$blue: #0000EE;
+$red: #ED5248;
+$white: #fff !default;
+$light-gray: #aaa;
+$light-gray-2: #999;
+$dark-black: #111;
+$dark: #1C1C1C;
+
+// Fonts
+$base-font-sans-serif: 'SF Pro Display', sans-serif;
+$second-font-sans-serif: 'SF Pro Display Bold', sans-serif;
+
+// Body
+$base-background-color: $white !default;
+$font-size-base: 20px !default;
+$font-weight-base: 400 !default;
+$base-line-height: 1.3 !default;
+$base-min-width: 320px !default;
+$base-color: $black !default;
+$base-font-family: $base-font-sans-serif;
+
+// Container
+$base-max-width: 1326px !default;
+$base-padding: 0 18px !default;
+$lg-max-w: 1396px;
+$md-max-w: 1106px;
+$sm-max-w: 886px;
+
+// form
+$base-input-bg-color: transparent;
+$base-form-color: $dark;
+$base-form-font-family: $base-font-sans-serif;
+$base-form-border-radius: 0;
+$form-element-padding: 9px 14px !default;
+$form-element-border-color: $light-gray-2 !default;
+$form-element-focus-border-color: $medium-gray !default;
+$form-element-font-size: 20px !default;
+$form-element-line-height: 1.3 !default;
+$form-element-font-weight: 400 !default;
+$placeholder-color: #888 !default;
+$placeholder-hover-color: $dark-gray;
+$placeholder-focus-color: transparent;
+
+// Links
+$base-link-color: $blue !default;
+$base-link-font-weight: 400 !default;
+$base-link-hover-color: $blue !default;
+
+// Buttons
+$btn-color: $white !default;
+$btn-border-radius: 6px !default;
+$btn-padding: 7px 20px !default;
+$btn-font-size: 20px !default;
+$btn-font-weight: 400 !default;
+$btn-line-height: 1.3 !default;
+$btn-background-color: $blue;
+$btn-min-width: 44px;
+$btn-border: 2px solid $blue;
+
+// default border-color
+$btn-blue-border: 2px solid $blue;
+$btn-black-border: 2px solid $black;
+$btn-grey-border: 2px solid $dark-gray;
+// primary Buttons
+$btn-blue-background-color: $blue;
+$btn-black-color: $black;
+$btn-grey-color: $dark-gray;
+
+// lg Buttons
+$btn-lg-border-radius: 100px;
+$btn-lg-padding: 16px 34px;
+$btn-lg-font-size: 18px;
+$btn-lg-fw: 600;
+
+// sm Buttons
+$btn-sm-padding: 6.5px 12px;
+$btn-sm-font-size: 15px;
+$btn-sm-lh: 1;
+$btn-sm-fw: 800;
+$btn-sm-br: 100px;
+
+// Headers
+$h1-font-size: 50px !default;
+$h1-lh: 54px;
+$h2-font-size: 40px !default;
+$h2-lh: 42px;
+$h3-font-size: 24px !default;
+$h3-lh: 30px;
+$h4-font-size: 24px !default;
+$h5-font-size: 24px !default;
+$h6-font-size: 20px !default;
+$p-font-size: 20px !default;
+$body_extra_large: 24px;
+$body_large: 20px;
+$body_medium: 18px;
+$body_small: 16px;
+$body_extra_small: 14px;
+$body_overline: 15px;
+
+// blockquote
+$blockquote-color: $white;
+$blockquote-font-size: 16px;
+$blockquote-font-family: $second-font-sans-serif;
+$blockquote-font-weight: 400;
+$blockquote-opacity: .85;
+$blockquote-margin:  0 0 43px;
+$blockquote-line-height: 1.7;
+$blockquote-padding: 62px 0 0;

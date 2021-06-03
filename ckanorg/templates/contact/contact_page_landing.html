@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+<div class="container py-lg-5">
+    <div class="row">
+        <div class="col-xs-1" align="center" style="padding: 200px 0px">
+            {{ page.thank_you_text|richtext }}
+        <div>
+    </div>
+</div>
+{% endblock %}
+

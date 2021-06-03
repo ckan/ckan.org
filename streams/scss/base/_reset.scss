@@ -1,0 +1,46 @@
+html {
+  box-sizing: border-box;
+  height: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+* {
+  max-height: 1000000px;
+}
+
+body {
+  font: $font-weight-base #{$font-size-base}/#{$base-line-height} $base-font-sans-serif;
+  background: $base-background-color;
+  min-width: $base-min-width;
+  color: $base-color;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: top;
+}
+
+strong,
+b {
+  font-weight: 700;
+}
+figure{
+  margin-left: 0;
+  margin-right: 0;
+}
+figcaption{
+  text-align: center;
+  font-size: 16px;
+  margin-top: 10px;
+  color: $medium-gray;
+  @media all and (max-width: 767px){
+    font-size: 12px;
+    line-height: 16px;
+  }
+}

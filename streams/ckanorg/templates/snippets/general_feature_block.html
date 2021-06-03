@@ -1,0 +1,21 @@
+{% load static wagtailimages_tags %}
+
+{% image feature.icon scale-100 as icon %}
+{% image feature.image fill-630x520 as image %}
+            
+<div class="feature-box">
+    <div class="two-columns">
+        <div class="two-columns-item">
+            <div class="two-columns-item-info">
+                <img src="{{ icon.url }}" alt="">
+                <h2 class="h1">{{ feature.title }}</h2>
+                <h3 class="h3">{{ feature.subtitle }}</h3>
+                <p>{{ feature.text }}</p>
+                <a href="{{ feature.read_more_page.url }}" class="read-more">Read more <img src="{% static 'img/arrow-right.svg' %}" alt=""></a>
+            </div>
+        </div>
+        <div class="two-columns-item {% if image_right %}order{% endif %}">
+            <img class="feature-img" src="{{ image.url }}" alt="">
+        </div>
+    </div>
+</div>

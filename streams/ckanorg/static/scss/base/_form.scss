@@ -1,0 +1,170 @@
+form,
+fieldset {
+  margin: 0;
+  padding: 0;
+  border-style: none;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="search"],
+input[type="password"],
+input[type="file"],
+textarea {
+  @include size(100%, 44px);
+  box-sizing: border-box;
+  font-size: $form-element-font-size;
+  font-weight: $form-element-font-weight;
+  line-height: $form-element-line-height;
+  padding: $form-element-padding;
+  border: 1px solid $form-element-border-color;
+  border-radius: $base-form-border-radius;
+  color: $base-form-color;
+  display: block;
+  font-family: $base-form-font-family;
+  outline: none;
+  -webkit-appearance: none;
+  background: $base-input-bg-color;
+  @include animate(border-color color);
+  margin-right: 10px;
+  @media all and (min-width: 600px) {
+    max-width: 410px;
+  }
+  @media all and (max-width: 599px) {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  @include placeholder {
+    color: $placeholder-color;
+    @include animate(color, .3s, ease-in-out);
+  }
+
+  &:focus {
+    border-color: $form-element-focus-border-color;
+
+    @include placeholder {
+      color: $placeholder-hover-color;
+    }
+  }
+  &:-webkit-autofill:active,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill{
+    -webkit-text-fill-color: $base-form-color;
+    -webkit-box-shadow:0 0 0 36px $dark inset;
+  }
+}
+
+textarea {
+  @include size(100%, 60px);
+  resize: none;
+  vertical-align: top;
+  padding: $form-element-padding;
+}
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="file"],
+input[type="submit"] {
+  cursor: pointer;
+  border-radius: 6px;
+  -webkit-appearance: none;
+}
+
+label{
+  margin-bottom: 2px;
+  display: block;
+  color: $medium-gray;
+  font-size: 12px;
+}
+.error{
+  position: relative;
+  label{
+    color: $red;
+  }
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"],
+  input[type="search"],
+  input[type="password"],
+  input[type="file"],
+  textarea{
+    border-color: $red;
+    color: $red;
+  }
+}
+.error-message{
+  background: $red;
+  color: $white;
+  font-size: 11px;
+  padding: 1px 8px;
+  margin-top: 11px;
+  position: absolute;
+  &:before{
+    content: '';
+    display: block;
+    border-bottom: 9px solid $red;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    margin-top: -9px;
+    width: 9px;
+  }
+}
+.custom-checkbox{
+  input{
+    display: none;
+  }
+  a{
+    margin: 0 5px;
+    font-size: 14px;
+  }
+  label{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    cursor: pointer;
+    padding-left: 36px;
+    font-size: 14px;
+    color: $dark;
+    &:before{
+      content: '';
+      display: block;
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      border: 1px solid $light-gray;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    &:hover:before{
+      border-color: $dark-gray;
+    }
+    a{
+      color: $red;
+      &:hover{
+        color: $dark;
+        text-decoration: underline;
+      }
+    }
+  }
+  input:checked + label:before{
+    background: $red;
+    border-color: $red;
+  }
+  input:checked + label:after{
+    content: '';
+    display: block;
+    width: 6px;
+    height: 12px;
+    border: solid $white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    position: absolute;
+    top: 5px;
+    left: 9px;
+  }
+}

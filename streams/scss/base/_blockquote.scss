@@ -1,0 +1,44 @@
+blockquote {
+  font-size: $blockquote-font-size;
+  font-family: $blockquote-font-family;
+  text-align: center;
+  color: $blockquote-color;
+  margin: $blockquote-margin;
+  font-weight: $blockquote-font-weight;
+  line-height: $blockquote-line-height;
+  position: relative;
+  padding: $blockquote-padding;
+
+  .icon-left-quote {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+    top: 0;
+  }
+
+  q {
+    opacity: $blockquote-opacity;
+    &:not(:last-child) {
+      margin: 0 0 45px;
+      display: block;
+    }
+
+    &:after, &:before {
+      content: none;
+    }
+  }
+
+  cite {
+    display: inline-block;
+    vertical-align: top;
+    font-style: normal;
+    text-transform: uppercase;
+    font-family: $base-font-family;
+    font-size: 14px;
+
+    &:not(:last-child) {
+      margin: 0 0 10px;
+    }
+  }
+}

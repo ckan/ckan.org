@@ -1,0 +1,113 @@
+.btn {
+  background: $btn-background-color;
+  color: $btn-color;
+  outline: none;
+  border: $btn-border;
+  padding: $btn-padding;
+  min-width: $btn-min-width;
+  line-height: $btn-line-height;
+  cursor: pointer;
+  font-weight: $btn-font-weight;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  @include animate(border color background);
+  font-size: $btn-font-size;
+  border-radius: $btn-border-radius;
+  svg{
+    path{
+      fill: $white;
+      @include animate(fill);
+    }
+  }
+  @media all and (max-width: 767px){
+    font-size: 16px;
+    justify-content: center;
+  }
+  @media all and (max-width: 350px){
+    padding: 7px;
+    width: 100%;
+    text-align: center;
+  }
+  &:active,
+  &:focus,
+  &:hover {
+    color: $blue;
+    background: $white;
+    svg{
+      path{
+        fill: $blue;
+      }
+    }
+  }
+
+  &.btn-black {
+    border: $btn-black-border;
+    color: $btn-black-color;
+    background: transparent;
+    svg{
+      path{
+        fill: $black;
+      }
+    }
+    &:active,
+    &:focus,
+    &:hover{
+      background: $black;
+      color: $white;
+      svg{
+        path{
+          fill: $white;
+        }
+      }
+    }
+  }
+  &.btn-grey{
+    background: transparent;
+    border: $btn-grey-border;
+    color: $btn-grey-color;
+    svg{
+      path{
+        fill: $dark-gray;
+      }
+    }
+    &:active,
+    &:focus,
+    &:hover{
+      background: $btn-grey-color;
+      color: white;
+      svg{
+        path{
+          fill: $white;
+        }
+      }
+    }
+
+  }
+
+  &.btn-sm{
+    padding: $btn-sm-padding;
+    font-size: $btn-sm-font-size;
+    line-height: $btn-sm-lh;
+    font-weight: $btn-sm-fw;
+    border-radius: $btn-sm-br;
+    font-family: $second-font-sans-serif;
+  }
+  &.btn-lg{
+    border-radius: $btn-lg-border-radius;
+    padding: $btn-lg-padding;
+    font-size: $btn-lg-font-size;
+    font-weight: $btn-lg-fw;
+  }
+  &.btn-lg-br{
+    border-radius: $btn-lg-border-radius;
+  }
+  svg{
+    margin-right: 5px;
+  }
+  &.send{
+    background: $blue url("../img/icon-send.svg") no-repeat;
+    background-position: center;
+  }
+}

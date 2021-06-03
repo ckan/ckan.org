@@ -1,0 +1,15 @@
+
+{% load static wagtailimages_tags %}
+
+{% image feature.icon scale-100 as icon %}
+
+<li>
+    <div class="feature-list-icon">
+        <img src="{{ icon.url }}" alt="">
+    </div>
+    <div class="feature-list-info">
+        <h2 class="h2">{{ feature.title }}</h2>
+        <p>{{ feature.sub_title }}</p>
+        <a href="{{ feature.read_more_page.url }}" class="read-more">Read more <img src="{% static 'img/arrow-right.svg' %}" alt=""></a>
+    </div>
+</li>

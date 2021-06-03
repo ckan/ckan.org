@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static wagtailimages_tags wagtailcore_tags page_tags wagtailmetadata_tags %}
+
+{% block meta_tags %}{% meta_tags %}{% endblock %}
+
+{% block content %}
+
+        {% image page.contributors_image scale-100 as image %}
+
+        <section class="section-banner">
+            <div class="container-sm t-center">
+                <h1> {{ page.subtitle }}</h1>
+                <p class="grey body_extra_large">Over 240 contributors and counting. <a href="https://github.com/ckan/ckan/graphs/contributors" target="_blank" rel="noopener" class="grey body_extra_large">See all of them on Github.</a></p>
+            </div>
+            <div class="photo">
+                <img src="{{ image.url }}" alt="{{ image.alt }}">
+            </div>
+        </section>
+
+        {% include '../snippets/contribute_help_block.html' %}
+
+        <div class="container-sm t-center">
+            <h2 class="h1">{{ page.tech_team_title }}</h2>
+            <p class="body_extra_large">{{ page.tech_team_subtitle }}</p>
+        </div>
+        <div class="container inner-indent developers">
+            <ul class="team-list">
+                {% for item in page.developers.all %}
+                        {% include "../snippets/developer_block.html" with developer=item.developer %}
+                {% endfor %}
+            </ul>
+            <div id="stewards"></div>
+        </div>
+
+        <div class="container-sm t-center inner-indent">
+            <h2 class="h1">{{ page.stewards_title }}</h2>
+            <p class="body_extra_large">{{ page.stewards_subtitle }}</p>
+        </div>
+        <div class="container inner-indent">
+            <div class="two-columns">
+
+                {% for item in page.stewards.all %}
+                        {% include "../snippets/steward_block.html" with steward=item.steward %}
+                {% endfor %}
+
+            </div>
+        </div>
+            <div class="container-sm t-center speak-with-us">
+                <h2>Speak with us</h2>
+                <p>Our <a href="{% if community_page %}{{ community_page.url }}#stewards{% else %}#{% endif %}">CKAN stewards</a> help organisations of all sizes around the globe <br> learn more about implementing CKAN open data portals.
+                    <br class="mobile-hidden" />The best way to get in touch is via the form below</p>
+                <form action="#" id="stewardForm">
+                    <iframe src="csrf/" style="display: none;"></iframe>
+                    <div class="row">
+                        <input type="text" id="steward_email" placeholder="Your email" autocomplete="off"/>
+                        <input type="submit" value="Schedule a meeting" class="btn">
+                    </div>
+                </form>
+            </div>
+        <div class="indent">
+        <div class="container-md">
+            {% for item in page.working_groups.all %}
+                    {% include "../snippets/working_group_block.html" with working_group=item.working_group page_for=page.page_for %}
+            {% endfor %}
+        </div>            
+        <div class="separator alt"></div>
+
+{% endblock content %}

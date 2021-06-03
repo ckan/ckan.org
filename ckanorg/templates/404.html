@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block body_class %}template-404{% endblock %}
+
+{% block content %}
+    <div class="message_404_500">
+        <h2>Sorry, this page could not be found.</h2>
+        <h3><a href="/">Home</a></h3>
+    </div>
+    <script>
+         setTimeout(function(){
+            window.location.href = '/';
+         }, 5000);
+    </script>
+{% endblock %}

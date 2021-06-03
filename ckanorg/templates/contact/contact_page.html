@@ -1,0 +1,28 @@
+{% load wagtailcore_tags %}
+
+
+{{ page.title }}
+{{ page.intro|richtext }}
+
+<form action='{% pageurl page %}' method='POST', role='form'>
+    {% csrf_token %}
+
+    {% for field in form %}
+        <div class="row">
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">
+                    {{ field.label }}
+                </label>
+                {{ field }}
+                {% if field.errors %}
+                    {% for err in field.errors %}
+                        * {{ err|escape }}{% if not forloop.last %} <br> {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <br>
+    {% endfor %}
+
+    <button type='submit'>Submit</button>
+</form>

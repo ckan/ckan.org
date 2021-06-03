@@ -1,0 +1,34 @@
+{% load static wagtailimages_tags %}
+
+
+{% image feedback.image scale-100 as img %}
+{% comment %} <div class="container-sm t-center">
+    <ul class="quotes-slider"> {% endcomment %}
+        <li>
+            <div class="quotes-item">
+                <div class="quotes-item-icon">
+                    <img src="{% static 'img/quote.svg' %}" alt="">
+                </div>
+
+                {% if img %}
+                    <div class="quotes-item-text">
+                        <p>{{ feedback.text }}</p>
+                        <div class="author-box">
+                            <div class="author-box-ava">
+                                <img src="{{ img.url }}" alt="{{ img.alt }}">
+                            </div>
+                            <div class="author-box-info">
+                                <strong class="author">{{ feedback.name }}</strong>
+                                <span class="adr">{{ feedback.role }}</span>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="quotes-item-text">
+                        <p> {{ feedback.text }} </p>
+                        <strong class="author">{{ feedback.name }}</strong>
+                        <span class="adr">{{ feedback.role }}</span>
+                    </div>
+                {% endif %}
+            </div>
+        </li>

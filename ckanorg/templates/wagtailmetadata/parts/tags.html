@@ -1,0 +1,6 @@
+{% extends "wagtailmetadata/parts/tags.html" %}
+
+{% block tags %}
+    {{ block.super }}
+    <meta name="keywords" content="{{ object.keywords }}">
+{% endblock %}

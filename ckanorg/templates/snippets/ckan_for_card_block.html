@@ -1,0 +1,10 @@
+
+{% load wagtailimages_tags %}
+
+{% image card.image fill-625x340 as img %}
+<div class="two-columns-item skan-for-card-block" onclick="location.href='{{ card.internal_page.url }}'">
+    <h2>{{ card.title }}</h2>
+    <p>{{ card.text }}</p>
+    <a href="{{ card.internal_page.url }}">{{ card.link_text }}</a>
+    <img src="{{ img.url }}" alt="{{ img.alt }}">
+</div>

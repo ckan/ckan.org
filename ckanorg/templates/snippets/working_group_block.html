@@ -1,0 +1,34 @@
+{% load static wagtailimages_tags page_tags modal_tags%}
+
+{% image working_group.image scale-100 as wg_image %}
+
+    <div class="government-working-group  {% if not page_for %} indent {% endif %}">
+        <div class="t-center inner-indent">
+            <h2 class="h2">{{ working_group.name }} {% if page_for %}{% endif %}</h2>
+            {% with working_group.description|split_string:"12" as chunks %}
+                <p>
+                {% for chunk in chunks %}
+                    {{ chunk }} <br class="mobile-hidden" />
+                {% endfor %}
+                </p>
+            {% endwith %}
+        </div>
+        <div class="gwg-columns">
+        {% if page_for == "government" %}{% with working_group|get_working_group_members as members %}
+                {% for member in members %}
+                    {% include "../snippets/working_group_member_block.html" with member=member %} 
+                {% endfor %}
+            {% endwith %}{% endif %}
+        </div>
+        <div class="gwg-two-cols">
+            <div class="gwg-two-cols-text">
+                {% if working_group.name == "Enterprise Working Group" %}
+                    <p id="let_us_know">If your enterprise organisation is one of the many who are adopting CKAN for data management and data governance workloads, then {% form_modal %} and join our new working group.</p>{% else %}
+                    <p>{{ working_group.additional_text }}</p>
+                {% endif %}
+            </div>
+            <div class="gwg-two-cols-img">
+                <img src="{{ wg_image.url }}" alt="">
+            </div>
+        </div>
+    </div>

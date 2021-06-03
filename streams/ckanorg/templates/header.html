@@ -1,0 +1,53 @@
+{% load static menu_tags page_tags modal_tags %}
+
+{% get_menu 'header-menu' as menu %}
+
+<header class="header">
+    <div class="header-holder">
+        <div class="container">
+            <div class="logo">
+                <a href="/"><img src="{% static 'img/logo.svg' %}" alt="Logotype" width="160" height="44"></a>
+            </div>
+            <nav class="nav">
+                <div class="nav-opener"><span></span></div>
+                <div class="nav-drop">
+                    <ul class="nav-menu">
+                    {% with menu.menu_items.all as menu_items %}
+                        {% for item in menu_items %}
+                            {% is_active request item as active%}
+                            {% if item.link_title == "Solutions" or item.link_title == "Support" %}
+                                {% if item.link_title == "Solutions" %}
+                                    <div class="dropdown">
+                                    <button onclick="clickDropdown('{{item.link_title}}')" id="dropbtn-{{item.link_title}}" {% if request.path == "/enterprise" or request.path == "/government" %} class="active"{% endif %}>{{item.link_title}} <span class="support-arrow"></span></button>
+                                    <div id="{{item.link_title}}_dropdown" class="dropdown-content">
+                                            <a href="/government">CKAN for Government</a>
+                                            <a href="/enterprise">CKAN for Enterprise</a>
+                                        {%endif%}
+                                {% if item.link_title == "Support" %}
+                                    <div class="dropdown">
+                                    <button onclick="clickDropdown('{{item.link_title}}')" id="dropbtn-{{item.link_title}}" {% if request.path == "/community" or request.path == "/commercial" %} class="active"{% endif %}>{{item.link_title}} <span class="support-arrow"></span></button>
+                                    <div id="{{item.link_title}}_dropdown" class="dropdown-content">
+                                            <a href="/community">Community Support</a>
+                                            <a href="/commercial">Commercial Support</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% else %}
+                                <li {% if active%} class="active" {% endif %}>
+                                    <a href="{{ item.link }}"
+                                    {% if item.open_in_new_tab %}target="_blank"{% endif %}
+                                    {% if item.show_as_button == True %}class="btn btn-sm btn-grey"{% endif %}
+                                    >{% if item.svg_icon and item.icon_before_text %}{{item.svg_icon|safe}}{% endif %}
+                                    {{ item.link_title }}{% if item.svg_icon and not item.icon_before_text %}
+                                    {{item.svg_icon|safe}}{%endif%}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    {% endwith %}
+                    </ul>
+                </div>
+
+            </nav>
+        </div>
+    </div>
+</header>

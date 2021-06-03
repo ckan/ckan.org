@@ -1,0 +1,56 @@
+.container {
+  margin: 0 auto;
+  max-width: $base-max-width;
+  width: 100%;
+  padding: $base-padding;
+}
+.container-lg{
+  @extend .container;
+  max-width: $lg-max-w;
+}
+.container-md{
+  @extend .container;
+  max-width: $md-max-w;
+}
+.container-sm{
+  @extend .container;
+  max-width: $sm-max-w;
+}
+.container-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.m-t-100{
+  margin-top: 100px;
+  @media all and (max-width: 767px){
+    margin-top: 64px;
+  }
+}
+.m-100{
+  margin-top: 100px;
+  margin-bottom: 100px;
+  @media all and (max-width: 767px){
+    margin-top: 64px;
+    margin-bottom: 64px;
+  }
+}
+.mt-32{
+  margin-top: 32px;
+}
+.mb-56{
+  margin-bottom: 56px;
+}
+@mixin ii{
+  padding: 48px 0;
+  @media all and (min-width: 1024px){
+    padding: 96px 0;
+  }
+}
+
+@media all and (max-width: 767px){
+  .container-flex {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+}

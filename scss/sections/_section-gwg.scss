@@ -1,0 +1,127 @@
+.government-working-group{
+  background: #F3F3F3;
+  border: 1px solid #DDDDDD;
+  padding: 0 19px;
+  & + .government-working-group{
+    margin-top: -1px;
+  }
+}
+.gwg-columns{
+  @media all and (min-width: 768px) {
+    display: flex;
+    justify-content: space-around;
+  }
+  .gwg-columns-item{
+    @media all and (min-width: 768px){
+      width: 26.5%;
+    }
+
+  }
+}
+.gwg-card{
+  margin-bottom: 35px;
+  .gwg-card-img{
+    width: 100%;
+    height: 160px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 16px;
+    a{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+    }
+  }
+  .gwg-card-info{
+    p{
+      font-size: 14px;
+      line-height: 18px;
+      margin-bottom: 0;
+      color: $black;
+      @media all and (min-width: 768px){
+        font-size: 16px;
+        line-height: 20px;
+        margin-bottom: 10px;
+      }
+    }
+    a{
+      text-decoration: none;
+      font-size: 14px;
+      &:hover{
+        text-decoration: underline;
+      }
+      @media all and (min-width: 768px){
+        font-size: 16px;
+      }
+    }
+  }
+}
+.gwg-two-cols{
+  @media all and (min-width: 768px){
+    display: flex;
+  }
+  .gwg-two-cols-text{
+    color: $dark-gray;
+    position: relative;
+    z-index: 1;
+    @media all and (min-width: 768px){
+      flex-basis: 65%;
+      padding: 35px 30px 0;
+
+    }
+  }
+  .gwg-two-cols-img{
+    margin-right: -19px;
+    height: 180px;
+    position: relative;
+    margin-top: 30px;
+    @media all and (min-width: 768px){
+      flex-basis: 60%;
+      margin-left: -15%;
+      margin-top: 0;
+      height: 260px;
+    }
+    img{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      font-family: "object-fit: cover;";
+    }
+  }
+}
+.image-to-corners{
+  background: #f4f4f4;
+  align-items: flex-end;
+  @media all and (min-width: 768px){
+    background: $white;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 1px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+  }
+  .image-to-corners-info{
+    padding: 15px 12px;
+    @media all and (min-width: 768px){
+      padding: 40px;
+      width: 50%;
+    }
+  }
+  .image-to-corners-img{
+    @media all and (min-width: 768px){
+      width: 50%;
+      margin-top: 20px;
+      max-height: 240px;
+    }
+    img{
+      width: 100%;
+      height: auto;
+    }
+  }
+}

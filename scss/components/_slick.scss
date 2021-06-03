@@ -1,0 +1,68 @@
+.slick-slide{
+  outline: none;
+}
+.quotes-slider{
+  margin: 110px 0 90px;
+  padding: 0;
+  list-style: none;
+  @media all and (max-width: 767px){
+    margin: 50px 0;
+  }
+  .slick-list{
+    overflow: visible;
+  }
+  .slick-dots{
+    li:only-child {
+      display: none;
+    }
+  }
+}
+.quotes-item{
+  display: flex;
+  @media all and (max-width: 767px){
+    flex-direction: column;
+  }
+  .quotes-item-icon{
+    flex-shrink: 0;
+    margin-right: 30px;
+    @media all and (max-width: 767px){
+      margin-left: -25px;
+      margin-bottom: 10px;
+    }
+  }
+  .quotes-item-text{
+    text-align: left;
+    max-width: 625px;
+    p{
+      margin-bottom: 18px;
+    }
+    .author{
+      display: block;
+    }
+    .adr{
+      font-size: 16px;
+    }
+  }
+}
+.author-box{
+  display: flex;
+  align-items: center;
+  .author-box-ava{
+    margin-right: 20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 80px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    img{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      font-family: "object-fit: cover;";
+    }
+  }
+}

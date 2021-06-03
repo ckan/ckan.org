@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static modal_tags %}
+{% load wagtailimages_tags wagtailcore_tags page_tags wagtailmetadata_tags %}
+
+{% block meta_tags %}{% meta_tags %}{% endblock %}
+
+{% block content %}
+        <section class="section-banner">
+            <div class="container-sm t-center">
+            {% with page.home_page_subtitle|split_string:"5" as chunks %}
+                <h1>
+                {% for chunk in chunks %}
+                    {{ chunk }} <br class="mobile-hidden" />
+                {% endfor %}
+                </h1>
+            {% endwith %}
+            </div>
+            
+                {% for card in page.ckan_git %}
+                    {% include_block card %}
+                {% endfor %}
+
+        </section>       
+        <div class="grey-bg gradient">
+            <div class="container">
+                <div class="t-center partners inner-indent">
+                    <p class="powering_text">Powering open data at:</p>
+                    {% with page.powering_images.all|split_images:"6" as chunks %}
+                        {% for chunk in chunks %}
+                            <ul>
+                                {% for item in chunk %}
+                                    {% image item.powering_image.image scale-100 as img %}
+                                    <li> <a href="{{ item.powering_image.link }}" target="_blank" rel="noopener"><img src="{{ img.url }}" alt="{{ img.alt }}"></a></li>
+                                {% endfor %}
+                            </ul>
+                        {% endfor %}
+                    {% endwith %}
+                </div>
+            </div>
+            <div class="container-lg">
+                <div class="org">
+                    <div class="two-columns">
+                        {% for item in page.ckan_for_cards.all %}
+                            {% include "../snippets/ckan_for_card_block.html" with card=item.ckan_for_card %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="indent">
+            <div class="container-sm t-center speak-with-us speak-with-us-home">
+                <h2>Speak with us</h2>
+                <p>Our <a href="{% if community_page %}{{ community_page.url }}#stewards{% else %}#{% endif %}">CKAN stewards</a> help organisations of all sizes around the globe <br> learn more about implementing CKAN open data portals.
+                    <br class="mobile-hidden" />The best way to get in touch is via the form below</p>
+                {% comment %}<form action="#" id="stewardForm">
+                    {% csrf_token %}
+                    <div class="row">
+                        <input type="text" id="steward_email" placeholder="Your email" autocomplete="off"/>
+                        <input type="submit" value="Schedule a meeting" class="btn">
+                    </div>
+                </form>{% endcomment %}
+                {% form_modal %}
+                <div class="separator"></div>
+                <h2>Powered by CKAN</h2>
+                <p>A showcase of government and enterprise open data portals that use CKAN as their data management system of choice. <a href="{% if showcase_page %}{{showcase_page.url}}{% else %}#{% endif %}">See all showcase sites.</a></p>
+            </div>
+        </div>
+        <div class="container-lg">
+            <div class="card">
+                <div class="two-columns">
+                    {% for item in page.powered_cards.all %}
+                        {% include "../snippets/pow_by_ckan_card_block.html" with card=item.powered_card %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="indent">
+            <div class="container-sm t-center">
+                <div class="separator"></div>
+                <h2>Join our next webinar</h2>
+                <p>Where we showcase CKAN to people - it's free to join and open to everyone.</p>
+                <form action="#" id="webinarForm">
+                    <iframe src="csrf/" style="display: none;"></iframe>
+                    <div class="row">
+                        <input type="text" id="webinar_email" placeholder="Your email" autocomplete="off"/>
+                        <input type="submit" value="Get an invite" class="btn">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="separator alt"></div>
+
+{% endblock content %}
+

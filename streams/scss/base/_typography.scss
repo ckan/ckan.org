@@ -1,0 +1,115 @@
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, .h {
+  margin: 0 0 10px;
+  font-family: $second-font-sans-serif;
+  color: $black;
+  position: relative;
+  @media all and (min-width: 768px){
+    &:last-child {
+      margin: 0;
+    }
+  }
+}
+
+h1, .h1 {
+  font-size: $h1-font-size;
+  line-height: $h1-lh;
+  font-weight: 800;
+  margin: 0 0 16px;
+}
+
+h2, .h2 {
+  font-size: $h2-font-size;
+  font-weight: 800;
+  line-height: $h2-lh;
+  color: $dark-gray;
+}
+
+h3, .h3 {
+  font-size: $h3-font-size;
+  line-height: $h3-lh;
+  font-weight: 800;
+}
+
+h4, .h4 {
+  font-size: $h4-font-size;
+  font-weight: 500;
+}
+
+h5, .h5 {
+  font-size: $h5-font-size;
+  font-weight: 500;
+}
+
+h6, .h6 {
+  font-size: $h6-font-size;
+  font-weight: normal;
+}
+
+a {
+  text-decoration: underline;
+  color: $base-link-color;
+  outline: none;
+  font-weight: $base-link-font-weight;
+  font-size: 18px;
+  @include animate(color);
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: $base-link-hover-color;
+  }
+}
+
+p {
+  margin: 0;
+  &:not(:last-child) {
+    margin: 0 0 30px;
+    @media all and (max-width: 767px){
+      margin-bottom: 20px;
+    }
+  }
+}
+.text{
+  font-size: 24px;
+  line-height: 28px;
+  color: $dark;
+  @media all and (max-width: 767px){
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+@media all and (max-width: 1024px){
+  h1, .h1{
+    font-size: 28px;
+    line-height: 32px;
+  }
+  h2, .h2{
+    font-size: 24px;
+    line-height: 30px;
+  }
+  h3, .h3{
+    font-size: 18px;
+    line-height: 23px;
+  }
+  h4, .h4{
+    font-size: 16px;
+    line-height: 24px;
+  }
+  h5, .h5{
+    font-size: 14px;
+    line-height: 22px;
+  }
+  .text{
+    font-size: 18px;
+    line-height: 24px;
+  }
+  a{
+    font-size: 16px;
+  }
+}
+@media all and (max-width: 767px){
+  p{
+    font-size: 16px;
+    line-height: 20px;
+  }
+}

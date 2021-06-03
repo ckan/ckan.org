@@ -1,0 +1,31 @@
+.partners{
+  p{
+    font-size: $body_small;
+    color: $medium-gray;
+  }
+  ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @media all and (max-width: 767px){
+      justify-content: flex-start;
+      overflow: auto;
+    }
+    li{
+      margin: 12px 25px;
+      @media all and (max-width: 767px){
+        margin: 12px 10px;
+        flex-shrink: 0;
+      }
+      img{
+        @media all and (max-width: 767px){
+          max-height: 36px;
+          max-width: 100px;
+        }
+      }
+    }
+  }
+}

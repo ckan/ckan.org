@@ -1,0 +1,40 @@
+.row {
+  margin: 0 0 30px;
+  @media all and (min-width: 600px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.col-sm {
+  width: (100%/4);
+  padding: 0 15px;
+}
+
+.col-md {
+  width: (100%/3);
+  padding: 0 15px;
+  display: flex;
+}
+
+.col-lg {
+  width: (100%/1.5);
+  padding: 0 15px;
+}
+
+@media all and (max-width: 1024px){
+  .col-sm {
+    width: (100%/2);
+  }
+
+  .row {
+    margin: 0 0 20px;
+  }
+}
+
+@media all and (max-width: 767px){
+  .col-sm, .col-lg, .col-md {
+    width: 100%;
+  }
+}

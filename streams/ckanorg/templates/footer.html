@@ -1,0 +1,23 @@
+{% load static modal_tags %}
+
+<footer class="footer">
+    <div class="container-lg">
+        <div class="two-columns">
+            <div class="two-columns-item">
+                <span>CKAN stewards</span>
+                <p>Datopian and Link Digital are co-stewards of the CKAN project and some of the longest standing contributors to CKAN. They both play key roles in ensuring the CKAN project thrives and delivers the best results for CKAN’s end users and stakeholders.</p>
+                <ul>
+                    <li><a href="https://linkdigital.com.au/" target="_blank" rel="noopener"><img src="{% static 'img/linkdigital-logo-footer.svg' %}" alt=""></a></li>
+                    <li><a href="https://www.datopian.com/" target="_blank" rel="noopener"><img src="{% static 'img/datopian-logo-footer.svg' %}" alt=""></a></li>
+                </ul>
+            </div>
+            <div class="two-columns-item">
+                <span>Held in trust by</span>
+                <p>CKAN assets are held in trust by <strong>Open Knowledge Foundation</strong>, a non-profit organization, with best practice policies on governing openly and for use of the trademark.</p>
+            </div>
+        </div>
+
+        {% form_modal %}
+
+    </div>
+</footer>

@@ -1,0 +1,14 @@
+{% load static wagtailimages_tags %}
+
+<div class="three-columns-item">
+    <div class="extension-box">
+        <a href={{ extension.url }} id="extension-link">
+            <div id="extension-data">
+                <h3 class="h3">{{ extension.title }}</h3>
+                <span class="author">by {{ extension.author }} <span class="rate"><img src="{% static 'img/icon-rate.svg' %}" alt="">&nbsp;{{ extension.rating }}</span></span>
+                <p>{{ extension.description }}</p>
+            </div>
+        </a>
+    </div>
+</div>
+

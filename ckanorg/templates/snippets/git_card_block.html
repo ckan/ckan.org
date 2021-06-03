@@ -1,0 +1,19 @@
+{% load wagtailimages_tags %}
+
+{% for card in self.cards %}
+    {% image card.image_top scale-100 as img_top %}
+    {% image card.image_bottom scale-100 as img_bottom %}
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col ckan-git">
+                <a href="{{ card.external_link }}" target="_blank" rel="noopener" class="ckan_git_link">
+                    <img src="{{ img_top.url }}" alt="{{ img_top.alt }}">
+                    <div class="ckan-git-repo-text">
+                        {{ card.text }}
+                    </div>
+                    <img src="{{ img_bottom.url }}" alt="{{ img_bottom.alt }}">
+                </a>
+            </div>
+        </div>
+    </div>
+{% endfor %}            

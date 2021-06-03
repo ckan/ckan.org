@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static wagtailimages_tags wagtailcore_tags page_tags wagtailmetadata_tags %}
+{% image steward.photo scale-100 as photo %}
+
+{% block meta_tags %}{% meta_tags %}{% endblock %}
+
+{% block content %}
+
+<div class="container-lg">
+    <div class="card commercial">
+        <p class="commercial-title"> {{ page.title }}</p>
+        <p class="commercial-subtitle"> {{ page.subtitle }}</p>
+        <div class="three-columns commercial-items">
+        {% for item in page.commercial.all %}
+            {% image item.commercial.image scale-100 as image %}
+            <div class="three-columns-item commercial-item">
+                <a href="{{ item.commercial.url }}" target="_blank" rel="noopener">
+                    <img src="{{ image.url }}" alt="{{ image.alt }}">
+                </a>
+                <div class="commercial-info">
+                    <a href="{{ item.commercial.url }}" target="_blank" rel="noopener">
+                        <div class="commercial-name">{{item.commercial.name}}</div>
+                    </a>
+                    <div class="commercial-level">{{item.commercial.level}}</div>
+                    <div class="commercial-about">{{item.commercial.about}}</div>
+
+                </div>
+                <div class="commercial-bottom">
+                    <div class="commercial-date">{%comment%}{{item.commercial.date_info}}{%endcomment%}</div>
+                    <a href="{{ item.commercial.url }}" target="_blank" rel="noopener" class="commercial-details">Details ></a>
+                </div>
+            </div>
+        {% endfor %}
+            <div class="three-columns-item commercial-item-dummy">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,29 @@
+.input-row {
+  margin: 0 -16px 15px;
+  display: flex;
+  flex-wrap: wrap;
+  &:last-of-type{
+    margin-bottom: 0;
+    .input-col-lg{
+      margin-bottom: 0;
+    }
+  }
+}
+
+.input-col-md {
+  width: 50%;
+  padding: 0 16px;
+  margin: 0 0 35px;
+}
+
+.input-col-lg {
+  width: 100%;
+  padding: 0 16px;
+  margin: 0 0 35px;
+}
+
+@media all and (max-width: 767px){
+  .input-col-md {
+    width: 100%;
+  }
+}

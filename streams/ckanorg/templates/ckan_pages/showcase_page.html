@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags page_tags wagtailmetadata_tags %}
+
+{% block meta_tags %}{% meta_tags %}{% endblock %}
+
+{% block content %}
+
+        <section class="section-banner">
+            <div class="container-sm t-center">
+                {% with page.page_subtitle|split_string:"6" as chunks %}
+                    <h1>
+                    {% for chunk in chunks %}
+                        {{ chunk }} <br class="mobile-hidden" />
+                    {% endfor %}
+                    </h1>
+                {% endwith %}
+            </div>
+        </section>
+        <div>
+            <div class="indent">
+                <div class="container-sm t-center">
+                    <span class="upper">Government</span>
+                </div>
+            </div>
+            <div class="container-lg">
+
+                <!-- SHOWCASE SECTION 1 -->
+
+                    <div class="card">
+                        <div class="two-columns">
+
+                            {% for item in page.showcase_section_1.all %}
+                                {% include "../snippets/pow_by_ckan_card_block.html" with card=item.showcase %}
+                            {% endfor %}
+
+                        </div>
+                    </div>
+
+                <!-- END SHOWCASE SECTION 1 -->
+
+            </div>
+        </div>
+        <div class="indent">
+
+            <!-- TESTIMONIAL SECTION 1 -->
+            <div class="container-sm t-center">
+                <ul class="quotes-slider top">            
+                    {% for item in page.feedback_section_1.all %}
+                        {% include "../snippets/feedback_block.html" with feedback=item.feedback %}
+                    {% endfor %}
+                </ul>
+            </div><br>
+            <!-- END TESTIMONIAL SECTION 1 -->
+
+            <div class="container-lg">
+                <div class="card">
+                    <div class="two-columns">
+
+                        <!-- SHOWCASE SECTION 2 -->
+
+                            {% for item in page.showcase_section_2.all %}
+                                {% include "../snippets/pow_by_ckan_card_block.html" with card=item.showcase %}
+                            {% endfor %}            
+
+                        <!-- END SHOWCASE SECTION 2 -->
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- TESTIMONIAL SECTION 2 -->
+            <div class="container-sm t-center">
+                <ul class="quotes-slider">
+                    {% for item in page.feedback_section_2.all %}
+                        {% include "../snippets/feedback_block.html" with feedback=item.feedback %}
+                    {% endfor %}
+                </ul>
+            </div><br>
+            <!-- END TESTIMONIAL SECTION 2 -->
+
+            <div>
+                <div class="indent">
+                    <div class="container-sm t-center">
+                        <span class="upper">Enterprise</span>
+                    </div>
+                </div>
+                <div class="container-lg">
+                    <div class="card">
+                        <div class="two-columns">
+
+                            <!-- SHOWCASE SECTION 3 -->
+                                {% for item in page.showcase_section_3.all %}
+                                    {% include "../snippets/pow_by_ckan_card_block.html" with card=item.showcase %}
+                                {% endfor %}                              
+                            <!-- END SHOWCASE SECTION 3 -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="separator alt"></div>
+
+{% endblock content %}

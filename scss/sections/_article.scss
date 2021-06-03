@@ -1,0 +1,36 @@
+.article-bread-crumbs{
+  margin: 0 0 30px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  li{
+    padding: 0 22px;
+    margin-bottom: 10px;
+    position: relative;
+    font-size: 16px;
+    color: $medium-gray;
+    &:after{
+      content: '';
+      display: block;
+      width: 5px;
+      height: 5px;
+      background: #ccc;
+      border-radius: 5px;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    &:last-of-type:after{
+      display: none;
+    }
+  }
+}
+.article{
+  h3{
+    color: #444;
+  }
+}
