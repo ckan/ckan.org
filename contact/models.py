@@ -51,7 +51,8 @@ def parse_contact_form(message):
         out[i[0].split("/")[0].replace(
             " ", "_").replace(
             "-", "_").replace(
-            ".", "_").strip("_").lower()] = i[1]
+            ".", "_").replace(
+            "?", "").strip("_").lower()] = i[1]
     return out
 
 class ContactPage(WagtailCacheMixin, AbstractEmailForm):
