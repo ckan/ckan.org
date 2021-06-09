@@ -2366,10 +2366,10 @@ input.waiting[type=text] {
 #contact-modal p input[type=checkbox] {
   position: absolute;
   left: 30px;
-  bottom: 114px;
+  top: 464px;
 }
 #contact-modal label[for=id_i_consent_to_ckanorg_sending_me_marketing_emails_i_would_like_to_sign_up_to_receive_email_updates_from_ckanorg] {
-  padding: 0px 21px 29px;
+  padding: 0px 40px 15px 20px;
 }
 
 #dropbtn-Solutions,
@@ -3522,4 +3522,14 @@ input.waiting[type=text] {
 }
 .arrow-down svg path {
   fill: #666;
+}
+
+.modal__header {
+  margin-top: -15px;
+  margin-bottom: -20px;
+}
+
+.modal__container {
+  padding-right: 15px !important;
+  padding-bottom: 15px !important;
 }
