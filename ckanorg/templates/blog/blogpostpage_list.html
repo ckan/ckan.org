@@ -1,0 +1,12 @@
+{% extends "blog/blog_listing_page.html" %}
+
+{% block meta_tags %}{% endblock %}
+
+{% block content %}
+    {% block banner %}
+    {% endblock %}
+    <div class="t-center user-posts">
+        <p class="body_extra_large">All posts written by <span class='author'>{{author}}</author></p>
+    </div>
+    {{ block.super }}
+{% endblock %}

@@ -87,6 +87,9 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
         plain_message = self.render_email(form).replace('Your', 'Sender')
         fields = parse_contact_form(plain_message)
         html_message = render_to_string('contact_us_mail.html', fields)
+        sender_name  = fields.get('sender_name', '')
+        if sender_name:
+            self.subject = f'{self.subject} Sender name: {sender_name}'
         send_mail(self.subject, plain_message, addresses, self.from_address, html_message=html_message)
 
 

@@ -50,7 +50,7 @@
                 <p>Our <a href="{% if community_page %}{{ community_page.url }}#stewards{% else %}#{% endif %}">CKAN stewards</a> help organisations of all sizes around the globe <br> learn more about implementing CKAN open data portals.
                     <br class="mobile-hidden" />The best way to get in touch is via the form below</p>
                 <form action="#" id="stewardForm">
-                    <iframe src="csrf/" style="display: none;"></iframe>
+                    {% include "../snippets/iframe.html" %}
                     <div class="row">
                         <input type="text" id="steward_email" placeholder="Your email" autocomplete="off"/>
                         <input type="submit" value="Schedule a meeting" class="btn">

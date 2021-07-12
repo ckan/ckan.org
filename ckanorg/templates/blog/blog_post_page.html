@@ -8,16 +8,27 @@
 
         <section class="section-banner">
             <div class="container-sm t-center">
-                <a href="{{ page.get_parent.url }}" class="link">Blog <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <a href="{{ page.get_parent.url }}" class="link">{% block title %}Blog{% endblock %}<svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2.00009 0.855957L0.590088 2.26596L5.17009 6.85596L0.590088 11.446L2.00009 12.856L8.00009 6.85596L2.00009 0.855957Z" fill="#0000EE"/>
                 </svg>
                 </a>
                 <h1>{{ page.post_title }}</h1>
                 <p>{% if page.post_subtitle %} {{ page.post_subtitle }} {% endif %}</p>
                 <ul class="article-bread-crumbs">
-                    {% if page.author %} <li>{{ page.author }}</li> {% endif %}
+                    {% block owner %}
+                        {% if page.owner %} 
+                            <li><a href="{% url 'user_post_list' page.owner %}">
+                                {{page.owner.first_name}}
+                                {{page.owner.last_name}}
+                            </a></li>
+                        {% elif page.author %}
+                            <li>{{ page.author }}</li>
+                        {% endif %}
+                    {% endblock %}
                     {% if page.tags.all %} <li>{{ page.tags.all|tags_to_string }}</li> {% endif %}
+                    {% block date %}
                     <li>{{ page.created|date:"d M Y" }}</li>
+                    {% endblock %}
                 </ul>
             </div>
             {% if page.main_image.file.name != "original_images/default" and not page.imported %}
@@ -25,13 +36,15 @@
                 <img src="{{ image.url }}" alt="{{ image.alt }}">
             {% endif %}
         </section>
-        <div class="container-sm article">
+        <div class="container-sm article blog-event">
             {% for body in page.body %}
                 {% include_block body %}
             {% endfor %}
         </div>
+        
         <div class="more-posts-bottom">
             <div class="container-md">
+            {% block more_posts %}
                 <div class="indent">
                     <div class="container-sm t-center">
                         <span class="upper">More posts</span>
@@ -40,8 +53,10 @@
                 {% for post in last_posts %}
                     {% include "../snippets/blog_post_block.html" with post=post %}
                 {% endfor %}
+            {% endblock %}
             </div>
                 {% include "../snippets/connect_with_ckan_block.html" %}
         </div>
+       
 
 {% endblock content %}

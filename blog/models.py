@@ -24,6 +24,8 @@ from taggit.models import TaggedItemBase
 
 from .blocks import ImageWithCaption
 
+import events
+
 
 COMMON_PANELS = (
     FieldPanel('slug'),
@@ -175,7 +177,6 @@ class BlogPostPage(MetadataPageMixin, Page):
 
     content_panels = Page.content_panels + [
         ImageChooserPanel('main_image'),
-        FieldPanel('author'),
         FieldPanel('post_title'),
         FieldPanel('featured', widget=forms.CheckboxInput),
         FieldPanel('post_subtitle'),

@@ -1,4 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.contrib.auth.models import Group
 
 from modelcluster.fields import ParentalKey
 
@@ -78,6 +82,7 @@ class HomePage(MetadataPageMixin, Page):
         'ckan_pages.CommercialPage',
         'ckan_pages.CkanForPage',
         'blog.BlogListingPage',
+        'events.EventListingPage',
     ]
     max_count = 1
 
@@ -164,3 +169,9 @@ class HomePage(MetadataPageMixin, Page):
             ).public().filter(title='Community')
         context['community_page'] = community[0] if community else None        
         return context
+
+@receiver(post_save, sender=User)
+def update_profile_signal(sender, instance, created, **kwargs):
+    if created:
+        group, _ = Group.objects.get_or_create(name='Blog Post Creators')
+        instance.groups.add(group)

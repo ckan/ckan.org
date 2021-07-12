@@ -7,23 +7,35 @@
 {% block content %}
 
 
-<section class="section-banner">
-    <div class="container-sm t-center">
-        <h1>{{ page.title }}</h1>
-        <p class="body_extra_large">{{ page.page_caption }}</p>
-    </div>
-    <div class="container-md">
-        {% include "../snippets/featured_blog_post_block.html" with post=featured_post %}
-    </div>
-</section>
+{% block banner %}
+    <section class="section-banner">
+        <div class="container-sm t-center">
+            <h1>{{ page.title }}</h1>
+            <p class="body_extra_large">{{ page.page_caption }}</p>
+        </div>
+        <div class="container-md">
+            {% block featured %}
+                {% if featured_post %}
+                    {% include "../snippets/featured_blog_post_block.html" with post=featured_post %}
+                {% endif %}
+            {% endblock %}
+        </div>
+    </section>
+{% endblock %}
 
 <div class="ground">
     <div class="container-md">
-        {% for post in posts %}
-            {% include "../snippets/blog_post_block.html" with post=post %}
-        {% endfor %}
+        {% block upcoming %}
+            {% for post in posts %}
+                {% include "../snippets/blog_post_block.html" with post=post %}
+            {% endfor %}
+        {% endblock %}
+    </div>
+        {% block past %}
+        {% endblock %}
     </div>
     <div class="pagination-holder indent">
+        {% block pagination %}
         <ul class="pagination">
             {% if posts.paginator.num_pages > 1 %}
                 {% if posts.has_previous %}
@@ -61,6 +73,7 @@
                 {% endif %}
             {% endif %}
         </ul>
+        {% endblock %}
     </div>
         {% include "../snippets/connect_with_ckan_block.html" %}
     <div class="separator alt"></div>

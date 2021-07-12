@@ -1,0 +1,9 @@
+{% extends "blog/blog_post_page.html" %}
+
+{% block title %}Events{% endblock %}
+{% block owner %}{% endblock %}
+{% block date %}
+{% include 'events/calendar.svg' %}
+<span class="event-page-start-date">{{ start_date }}</span>
+{% endblock %}
+{% block more_posts %}{% endblock %}

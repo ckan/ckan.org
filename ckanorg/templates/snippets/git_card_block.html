@@ -1,4 +1,4 @@
-{% load wagtailimages_tags %}
+{% load static page_tags wagtailimages_tags %}
 
 {% for card in self.cards %}
     {% image card.image_top scale-100 as img_top %}
@@ -7,11 +7,22 @@
         <div class="row">
             <div class="col ckan-git">
                 <a href="{{ card.external_link }}" target="_blank" rel="noopener" class="ckan_git_link">
-                    <img src="{{ img_top.url }}" alt="{{ img_top.alt }}">
+                    {% comment %}%<img src="{{ img_top.url }}" alt="{{ img_top.alt }}">{% endcomment %}
+                     <div class="ckan-repo">
+                        <img src="{% static 'img/git-book.png' %}" />
+                        <span>ckan</span>
+                    </div>
                     <div class="ckan-git-repo-text">
                         {{ card.text }}
                     </div>
-                    <img src="{{ img_bottom.url }}" alt="{{ img_bottom.alt }}">
+                    <div class="ckan-git-repo-info">
+                        <img src="{% static 'img/python-dot.png' %}" />
+                        <span>Python</span>
+                        <img src="{% static 'img/star.png' %}" />
+                        <span class="counter">{% stars_count %}</span>
+                        <img src="{% static 'img/fork.png' %}" />
+                        <span class="counter">{% forks_count %}</span>
+                    </div>
                 </a>
             </div>
         </div>
