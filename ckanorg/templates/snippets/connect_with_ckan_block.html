@@ -1,4 +1,5 @@
 
+{% load page_tags %}
 
             <div class="container-md">
                 <div class="subscribe white-box">
@@ -7,7 +8,7 @@
                         <p>News and announcements delivered to your inbox.</p>
                     </div>
                 <form action="#" id="blogForm">
-                    <iframe src="csrf/" style="display: none;"></iframe>
+		    {% include "../snippets/iframe.html" %}
                     <div class="row">
                         <input type="text" id="blog_email" placeholder="Your email" autocomplete="off"/>
                         <input type="submit" value="Subscribe" class="btn">

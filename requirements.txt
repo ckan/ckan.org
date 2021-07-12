@@ -5,3 +5,5 @@ whitenoise
 wagtail-cache
 psycopg2
 wagtail-metadata
+requests-cache
+django-allauth

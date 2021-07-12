@@ -16,4 +16,3 @@ class EmailAdmin(ModelAdmin):
     list_display = ['submitted', 'form_name', 'address']
     list_filter = ['form_name', 'submitted']
     search_fields = ['submitted', 'form_name', 'address']
-

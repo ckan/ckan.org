@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'managers',
     'ckan_pages',
     'blog',
+    'events',
     'dashboard',
 
     'wagtail.contrib.forms',
@@ -53,15 +54,27 @@ INSTALLED_APPS = [
     'taggit',
 
     'django.contrib.admin',
-    'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    'django.contrib.auth',
+    'django.contrib.sites',
 
     'wagtailmetadata',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 ]
+
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = '/admin/'
+
+ACCOUNT_FORMS = {
+'signup': 'home.forms.CkanorgSignupForm',
+}
 
 MIDDLEWARE = [
     'wagtailcache.cache.UpdateCacheMiddleware',
@@ -105,6 +118,11 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 WSGI_APPLICATION = 'ckanorg.wsgi.application'
@@ -171,7 +189,32 @@ WAGTAIL_SITE_NAME = "ckanorg"
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-BASE_URL = 'http://example.com'
+BASE_URL = 'https://ckan.org'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'email-smtp.eu-central-1.amazonaws.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'AKIAUWX42BAVQ3UFZFUU'
+DEFAULT_FROM_EMAIL = 'noreply@ckan.org'
+
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_LOGIN_ON_PASSWORD_RESET = True
+ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_USERNAME_BLACKLIST = ['admin',]
+
+DEBUG = False
+
+GITHUB_CACHE_DIR = '{}/cache'.format(BASE_DIR)
+
+ALLOWED_HOSTS = ['*']
+
+WAGTAIL_APPEND_SLASH = False
 
 with open(BASE_DIR + '/../config/secret.txt') as f:
     data = f.read().strip().split(',')
@@ -179,19 +222,6 @@ with open(BASE_DIR + '/../config/secret.txt') as f:
     EMAIL_HOST_PASSWORD = data[1]
     DB_HOST = data[2]
     DB_PASS = data[3]
-    EMAIL_HOST_USER = data[4]
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'email-smtp.eu-central-1.amazonaws.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = 'noreply@ckan.org'
-
-DEBUG = False
-
-ALLOWED_HOSTS = ['*']
-
-WAGTAIL_APPEND_SLASH = False
 
 DATABASES = {
     'default': {

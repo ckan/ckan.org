@@ -44,6 +44,16 @@
                             {% endif %}
                         {% endfor %}
                     {% endwith %}
+
+                    {% if request.user.is_authenticated %}
+                        <li>
+                            <a href="{% url 'account_logout' %}">Logout</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{% url 'account_login' %}">Login</a>
+                        </li>
+                    {% endif %}
                     </ul>
                 </div>
 

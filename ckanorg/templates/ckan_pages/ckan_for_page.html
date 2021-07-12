@@ -16,7 +16,7 @@
                     <p class="text">{{ page.subtitle }}</p>
                     <p class="text"><strong>Schedule a chat</strong> to speak to a <a href="{% if community_page %}{{ community_page.url }}#stewards{% else %}#{% endif %}">CKAN steward</a> who specialises in open data portals for {{ page.page_for }}.</p>
                         <form action="#" id="stewardFormSend">
-                            <iframe src="csrf/" style="display: none;"></iframe>
+                            {% include "../snippets/iframe.html" %}
                             <div class="row">
                                 <input type="text" id="steward_email_send" placeholder="Your email" autocomplete="off"/>
                                 <input type="submit" value="" class="btn send">
@@ -94,7 +94,7 @@
                         <h2>Speak with a CKAN steward specialising in creating open data portals for {{page.page_for}}</h2>
                         <p>Our <a href="{% if community_page %}{{ community_page.url }}#stewards{% else %}#{% endif %}" id="stewards_link">CKAN stewards</a> help organisations of all sizes around the globe learn more about implementing CKAN open data portals. The best way to get in touch is via the form below</p>
                         <form action="#" id="stewardForm">
-                            <iframe src="csrf/" style="display: none;"></iframe>
+                            {% include "../snippets/iframe.html" %}
                             <div class="row">
                                 <input type="text" id="steward_email" placeholder="Your email" autocomplete="off"/>
                                 <input type="submit" value="Schedule a meeting" class="btn">

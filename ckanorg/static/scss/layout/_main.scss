@@ -170,6 +170,7 @@
   color: #5b626c;
   font-size: 14px;
   padding: 3px;
+  margin-top: 4px;
 }
 
 .ckan_git_link{
@@ -492,6 +493,12 @@ input.waiting[type='text'] {
     background: url("../img/Globe-black.svg") no-repeat;
   }
 }
+#id_how_you_heard_about_us {
+  height: 30px;
+  margin-bottom: 10px;
+  padding: 5px;
+  font-size: 16px;
+}
 
 #contact-modal {
   p {
@@ -513,10 +520,352 @@ input.waiting[type='text'] {
     input[type=checkbox] {
       position: absolute;
       left: 30px;
-      bottom: 114px;
+      top: 464px;
     }
   }
   label[for="id_i_consent_to_ckanorg_sending_me_marketing_emails_i_would_like_to_sign_up_to_receive_email_updates_from_ckanorg"] {
-    padding: 0px 21px 29px;
+    padding: 0px 40px 15px 20px;
  }
+}
+
+.ckan-git-repo-info img,
+.ckan-git-repo-info span{
+  display: inline-block;
+}
+
+.ckan-git-repo-info span {
+  font-size: 13px;
+  color: #555;
+  margin-top:14px;
+}
+
+.ckan-repo {
+  img {
+    float: left;
+    margin-top: -3px;
+  }
+  span {
+    margin-left: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #1868D0;
+  }
+}
+ 
+
+.counter {
+  margin-left: -1px;
+}
+
+.modal__header {
+  margin-top: -15px;
+  margin-bottom: -20px;
+}
+
+.modal__container {
+  padding-right: 15px !important;
+  padding-bottom: 15px !important;
+}
+
+#id_how_you_heard_about_us {
+  box-sizing: border-box;
+  font-weight: 400;
+  line-height: 1.3;
+  border: 1px solid #999;
+  border-radius: 0;
+  color: #1C1C1C;
+  display: block;
+  font-family: "SF Pro Display", sans-serif;
+  outline: none;
+  -webkit-appearance: none;
+  background: transparent;
+  transition: border-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  margin-right: 10px;
+  color: #444;
+  width: 410px;
+  background: url("../img/select_arrow_down.svg") no-repeat;
+  background-position: right 5px top 5px;
+  font-size: 16px;
+}
+
+.user-posts {
+  margin: 60px 0px;
+  span {
+    font-weight: bold;
+  }
+}
+
+.ckanorg-auth-form {
+  .bad-token {
+    margin: 70px 0;
+  }
+  margin: 70px 35%;
+  p {
+    a {
+      font-size: 20px !important;
+    }
+  }  
+  form {
+    .errorlist {
+      li {
+        color: #ED5248;
+      }
+    }
+    p {
+      a {
+        font-size: 20px !important;
+      }
+      label {
+        font-size: 16px !important;
+      }
+      input {
+        max-width: 100% !important;
+      }
+      input[type=email]:-webkit-autofill,
+      input[type=password]:-webkit-autofill {
+        box-shadow: none;
+        -webkit-box-shadow: none;
+      }
+    }
+    .secondaryAction {
+      margin-right: 20px;
+    }
+  }
+}
+
+.signup {
+  p {
+    margin-bottom: 20px;
+  }
+}
+
+@media all and (max-width: 1280px) {
+  .ckanorg-auth-form {
+    margin: 40px 33%;
+  }
+}
+@media all and (max-width: 1185px) {
+  .ckanorg-auth-form {
+    margin: 40px 30%;
+  }
+}
+@media all and (max-width: 1023px) {
+  .ckanorg-auth-form {
+    margin: 40px 25%;
+  }
+  input::placeholder {
+    font-size: 18px;
+  }
+}
+@media all and (max-width: 767px) {
+  .ckanorg-auth-form {
+    margin: 40px 15%;
+    p {
+      a {
+        font-size: 16px !important;
+      }
+    } 
+  }
+}
+@media all and (max-width: 362px) {
+  .ckanorg-auth-form {
+    margin: 40px 15px;
+  }
+}
+
+.event-page-start-date {
+  display: inline;
+  margin-left: 8px;
+  color: #666;
+}
+
+.section-event-text {
+  font-family: "SF Pro Display Bold", sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 42px;
+  color: #000000;
+  margin: 26px 0 -24px 0;
+  @media all and (max-width: 362px) {
+    font-size: 24px;
+    margin-bottom: 13px !important;
+  }
+}
+
+.featured {
+  @media all and (max-width: 362px) {
+    margin-bottom: -36px !important;
+  }
+}
+
+.upcoming {
+  margin: -21px 0 33px 0;
+  @media all and (max-width: 768px) {
+    margin-top: 15px !important;
+  }
+}
+
+.past-events {
+  .row {
+    align-items: normal;
+  }
+  a {
+    text-decoration: none;
+  }
+  .past-event-title:hover {
+    color: #000;
+  }  
+}
+
+.past-event-title {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 26px;
+  color: #000000;
+  display: block;
+  text-decoration: none;
+}
+
+.past{
+  padding-left: 0;
+}
+
+.past-list {
+  margin: 26px 0 31px 0;
+}
+
+.left {
+  width: 50%;
+  float: left;
+}
+
+.right {
+  width: 50%;
+  float: right;
+}
+
+.featured-event {
+  position: relative;
+  svg {
+    margin-top: 0px;
+  }
+  .start-date {
+    position: absolute;
+    font-size: 15px;
+    top: 1px;
+    left: 28px;
+    color: #666666
+  }
+}
+
+.featured-post-subtitle {
+  display: block;
+  margin-top: 6px !important;
+}
+
+.upcoming-event,
+.past-event {
+  position: relative;
+  span {
+    display: block;
+    position: absolute;
+    color: #666666;
+
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 16px;
+    top: 2px;
+    left: 28px;
+  }
+}
+
+.past-event{
+  margin: 7px 0 11px 0;
+}
+
+.post-info {
+  p {
+    margin-top: 10px;
+  }
+}
+
+.row.narrow {
+  display: none;
+  .col-sm {
+    width: 50%;
+  }
+  .col-sm:first-of-type {
+    float: left;
+  }
+  .col-sm:last-of-type {
+    float: left;
+  }
+  .past {
+    margin-bottom: 20px;
+  }
+  @media all and (max-width: 767px) {
+    display: block;
+  }
+}
+
+.wide {
+  @media all and (max-width: 767px) {
+    display: none;
+  }
+}
+
+.featured-event.top {
+  display: none;
+  @media all and (max-width: 362px) {
+    font-size: 11px;
+  }
+  @media all and (max-width: 767px) {
+    display: block;
+    margin-bottom: 4px;
+  }
+}
+
+.featured-event.bottom {
+  @media all and (max-width: 767px) {
+    display: none;
+  }
+}
+
+
+.upcoming-event.top {
+  display: none;
+  @media all and (max-width: 767px) {
+    display: block;
+  }
+}
+
+.upcoming-event.bottom {
+  @media all and (max-width: 767px) {
+    display: none;
+  }
+}
+
+.post {
+  .post-img {
+    img {
+      @media all and (max-width: 767px) {
+        width: 100%;
+        max-height: 100%;
+      }
+    }
+  }
+}
+
+.waiting {
+  font-size: 38px;
+  font-weight: bold;
+  font-family: "SF Pro Display Bold", sans-serif;
+  margin: 40px 0 100px 0;
+}
+
+.blog-event {
+  font-size: 16px;
 }

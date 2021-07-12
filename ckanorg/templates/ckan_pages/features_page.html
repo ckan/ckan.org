@@ -66,7 +66,7 @@
                 <h2>Join our next webinar</h2>
                 <p>Where we showcase CKAN to people - it's free to join and open to everyone.</p>
                     <form action="#" id="webinarForm">
-                        <iframe src="csrf/" style="display: none;"></iframe>
+                        {% include "../snippets/iframe.html" %}
                         <div class="row">
                             <input type="text" id="webinar_email" placeholder="Your email" autocomplete="off"/>
                             <input type="submit" value="Get an invite" class="btn">
