@@ -15,7 +15,7 @@
 
 #### 6. Create `media` folder in the `ckan.org` directory.
 
-#### 7. Create `static` folder in the `ckan.or`g directory and run `python manage.py collectstatic`.
+#### 7. Create `static` folder in the `ckan.org` directory and run `python manage.py collectstatic`.
 
 #### 8.We can use sqlite db for local development, switch it in the settings:
 
