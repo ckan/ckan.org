@@ -18,7 +18,7 @@ from wagtail.admin.edit_handlers import (
 from wagtailcache.cache import WagtailCacheMixin
 
 from managers.models import Manager
-
+from wagtailcaptcha.models import WagtailCaptchaEmailForm
 
 @register_setting
 class CkanOrgSettings(BaseSetting):
@@ -55,7 +55,7 @@ def parse_contact_form(message):
             "?", "").strip("_").lower()] = i[1]
     return out
 
-class ContactPage(WagtailCacheMixin, AbstractEmailForm):
+class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
