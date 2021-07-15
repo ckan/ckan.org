@@ -7,3 +7,4 @@ psycopg2
 wagtail-metadata
 requests-cache
 django-allauth
+wagtail-django-recaptcha==1.0

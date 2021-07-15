@@ -66,6 +66,9 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+
+    'captcha',
+    'wagtailcaptcha',
 ]
 
 SITE_ID = 1
@@ -222,6 +225,9 @@ with open(BASE_DIR + '/../config/secret.txt') as f:
     EMAIL_HOST_PASSWORD = data[1]
     DB_HOST = data[2]
     DB_PASS = data[3]
+    RECAPTCHA_PUBLIC_KEY = data[4]
+    RECAPTCHA_PRIVATE_KEY = data[5]
+
 
 DATABASES = {
     'default': {

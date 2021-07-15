@@ -1,11 +1,13 @@
 from datetime import datetime
 
 from django.db import models
+from django.shortcuts import render
 from django.template.loader import render_to_string
-
+from django.shortcuts import redirect
 from modelcluster.models import ParentalKey
 
 from wagtail.admin.mail import send_mail
+from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from wagtail.contrib.settings.models import BaseSetting, register_setting
@@ -18,7 +20,7 @@ from wagtail.admin.edit_handlers import (
 from wagtailcache.cache import WagtailCacheMixin
 
 from managers.models import Manager
-
+from wagtailcaptcha.models import WagtailCaptchaEmailForm
 
 @register_setting
 class CkanOrgSettings(BaseSetting):
@@ -55,7 +57,7 @@ def parse_contact_form(message):
             "?", "").strip("_").lower()] = i[1]
     return out
 
-class ContactPage(WagtailCacheMixin, AbstractEmailForm):
+class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -92,10 +94,25 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
             self.subject = f'{self.subject} Sender name: {sender_name}'
         send_mail(self.subject, plain_message, addresses, self.from_address, html_message=html_message)
 
+    def serve(self, request, *args, **kwargs):
+        if request.method == 'POST':
+            form = self.get_form(request.POST, request.FILES, page=self, user=request.user)
+            if form.is_valid():
+                form_submission = self.process_form_submission(form)
+                return self.render_landing_page(request, form_submission, *args, **kwargs)
+            elif form.errors.get('wagtailcaptcha', '') != '':
+                return render(request, "recaptcha_error.html")
+        else:
+            form = self.get_form(page=self, user=request.user)
+        context = self.get_context(request)
+        context['form'] = form
+        return TemplateResponse(
+            request,
+            self.get_template(request),
+            context
+        )
 
     def render_landing_page(self, request, form_submission=None, *args, **kwargs):
-        from wagtail.core.models import Page
-        from django.shortcuts import redirect
         redirect_page = Page.objects.get(id=request.POST.get('source-page-id'))
         if redirect_page:
             request.session['form_page_success'] = True
