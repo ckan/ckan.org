@@ -1,5 +1,9 @@
-from allauth.account.forms import SignupForm
+from allauth.account.forms import SignupForm, LoginForm, PasswordField
 from django import forms
+from django.utils.translation import ugettext_lazy as _
+
+from wagtailcaptcha.models import WagtailCaptchaEmailForm
+from captcha.fields import ReCaptchaField
  
  
 class CkanorgSignupForm(SignupForm):
@@ -12,8 +16,18 @@ class CkanorgSignupForm(SignupForm):
         label='Last Name',
         widget=forms.TextInput(attrs={'placeholder': 'Last Name'}))
  
+    password1 = PasswordField(label=_("Password"))
+    password2 = PasswordField(label=_("Password (again)")) 
+    captcha = ReCaptchaField(label=False)
+
     def signup(self, request, user):
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         user.save()
         return user
+
+
+class CkanorgLoginForm(LoginForm):
+    captcha = ReCaptchaField(label=False)
+    def login(self, *args, **kwargs):
+        return super(CkanorgLoginForm, self).login(*args, **kwargs)

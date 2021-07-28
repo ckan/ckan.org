@@ -874,3 +874,13 @@ input.waiting[type='text'] {
   margin-top: -13px;
   margin-left: 110px;
 }
+
+form {
+  &.login,
+  &.signup {
+    .g-recaptcha {
+      margin-top: 0;
+      margin-left: 0;
+    }
+  }
+}
