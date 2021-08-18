@@ -41,17 +41,6 @@
             </div>
         </div>
         <div class="indent">
-
-            <!-- TESTIMONIAL SECTION 1 -->
-            <div class="container-sm t-center">
-                <ul class="quotes-slider top">            
-                    {% for item in page.feedback_section_1.all %}
-                        {% include "../snippets/feedback_block.html" with feedback=item.feedback %}
-                    {% endfor %}
-                </ul>
-            </div><br>
-            <!-- END TESTIMONIAL SECTION 1 -->
-
             <div class="container-lg">
                 <div class="card">
                     <div class="two-columns">
@@ -99,6 +88,14 @@
                 </div>
             </div>
         </div>
-        <div class="separator alt"></div>
+            <!-- TESTIMONIAL SECTION 1 -->
+            <div class="container-sm t-center">
+                <ul class="quotes-slider top">
+                    {% for item in page.feedback_section_1.all %}
+                        {% include "../snippets/feedback_block.html" with feedback=item.feedback %}
+                    {% endfor %}
+                </ul>
+            </div><br>
+            <!-- END TESTIMONIAL SECTION 1 -->
 
 {% endblock content %}
