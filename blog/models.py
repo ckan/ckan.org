@@ -1,9 +1,10 @@
 from datetime import datetime, timezone
 from django.utils.timezone import now
+from django.contrib.auth.models import User
 
 from django import forms
 from django.db import models
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, ValidationError
 from django.core.paginator import (
     EmptyPage,
     PageNotAnInteger,
@@ -16,6 +17,7 @@ from wagtail.core.models import Page
 from wagtail.core.fields import StreamField
 from wagtail.core import blocks
 from wagtailmetadata.models import MetadataPageMixin
+from wagtail.admin.forms import WagtailAdminPageForm
 
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey
@@ -34,6 +36,14 @@ COMMON_PANELS = (
     FieldPanel('keywords'),
     ImageChooserPanel('search_image'),
 )
+
+
+def check_username_exists(value):
+    if not value:
+        raise ValidationError("Author field cannot be empty")
+    author = User.objects.filter(username=value).first()
+    if not author:
+        raise ValidationError("There is not such User with this username.")
 
 
 class BlogPageTag(TaggedItemBase):
@@ -126,6 +136,8 @@ class BlogPostPage(MetadataPageMixin, Page):
         max_length=255,
         null=True,
         blank=True,
+        validators=[check_username_exists],
+        help_text='If value is empty, it will be filled by the current User.'
     )
     created = models.DateTimeField(
         blank=True,
@@ -182,6 +194,7 @@ class BlogPostPage(MetadataPageMixin, Page):
         FieldPanel('post_subtitle'),
         FieldPanel('tags'),
         StreamFieldPanel('body'),
+        FieldPanel('author')
     ]
 
     def get_context(self,request, *args, **kwargs):
@@ -189,4 +202,3 @@ class BlogPostPage(MetadataPageMixin, Page):
         context['last_posts'] = BlogPostPage.objects.live().public(
             ).exclude(id__in=[self.id,]).order_by('-created')[:2]
         return context
-

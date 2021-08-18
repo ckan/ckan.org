@@ -50,7 +50,7 @@ a {
   color: $base-link-color;
   outline: none;
   font-weight: $base-link-font-weight;
-  font-size: 18px;
+  font-size: 16px;
   @include animate(color);
   &:hover,
   &:focus {
