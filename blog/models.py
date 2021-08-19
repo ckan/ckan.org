@@ -38,6 +38,7 @@ COMMON_PANELS = (
 )
 
 
+# DEPRECATED
 def check_username_exists(value):
     if not value:
         raise ValidationError("Author field cannot be empty")
@@ -136,7 +137,6 @@ class BlogPostPage(MetadataPageMixin, Page):
         max_length=255,
         null=True,
         blank=True,
-        validators=[check_username_exists],
         help_text='If value is empty, it will be filled by the current User.'
     )
     created = models.DateTimeField(

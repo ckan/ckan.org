@@ -1637,6 +1637,9 @@ blockquote {
 .modal__btn {
   float: left; }
 
+.modal__container .modal__content {
+  margin-bottom: 1rem; }
+
 .modal__content textarea {
   height: 80px; }
 
@@ -1652,7 +1655,7 @@ blockquote {
 .modal {
   display: none;
   position: fixed;
-  z-index: 1;
+  z-index: 9999;
   left: 0;
   top: 0;
   width: 100%;
@@ -2146,9 +2149,8 @@ input.waiting[type='text'] {
 .blog-event {
   font-size: 16px; }
 
-.g-recaptcha {
-  margin-top: -13px;
-  margin-left: 110px; }
+.g-recaptcha > div {
+  height: 100% !important; }
 
 form.login .g-recaptcha, form.signup .g-recaptcha {
   margin-top: 0;
