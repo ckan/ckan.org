@@ -16,13 +16,28 @@
                 <p>{% if page.post_subtitle %} {{ page.post_subtitle }} {% endif %}</p>
                 <ul class="article-bread-crumbs">
                     {% block owner %}
-                        {% if page.owner %} 
-                            <li><a href="{% url 'user_post_list' page.owner %}">
-                                {{page.owner.first_name}}
-                                {{page.owner.last_name}}
-                            </a></li>
-                        {% elif page.author %}
-                            <li>{{ page.author }}</li>
+                        {% if page.author %}
+                            <li>
+                                {% if blog_author %}
+                                    <a href="{% url 'user_post_list' blog_author.username %}">
+                                        {% if blog_author.first_name %}
+                                            {{ blog_author.first_name }}
+                                            {{ blog_author.last_name }}
+                                        {% else %}
+                                            {{ blog_author.username }}
+                                        {% endif %}
+                                    </a>
+                                {% else %}
+                                    {{ page.author }}
+                                {% endif %}
+                            </li>
+                        {% else %}
+                            {% if page.owner %}
+                                <li><a href="{% url 'user_post_list' page.owner %}">
+                                    {{page.owner.first_name}}
+                                    {{page.owner.last_name}}
+                                </a></li>
+                            {% endif %}
                         {% endif %}
                     {% endblock %}
                     {% if page.tags.all %} <li>{{ page.tags.all|tags_to_string }}</li> {% endif %}
