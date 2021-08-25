@@ -201,4 +201,9 @@ class BlogPostPage(MetadataPageMixin, Page):
         context = super().get_context(request, *args, **kwargs)
         context['last_posts'] = BlogPostPage.objects.live().public(
             ).exclude(id__in=[self.id,]).order_by('-created')[:2]
+        author = context.get('page').author
+        if author:
+            author_user = User.objects.filter(username=author).first()
+            if author_user:
+                context['blog_author'] = author_user
         return context
