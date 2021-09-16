@@ -214,7 +214,7 @@ class ShowcasePage(MetadataPageMixin, Page):
             [
                 InlinePanel('showcase_section_1', label="Showcase", min_num=2, max_num=10),
             ],
-            heading='Showsace section 1',
+            heading='Showcase section 1',
         ),
         MultiFieldPanel(
             [
@@ -226,7 +226,7 @@ class ShowcasePage(MetadataPageMixin, Page):
             [
                 InlinePanel('showcase_section_2', label="Showcase", min_num=2, max_num=10),
             ],
-            heading='Showsace section 2',
+            heading='Showcase section 2',
         ),
         MultiFieldPanel(
             [
@@ -238,7 +238,7 @@ class ShowcasePage(MetadataPageMixin, Page):
             [
                 InlinePanel('showcase_section_3', label="Showcase", min_num=2, max_num=10),
             ],
-            heading='Showsace section 3',
+            heading='Showcase section 3',
         ),        
     ]
 
