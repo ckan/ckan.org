@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static modal_tags %}
 {% load static wagtailimages_tags wagtailcore_tags page_tags wagtailmetadata_tags %}
 
 {% block meta_tags %}{% meta_tags %}{% endblock %}
@@ -15,13 +16,14 @@
                 <div class="banner-info">
                     <p class="text">{{ page.subtitle }}</p>
                     <p class="text"><strong>Schedule a chat</strong> to speak to a <a href="{% if community_page %}{{ community_page.url }}#stewards{% else %}#{% endif %}">CKAN steward</a> who specialises in open data portals for {{ page.page_for }}.</p>
-                        <form action="#" id="stewardFormSend">
-                            {% include "../snippets/iframe.html" %}
-                            <div class="row">
-                                <input type="text" id="steward_email_send" placeholder="Your email" autocomplete="off"/>
-                                <input type="submit" value="" class="btn send">
+
+                    <div class="schedule-chat-contact">
+                        <div class="row">
+                            <div class="col-xs-1 text-capitalize" align="center">
+                                <a data-micromodal-trigger="modal-1" href="javascript:void(0);" id="contact">Schedule a chat</a>
                             </div>
-                        </form>
+                        </div>
+                    </div>
                 </div>
                 <div class="banner-animation">
                     <img src="{{ image.url }}" alt="{{ image.alt }}">
