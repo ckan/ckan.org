@@ -398,6 +398,34 @@ input[type=text]:-webkit-autofill {
 	margin: 0 auto;
 }
 
+.schedule-chat-contact {
+  #contact {
+    // font-size: 0px;
+    display: block;
+    width: 210px;
+    height: 50px;
+    text-decoration: none;
+    color: white;
+    background: #0000EE;
+    color: #fff;
+    outline: none;
+    border: 2px solid #0000EE;
+    padding: 7px 20px;
+    line-height: 1.3;
+    cursor: pointer;
+    text-decoration: none;
+    // display: inline-flex;
+    align-items: center;
+    // flex-shrink: 0;
+    transition: border 0.3s ease-in-out, color 0.3s ease-in-out, background 0.3s ease-in-out;
+    border-radius: 6px;
+  } 
+  #contact:hover {
+    background: #fff;
+    color: #0000EE;
+  }
+}
+
 .speak-with-us-home {
   #contact {
     font-size: 0px;
