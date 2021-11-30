@@ -921,3 +921,15 @@ form {
     }
   }
 }
+
+img {
+  &.left {
+    margin-right: 25px;
+  }
+  &.right {
+    margin-left: 25px;
+  }
+  &.full-width {
+    width: 100%;
+  }
+}
