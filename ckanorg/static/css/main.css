@@ -2177,6 +2177,13 @@ form.login .g-recaptcha, form.signup .g-recaptcha {
   margin-top: 0;
   margin-left: 0; }
 
+img.left {
+  margin-right: 25px; }
+img.right {
+  margin-left: 25px; }
+img.full-width {
+  width: 100%; }
+
 #dropbtn-Solutions,
 #dropbtn-Support {
   background-color: transparent;
