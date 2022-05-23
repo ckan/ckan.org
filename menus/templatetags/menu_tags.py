@@ -1,4 +1,3 @@
-
 from django import template
 
 from ..models import Menu
@@ -14,8 +13,10 @@ def get_menu(slug):
 
 @register.simple_tag()
 def is_active(request, item):
-    if item.link == '/':
+    if item.link == '/' and request:
         return request.path == '/'
+    elif isinstance(request, str) and request == '':
+        return False
     return request.path.startswith(item.link)
 
 
