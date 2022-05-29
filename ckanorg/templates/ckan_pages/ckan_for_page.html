@@ -91,17 +91,17 @@
                             </ul>
                         </div>
                     </div>
-                <div class="indent">
+                <div class="indent speak-with">
                     <div class="container-sm t-center">
                         <h2>Speak with a CKAN steward specialising in creating open data portals for {{page.page_for}}</h2>
                         <p>Our <a href="{% if community_page %}{{ community_page.url }}#stewards{% else %}#{% endif %}" id="stewards_link">CKAN stewards</a> help organisations of all sizes around the globe learn more about implementing CKAN open data portals. The best way to get in touch is via the form below</p>
-                        <form action="#" id="stewardForm">
-                            {% include "../snippets/iframe.html" %}
+                        <div class="schedule-chat-contact">
                             <div class="row">
-                                <input type="text" id="steward_email" placeholder="Your email" autocomplete="off"/>
-                                <input type="submit" value="Schedule a meeting" class="btn">
+                                <div class="col-xs-1 text-capitalize" align="center">
+                                    <a data-micromodal-trigger="modal-1" href="javascript:void(0);" id="contact">Schedule a chat</a>
+                                </div>
                             </div>
-                        </form>
+                        </div>
                         <div class="separator"></div>
                     </div>
                 </div>

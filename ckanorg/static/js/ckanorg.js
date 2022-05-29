@@ -99,8 +99,8 @@ function submitAction(e, form_id){
 }
 
 $('#webinarForm').on('submit', webinarSubmitAction);
-$('#stewardForm').on('submit', stewardSubmitAction);
-$('#stewardFormSend').on('submit', stewardSendSubmitAction);
+// $('#stewardForm').on('submit', stewardSubmitAction);
+// $('#stewardFormSend').on('submit', stewardSendSubmitAction);
 $('#blogForm').on('submit', blogSubmitAction);
 
 $.each(['#webinar_email', '#steward_email', '#blog_email'], function(_, id){
