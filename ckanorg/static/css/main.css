@@ -1857,9 +1857,11 @@ input[type=text]:-webkit-autofill {
 .block-paragraph a {
   font-size: 20px; }
 
-.banner-info a {
+.banner-info a,
+.speak-with a {
   font-size: 20px; }
-.banner-info .text {
+.banner-info .text,
+.speak-with .text {
   font-size: 20px;
   line-height: 26px; }
 
