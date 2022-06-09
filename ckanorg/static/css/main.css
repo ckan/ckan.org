@@ -398,15 +398,18 @@ h6, .h6 {
   font-weight: normal; }
 
 a {
-  text-decoration: underline;
-  color: #0000EE;
+  text-decoration: none;
+  color: #ED5248;
   outline: none;
   font-weight: 400;
   font-size: 16px;
   transition: color 0.3s ease-in-out; }
+  a:visited {
+  	text-decoration: none;
+    color: #EF6D6A; }
   a:hover, a:focus {
-    text-decoration: none;
-    color: #0000EE; }
+    text-decoration: underline;
+    color: #B73C39; }
 
 p {
   margin: 0; }
