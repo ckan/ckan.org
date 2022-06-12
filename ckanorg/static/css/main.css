@@ -331,7 +331,7 @@ html {
   max-height: 1000000px; }
 
 body {
-  font: 400 20px/1.3 "SF Pro Display", sans-serif;
+  font: 400 20px/1.5 "SF Pro Display", sans-serif;
   background: #fff;
   min-width: 320px;
   color: #000; }
@@ -412,7 +412,8 @@ a {
     color: #B73C39; }
 
 p {
-  margin: 0; }
+  margin: 0;
+  text-align: justify; }
   p:not(:last-child) {
     margin: 0 0 30px; }
     @media all and (max-width: 767px) {
@@ -1030,6 +1031,9 @@ blockquote {
         margin-right: 5%;
         margin-bottom: 0;
         max-width: 250px; } }
+  .count p {
+    text-align: center;
+  }
 
 .partners p {
   font-size: 16px;
@@ -1495,6 +1499,10 @@ blockquote {
   .t-center img {
     margin: 0 auto; }
 
+.t-center p {
+  text-align: center;
+}
+
 @media all and (max-width: 767px) {
   .m-centered {
     display: flex;
@@ -1623,7 +1631,8 @@ blockquote {
   color: #5b626c;
   font-size: 14px;
   padding: 3px;
-  margin-top: 4px; }
+  margin-top: 4px;
+  text-align: justify; }
 
 .ckan_git_link {
   text-decoration: none; }
@@ -1773,7 +1782,8 @@ input[type=text]:-webkit-autofill {
 .commercial-about {
   padding-top: 25px;
   color: #767676;
-  font-size: 16px; }
+  font-size: 16px;
+  text-align: justify; }
 
 .commercial-bottom {
   padding: 10px 0 10px 30px;
@@ -1943,7 +1953,7 @@ input.waiting[type='text'] {
   margin-left: 10px;
   font-size: 14px;
   font-weight: bold;
-  color: #1868D0; }
+  color: #ED5248; }
 
 .counter {
   margin-left: -1px; }
@@ -2967,7 +2977,8 @@ img.full-width {
     text-align: left;
     max-width: 625px; }
     .quotes-item .quotes-item-text p {
-      margin-bottom: 18px; }
+      margin-bottom: 18px;
+      text-align: justify; }
     .quotes-item .quotes-item-text .author {
       display: block; }
     .quotes-item .quotes-item-text .adr {
