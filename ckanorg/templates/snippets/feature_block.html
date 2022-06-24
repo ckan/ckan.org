@@ -5,11 +5,10 @@
 
 <li>
     <div class="feature-list-icon">
-        <img src="{{ icon.url }}" alt="">
+        <a href="{{ feature.read_more_page.url }}"><img src="{{ icon.url }}" alt=""></a>
     </div>
     <div class="feature-list-info">
-        <h2 class="h2">{{ feature.title }}</h2>
+        <a href="{{ feature.read_more_page.url }}"><h2 class="h2">{{ feature.title }}</h2></a>
         <p>{{ feature.sub_title }}</p>
-        <a href="{{ feature.read_more_page.url }}" class="read-more">Read more <img src="{% static 'img/arrow-right.svg' %}" alt=""></a>
     </div>
 </li>
