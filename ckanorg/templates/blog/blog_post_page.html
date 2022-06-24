@@ -40,7 +40,13 @@
                             {% endif %}
                         {% endif %}
                     {% endblock %}
-                    {% if page.tags.all %} <li>{{ page.tags.all|tags_to_string }}</li> {% endif %}
+                    {% if page.tags.all %}
+                        <li>
+                            {% for tag in page.tags.all %}
+                                <a href="{% url 'tag_post_list' tag %}">{{ tag }} </a>
+                            {% endfor %}
+                        </li>
+                    {% endif %}
                     {% block date %}
                     <li>{{ page.created|date:"d M Y" }}</li>
                     {% endblock %}

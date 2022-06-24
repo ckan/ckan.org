@@ -6,7 +6,7 @@
     {% block banner %}
     {% endblock %}
     <div class="t-center user-posts">
-        <p class="body_extra_large">All posts written by <span class='author'>{{author}}</author></p>
+        <p class="body_extra_large">All posts {% if tag %}with tag <span class='author'>{{tag}}</span>{% else %}written by <span class='author'>{{author}}</span>{% endif %}</p>
     </div>
     {{ block.super }}
 {% endblock %}
