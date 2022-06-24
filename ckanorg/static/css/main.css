@@ -364,9 +364,9 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, .h {
   font-family: "SF Pro Display Bold", sans-serif;
   color: #000;
   position: relative; }
-  @media all and (min-width: 768px) {
+  /* @media all and (min-width: 768px) {
     h1:last-child, .h1:last-child, h2:last-child, .h2:last-child, h3:last-child, .h3:last-child, h4:last-child, .h4:last-child, h5:last-child, .h5:last-child, h6:last-child, .h6:last-child, .h:last-child {
-      margin: 0; } }
+      margin: 0; } } */
 
 h1, .h1 {
   font-size: 50px;
@@ -1088,6 +1088,8 @@ blockquote {
       @media all and (max-width: 767px) {
         .feature .two-columns-item .two-columns-item-info p {
           font-size: 14px; } }
+    .feature .two-columns-item .two-columns-item-info a {
+      text-decoration: none; }
 
 .read-more {
   color: #ED5248;
@@ -1138,8 +1140,9 @@ blockquote {
       .feature-list .feature-list-info p {
         font-size: 14px;
         line-height: 18px; } }
-  .feature-list + a {
-    margin: 20px 0; }
+  .feature-list a {
+    margin: 20px 0;
+    text-decoration: none; }
     @media all and (min-width: 350px) {
       .feature-list + a {
         margin-left: 108px; } }
@@ -2861,7 +2864,7 @@ img.full-width {
   align-items: center;
   text-decoration: none; }
   .card a:hover {
-    text-decoration: underline; }
+    text-decoration: none; }
   .card a svg {
     margin-left: 5px; }
 
