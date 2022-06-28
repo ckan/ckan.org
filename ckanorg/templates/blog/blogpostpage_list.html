@@ -6,7 +6,9 @@
     {% block banner %}
     {% endblock %}
     <div class="t-center user-posts">
-        <p class="body_extra_large">All posts {% if tag %}with tag <span class='author'>{{tag}}</span>{% else %}written by <span class='author'>{{author}}</span>{% endif %}</p>
+        <p class="body_extra_large">
+            All posts {% if tag %}with tag <span class='author'>{{tag}}</span>{% else %}written by <span class='author' data-toggle="tooltip" data-placement="bottom" data-html="true" title="Author: {{ author.first_name}} {{ author.last_name}}&#013;Email: {{ author.email }}&#013;Company: {{ author.user.company }}&#013;Bio: {{ author.user.bio }}">{{author.first_name}} {{author.last_name}}</span>{% endif %}
+        </p>
     </div>
     {{ block.super }}
 {% endblock %}

@@ -9,9 +9,9 @@ class UsersBlogPostListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        author = self.kwargs.get('username', '')
-        author_id = User.objects.get(username=author).id
-        context['posts'] = BlogPostPage.objects.filter(owner=author_id)
+        user_name = self.kwargs.get('username', '')
+        author = User.objects.get(username=user_name)
+        context['posts'] = BlogPostPage.objects.filter(owner=author.id)
         context['author'] = author
         return context
 
