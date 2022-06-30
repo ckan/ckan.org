@@ -27,9 +27,16 @@
         <div class="container inner-indent developers">
             <ul class="team-list">
                 {% for item in page.developers.all %}
+                    {% if item.developer.active is True  %}
                         {% include "../snippets/developer_block.html" with developer=item.developer %}
+                    {% endif %}
                 {% endfor %}
             </ul>
+            <div align="center">
+                <a href="{% url 'former_members' %}" rel="noopener" class="btn btn-grey btn-lg">
+                    Our former members
+                </a>
+            </div>
             <div id="stewards"></div>
         </div>
 

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static modal_tags %}
+{% load static wagtailimages_tags wagtailcore_tags page_tags %}
+
+
+{% block content %}
+
+    <div class="container-sm t-center">
+        <h2 class="h1">The Tech Team</h2>
+        <p class="body_extra_large">Our former and honorary members</p>
+    </div>
+    <div class="container inner-indent developers">
+        <ul class="team-list">
+            {% for item in engineers.all %}
+                    {% include "../snippets/developer_block.html" with developer=item.developer %}
+            {% endfor %}
+        </ul>
+        
+    </div>
+
+{% endblock content %}

@@ -26,6 +26,7 @@ urlpatterns = [
     path('500/', ckanorg_views.server_error, name='server_error'),
     path('accounts/', include('allauth.urls')),
     path('blog/', include('blog.urls')),
+    path('ckan/', include('ckan_pages.urls')),
 ]
 
 if settings.DEBUG:
