@@ -14,13 +14,14 @@ from django.core.paginator import (
     Paginator
 )
 
-from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, MultiFieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, MultiFieldPanel, InlinePanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.core.models import Page
 from wagtail.core.fields import StreamField
 from wagtail.core import blocks
 from wagtailmetadata.models import MetadataPageMixin
 from wagtail.admin.forms import WagtailAdminPageForm
+from wagtail.snippets.models import register_snippet
 
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey
@@ -50,11 +51,14 @@ def check_username_exists(value):
         raise ValidationError("There is not such User with this username.")
 
 
+@register_snippet
 class Profile(models.Model):
     user = models.OneToOneField(
         User, 
+        null=True,
+        blank=True,
         on_delete=models.CASCADE,
-        related_name='user'
+        related_name='profile'
     )
     bio = models.TextField(
         max_length=500, 
@@ -68,9 +72,43 @@ class Profile(models.Model):
         max_length=30, 
         blank=True
     )
-    
+    site = models.CharField(
+        null=True,
+        blank=True,
+        max_length=512,
+    )
+    linkedin = models.CharField(
+        null=True,
+        blank=True,        
+        max_length=512,
+    )
+    github = models.CharField(
+        null=True,
+        blank=True,        
+        max_length=512,
+    )
+       
     def __str__(self):
         return self.user.username
+    
+    panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel('user'),
+                FieldPanel('bio'),
+                FieldPanel('company'),
+                FieldPanel('location'),
+                FieldPanel('site'),
+                FieldPanel('linkedin'),
+                FieldPanel('github'),
+            ],
+            heading = "User profile"
+        )
+    ]
+    
+    class Meta:
+        verbose_name = "User Profile"
+        verbose_name_plural = "User Profiles"
     
 
 @receiver(post_save, sender=User)

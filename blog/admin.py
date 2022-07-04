@@ -8,7 +8,7 @@ from .models import Profile
 @modeladmin_register
 class ProfileAdmin(ModelAdmin):
     model = Profile
-    menu_label = "Users profiles"
+    menu_label = "User profiles"
     menu_icon = 'user'
     menu_order = 600
     add_to_settings_menu = True
