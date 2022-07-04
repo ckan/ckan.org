@@ -3074,7 +3074,8 @@ img.full-width {
         flex-basis: calc(33% - 30px); } }
 
 .member {
-  display: flex; }
+  display: flex;
+  margin: 20px 20px 20px 20px; }
   .member .member-ava {
     margin-right: 20px;
     border-radius: 6px;
