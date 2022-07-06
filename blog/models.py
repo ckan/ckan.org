@@ -51,7 +51,6 @@ def check_username_exists(value):
         raise ValidationError("There is not such User with this username.")
 
 
-@register_snippet
 class Profile(models.Model):
     user = models.OneToOneField(
         User, 
@@ -107,18 +106,14 @@ class Profile(models.Model):
     ]
     
     class Meta:
-        verbose_name = "User Profile"
-        verbose_name_plural = "User Profiles"
+        verbose_name = "Profile"
+        verbose_name_plural = "Profiles"
     
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
 
 
 class BlogPageTag(TaggedItemBase):
