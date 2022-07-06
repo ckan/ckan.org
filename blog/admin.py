@@ -19,7 +19,9 @@ class ProfileAdmin(ModelAdmin):
     
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        print(request.user.groups.all())
-        if request.user.groups.all()[0].name == "Blog Post Creators" and len(request.user.groups.all()) == 1:
-            qs = qs.filter(user=request.user)
+        if request.user.is_superuser:
+            return qs
+        else:
+            if request.user.groups.all()[0].name == "Blog Post Creators" and len(request.user.groups.all()) == 1:
+                qs = qs.filter(user=request.user)       
         return qs
