@@ -14,7 +14,7 @@
             <h1 class="t-center">All posts {% if tag %}with tag <span class='author'>"{{tag}}"</span>{% else %}written by </h1>
             <div class="image-to-corners">           
                 <div class="two-columns-item">
-                    <div class="member author big">
+                    <div class="author big">
                         <div class="member-ava">     
                             {% if author.wagtail_userprofile.avatar %}
                                 <img src="{{ author.wagtail_userprofile.avatar.url }}" alt='Author photo'>
@@ -24,7 +24,11 @@
                         </div>
                         <div class="member-info">
                             <h3 class="h3">{{ author.first_name}} {{ author.last_name}}</h3>
-                            <p id="about">{{ author.profile.bio }}</p>                           
+                            {% if author.profile.bio %}
+                                <p id="about">{{ author.profile.bio }}</p>    
+                            {% else %}
+                                <p>There is no information about the author in his/her profile yet.</p>                       
+                            {% endif %}
                             <h4 class="h4" id="represented_by">{{ author.profile.company }}{% if author.profile.location %}, {{ author.profile.location }}{% endif %} </h4>
                             
                             <ul class="social">
