@@ -197,6 +197,10 @@ class SoftwareEngineer(models.Model):
         blank=True,        
         max_length=512,
     )
+    active = models.BooleanField(
+        default=True,
+        help_text='Uncheck this field for former tech team member',
+    )
 
     def __str__(self):
         return self.name
@@ -210,6 +214,7 @@ class SoftwareEngineer(models.Model):
                 FieldPanel('twitter'),
                 FieldPanel('linkedin'),
                 FieldPanel('github'),
+                FieldPanel('active'),
             ],
             heading = "Software Engineer"
         )
