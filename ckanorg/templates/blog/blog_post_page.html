@@ -5,12 +5,13 @@
 {% block meta_tags %}{% meta_tags %}{% endblock %}
 
 {% block content %}
-
+        
         <section class="section-banner">
             <div class="container-sm t-center">
-                <a href="{{ page.get_parent.url }}" class="link">{% block title %}Blog{% endblock %}<svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2.00009 0.855957L0.590088 2.26596L5.17009 6.85596L0.590088 11.446L2.00009 12.856L8.00009 6.85596L2.00009 0.855957Z" fill="#ED5248"/>
-                </svg>
+                <a href="{{ page.get_parent.url }}" class="link">{% block title %}Blog{% endblock %}
+                    <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.00009 0.855957L0.590088 2.26596L5.17009 6.85596L0.590088 11.446L2.00009 12.856L8.00009 6.85596L2.00009 0.855957Z" fill="#ED5248"/>
+                    </svg>
                 </a>
                 <h1>{{ page.post_title }}</h1>
                 <p>{% if page.post_subtitle %} {{ page.post_subtitle }} {% endif %}</p>
@@ -19,7 +20,7 @@
                         {% if page.author %}
                             <li>
                                 {% if blog_author %}
-                                    <a href="{% url 'user_post_list' blog_author.username %}">
+                                    <a href="{% url 'user_post_list' blog_author.username %}" title="Author: {{ blog_author.first_name}} {{ blog_author.last_name}}&#013;Email: {{ blog_author.email }}&#013;Company: {{ blog_author.profile.company }}">
                                         {% if blog_author.first_name %}
                                             {{ blog_author.first_name }}
                                             {{ blog_author.last_name }}
@@ -27,13 +28,14 @@
                                             {{ blog_author.username }}
                                         {% endif %}
                                     </a>
+                                    
                                 {% else %}
                                     {{ page.author }}
                                 {% endif %}
                             </li>
-                        {% else %}
+                        {% else %}                       
                             {% if page.owner %}
-                                <li><a href="{% url 'user_post_list' page.owner %}">
+                                <li><a href="{% url 'user_post_list' page.owner %}" title="Author: {{ page.owner.first_name}} {{ page.owner.last_name}}&#013;Email: {{ page.owner.email }}&#013;Company: {{ page.owner.profile.company }}">
                                     {{page.owner.first_name}}
                                     {{page.owner.last_name}}
                                 </a></li>
@@ -43,12 +45,12 @@
                     {% if page.tags.all %}
                         <li>
                             {% for tag in page.tags.all %}
-                                <a href="{% url 'tag_post_list' tag %}">{{ tag }} </a>
+                                <a href="{% url 'tag_post_list' tag %}">{{ tag }}{% if page.tags.all|length > 1 and not forloop.last %}, {% endif %}</a>
                             {% endfor %}
                         </li>
                     {% endif %}
                     {% block date %}
-                    <li>{{ page.created|date:"d M Y" }}</li>
+                        <li>{{ page.created|date:"d M Y" }}</li>
                     {% endblock %}
                 </ul>
             </div>
@@ -65,19 +67,19 @@
         
         <div class="more-posts-bottom">
             <div class="container-md">
-            {% block more_posts %}
-                <div class="indent">
-                    <div class="container-sm t-center">
-                        <span class="upper">More posts</span>
+                {% block more_posts %}
+                    <div class="indent">
+                        <div class="container-sm t-center">
+                            <span class="upper">More posts</span>
+                        </div>
                     </div>
-                </div>
-                {% for post in last_posts %}
-                    {% include "../snippets/blog_post_block.html" with post=post %}
-                {% endfor %}
-            {% endblock %}
+                    {% for post in last_posts %}
+                        {% include "../snippets/blog_post_block.html" with post=post %}
+                    {% endfor %}
+                {% endblock %}
             </div>
                 {% include "../snippets/connect_with_ckan_block.html" %}
-        </div>
-       
-
+        </div>    
+        
 {% endblock content %}
+

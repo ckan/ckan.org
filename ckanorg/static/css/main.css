@@ -3098,7 +3098,8 @@ img.full-width {
   .member .member-info .h4 {
     margin: 10px 0; }
   .member .member-info p {
-    margin: 12px 0; }
+    margin: 12px 0;
+    text-align: left; }
   @media all and (max-width: 1023px) {
     .member.big {
       display: block; } }
@@ -3119,6 +3120,53 @@ img.full-width {
     font-weight: 400;
     font-size: 18px; }
   .member.big .member-info p {
+    font-size: 16px;
+    margin-bottom: 0px;
+    text-align: justify; }
+
+.author {
+  display: flex;
+  margin: 20px 20px 20px 20px; }
+  .author .member-ava {
+    margin-right: 20px;
+    border-radius: 6px;
+    overflow: hidden;
+    width: 100px;
+    height: 120px;
+    flex-shrink: 0;
+    position: relative; }
+    .author .member-ava img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      font-family: "object-fit: cover;"; }
+  .author .member-info .h4 {
+    margin: 10px 0; }
+  .author .member-info p {
+    margin: 12px 0; }
+  @media all and (max-width: 1023px) {
+    .author.big {
+      display: block; } }
+  .author.big .member-ava {
+    width: 190px;
+    height: 190px; }
+    @media all and (max-width: 1023px) {
+      .author.big .member-ava {
+        margin: 0 auto 20px; } }
+    @media all and (max-width: 500px) {
+      .author.big .member-ava {
+        width: 100%;
+        height: 200px; } }
+  .author.big .member-info .h3 {
+    color: #333; }
+  .author.big .member-info .h4 {
+    font-family: "SF Pro Display", sans-serif;
+    font-weight: 400;
+    font-size: 18px; }
+  .author.big .member-info p {
     font-size: 16px;
     margin-bottom: 0px; }
 
