@@ -1,13 +1,17 @@
+import inspect
 from wagtail.contrib.modeladmin.options import (
     ModelAdmin,
     modeladmin_register
 )
 from .models import Profile
+from .views import ProfileCreateView
 
 
 @modeladmin_register
 class ProfileAdmin(ModelAdmin):
     model = Profile
+    create_view_class = ProfileCreateView
+    form_fields_exclude = ['user']
     menu_label = "Profiles"
     menu_icon = 'user'
     menu_order = 600
