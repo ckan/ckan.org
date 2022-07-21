@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.views.generic.list import ListView
-from .models import BlogPostPage
+from .models import BlogPostPage, PostCategoryPage
 
 
 class UsersBlogPostListView(ListView):
@@ -25,4 +25,19 @@ class TagsBlogPostListView(ListView):
         tag = self.kwargs.get('tag', '')
         context['posts'] = BlogPostPage.objects.filter(tags__name=tag)
         context['tag'] = tag
+        return context
+
+
+class CategoriesBlogPostListView(ListView):
+
+    model = BlogPostPage
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cat_id = self.kwargs.get('cat_id', '')
+        if cat_id == 0:
+            context['posts'] = BlogPostPage.objects.all()
+        else:    
+            context['posts'] = BlogPostPage.objects.filter(category=cat_id)
+            context['cat_id'] = PostCategoryPage.objects.filter(id=cat_id).first().category_title
         return context
