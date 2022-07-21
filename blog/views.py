@@ -1,6 +1,10 @@
 from django.contrib.auth.models import User
 from django.views.generic.list import ListView
 from .models import BlogPostPage, PostCategoryPage
+from django.shortcuts import redirect
+from wagtail.contrib.modeladmin.views import CreateView
+from wagtail.admin import messages
+
 
 
 class UsersBlogPostListView(ListView):
@@ -28,6 +32,7 @@ class TagsBlogPostListView(ListView):
         return context
 
 
+
 class CategoriesBlogPostListView(ListView):
 
     model = BlogPostPage
@@ -41,3 +46,16 @@ class CategoriesBlogPostListView(ListView):
             context['posts'] = BlogPostPage.objects.filter(category=cat_id)
             context['cat_id'] = PostCategoryPage.objects.filter(id=cat_id).first().category_title
         return context
+
+
+class ProfileCreateView(CreateView):
+        
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        instance = form.save()
+        messages.success(
+            self.request, self.get_success_message(instance),
+            buttons=self.get_success_message_buttons(instance)
+        )
+        return redirect(self.get_success_url())
+

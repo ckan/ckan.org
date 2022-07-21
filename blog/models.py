@@ -93,7 +93,6 @@ class Profile(models.Model):
     panels = [
         MultiFieldPanel(
             [
-                FieldPanel('user'),
                 FieldPanel('bio'),
                 FieldPanel('company'),
                 FieldPanel('location'),
