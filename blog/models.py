@@ -115,6 +115,50 @@ def create_user_profile(sender, instance, created, **kwargs):
         Profile.objects.create(user=instance)
 
 
+class PostCategoryPage(models.Model):
+
+    category_image = models.ForeignKey(
+        'wagtailimages.Image',
+        blank=True,
+        null=True,
+        related_name='+',
+        help_text="Image",
+        on_delete=models.SET_NULL,
+    )
+    category_title = models.CharField(
+        max_length=512,
+        null=True,
+        blank=True
+    )
+    description = StreamField([
+        ('paragraph', blocks.RichTextBlock(
+            features=[
+                'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+                'bold', 'italic', 'link', 'ol', 'ul', 'hr'
+            ])),
+        ],
+        null=True,
+        blank=True
+    )
+    
+    def __str__(self):
+        return self.category_title
+
+    panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel('category_title'),
+                ImageChooserPanel('category_image'),
+                StreamFieldPanel('description')
+            ]
+        )
+    ]
+    
+    class Meta:
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
+
+
 class BlogPageTag(TaggedItemBase):
     content_object = ParentalKey(
         'BlogPostPage',
@@ -168,6 +212,7 @@ class BlogListingPage(MetadataPageMixin, Page):
             ).filter(featured=True).order_by('-created')
         featured_post = featured_posts[0] if featured_posts else all_posts[0]
         context['featured_post'] = featured_post
+        context['categories'] = PostCategoryPage.objects.all().order_by('-category_title')
         all_posts = all_posts.exclude(id__in=[featured_post.id,])
         paginator = Paginator(all_posts, self.posts_per_page)
         page = request.GET.get('page')
@@ -216,6 +261,13 @@ class BlogPostPage(MetadataPageMixin, Page):
         null=True,
         blank=True
     )
+    category = models.ForeignKey(
+        PostCategoryPage, 
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='post_category'
+    )
     featured = models.BooleanField(
         null=True,
         default=False
@@ -257,6 +309,7 @@ class BlogPostPage(MetadataPageMixin, Page):
 
     content_panels = Page.content_panels + [
         ImageChooserPanel('main_image'),
+        FieldPanel('category'),
         FieldPanel('post_title'),
         FieldPanel('featured', widget=forms.CheckboxInput),
         FieldPanel('post_subtitle'),
