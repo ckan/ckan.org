@@ -579,6 +579,10 @@ p {
   .btn.send {
     background: #0000EE url("../img/icon-send.svg") no-repeat;
     background-position: center; }
+  .btn.back {
+    border-radius: 100px;
+    font-size: 18px;
+    font-weight: 600; }
 
 form,
 fieldset {
