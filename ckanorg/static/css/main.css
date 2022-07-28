@@ -3208,32 +3208,68 @@ img.full-width {
 
 /* blog navbar */
 
-.blog-nav { 
-  padding-top: 10px;
-  padding-left: 15px;
-  margin-top: 20px;
+ul.blog-nav { 
+  padding: 10px 10px;
+  padding-bottom: 1px;
+  margin-top: 10px;
   margin-bottom: 10px;
   border-bottom: ridge;
   border-top: ridge;
   list-style: none;
   display: inline-block;
-  align-items: center; }
-  .blog-nav li {
-    display: inline-block;
-    margin-right: 16px; }
-    .blog-nav li:hover {
-      transform: scale(1.3); }
-    .blog-nav li a svg path {
-      transition: fill 0.3s ease-in-out; }
-    .blog-nav li a:hover svg path {
-      fill: #777777; }
-  .blog-nav li.category {
-    display: inline-block;
-    margin-right: -5px; }
-    .blog-nav li.category:hover {
-      transform: none; }
-  .blog-nav.bigger svg path {
-    fill: #000; }
+  align-items: center;
+  justify-content: center; 
+}
+
+ul.blog-nav li {
+  display: inline-block;
+  margin-left: 16px;
+  height: 25px;
+  position: relative; 
+}
+
+@media all and (max-width: 500px) {
+  ul.blog-nav li {
+    margin-right: 16px;
+    margin-left: 0px 
+  } 
+}
+
+ul.blog-nav li:hover {
+  transform: scale(1.3); 
+}
+
+ul.blog-nav li a {
+  display: inline-block; 
+}
+
+ul.blog-nav li a svg path {
+  transition: fill 0.3s ease-in-out; 
+}
+
+ul.blog-nav li a:hover svg path {
+  fill: #777777; 
+}
+
+ul.blog-nav li.category {
+  display: inline-block;
+  margin-right: -5px; 
+  margin-left: 0px
+}
+
+ul.blog-nav li.category:hover {
+  transform: none; 
+}
+
+ul.blog-nav li.filter {
+  display: inline-block;
+  margin-right: 80px; 
+  margin-left: 0px;
+}
+
+ul.blog-nav li.first {
+  margin-left: 0px;
+}
 
 /* ctagories select field in blog navbar */
 
@@ -3244,6 +3280,8 @@ img.full-width {
   overflow: hidden;
   position: relative;
   width: 150px;
+  border-radius: 6px 0px 0px 6px;
+  display: inline-block;
 }
 
 .styled-select select {
@@ -3267,6 +3305,29 @@ img.full-width {
 .styled-select select:focus {
   outline: none;
   box-shadow: none !important;
+}
+
+a.btn-filter {
+  background: #000;
+  color: #fff;
+  font-family: "SF Pro Display Bold", sans-serif;
+  padding: 0px 10px;
+  cursor: pointer;
+  font-weight: 800;
+  text-decoration: none;
+  position: absolute;
+  align-items: center;
+  transition: border 0.3s ease-in-out, color 0.3s ease-in-out, background 0.3s ease-in-out;
+  font-size: 19px;
+  border: none;
+  border-radius: 0px 6px 6px 0px; 
+  width: fit-content;
+}
+
+a.btn-filter:hover {
+  background-color: #777777;
+  color: #fff;
+  border-radius: 6px 6px 6px 6px;
 }
 
 /* Hide Default */
