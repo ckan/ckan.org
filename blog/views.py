@@ -6,7 +6,6 @@ from wagtail.contrib.modeladmin.views import CreateView
 from wagtail.admin import messages
 
 
-
 class UsersBlogPostListView(ListView):
 
     model = BlogPostPage
