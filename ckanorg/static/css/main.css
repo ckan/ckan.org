@@ -504,6 +504,11 @@ p {
   .container-flex {
     flex-direction: column;
     justify-content: flex-start; } }
+
+.container-empty {
+  height: 60px;
+}
+
 .btn {
   background: #0000EE;
   color: #fff;
@@ -1236,6 +1241,15 @@ blockquote {
   @media all and (max-width: 767px) {
     .ground {
       padding-top: 146px; } }
+
+.ground-list {
+  background: #f3f3f3;
+  margin-top: -180px;
+  padding-top: 120px;
+  overflow: hidden; }
+  @media all and (max-width: 767px) {
+    .ground-list {
+      padding-top: 90px; } }
 
 .pagination {
   margin: 0;
