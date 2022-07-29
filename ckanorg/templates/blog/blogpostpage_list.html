@@ -123,8 +123,79 @@
                 </li>              
             </ul>           
         </div>
+        <div class="container-empty"></div>
     </section>
     
-{{ block.super }}
+    <div class="ground-list">
+        <div class="container-md">
+            {% block upcoming %}
+                {% for post in posts %}
+                    {% include "../snippets/blog_post_block.html" with post=post %}
+                {% endfor %}
+            {% endblock %}
+        </div>
+            {% block past %}
+            {% endblock %}
+        </div>
+        <div class="pagination-holder indent">
+            {% block pagination %}
+            <ul class="pagination">
+                {% if posts.paginator.num_pages > 1 %}
+                    {% if posts.has_previous %}
+                        <li class="prev">
+                            <a href="?page={{ posts.previous_page_number }}">
+                                <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2.00009 0.855957L0.590088 2.26596L5.17009 6.85596L0.590088 11.446L2.00009 12.856L8.00009 6.85596L2.00009 0.855957Z" fill="#0000EE"/>
+                                </svg>
+                                Previous
+                            </a>
+                        </li>
+                        <li>
+                            <a href="?page=1">...</a>
+                        </li>
+                    {% endif %}
+                    {% for page_num in posts.paginator.page_range %}
+                        {% if page_num == posts.number %}
+                            <li><a href="?page={{ page_num }}" style="font-weight: bold;">{{ page_num }}</a></li>
+                        {% elif page_num > posts.number|add:'-3' and page_num < posts.number|add:'3' %}
+                            <li><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if posts.has_next %}
+                        <li>
+                            <a href="?page={{posts.paginator.num_pages}}">...</a>
+                        </li>
+                        <li class="next">
+                            <a href="?page={{ posts.next_page_number }}">
+                                Next
+                                <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2.00009 0.855957L0.590088 2.26596L5.17009 6.85596L0.590088 11.446L2.00009 12.856L8.00009 6.85596L2.00009 0.855957Z" fill="#0000EE"/>
+                                </svg>
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+            {% endblock %}
+        </div>
+            {% include "../snippets/connect_with_ckan_block.html" %}
+        <div class="separator alt"></div>
+    </div>
+    
+    <script type="text/javascript">
+        function update() {
+            var select = document.getElementById('cat_select');
+            var cat_id = select.options[select.selectedIndex].value;
+            if (cat_id === '0') {
+                var cat_link = "";
+            } else {
+                var cat_link = "{% url "category_post_list" cat_id=0 %}".replace('0', cat_id); 
+            }        
+            var link = $('#link');
+            link.attr("href", cat_link); 
+            console.log(cat_link)
+        }
+        update();
+    </script>
 
 {% endblock %}
