@@ -9,6 +9,7 @@ from .models import EventPostPage
 class EventPostPageAdmin(ModelAdmin):
     model = EventPostPage
     menu_label = 'Events'
+    menu_icon = 'date'
     menu_order = 290
     list_display = ['created', 'post_title', 'event_type', 'start_date', 'end_date']
     list_filter = ['created', 'event_type', 'start_date', 'end_date']
