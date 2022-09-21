@@ -129,14 +129,13 @@
     function update() {
         var select = document.getElementById('cat_select');
         var cat_id = select.options[select.selectedIndex].value;
-        if (cat_id === '0') {
-            var cat_link = "";
+        if (cat_id == 0) {
+            var cat_link = "{% slugurl 'blog' %}";
         } else {
             var cat_link = "{% url "category_post_list" cat_id=0 %}".replace('0', cat_id); 
         }        
         var link = $('#link');
         link.attr("href", cat_link); 
-        console.log(cat_link)
     }
     update();
 </script>
