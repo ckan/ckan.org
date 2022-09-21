@@ -212,7 +212,7 @@ class BlogListingPage(MetadataPageMixin, Page):
             ).filter(featured=True).order_by('-created')
         featured_post = featured_posts[0] if featured_posts else all_posts[0]
         context['featured_post'] = featured_post
-        context['categories'] = PostCategoryPage.objects.all().order_by('-category_title')
+        context['categories'] = PostCategoryPage.objects.all().order_by('category_title')
         all_posts = all_posts.exclude(id__in=[featured_post.id,])
         paginator = Paginator(all_posts, self.posts_per_page)
         page = request.GET.get('page')
