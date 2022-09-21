@@ -15,9 +15,9 @@
             <h1 class="t-center">
                  
                 {% if tag %}
-                    All posts with tag "{{tag}}"</h1>
-                {% elif cat_id %}
-                    All posts in category "{{cat_id}}"</h1>
+                    All posts with tag "{{ tag }}"</h1>
+                {% elif cat_selected.category_title %}
+                    All posts in category "{{ cat_selected.category_title }}"</h1>
                 {% else %}
                     All posts written by </h1>
                     <div class="image-to-corners">           
@@ -86,6 +86,20 @@
         </div>{% endif %}
         <div class="container-sm t-center">
             <ul class="blog-nav">
+                <li class="category">
+                    <div class="styled-select">
+                        <select id="cat_select" size="1" autocomplete="off" onChange="update()" title="Choose a category">
+                            <option value="0">Categories...</option>
+                            {% for category in categories %}
+                                <option value="{{ category.id }}" {% if category.id == cat_selected.id %}selected="selected"{% endif %}>{{ category.category_title }}</option>
+                            {% endfor %}
+                        </select>                       
+                        <div class="hider"></div>                       
+                    </div>                                      
+                </li>
+                <li class="filter">
+                    <a id="link" href="{% slugurl 'blog' %}" class="btn btn-filter" rel="noopener" title="Filter by category">Filter</a>
+                </li>
                 <li class="first">
                     <a href="https://twitter.com/intent/tweet?text=CKAN:%20News,%20industry%20reports,%20and%20announcements&url={{ request.build_absolute_uri }}" target="_blank" rel="noopener" title="Tweet this">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#000" class="bi bi-twitter" viewBox="0 0 16 16">
@@ -186,14 +200,13 @@
         function update() {
             var select = document.getElementById('cat_select');
             var cat_id = select.options[select.selectedIndex].value;
-            if (cat_id === '0') {
-                var cat_link = "";
+            if (cat_id == 0) {
+                var cat_link = "{% slugurl 'blog' %}";
             } else {
                 var cat_link = "{% url "category_post_list" cat_id=0 %}".replace('0', cat_id); 
             }        
             var link = $('#link');
             link.attr("href", cat_link); 
-            console.log(cat_link)
         }
         update();
     </script>

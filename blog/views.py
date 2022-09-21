@@ -6,7 +6,6 @@ from wagtail.contrib.modeladmin.views import CreateView
 from wagtail.admin import messages
 
 
-
 class UsersBlogPostListView(ListView):
 
     model = BlogPostPage
@@ -43,8 +42,9 @@ class CategoriesBlogPostListView(ListView):
         if cat_id == 0:
             context['posts'] = BlogPostPage.objects.all()
         else:    
-            context['posts'] = BlogPostPage.objects.filter(category=cat_id)
-            context['cat_id'] = PostCategoryPage.objects.filter(id=cat_id).first().category_title
+            context['posts'] = BlogPostPage.objects.filter(category=cat_id).order_by("-created")
+            context['categories'] = PostCategoryPage.objects.all().order_by('category_title')
+            context['cat_selected'] = PostCategoryPage.objects.filter(id=cat_id).first()
         return context
 
 
