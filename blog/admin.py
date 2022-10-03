@@ -12,7 +12,6 @@ from .views import ProfileCreateView
 class ProfileAdmin(ModelAdmin):
     model = Profile
     create_view_class = ProfileCreateView
-    form_fields_exclude = ['user']
     menu_label = "Profiles"
     menu_icon = 'user'
     menu_order = 600
@@ -28,7 +27,7 @@ class ProfileAdmin(ModelAdmin):
             return qs
         else:
             if request.user.groups.all()[0].name == "Blog Post Creators" and len(request.user.groups.all()) == 1:
-                qs = qs.filter(user=request.user)       
+                qs = qs.filter(user=request.user)    
         return qs
     
 
