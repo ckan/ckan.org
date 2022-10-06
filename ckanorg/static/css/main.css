@@ -3235,7 +3235,7 @@ ul.blog-nav {
 
 @media all and (max-width: 500px) {
   ul.blog-nav {
-    width: 250px;
+    width: 290px;
   } 
 }
 
@@ -3271,13 +3271,14 @@ ul.blog-nav li a:hover svg path {
 
 ul.blog-nav li.category {
   display: inline-block;
-  margin-left: 0px;
-  margin-right: 0px;
+  margin-left: 16px;
+  margin-right: 16px;
 }
 
 @media all and (min-width: 500px) {
   ul.blog-nav li.category {
     margin-left: 16px;
+    margin-right: 0px;
   } 
 }
 

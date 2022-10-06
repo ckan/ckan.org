@@ -107,20 +107,13 @@
                           </svg>
                     </a>
                 </li>
-                <li>
+                <li class="last">
                     <a href="{% url 'wagtailadmin_pages:add' content_type_app_name='blog' content_type_model_name='blogpostpage' parent_page_id=7 %}" target="_blank" rel="noopener" title="Add post">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#000" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
                             <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
                         </svg>
                     </a>
                 </li>  
-                <li class="last">
-                    <a href="{% slugurl 'blog' %}" rel="noopener" title="Go back">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#000" class="bi bi-reply-fill" viewBox="0 0 16 16">
-                            <path d="M5.921 11.9 1.353 8.62a.719.719 0 0 1 0-1.238L5.921 4.1A.716.716 0 0 1 7 4.719V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z"/>
-                        </svg>
-                    </a>
-                </li>
                 <li class="category">
                     <div class="styled-select">
                         <select id="cat_select" size="1" autocomplete="off" onChange="update()" title="Choose a category">
@@ -139,7 +132,14 @@
                             {% endfor %}
                         </select>                                              
                     </div>                                      
-                </li>            
+                </li>  
+                <li class="last">
+                    <a href="{% slugurl 'blog' %}" rel="noopener" title="Go back">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#000" class="bi bi-reply-fill" viewBox="0 0 16 16">
+                            <path d="M5.921 11.9 1.353 8.62a.719.719 0 0 1 0-1.238L5.921 4.1A.716.716 0 0 1 7 4.719V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z"/>
+                        </svg>
+                    </a>
+                </li>          
             </ul>           
         </div>
         <div class="container-empty"></div>
