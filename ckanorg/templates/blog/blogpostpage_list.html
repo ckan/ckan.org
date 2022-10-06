@@ -86,20 +86,6 @@
         </div>{% endif %}
         <div class="container-sm t-center">
             <ul class="blog-nav">
-                <li class="category">
-                    <div class="styled-select">
-                        <select id="cat_select" size="1" autocomplete="off" onChange="update()" title="Choose a category">
-                            <option value="0">Categories...</option>
-                            {% for category in categories %}
-                                <option value="{{ category.id }}" {% if category.id == cat_selected.id %}selected="selected"{% endif %}>{{ category.category_title }}</option>
-                            {% endfor %}
-                        </select>                       
-                        <div class="hider"></div>                       
-                    </div>                                      
-                </li>
-                <li class="filter">
-                    <a id="link" href="{% slugurl 'blog' %}" class="btn btn-filter" rel="noopener" title="Filter by category">Filter</a>
-                </li>
                 <li class="first">
                     <a href="https://twitter.com/intent/tweet?text=CKAN:%20News,%20industry%20reports,%20and%20announcements&url={{ request.build_absolute_uri }}" target="_blank" rel="noopener" title="Tweet this">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#000" class="bi bi-twitter" viewBox="0 0 16 16">
@@ -128,13 +114,32 @@
                         </svg>
                     </a>
                 </li>  
-                <li>
+                <li class="last">
                     <a href="{% slugurl 'blog' %}" rel="noopener" title="Go back">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#000" class="bi bi-reply-fill" viewBox="0 0 16 16">
                             <path d="M5.921 11.9 1.353 8.62a.719.719 0 0 1 0-1.238L5.921 4.1A.716.716 0 0 1 7 4.719V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z"/>
                         </svg>
                     </a>
-                </li>              
+                </li>
+                <li class="category">
+                    <div class="styled-select">
+                        <select id="cat_select" size="1" autocomplete="off" onChange="update()" title="Choose a category">
+                            <option value="0">Select category...</option>
+                            <option value="999">
+                                <a id="link" href="" rel="noopener">
+                                    All
+                                </a>                                   
+                            </option>
+                            {% for category in categories %}
+                                <option value="{{ category.id }}">
+                                    <a id="link" href="" rel="noopener">
+                                        {{ category.category_title }}
+                                    </a>                                   
+                                </option>
+                            {% endfor %}
+                        </select>                                              
+                    </div>                                      
+                </li>            
             </ul>           
         </div>
         <div class="container-empty"></div>
@@ -198,17 +203,15 @@
     
     <script type="text/javascript">
         function update() {
-            var select = document.getElementById('cat_select');
-            var cat_id = select.options[select.selectedIndex].value;
-            if (cat_id == 0) {
+            var select = document.getElementById('cat_select').value;
+            if (select == '999') {
                 var cat_link = "{% slugurl 'blog' %}";
             } else {
-                var cat_link = "{% url "category_post_list" cat_id=0 %}".replace('0', cat_id); 
+                var cat_link = "{% url "category_post_list" cat_id=0 %}".replace('0', select); 
             }        
             var link = $('#link');
-            link.attr("href", cat_link); 
+            window.open(cat_link, '_self');
         }
-        update();
     </script>
 
 {% endblock %}
