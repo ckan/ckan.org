@@ -1244,7 +1244,7 @@ blockquote {
 
 .ground-list {
   background: #f3f3f3;
-  margin-top: -180px;
+  margin-top: -100px;
   padding-top: 120px;
   overflow: hidden; }
   @media all and (max-width: 767px) {
