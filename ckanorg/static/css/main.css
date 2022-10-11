@@ -1244,7 +1244,7 @@ blockquote {
 
 .ground-list {
   background: #f3f3f3;
-  margin-top: -180px;
+  margin-top: -100px;
   padding-top: 120px;
   overflow: hidden; }
   @media all and (max-width: 767px) {
@@ -3227,12 +3227,16 @@ ul.blog-nav {
   padding-bottom: 1px;
   margin-top: 10px;
   margin-bottom: 10px;
-  border-bottom: ridge;
-  border-top: ridge;
   list-style: none;
   display: inline-block;
   align-items: center;
   justify-content: center; 
+}
+
+@media all and (max-width: 500px) {
+  ul.blog-nav {
+    width: 290px;
+  } 
 }
 
 ul.blog-nav li {
@@ -3245,7 +3249,7 @@ ul.blog-nav li {
 @media all and (max-width: 500px) {
   ul.blog-nav li {
     margin-right: 16px;
-    margin-left: 0px 
+    margin-left: 0px;
   } 
 }
 
@@ -3267,42 +3271,49 @@ ul.blog-nav li a:hover svg path {
 
 ul.blog-nav li.category {
   display: inline-block;
-  margin-right: -5px; 
-  margin-left: 0px
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+@media all and (min-width: 500px) {
+  ul.blog-nav li.category {
+    margin-left: 16px;
+    margin-right: 0px;
+  } 
 }
 
 ul.blog-nav li.category:hover {
-  transform: none; 
-}
-
-ul.blog-nav li.filter {
-  display: inline-block;
-  margin-right: 80px; 
-  margin-left: 0px;
+  transform: scale(1.1); 
+  transition: transform 0.3s ease-in-out;
 }
 
 ul.blog-nav li.first {
   margin-left: 0px;
 }
 
+ul.blog-nav li.last {
+  margin-right: 0px;
+}
+
 /* ctagories select field in blog navbar */
 
 .styled-select {
-  background-color: #ffffff;
-  border: 1px solid #000;
+  background-color: #fff;
+  border: 2px solid #000;
   box-sizing: border-box;
   overflow: hidden;
   position: relative;
-  width: 150px;
-  border-radius: 6px 0px 0px 6px;
+  top: 5px;
+  width: 200px;
+  border-radius: 100px;
   display: inline-block;
 }
 
 .styled-select select {
   display: inline-block;
-  float: left;
-  font-size:18px;
-  padding: 1px 5px 1px 5px;
+  font-family: "SF Pro Display Bold", sans-serif;
+  font-size:15px;
+  padding: 6.5px 12px;
   z-index:9999;
   cursor: pointer;
   background: transparent;
@@ -3319,39 +3330,6 @@ ul.blog-nav li.first {
 .styled-select select:focus {
   outline: none;
   box-shadow: none !important;
-}
-
-a.btn-filter {
-  background: #000;
-  color: #fff;
-  font-family: "SF Pro Display Bold", sans-serif;
-  padding: 0px 10px;
-  cursor: pointer;
-  font-weight: 800;
-  text-decoration: none;
-  position: absolute;
-  align-items: center;
-  transition: border 0.3s ease-in-out, color 0.3s ease-in-out, background 0.3s ease-in-out;
-  font-size: 19px;
-  border: none;
-  border-radius: 0px 6px 6px 0px; 
-  width: fit-content;
-}
-
-a.btn-filter:hover {
-  background-color: #777777;
-  color: #fff;
-  border-radius: 6px 6px 6px 6px;
-}
-
-/* Hide Default */
-.styled-select .hider {
-  background: none repeat scroll 0 0 #ffffff;
-  float: right !important;
-  height: 40px;
-  position: absolute;
-  right: 0;
-  width: 20px;
 }
 
 /* Social share container */
