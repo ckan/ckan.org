@@ -124,7 +124,7 @@
                                 </a>                                   
                             </option>
                             {% for category in categories %}
-                                <option value="{{ category.id }}">
+                                <option value="{{ category.id }}" {% if category.id == cat_selected.id %}selected="selected"{% endif %}>
                                     <a id="link" href="" rel="noopener">
                                         {{ category.category_title }}
                                     </a>                                   
