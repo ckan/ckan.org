@@ -23,6 +23,7 @@ from modelcluster.fields import ParentalKey
 from taggit.models import TaggedItemBase
 
 from .blocks import ImageWithCaption
+from wagtailcodeblock.blocks import CodeBlock
 
 
 COMMON_PANELS = (
@@ -161,8 +162,10 @@ class BlogPostPage(MetadataPageMixin, Page):
         ('paragraph', blocks.RichTextBlock(
             features=[
                 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-                'bold', 'italic', 'link', 'ol', 'ul', 'hr'
+                'bold', 'italic', 'link', 'ol', 'ul', 'hr', 'image',
+                'code', 'blockquote',
             ])),
+        ('code', CodeBlock(label='Code')),
         ('post_image', ImageWithCaption()),
     ],
     null=True,
