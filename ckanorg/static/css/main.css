@@ -3366,9 +3366,7 @@ ul.blog-nav li.last {
             backface-visibility: hidden;
     z-index: 2;
     transform: rotateX(0deg);
-    background-image: url("http://frolovoleg.ru/images/share.svg");
     background-repeat: no-repeat;
-    background-position: 72px center;
     color: #212c3f;
 }
 .share-container .back {
