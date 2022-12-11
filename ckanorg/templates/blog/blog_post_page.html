@@ -14,7 +14,7 @@
                     </svg>
                 </a>
                 <h1>{{ page.post_title }}</h1>
-                <p>{% if page.post_subtitle %} {{ page.post_subtitle }} {% endif %}</p>               
+                <p>{% if page.post_subtitle %} {{ page.post_subtitle }} {% endif %}</p>
                 <ul class="article-bread-crumbs">
                     {% block owner %}
                         {% if page.author %}
@@ -50,7 +50,7 @@
                         </li>
                     {% endif %}
                     {% block date %}
-                        <li>{{ page.created|date:"d M Y" }}</li>
+                        <li>{{ page.last_published_at|date:"d M Y" }}</li>
                     {% endblock %}
                     <li>
                         <div class="share-container">
@@ -87,7 +87,7 @@
                     </li>
                 </ul>
             </div>
-            
+
             {% if page.main_image.file.name != "original_images/default" and not page.imported %}
                 {% image page.main_image fill-1440x600 as image %}
                 <img src="{{ image.url }}" alt="{{ image.alt }}">
