@@ -4,6 +4,7 @@ $dark-gray: #333;
 $medium-gray: #666;
 $blue: #0000EE;
 $red: #ED5248;
+$dark-red: #B73C39;
 $white: #fff !default;
 $light-gray: #aaa;
 $light-gray-2: #999;
@@ -18,7 +19,7 @@ $second-font-sans-serif: 'SF Pro Display Bold', sans-serif;
 $base-background-color: $white !default;
 $font-size-base: 20px !default;
 $font-weight-base: 400 !default;
-$base-line-height: 1.3 !default;
+$base-line-height: 1.5 !default;
 $base-min-width: 320px !default;
 $base-color: $black !default;
 $base-font-family: $base-font-sans-serif;
@@ -46,9 +47,9 @@ $placeholder-hover-color: $dark-gray;
 $placeholder-focus-color: transparent;
 
 // Links
-$base-link-color: $blue !default;
+$base-link-color: $red !default;
 $base-link-font-weight: 400 !default;
-$base-link-hover-color: $blue !default;
+$base-link-hover-color: $dark-red !default;
 
 // Buttons
 $btn-color: $white !default;

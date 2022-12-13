@@ -3,11 +3,11 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, .h {
   font-family: $second-font-sans-serif;
   color: $black;
   position: relative;
-  @media all and (min-width: 768px){
-    &:last-child {
-      margin: 0;
-    }
-  }
+  // @media all and (min-width: 768px){
+  //   &:last-child {
+  //     margin: 0;
+  //   }
+  // }
 }
 
 h1, .h1 {
@@ -46,21 +46,26 @@ h6, .h6 {
 }
 
 a {
-  text-decoration: underline;
+  text-decoration: none;
   color: $base-link-color;
   outline: none;
   font-weight: $base-link-font-weight;
   font-size: 16px;
   @include animate(color);
+  &:visited {
+    text-decoration: none;
+    color: $base-link-hover-color;
+  }
   &:hover,
   &:focus {
-    text-decoration: none;
+    text-decoration: underline;
     color: $base-link-hover-color;
   }
 }
 
 p {
   margin: 0;
+  text-align: justify;
   &:not(:last-child) {
     margin: 0 0 30px;
     @media all and (max-width: 767px){
