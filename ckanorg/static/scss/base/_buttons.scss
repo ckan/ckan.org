@@ -110,4 +110,9 @@
     background: $blue url("../img/icon-send.svg") no-repeat;
     background-position: center;
   }
+  &.back{
+    border-radius: $btn-lg-border-radius;
+    font-size: $btn-lg-font-size;
+    font-weight: $btn-lg-fw;
+  }
 }
