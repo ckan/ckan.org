@@ -8,3 +8,5 @@ wagtail-metadata<4.0.0
 requests-cache
 django-allauth
 wagtail-django-recaptcha==1.0
+wagtailcodeblock==1.17.1.0
+mailchimp-marketing
