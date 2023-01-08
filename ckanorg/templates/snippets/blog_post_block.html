@@ -26,7 +26,7 @@
                 <span>{% event_start post.start_date %}</span>
             </div>
         {% else %}
-            <span class="date">In Category on {{ post.created|date:"d M Y" }}</span> <br>
+            <span class="date">In Category on {{ post.last_published_at|date:"d M Y" }}</span> <br>
         {% endif %}
         <a href="{{ post.url }}"><h2 class="h2">{{ post.post_title }}</h2></a>
         <p>{% if post.post_subtitle %} {{ post.post_subtitle }} {% endif %}</p>
