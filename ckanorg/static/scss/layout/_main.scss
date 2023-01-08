@@ -29,6 +29,9 @@
   img{
     margin: 0 auto;
   }
+  p {
+    text-align: center;
+  }
 }
 .m-centered{
   @media all and (max-width: 767px){
@@ -171,6 +174,7 @@
   font-size: 14px;
   padding: 3px;
   margin-top: 4px;
+  text-align: justify;
 }
 
 .ckan_git_link{
@@ -288,6 +292,11 @@
   padding-bottom: 0px;
 }
 
+.former {
+  margin-top: 60px; 
+  margin-bottom: 60px;
+}
+
 .government-working-group {
   padding-top: 50px;
 }
@@ -364,6 +373,7 @@ input[type=text]:-webkit-autofill {
   padding-top: 25px;
   color: #767676;
   font-size: 16px;
+  text-align: justify;
 }
 
 .commercial-bottom {
@@ -583,7 +593,7 @@ input.waiting[type='text'] {
     margin-left: 10px;
     font-size: 14px;
     font-weight: bold;
-    color: #1868D0;
+    color: #ED5248;
   }
 }
  
