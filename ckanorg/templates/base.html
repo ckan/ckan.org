@@ -9,67 +9,70 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
         gtag('config', 'UA-8271754-21');
         </script>
+
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	{% block meta_tags %}{% endblock %}
+
+        {% block meta_tags %}{% endblock %}
+
         {% block main_css %}
             <link href="{% static 'css/main.css' %}" rel="stylesheet">
             <link rel="stylesheet" href="{% static 'css/slick.css' %}">
             {% if page.favicon%}
                 {% image page.favicon fill-16x16 as fav %}
-                <link rel="icon" type="image/png" href="{{ fav.url }}">            
+                <link rel="icon" type="image/png" href="{{ fav.url }}">
             {% else %}
                 <link rel="icon" href="{% static 'img/ckan.ico' %}">
             {% endif %}
             <link href="{% static 'css/jquery.fancybox.min.css' %}" rel="stylesheet">
             <link href="{% static 'css/slick-theme.css' %}" rel="stylesheet">
-            <link href="{% static 'css/micromodal.css' %}" rel="stylesheet" type="text/css">           
+            <link href="{% static 'css/micromodal.css' %}" rel="stylesheet" type="text/css">
         {% endblock main_css %}
+
+        <script>window.pipedriveLeadboosterConfig = {base: 'leadbooster-chat.pipedrive.com',companyId: 11632257,playbookUuid: '38318f40-245d-419a-a07f-264a99d52996',version: 2};(function () {var w = window;if (w.LeadBooster) {console.warn('LeadBooster already exists');} else {w.LeadBooster = {q: [],on: function (n, h) {this.q.push({ t: 'o', n: n, h: h });},trigger: function (n) {this.q.push({ t: 't', n: n });},};}})();</script><script src="https://leadbooster-chat.pipedrive.com/assets/loader.js" async></script>
     </head>
 
-<body>
-<div class="wrapper" id="wrap">
-    <main class="main">
-        {% block header %}
-            {% include "header.html" %}
-        {% endblock header %}
-        {% block content %}{% endblock content %}
+    <body>
+        <div class="wrapper" id="wrap">
+            <main class="main">
+                {% block header %}
+                    {% include "header.html" %}
+                {% endblock header %}
+                {% block content %}{% endblock content %}
 
-    </main>
+            </main>
 
+            {% block footer %}
+                {% include "footer.html" %}
+            {% endblock footer %}
 
-    {% block footer %}
-        {% include "footer.html" %}
-    {% endblock footer %}
+            <div id="thanks-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div id="thanks-text"></div>
+                </div>
+            </div>
 
-    <div id="thanks-modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div id="thanks-text"></div>
         </div>
-    </div>
-
-</div>
-{% block js_bottom %}
-    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
-    <script src="{% static 'js/readmore.min.js' %}"></script>
-    <script src="{% static 'js/slick.min.js' %}"></script>
-    <script src="{% static 'js/jquery.fancybox.min.js' %}"></script>
-    <script src="{% static 'js/device.js' %}"></script>
-    <script src="{% static 'js/common.js' %}"></script>
-    <script src="{% static 'js/dropdown.js' %}"></script>
-    <script src="{% static 'js/micromodal.min.js' %}"></script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            MicroModal.init();
-        });
-    </script>
-    <script src="{% static 'js/ckanorg.js' %}"></script>    
-{% endblock js_bottom %}
-</body>
+        {% block js_bottom %}
+            <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+            <script src="{% static 'js/readmore.min.js' %}"></script>
+            <script src="{% static 'js/slick.min.js' %}"></script>
+            <script src="{% static 'js/jquery.fancybox.min.js' %}"></script>
+            <script src="{% static 'js/device.js' %}"></script>
+            <script src="{% static 'js/common.js' %}"></script>
+            <script src="{% static 'js/dropdown.js' %}"></script>
+            <script src="{% static 'js/micromodal.min.js' %}"></script>
+            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    MicroModal.init();
+                });
+            </script>
+            <script src="{% static 'js/ckanorg.js' %}"></script>    
+        {% endblock js_bottom %}
+    </body>
 </html>
