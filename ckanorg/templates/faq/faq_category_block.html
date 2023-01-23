@@ -1,0 +1,13 @@
+{% load static wagtailimages_tags %}
+
+{% image category.image width-100 as image %}
+
+<li>
+    <div class="faq-list-icon">
+        <a href="{{ category.url }}"><img src="{{ image.url }}" alt=""></a>
+    </div>
+    <div class="faq-list-info">
+        <a href="{{ category.url }}"><h2 class="h2">{{ category.name }}</h2></a>
+        <p>{{ category.description }}</p>
+    </div>
+</li>

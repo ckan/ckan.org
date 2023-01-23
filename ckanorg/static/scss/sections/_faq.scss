@@ -1,0 +1,122 @@
+.faq-list{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+    @media all and (max-width: 767px){
+        max-height: 370px;
+    }
+    @media all and (min-width: 768px){
+        display: flex;
+        flex-wrap: wrap;
+    }
+    li{
+        display: flex;
+        margin: 40px 0 20px;
+        @media all and (min-width: 768px){
+            width: 48%;
+        }
+    }
+    .faq-list-icon{
+        margin-right: 32px;
+        min-width: 76px;
+    }
+    .faq-list-info{
+        @media all and (min-width: 768px){
+            max-width: 410px;
+        }
+        p,
+        .h2{
+            margin-bottom: 4px;
+        }
+        p{
+            font-size: $body_medium;
+            padding-right: 10px;
+            @media all and (max-width: 767px){
+                font-size: 14px;
+                line-height: 18px;
+            }
+        }
+    }
+    + a {
+        margin: 20px 0;
+        text-decoration: none;
+        @media all and (min-width: 350px){
+            margin-left: 108px;
+        }
+    }
+}
+input {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+.accordion-wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.5);
+    width: 80%;
+    margin: 0 auto;
+    @media all and (max-width: 767px){
+        width: 100%;
+    }
+    .collapse-btn {
+        float: right;
+    }
+}
+.accordion {
+    width: 100%;
+    color: white;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+.accordion:last-child {
+    margin-bottom: 0;
+}
+.accordion-label {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding: 16px;
+    background: #333;
+    opacity: 0.8;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 20px;
+    color: #FFF;
+}
+.accordion-label:hover {
+    background: #000;
+}
+.accordion-label::after {
+    content: "\276F";
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.accordion-content {
+    max-height: 0;
+    padding: 0 16px;
+    color: #333;
+    background: white;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.accordion-content p {
+    margin: 0;
+    color: #000;
+    font-size: 18px;
+}
+input:checked + .accordion-label {
+    background: #000;
+}
+input:checked + .accordion-label::after {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+input:checked ~ .accordion-content {
+    max-height: 100%;
+    padding: 16px;
+}

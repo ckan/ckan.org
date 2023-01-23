@@ -83,6 +83,7 @@ class HomePage(MetadataPageMixin, Page):
         'ckan_pages.CkanForPage',
         'blog.BlogListingPage',
         'events.EventListingPage',
+        'faq.FaqPage',
     ]
     max_count = 1
 
