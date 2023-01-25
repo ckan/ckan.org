@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static wagtailimages_tags wagtailcore_tags page_tags wagtailmetadata_tags %}
+
+
+{% block meta_tags %}{% meta_tags %}{% endblock %}
+
+{% block content %}
+    <section class="section-banner">
+        <div class="container-sm t-center">
+            <h1>{{ page.page_subtitle }}</h1>
+            <p class="grey body_extra_large">{{ page.page_caption }}</p>
+        </div>
+    </section>
+    {% block body %}
+    <section>
+        <div class="container-lg">
+            <ul class="faq-list">
+                {% for item in categories %}
+                        {% include "faq/faq_category_block.html" with category=item %}
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+    <br>
+    <br>
+    {% endblock body %}
+{% endblock content %}
