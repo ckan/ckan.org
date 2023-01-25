@@ -22,7 +22,7 @@ COMMON_PANELS = (
 class FaqPage(MetadataPageMixin, Page):
     """Frequently Asked Questions Base Page"""
     parent_page_types = ['home.HomePage']
-    subpage_types = ['faq.FaqCategoryPage', 'FaqQuestionPage']
+    subpage_types = ['faq.FaqCategoryPage', 'faq.FaqQuestionPage']
     max_count = 1
 
     page_subtitle = models.CharField(
@@ -65,7 +65,7 @@ class FaqPage(MetadataPageMixin, Page):
 class FaqCategoryPage(MetadataPageMixin, Page):
     """FAQ Category Model"""
     parent_page_types = ['faq.FaqPage']
-    subpage_types = ['FaqQuestionPage']
+    subpage_types = []
 
     name = models.CharField(
         max_length=50,
