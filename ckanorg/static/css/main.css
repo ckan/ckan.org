@@ -2238,10 +2238,11 @@ ul.blog-nav li.last {
 .faq-list li {
   display: flex;
   margin: 40px 0 20px;
+  padding: 0px 5%;
 }
 @media all and (min-width: 768px) {
   .faq-list li {
-    width: 48%;
+    width: 50%;
   }
 }
 .faq-list .faq-list-icon {
