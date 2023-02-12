@@ -429,11 +429,11 @@ a {
 }
 a:visited {
   text-decoration: none;
-  color: #B73C39;
+  color: #97342D;
 }
 a:hover, a:focus {
   text-decoration: underline;
-  color: #B73C39;
+  color: #97342D;
 }
 
 p {
@@ -695,23 +695,23 @@ textarea {
 }
 @media all and (min-width: 600px) {
   input[type=text],
-input[type=tel],
-input[type=email],
-input[type=search],
-input[type=password],
-input[type=file],
-textarea {
+  input[type=tel],
+  input[type=email],
+  input[type=search],
+  input[type=password],
+  input[type=file],
+  textarea {
     max-width: 410px;
   }
 }
 @media all and (max-width: 599px) {
   input[type=text],
-input[type=tel],
-input[type=email],
-input[type=search],
-input[type=password],
-input[type=file],
-textarea {
+  input[type=tel],
+  input[type=email],
+  input[type=search],
+  input[type=password],
+  input[type=file],
+  textarea {
     margin-right: 0;
     margin-bottom: 10px;
   }
@@ -2283,8 +2283,7 @@ ul.blog-nav li.last {
 }
 
 .flipIn, .accord-list .accord-item {
-  -webkit-animation: flipdown 0.5s ease both;
-          animation: flipdown 0.5s ease both;
+  animation: flipdown 0.5s ease both;
 }
 
 .no-select, .accord-title {
@@ -2292,7 +2291,6 @@ ul.blog-nav li.last {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -2332,8 +2330,7 @@ ul.blog-nav li.last {
   padding-bottom: 18px;
   padding-top: 18px;
   border-top: 1px dotted #dce7eb;
-  -webkit-animation-delay: 0.5s;
-          animation-delay: 0.5s;
+  animation-delay: 0.5s;
 }
 .accord-list .accord-item:last-of-type {
   padding-bottom: 18px;
@@ -2397,30 +2394,6 @@ ul.blog-nav li.last {
   transform: translate(0, 0);
   margin-top: 14px;
   z-index: 2;
-}
-
-@-webkit-keyframes flipdown {
-  0% {
-    opacity: 0;
-    transform-origin: top center;
-    transform: rotateX(-90deg);
-  }
-  5% {
-    opacity: 1;
-  }
-  80% {
-    transform: rotateX(8deg);
-  }
-  83% {
-    transform: rotateX(6deg);
-  }
-  92% {
-    transform: rotateX(-3deg);
-  }
-  100% {
-    transform-origin: top center;
-    transform: rotateX(0deg);
-  }
 }
 
 @keyframes flipdown {
@@ -3148,9 +3121,6 @@ input.waiting[type=text] {
   input::-moz-placeholder {
     font-size: 18px;
   }
-  input:-ms-input-placeholder {
-    font-size: 18px;
-  }
   input::placeholder {
     font-size: 18px;
   }
@@ -3407,7 +3377,7 @@ img.full-width {
 }
 @media (max-width: 1024px) {
   #dropbtn-Solutions,
-#dropbtn-Support {
+  #dropbtn-Support {
     font-size: 16px;
     line-height: 20px;
   }
