@@ -326,6 +326,70 @@ template {
   display: none;
 }
 
+.modal__container .modal__header {
+  margin-top: -15px;
+  margin-bottom: -20px;
+}
+.modal__container #contact-modal p {
+  margin-bottom: 5px;
+}
+.modal__container #contact-modal p label {
+  float: left;
+  text-align: left;
+}
+.modal__container #contact-modal p input[type=text], .modal__container #contact-modal p input[type=email] {
+  height: 30px;
+  margin-bottom: 10px;
+  padding: 5px;
+  font-size: 16px;
+}
+.modal__container #contact-modal p textarea {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+.modal__container #contact-modal p input[type=checkbox] {
+  position: absolute;
+  left: 30px;
+}
+.modal__container #contact-modal p select {
+  box-sizing: border-box;
+  font-weight: 400;
+  line-height: 1.3;
+  border: 1px solid #999;
+  border-radius: 0;
+  color: #1C1C1C;
+  display: block;
+  font-family: "SF Pro Display", sans-serif;
+  outline: none;
+  -webkit-appearance: none;
+  background: transparent;
+  transition: border-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  margin-right: 10px;
+  color: #444;
+  width: 100%;
+  background: url("../img/select_arrow_down.svg") no-repeat;
+  background-position: right 5px top 5px;
+  font-size: 16px;
+}
+.modal__container #contact-modal label[for=id_i_consent_to_ckanorg_sending_me_marketing_emails_i_would_like_to_sign_up_to_receive_email_updates_from_ckanorg] {
+  padding: 0px 40px 15px 20px;
+}
+.modal__container #contact-modal ul {
+  display: inline-flex;
+  list-style-type: none;
+  float: left;
+  padding: 0;
+}
+.modal__container #contact-modal ul li {
+  margin-right: 10px;
+}
+.modal__container #contact-modal .modal-intro {
+  font-size: 12px;
+}
+.modal__container #contact-modal .modal-intro p {
+  text-align: justify;
+}
+
 html {
   box-sizing: border-box;
   height: 100%;
@@ -695,23 +759,23 @@ textarea {
 }
 @media all and (min-width: 600px) {
   input[type=text],
-input[type=tel],
-input[type=email],
-input[type=search],
-input[type=password],
-input[type=file],
-textarea {
-    max-width: 410px;
+  input[type=tel],
+  input[type=email],
+  input[type=search],
+  input[type=password],
+  input[type=file],
+  textarea {
+    max-width: 100%;
   }
 }
 @media all and (max-width: 599px) {
   input[type=text],
-input[type=tel],
-input[type=email],
-input[type=search],
-input[type=password],
-input[type=file],
-textarea {
+  input[type=tel],
+  input[type=email],
+  input[type=search],
+  input[type=password],
+  input[type=file],
+  textarea {
     margin-right: 0;
     margin-bottom: 10px;
   }
@@ -2283,8 +2347,7 @@ ul.blog-nav li.last {
 }
 
 .flipIn, .accord-list .accord-item {
-  -webkit-animation: flipdown 0.5s ease both;
-          animation: flipdown 0.5s ease both;
+  animation: flipdown 0.5s ease both;
 }
 
 .no-select, .accord-title {
@@ -2292,7 +2355,6 @@ ul.blog-nav li.last {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -2332,8 +2394,7 @@ ul.blog-nav li.last {
   padding-bottom: 18px;
   padding-top: 18px;
   border-top: 1px dotted #dce7eb;
-  -webkit-animation-delay: 0.5s;
-          animation-delay: 0.5s;
+  animation-delay: 0.5s;
 }
 .accord-list .accord-item:last-of-type {
   padding-bottom: 18px;
@@ -2397,30 +2458,6 @@ ul.blog-nav li.last {
   transform: translate(0, 0);
   margin-top: 14px;
   z-index: 2;
-}
-
-@-webkit-keyframes flipdown {
-  0% {
-    opacity: 0;
-    transform-origin: top center;
-    transform: rotateX(-90deg);
-  }
-  5% {
-    opacity: 1;
-  }
-  80% {
-    transform: rotateX(8deg);
-  }
-  83% {
-    transform: rotateX(6deg);
-  }
-  92% {
-    transform: rotateX(-3deg);
-  }
-  100% {
-    transform-origin: top center;
-    transform: rotateX(0deg);
-  }
 }
 
 @keyframes flipdown {
@@ -2692,6 +2729,7 @@ ul.blog-nav li.last {
 
 .modal__footer {
   width: 50%;
+  height: 30px;
 }
 
 .modal__container {
@@ -2888,6 +2926,7 @@ input[type=text]:-webkit-autofill {
 }
 
 .schedule-chat-contact #contact {
+  font-size: 0;
   display: block;
   width: 210px;
   height: 50px;
@@ -2908,6 +2947,12 @@ input[type=text]:-webkit-autofill {
 .schedule-chat-contact #contact:hover {
   background: #fff;
   color: #0000EE;
+}
+.schedule-chat-contact #contact:after {
+  content: "Schedule a chat";
+  font-size: 16px;
+  font-weight: 400;
+  font-size: 20px;
 }
 
 .speak-with-us-home #contact {
@@ -2937,6 +2982,36 @@ input[type=text]:-webkit-autofill {
 }
 .speak-with-us-home #contact:after {
   content: "Schedule a meeting";
+  font-size: 16px;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.webinar-contact #contact {
+  font-size: 0;
+  display: block;
+  width: 210px;
+  height: 50px;
+  text-decoration: none;
+  color: white;
+  background: #0000EE;
+  color: #fff;
+  outline: none;
+  border: 2px solid #0000EE;
+  padding: 7px 20px;
+  line-height: 1.3;
+  cursor: pointer;
+  text-decoration: none;
+  align-items: center;
+  transition: border 0.3s ease-in-out, color 0.3s ease-in-out, background 0.3s ease-in-out;
+  border-radius: 6px;
+}
+.webinar-contact #contact:hover {
+  background: #fff;
+  color: #0000EE;
+}
+.webinar-contact #contact:after {
+  content: "Get an invite";
   font-size: 16px;
   font-weight: 400;
   font-size: 20px;
@@ -3007,32 +3082,6 @@ input.waiting[type=text] {
   font-size: 16px;
 }
 
-#contact-modal p {
-  margin-bottom: 5px;
-}
-#contact-modal p label {
-  float: left;
-  text-align: left;
-}
-#contact-modal p input[type=text] {
-  height: 30px;
-  margin-bottom: 10px;
-  padding: 5px;
-  font-size: 16px;
-}
-#contact-modal p textarea {
-  margin-bottom: 10px;
-  font-size: 16px;
-}
-#contact-modal p input[type=checkbox] {
-  position: absolute;
-  left: 30px;
-  top: 464px;
-}
-#contact-modal label[for=id_i_consent_to_ckanorg_sending_me_marketing_emails_i_would_like_to_sign_up_to_receive_email_updates_from_ckanorg] {
-  padding: 0px 40px 15px 20px;
-}
-
 .ckan-git-repo-info img,
 .ckan-git-repo-info span {
   display: inline-block;
@@ -3057,37 +3106,6 @@ input.waiting[type=text] {
 
 .counter {
   margin-left: -1px;
-}
-
-.modal__header {
-  margin-top: -15px;
-  margin-bottom: -20px;
-}
-
-.modal__container {
-  padding-right: 15px !important;
-  padding-bottom: 15px !important;
-}
-
-#id_how_you_heard_about_us {
-  box-sizing: border-box;
-  font-weight: 400;
-  line-height: 1.3;
-  border: 1px solid #999;
-  border-radius: 0;
-  color: #1C1C1C;
-  display: block;
-  font-family: "SF Pro Display", sans-serif;
-  outline: none;
-  -webkit-appearance: none;
-  background: transparent;
-  transition: border-color 0.3s ease-in-out, color 0.3s ease-in-out;
-  margin-right: 10px;
-  color: #444;
-  width: 410px;
-  background: url("../img/select_arrow_down.svg") no-repeat;
-  background-position: right 5px top 5px;
-  font-size: 16px;
 }
 
 .user-posts {
@@ -3146,9 +3164,6 @@ input.waiting[type=text] {
     margin: 40px 25%;
   }
   input::-moz-placeholder {
-    font-size: 18px;
-  }
-  input:-ms-input-placeholder {
     font-size: 18px;
   }
   input::placeholder {
@@ -3407,7 +3422,7 @@ img.full-width {
 }
 @media (max-width: 1024px) {
   #dropbtn-Solutions,
-#dropbtn-Support {
+  #dropbtn-Support {
     font-size: 16px;
     line-height: 20px;
   }

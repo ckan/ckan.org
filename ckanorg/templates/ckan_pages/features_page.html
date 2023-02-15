@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static wagtailimages_tags wagtailcore_tags page_tags wagtailmetadata_tags %}
+{% load static modal_tags %}
 
 {% block meta_tags %}{% meta_tags %}{% endblock %}
 
@@ -65,13 +66,9 @@
                 <div class="separator"></div>
                 <h2>Join our next webinar</h2>
                 <p>Where we showcase CKAN to people - it's free to join and open to everyone.</p>
-                    <form action="#" id="webinarForm">
-                        {% include "../snippets/iframe.html" %}
-                        <div class="row">
-                            <input type="text" id="webinar_email" placeholder="Your email" autocomplete="off"/>
-                            <input type="submit" value="Get an invite" class="btn">
-                        </div>
-                    </form>
+                <div class="webinar-contact">
+                    {% form_modal form_name="Webinar Form" %}
+                </div>
             </div>
         </div>
 

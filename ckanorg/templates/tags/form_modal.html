@@ -4,11 +4,11 @@
 
 <div class="row">
     <div class="col-xs-1 text-capitalize" align="center">
-        <a data-micromodal-trigger="modal-1" href="javascript:void(0);" id="contact">Contact Us</a>
+        <a data-micromodal-trigger="modal-{{ form_page.pk }}" href="javascript:void(0);" id="contact">{{ form_page.button_text }}</a>
     </div>
 </div>
 
-<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+<div class="modal micromodal-slide" id="modal-{{ form_page.pk }}" aria-hidden="true">
   <div class="modal__overlay" tabindex="-1" data-micromodal-close>
     <div class="modal__container" id="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
       <header class="modal__header">
@@ -20,9 +20,12 @@
       <form action="{% pageurl form_page %}" method="POST" role="form" id="contact-modal">
         <main class="modal__content" id="modal-1-content">
           {% csrf_token %}
+          <div class="modal-intro">
+            {{ form_page.intro|richtext }}
+          </div>
           {{ form.as_p }}
           {% if page.pk != form_page.pk %}
-          <input name="source-page-id" type="hidden" value="{{ page.pk }}">
+            <input name="source-page-id" type="hidden" value="{{ page.pk }}">
           {% endif %}
         </main>
         <footer class="modal__footer">
