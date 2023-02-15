@@ -493,11 +493,11 @@ a {
 }
 a:visited {
   text-decoration: none;
-  color: #B73C39;
+  color: #97342D;
 }
 a:hover, a:focus {
   text-decoration: underline;
-  color: #B73C39;
+  color: #97342D;
 }
 
 p {
