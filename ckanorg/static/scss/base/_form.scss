@@ -29,7 +29,7 @@ textarea {
   @include animate(border-color color);
   margin-right: 10px;
   @media all and (min-width: 600px) {
-    max-width: 410px;
+    max-width: 100%;
   }
   @media all and (max-width: 599px) {
     margin-right: 0;

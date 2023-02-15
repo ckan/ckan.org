@@ -129,17 +129,31 @@ class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
         blank=True,
     )
     intro = RichTextField(
+        features=['h2', 'h3', 'h4', 'h5', 'h6', 'bold', 'italic', 'link', 'superscript', 'subscript'],
         blank=True,
     )
     thank_you_text = RichTextField(
         blank=True,
     )
+    button_text = models.CharField(
+        max_length = 50,
+        blank=True,
+        help_text = "Submit button text for this form.",
+        default="Contact Us"
+    )
+
+
+    class Meta:
+        verbose_name = 'Contact form'
+        verbose_name_plural = "Contact forms"
+
     content_panels = AbstractEmailForm.content_panels + [
         FieldPanel('form_name'),
         FieldPanel('intro'),
         FieldPanel('thank_you_text'),
         FieldPanel('subject'), 
         FieldPanel('from_address'),
+        FieldPanel('button_text'),
         InlinePanel('form_fields', label='Form Fields'),
     ]
 
@@ -147,7 +161,10 @@ class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
         addresses = [x.strip() for x in self.to_address.split(',')]
         plain_message = self.render_email(form).replace('Your', 'Sender')
         fields = parse_contact_form(plain_message)
-        html_message = render_to_string('contact_us_mail.html', fields)
+        if self.form_name == "Contact Form":
+            html_message = render_to_string('contact/contact_form_mail.html', fields)
+        else:
+            html_message = render_to_string('contact/webinar_form_mail.html', fields)
         sender_name  = fields.get('sender_name', '')
         if sender_name:
             self.subject = f'{self.subject} Sender name: {sender_name}'
