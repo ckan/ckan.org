@@ -83,7 +83,27 @@
         }
       }
     }
-
+  }
+  &.btn-dark-grey{
+    background: $btn-grey-color;
+    border: $btn-grey-border;
+    color: $white;
+    svg{
+      path{
+        fill: $white;
+      }
+    }
+    &:active,
+    &:focus,
+    &:hover{
+      background: $white;
+      color: $btn-grey-color;
+      svg{
+        path{
+          fill: $dark-gray;
+        }
+      }
+    }
   }
 
   &.btn-sm{
@@ -93,12 +113,15 @@
     font-weight: $btn-sm-fw;
     border-radius: $btn-sm-br;
     font-family: $second-font-sans-serif;
+    text-decoration: $btn-sm-text-decoration;
   }
   &.btn-lg{
     border-radius: $btn-lg-border-radius;
     padding: $btn-lg-padding;
     font-size: $btn-lg-font-size;
     font-weight: $btn-lg-fw;
+    height: $btn-lg-height;
+    text-decoration: $btn-lg-text-decoration;
   }
   &.btn-lg-br{
     border-radius: $btn-lg-border-radius;

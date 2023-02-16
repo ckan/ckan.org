@@ -624,10 +624,10 @@ p:not(:last-child) {
 }
 
 .btn {
-  background: #0000EE;
+  background: #333;
   color: #fff;
   outline: none;
-  border: 2px solid #0000EE;
+  border: 2px solid #333;
   padding: 7px 20px;
   min-width: 44px;
   line-height: 1.3;
@@ -695,6 +695,21 @@ p:not(:last-child) {
 .btn.btn-grey:active svg path, .btn.btn-grey:focus svg path, .btn.btn-grey:hover svg path {
   fill: #fff;
 }
+.btn.btn-dark-grey {
+  background: #333;
+  border: 2px solid #333;
+  color: #fff;
+}
+.btn.btn-dark-grey svg path {
+  fill: #fff;
+}
+.btn.btn-dark-grey:active, .btn.btn-dark-grey:focus, .btn.btn-dark-grey:hover {
+  background: #fff;
+  color: #333;
+}
+.btn.btn-dark-grey:active svg path, .btn.btn-dark-grey:focus svg path, .btn.btn-dark-grey:hover svg path {
+  fill: #333;
+}
 .btn.btn-sm {
   padding: 6.5px 12px;
   font-size: 15px;
@@ -702,12 +717,15 @@ p:not(:last-child) {
   font-weight: 800;
   border-radius: 100px;
   font-family: "SF Pro Display Bold", sans-serif;
+  text-decoration: none;
 }
 .btn.btn-lg {
   border-radius: 100px;
   padding: 16px 34px;
   font-size: 18px;
   font-weight: 600;
+  height: 50px;
+  text-decoration: none;
 }
 .btn.btn-lg-br {
   border-radius: 100px;
@@ -2925,96 +2943,59 @@ input[type=text]:-webkit-autofill {
   margin: 0 auto;
 }
 
-.schedule-chat-contact #contact {
+.schedule-chat-contact #contact,
+.speak-with-us-home #contact,
+.webinar-contact #contact,
+.ask-question #contact {
   font-size: 0;
-  display: block;
+  display: inline-flex;
   width: 210px;
   height: 50px;
   text-decoration: none;
   color: white;
-  background: #0000EE;
+  background: #333;
   color: #fff;
   outline: none;
-  border: 2px solid #0000EE;
+  border: 2px solid #333;
   padding: 7px 20px;
   line-height: 1.3;
   cursor: pointer;
   text-decoration: none;
   align-items: center;
+  justify-content: center;
   transition: border 0.3s ease-in-out, color 0.3s ease-in-out, background 0.3s ease-in-out;
-  border-radius: 6px;
+  border-radius: 100px;
 }
-.schedule-chat-contact #contact:hover {
+.schedule-chat-contact #contact:hover,
+.speak-with-us-home #contact:hover,
+.webinar-contact #contact:hover,
+.ask-question #contact:hover {
   background: #fff;
-  color: #0000EE;
+  color: #333;
 }
+.schedule-chat-contact #contact:after,
+.speak-with-us-home #contact:after,
+.webinar-contact #contact:after,
+.ask-question #contact:after {
+  font-size: 16px;
+  font-weight: 400;
+  font-size: 20px;
+}
+
 .schedule-chat-contact #contact:after {
   content: "Schedule a chat";
-  font-size: 16px;
-  font-weight: 400;
-  font-size: 20px;
 }
 
-.speak-with-us-home #contact {
-  font-size: 0px;
-  display: block;
-  width: 210px;
-  height: 50px;
-  text-decoration: none;
-  color: white;
-  background: #0000EE;
-  color: #fff;
-  outline: none;
-  border: 2px solid #0000EE;
-  padding: 7px 20px;
-  line-height: 1.3;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  flex-shrink: 0;
-  transition: border 0.3s ease-in-out, color 0.3s ease-in-out, background 0.3s ease-in-out;
-  border-radius: 6px;
-}
-.speak-with-us-home #contact:hover {
-  background: #fff;
-  color: #0000EE;
-}
 .speak-with-us-home #contact:after {
   content: "Schedule a meeting";
-  font-size: 16px;
-  font-weight: 400;
-  font-size: 20px;
 }
 
-.webinar-contact #contact {
-  font-size: 0;
-  display: block;
-  width: 210px;
-  height: 50px;
-  text-decoration: none;
-  color: white;
-  background: #0000EE;
-  color: #fff;
-  outline: none;
-  border: 2px solid #0000EE;
-  padding: 7px 20px;
-  line-height: 1.3;
-  cursor: pointer;
-  text-decoration: none;
-  align-items: center;
-  transition: border 0.3s ease-in-out, color 0.3s ease-in-out, background 0.3s ease-in-out;
-  border-radius: 6px;
-}
-.webinar-contact #contact:hover {
-  background: #fff;
-  color: #0000EE;
-}
 .webinar-contact #contact:after {
   content: "Get an invite";
-  font-size: 16px;
-  font-weight: 400;
-  font-size: 20px;
+}
+
+.ask-question #contact:after {
+  content: "Ask a question";
 }
 
 #stewards_link {

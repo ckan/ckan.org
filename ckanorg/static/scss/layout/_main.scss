@@ -409,101 +409,62 @@ input[type=text]:-webkit-autofill {
 	margin: 0 auto;
 }
 
-.schedule-chat-contact {
+.schedule-chat-contact,
+.speak-with-us-home,
+.webinar-contact,
+.ask-question {
   #contact {
     font-size: 0;
-    display: block;
+    display: inline-flex;
     width: 210px;
     height: 50px;
     text-decoration: none;
     color: white;
-    background: #0000EE;
+    background: #333;
     color: #fff;
     outline: none;
-    border: 2px solid #0000EE;
+    border: 2px solid #333;
     padding: 7px 20px;
     line-height: 1.3;
     cursor: pointer;
     text-decoration: none;
     align-items: center;
+    justify-content: center;
     transition: border 0.3s ease-in-out, color 0.3s ease-in-out, background 0.3s ease-in-out;
-    border-radius: 6px;
+    border-radius: 100px;
   } 
   #contact:hover {
     background: #fff;
-    color: #0000EE;
+    color: #333;
   }
   #contact:after {
-    content: 'Schedule a chat';
     font-size: 16px;
     font-weight: 400;
     font-size: 20px;
+  }
+}
+
+.schedule-chat-contact {
+  #contact:after {
+    content: 'Schedule a chat';
   }
 }
 
 .speak-with-us-home {
-  #contact {
-    font-size: 0px;
-    display: block;
-    width: 210px;
-    height: 50px;
-    text-decoration: none;
-    color: white;
-    background: #0000EE;
-    color: #fff;
-    outline: none;
-    border: 2px solid #0000EE;
-    padding: 7px 20px;
-    line-height: 1.3;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    flex-shrink: 0;
-    transition: border 0.3s ease-in-out, color 0.3s ease-in-out, background 0.3s ease-in-out;
-    border-radius: 6px;
-  }
-  #contact:hover {
-    background: #fff;
-    color: #0000EE;
-  }
   #contact:after {
-      content: 'Schedule a meeting';
-      font-size: 16px;
-      font-weight: 400;
-      font-size: 20px;
+    content: 'Schedule a meeting';
   }
 }
 
 .webinar-contact {
-  #contact {
-    font-size: 0;
-    display: block;
-    width: 210px;
-    height: 50px;
-    text-decoration: none;
-    color: white;
-    background: #0000EE;
-    color: #fff;
-    outline: none;
-    border: 2px solid #0000EE;
-    padding: 7px 20px;
-    line-height: 1.3;
-    cursor: pointer;
-    text-decoration: none;
-    align-items: center;
-    transition: border 0.3s ease-in-out, color 0.3s ease-in-out, background 0.3s ease-in-out;
-    border-radius: 6px;
-  } 
-  #contact:hover {
-    background: #fff;
-    color: #0000EE;
-  }
   #contact:after {
     content: 'Get an invite';
-    font-size: 16px;
-    font-weight: 400;
-    font-size: 20px;
+  }
+}
+
+.ask-question {
+  #contact:after {
+    content: 'Ask a question';
   }
 }
 
