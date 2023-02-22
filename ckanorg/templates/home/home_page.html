@@ -52,13 +52,6 @@
                 <h2>Speak with us</h2>
                 <p>Our <a href="{% if community_page %}{{ community_page.url }}#stewards{% else %}#{% endif %}">CKAN stewards</a> help organisations of all sizes around the globe <br> learn more about implementing CKAN open data portals.
                     <br class="mobile-hidden" />The best way to get in touch is via the form below</p>
-                {% comment %}<form action="#" id="stewardForm">
-                    {% csrf_token %}
-                    <div class="row">
-                        <input type="text" id="steward_email" placeholder="Your email" autocomplete="off"/>
-                        <input type="submit" value="Schedule a meeting" class="btn">
-                    </div>
-                </form>{% endcomment %}
                 {% form_modal %}
                 <div class="separator"></div>
                 <h2>Powered by CKAN</h2>
@@ -79,16 +72,12 @@
                 <div class="separator"></div>
                 <h2>Join our next webinar</h2>
                 <p>Where we showcase CKAN to people - it's free to join and open to everyone.</p>
-                <form action="#" id="webinarForm">
-                    {% include "../snippets/iframe.html" %}
-                    <div class="row">
-                        <input type="text" id="webinar_email" placeholder="Your email" autocomplete="off"/>
-                        <input type="submit" value="Get an invite" class="btn">
-                    </div>
-                </form>
+                <div class="webinar-contact">
+                    {% form_modal form_name="Webinar Form" %}
+                </div>
             </div>
         </div>
-        <div class="separator alt"></div>
+        <div class="separator"></div>
 
 {% endblock content %}
 

@@ -29,5 +29,5 @@ class FaqQuestionPageAdmin(ModelAdmin):
 class FaqGroup(ModelAdminGroup):
     menu_label = 'FAQ'
     menu_icon = 'folder-open-inverse'
-    menu_order = 200  
+    menu_order = 160  
     items = (FaqCategoryPageAdmin, FaqQuestionPageAdmin)

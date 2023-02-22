@@ -4,7 +4,7 @@ $dark-gray: #333;
 $medium-gray: #666;
 $blue: #0000EE;
 $red: #ED5248;
-$dark-red: #B73C39;
+$dark-red: #97342D;
 $white: #fff !default;
 $light-gray: #aaa;
 $light-gray-2: #999;
@@ -31,7 +31,7 @@ $lg-max-w: 1396px;
 $md-max-w: 1106px;
 $sm-max-w: 886px;
 
-// form
+// Form
 $base-input-bg-color: transparent;
 $base-form-color: $dark;
 $base-form-font-family: $base-font-sans-serif;
@@ -58,15 +58,16 @@ $btn-padding: 7px 20px !default;
 $btn-font-size: 20px !default;
 $btn-font-weight: 400 !default;
 $btn-line-height: 1.3 !default;
-$btn-background-color: $blue;
+$btn-background-color: $dark-gray;
 $btn-min-width: 44px;
-$btn-border: 2px solid $blue;
+$btn-border: 2px solid $dark-gray;
 
-// default border-color
+// Default border-color
 $btn-blue-border: 2px solid $blue;
 $btn-black-border: 2px solid $black;
 $btn-grey-border: 2px solid $dark-gray;
-// primary Buttons
+
+// Primary buttons
 $btn-blue-background-color: $blue;
 $btn-black-color: $black;
 $btn-grey-color: $dark-gray;
@@ -76,6 +77,8 @@ $btn-lg-border-radius: 100px;
 $btn-lg-padding: 16px 34px;
 $btn-lg-font-size: 18px;
 $btn-lg-fw: 600;
+$btn-lg-height: 50px;
+$btn-lg-text-decoration: none;
 
 // sm Buttons
 $btn-sm-padding: 6.5px 12px;
@@ -83,6 +86,7 @@ $btn-sm-font-size: 15px;
 $btn-sm-lh: 1;
 $btn-sm-fw: 800;
 $btn-sm-br: 100px;
+$btn-sm-text-decoration: none;
 
 // Headers
 $h1-font-size: 50px !default;

@@ -1,11 +1,8 @@
-from wagtail.contrib.modeladmin.options import (
-    ModelAdmin,
-    modeladmin_register
-)
+from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, modeladmin_register
 
-from .models import Email
+from .models import Email, ContactPage
 
-@modeladmin_register
+
 class EmailAdmin(ModelAdmin):
     model = Email
     menu_label = 'Emails'
@@ -16,3 +13,20 @@ class EmailAdmin(ModelAdmin):
     list_display = ['submitted', 'form_name', 'address']
     list_filter = ['form_name', 'submitted']
     search_fields = ['submitted', 'form_name', 'address']
+
+
+class ContactPageAdmin(ModelAdmin):
+    model = ContactPage
+    menu_label = "Pages"
+    menu_icon = 'form'
+    menu_order = 200
+    list_display = ('title',)
+    empty_value = 'No category'
+
+
+@modeladmin_register
+class ContactGroup(ModelAdminGroup):
+    menu_label = 'Contacts'
+    menu_icon = 'folder-open-inverse'
+    menu_order = 170  
+    items = (ContactPageAdmin, EmailAdmin)

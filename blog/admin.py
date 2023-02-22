@@ -64,5 +64,5 @@ class PostCategoryPageAdmin(ModelAdmin):
 class BlogGroup(ModelAdminGroup):
     menu_label = 'Blog'
     menu_icon = 'folder-open-inverse'
-    menu_order = 200  
+    menu_order = 150  
     items = (BlogPostPageAdmin, PostCategoryPageAdmin)
