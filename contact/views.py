@@ -18,7 +18,7 @@ with the following e-mail: {}
 form_mapping = {
     # '#steward_email': 'Steward Form',
     # '#steward_email_send': 'Steward Form',
-    '#webinar_email': 'Webinar Form',
+    '#subscribe_email': 'Subscribe Form',
     '#blog_email': 'Blog Subscription Form',
 }
 
