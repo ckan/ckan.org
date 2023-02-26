@@ -1816,7 +1816,6 @@ blockquote cite:not(:last-child) {
 /* blog navbar */
 ul.blog-nav {
   padding: 10px 10px;
-  padding-bottom: 1px;
   margin-top: 10px;
   margin-bottom: 10px;
   list-style: none;
@@ -2096,6 +2095,61 @@ ul.blog-nav li.last {
 
 .mb0 {
   margin-bottom: 0;
+}
+
+.blog-subscribe {
+  background: url("/static/img/newsletter-01.max-800x600.png");
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-size: 40%;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+}
+.blog-subscribe .blog-subscribe-content {
+  padding: 20px 40px;
+  width: 100%;
+}
+.blog-subscribe .blog-subscribe-content h2 {
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 42px;
+  color: #333;
+  text-align: center;
+}
+.blog-subscribe .blog-subscribe-content p:not(:last-child) {
+  margin: 0 0 10px;
+  text-align: center;
+}
+.blog-subscribe .blog-subscribe-content .title {
+  font-size: 15px;
+  text-transform: uppercase;
+}
+.blog-subscribe .blog-subscribe-content .blog-subscribe-form {
+  margin-top: 30px;
+}
+.blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=text] {
+  background-color: transparent;
+  color: #333;
+  border: 1px solid #777;
+  border-radius: 6px;
+}
+.blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit] {
+  background: #333;
+  border: 2px solid #333;
+  border-radius: 6px;
+  color: #fff;
+}
+.blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit] svg path {
+  fill: #fff;
+}
+.blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:active, .blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:focus, .blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:hover {
+  background: transparent;
+  color: #333;
+}
+.blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:active svg path, .blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:focus svg path, .blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:hover svg path {
+  fill: #333;
 }
 
 .government-working-group {
