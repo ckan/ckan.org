@@ -1,6 +1,6 @@
 var modal = document.getElementById("thanks-modal");
 var span = $(".close")[0];
-var thanks = "<h4>Thank you for getting in touch!</h4><p>We’ll get back to you within one business day!</p>"
+var thanks = "<h4>Thank you for getting in touch!</h4><p style='text-align: center;'>We’ll get back to you within one business day!</p>"
 var blog_thanks = "<h4>Thank you for subscribing our blog!</h4>"
 
 span.onclick = function() {
@@ -18,8 +18,13 @@ function showError(error, form_id) {
     $(form_id).attr('placeholder', error);
 }
 
-function webinarSubmitAction(e){
-    submitAction(e, '#webinar_email');
+function subscribeSubmitAction(e){
+    submitAction(e, '#subscribe_email');
+}
+
+function blogSubscribeSubmitAction(e){
+    submitAction(e, '#blog_subscribe_email', '#blog_subscribe_name');
+    console.log("Submit action (e):", e)
 }
 
 function stewardSubmitAction(e){
@@ -53,7 +58,7 @@ function isTooFast(form_id) {
     }
 }
 
-function submitAction(e, form_id){
+function submitAction(e, form_id, form_input_name){
     e.preventDefault();
     var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     var valid = re.test($(form_id)[0].value);
@@ -68,11 +73,12 @@ function submitAction(e, form_id){
             showError('Please try again later', form_id);
         } else {
             window.localStorage.setItem(form_id, new Date());
-            $(form_id).addClass('waiting');
+            // $(form_id).addClass('waiting');
             $.ajax({
                 type : "POST", 
                 url: "/ajax-posting/",
                 data: {
+                    name: $(form_input_name).val() || 'Unknown',
                     email: $(form_id).val(),
                     form_id: form_id,
                     csrfmiddlewaretoken: token,
@@ -80,9 +86,11 @@ function submitAction(e, form_id){
                 },
                 success: function(data){
                     $(form_id)[0].value = '';
-                    $(form_id).removeClass('waiting');
+                    $(form_input_name).value = '';
+                    // $(form_id).removeClass('waiting');
                     $(form_id).removeClass('contactFormError');
-                    $(form_id).attr('placeholder', 'Your email');
+                    $(form_id).attr('placeholder', 'your@email.com');
+                    $(form_input_name).attr('placeholder', 'your name');
                     if (form_id == "#blog_email") {
                         $("#thanks-text").html(blog_thanks)
                     } else {
@@ -98,21 +106,39 @@ function submitAction(e, form_id){
     }
 }
 
-$('#webinarForm').on('submit', webinarSubmitAction);
-// $('#stewardForm').on('submit', stewardSubmitAction);
-// $('#stewardFormSend').on('submit', stewardSendSubmitAction);
+$('#subscribe_form').on('submit', subscribeSubmitAction);
+$('#blog_subscribe_form').on('submit', blogSubscribeSubmitAction);
 $('#blogForm').on('submit', blogSubmitAction);
 
-$.each(['#webinar_email', '#steward_email', '#blog_email'], function(_, id){
+$.each([
+    '#subscribe_email',
+    '#blog_subscribe_email',
+    '#steward_email',
+    '#blog_email',
+    '#blog_subscribe_name'], 
+    function(_, id){
     $(id).focus(function(){
         $(id).attr('placeholder', '');
     });
 });
 
-$.each(['#webinar_email', '#steward_email', '#blog_email'], function(_, id){
+$.each([
+    '#subscribe_email',
+    '#blog_subscribe_email',
+    '#steward_email',
+    '#blog_email'],
+    function(_, id){
     $(id).focusout(function(){
         $(id)
-            .attr('placeholder', 'Your email')
+            .attr('placeholder', 'your@email.com')
+            .removeClass('contactFormError');
+    });
+});
+
+$.each(['#blog_subscribe_name'], function(_, id){
+    $(id).focusout(function(){
+        $(id)
+            .attr('placeholder', 'your name')
             .removeClass('contactFormError');
     });
 });

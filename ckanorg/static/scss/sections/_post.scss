@@ -170,7 +170,6 @@
 /* blog navbar */
 ul.blog-nav { 
   padding: 10px 10px;
-  padding-bottom: 1px;
   margin-top: 10px;
   margin-bottom: 10px;
   list-style: none;
@@ -344,9 +343,6 @@ ul.blog-nav {
   }
 }
 
-.pagination-holder{
-
-}
 .pagination{
   margin: 0;
   padding: 0;
@@ -428,9 +424,6 @@ ul.blog-nav {
   }
 }
 .subscribe{
-  .h3{
-
-  }
   >div{
     margin-bottom: 24px;
   }
@@ -459,4 +452,65 @@ ul.blog-nav {
 }
 .mb0{
   margin-bottom: 0;
+}
+
+.blog-subscribe {
+  background: url('/static/img/newsletter-01.max-800x600.png');
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-size: 40%;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  .blog-subscribe-content {
+    padding: 20px 40px;
+    width: 100%;
+    h2 {
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 42px;
+      color: #333;
+      text-align: center;
+    }
+    p:not(:last-child) {
+      margin: 0 0 10px;
+      text-align: center;
+    }
+    .title {
+      font-size: 15px;
+      text-transform: uppercase;
+    }
+    .blog-subscribe-form {
+      margin-top: 30px;
+      input[type=text] {
+        background-color: transparent;
+        color: #333;
+        border: 1px solid #777;
+        border-radius: 6px;
+      }
+      input[type=submit] {
+        background: $btn-grey-color;
+        border: 2px solid $btn-grey-color;
+        border-radius: 6px;
+        color: $white;
+        svg{
+          path{
+            fill: $white;
+          }
+        }
+        &:active,
+        &:focus,
+        &:hover{
+          background: transparent;
+          color: $btn-grey-color;
+          svg{
+            path{
+              fill: $dark-gray;
+            }
+          }
+        }
+      }
+    }
+  }
 }

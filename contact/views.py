@@ -16,9 +16,8 @@ with the following e-mail: {}
 '''
 
 form_mapping = {
-    # '#steward_email': 'Steward Form',
-    # '#steward_email_send': 'Steward Form',
-    '#webinar_email': 'Webinar Form',
+    '#subscribe_email': 'Subscribe Form',
+    '#blog_subscribe_email': 'Subscribe Form',
     '#blog_email': 'Blog Subscription Form',
 }
 
@@ -26,6 +25,7 @@ def ajax_email(request):
     if request.is_ajax():
         form_id = request.POST.get('form_id', None)
         form_name = form_mapping.get(form_id, 'Unknown form')
+        name = request.POST.get('name', 'Unknown')
         email = request.POST.get('email', None)
         response = {}
         Email.objects.create(
@@ -54,6 +54,8 @@ def ajax_email(request):
             "email_address": email,
             "status": "subscribed",
             "merge_fields": {
+                "FNAME": name.split(" ")[0],
+                "LNAME": name.split(" ")[-1],
                 "FORM": form_name,
             }
         }
