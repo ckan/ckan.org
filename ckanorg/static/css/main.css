@@ -1816,7 +1816,6 @@ blockquote cite:not(:last-child) {
 /* blog navbar */
 ul.blog-nav {
   padding: 10px 10px;
-  padding-bottom: 1px;
   margin-top: 10px;
   margin-bottom: 10px;
   list-style: none;
@@ -2096,6 +2095,61 @@ ul.blog-nav li.last {
 
 .mb0 {
   margin-bottom: 0;
+}
+
+.blog-subscribe {
+  background: url("/static/img/newsletter-01.max-800x600.png");
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-size: 40%;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+}
+.blog-subscribe .blog-subscribe-content {
+  padding: 20px 40px;
+  width: 100%;
+}
+.blog-subscribe .blog-subscribe-content h2 {
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 42px;
+  color: #333;
+  text-align: center;
+}
+.blog-subscribe .blog-subscribe-content p:not(:last-child) {
+  margin: 0 0 10px;
+  text-align: center;
+}
+.blog-subscribe .blog-subscribe-content .title {
+  font-size: 15px;
+  text-transform: uppercase;
+}
+.blog-subscribe .blog-subscribe-content .blog-subscribe-form {
+  margin-top: 30px;
+}
+.blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=text] {
+  background-color: transparent;
+  color: #333;
+  border: 1px solid #777;
+  border-radius: 6px;
+}
+.blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit] {
+  background: #333;
+  border: 2px solid #333;
+  border-radius: 6px;
+  color: #fff;
+}
+.blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit] svg path {
+  fill: #fff;
+}
+.blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:active, .blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:focus, .blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:hover {
+  background: transparent;
+  color: #333;
+}
+.blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:active svg path, .blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:focus svg path, .blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:hover svg path {
+  fill: #333;
 }
 
 .government-working-group {
@@ -2501,6 +2555,23 @@ ul.blog-nav li.last {
     transform: rotateX(0deg);
   }
 }
+.subscribe-page-content {
+  margin-top: 30px;
+}
+
+.two-columns-item.subscribe-page-info {
+  display: flex;
+  align-items: center;
+}
+.two-columns-item.subscribe-page-form {
+  display: flex;
+  align-items: center;
+}
+.two-columns-item.subscribe-page-form .blog-subscribe {
+  border-radius: 0;
+  box-shadow: none;
+}
+
 .wrapper {
   position: relative;
   overflow: hidden;
@@ -3489,11 +3560,14 @@ img.full-width {
   background: #f4f4f4;
 }
 @media all and (min-width: 768px) {
-  .footer .two-columns .two-columns-item:first-of-type {
-    width: calc(55% - 15px);
+  .footer .two-columns .two-columns-item {
+    margin-bottom: 0;
   }
-  .footer .two-columns .two-columns-item:last-of-type {
-    width: calc(44.5% - 15px);
+  .footer .two-columns .two-columns-item .two-columns-item:first-of-type {
+    width: calc(50% - 15px);
+  }
+  .footer .two-columns .two-columns-item .two-columns-item:last-of-type {
+    width: calc(50% - 15px);
   }
 }
 .footer #contact {
@@ -3525,9 +3599,15 @@ img.full-width {
   .footer ul {
     display: flex;
     align-items: center;
+    margin-bottom: 20px;
   }
   .footer ul li:first-of-type {
     margin-right: 60px;
+  }
+}
+@media all and (max-width: 450px) {
+  .footer ul {
+    margin-bottom: 20px;
   }
 }
 
@@ -3536,7 +3616,7 @@ img.full-width {
 }
 
 .auth-links {
-  position: absolute !important;
+  position: inherit !important;
   width: 100%;
   bottom: 24px;
 }
@@ -3546,7 +3626,6 @@ img.full-width {
 .auth-links li a {
   color: #666;
   font-family: "SF Pro Display Bold", sans-serif;
-  display: flex;
   align-items: center;
   font-weight: 800;
   transition: all 0.3s ease-in-out;
@@ -3555,7 +3634,7 @@ img.full-width {
 }
 
 .footer-btns {
-  position: absolute !important;
+  display: flex;
   bottom: 35px;
   right: 0;
 }
@@ -3565,27 +3644,75 @@ img.full-width {
   display: inline;
 }
 .footer-btns li a {
-  padding-left: 7px !important;
+  padding-left: 0px !important;
   padding-right: 7px !important;
 }
 
-@media all and (max-width: 767px) {
+@media all and (max-width: 940px) {
   .footer-btns {
-    bottom: -15px;
-  }
-  .auth-links {
-    bottom: -29px;
-  }
-  .auth-links li {
-    margin-bottom: 2px !important;
-  }
-}
-@media all and (max-width: 362px) {
-  .footer-btns li {
     display: block;
-    margin-top: 10px !important;
   }
 }
+@media all and (max-width: 768px) {
+  .footer-btns {
+    display: flex;
+  }
+}
+@media all and (max-width: 450px) {
+  .footer-btns {
+    display: block;
+  }
+}
+.footer-subscribe {
+  background-color: none;
+  padding: 0px 2px;
+  border: 1px solid #777;
+  margin: -10px 0 20px;
+}
+.footer-subscribe .row {
+  display: flex;
+  margin: 0;
+}
+@media all and (max-width: 950px) {
+  .footer-subscribe .row {
+    display: block;
+  }
+}
+.footer-subscribe input[type=text] {
+  background-color: transparent;
+  color: #333;
+  border: none;
+  height: 34px;
+  font-size: 16px;
+}
+@media all and (max-width: 950px) {
+  .footer-subscribe input[type=text] {
+    text-align: center;
+  }
+}
+.footer-subscribe input[type=submit] {
+  background: #333;
+  border: 1px solid #777;
+  border-radius: 0;
+  color: #fff;
+}
+@media all and (max-width: 950px) {
+  .footer-subscribe input[type=submit] {
+    width: 100%;
+    justify-content: center;
+  }
+}
+.footer-subscribe input[type=submit] svg path {
+  fill: #fff;
+}
+.footer-subscribe input[type=submit]:active, .footer-subscribe input[type=submit]:focus, .footer-subscribe input[type=submit]:hover {
+  background: #f4f4f4;
+  color: #333;
+}
+.footer-subscribe input[type=submit]:active svg path, .footer-subscribe input[type=submit]:focus svg path, .footer-subscribe input[type=submit]:hover svg path {
+  fill: #333;
+}
+
 .header {
   transition: all ease 0.5s;
   position: fixed;
