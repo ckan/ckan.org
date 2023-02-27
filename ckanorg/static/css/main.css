@@ -2555,6 +2555,23 @@ ul.blog-nav li.last {
     transform: rotateX(0deg);
   }
 }
+.subscribe-page-content {
+  margin-top: 30px;
+}
+
+.two-columns-item.subscribe-page-info {
+  display: flex;
+  align-items: center;
+}
+.two-columns-item.subscribe-page-form {
+  display: flex;
+  align-items: center;
+}
+.two-columns-item.subscribe-page-form .blog-subscribe {
+  border-radius: 0;
+  box-shadow: none;
+}
+
 .wrapper {
   position: relative;
   overflow: hidden;
