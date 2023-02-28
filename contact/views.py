@@ -1,19 +1,16 @@
-from datetime import datetime
+import time
+import logging
+import traceback
 
-from django.core.mail import send_mail
-from django.http import JsonResponse  
-from django.conf import settings
+from django.http import JsonResponse, HttpResponse
+from django.shortcuts import redirect
+from django.utils.encoding import force_text
+from django.utils.http import urlsafe_base64_decode
 
 from .models import Email, send_contact_info
-from managers.models import Manager
+from .token import user_activation_token
+from .email import send_subscription_email
 
-
-EMAIL_SUBJECT = 'Form submition from ckan.org'
-
-EMAIL_BODY = '''
-<b>{}</b> was submitted on {}
-with the following e-mail: {}
-'''
 
 form_mapping = {
     '#subscribe_email': 'Subscribe Form',
@@ -21,44 +18,62 @@ form_mapping = {
     '#blog_email': 'Blog Subscription Form',
 }
 
+def activate_subscription(request, eidb64, token):
+    try:
+        eid = force_text(urlsafe_base64_decode(eidb64))
+        email = Email.objects.filter(address=eid).first()
+        url = request._current_scheme_host
+    except(TypeError, ValueError, OverflowError, email.DoesNotExist):
+        logging.getLogger("error_logger").error(traceback.format_exc())
+        email = None
+    if email is not None and user_activation_token.check_token(email, token):
+        email.subscribed = True
+        email.save()
+        return redirect(url)
+    else:
+        return HttpResponse('Activation link is invalid!')
+
+
 def ajax_email(request):
     if request.is_ajax():
         form_id = request.POST.get('form_id', None)
         form_name = form_mapping.get(form_id, 'Unknown form')
         name = request.POST.get('name', 'Unknown')
         email = request.POST.get('email', None)
+        token = user_activation_token.make_token(email)
+        current_site = request._current_scheme_host
+
         response = {}
-        Email.objects.create(
-            form_name=form_name,
-            address=email
-        )
-        send_to = [x.email for x in Manager.objects.all()]
-        from django.template.loader import render_to_string
-        from django.utils.html import strip_tags
-        html_message = render_to_string('mail.html',
-                {'form_name': form_name,
-                 'time': datetime.now().strftime("%A, %d %B %Y, %I:%M%p"),
-                 'email': email
-                 })
-        plain_message = strip_tags(html_message)
-        send_mail(
-            EMAIL_SUBJECT,
-            plain_message,
-            settings.DEFAULT_FROM_EMAIL,
-            send_to,
-            fail_silently=False,
-            html_message=html_message),
+
+        status = True
+        if not Email.objects.filter(address=email).exists():
+            Email.objects.create(
+                form_name=form_name,
+                full_name=name, 
+                address=email,
+                subscribed=False,
+            )
+            status = send_subscription_email(
+                email=email,
+                current_site=current_site,
+                token=token
+            )
+        else:
+            Email.objects.filter(address=email).first().update(subscribed=True)
+
+        if status is True:
+            member_info = {
+                "email_address": email,
+                "status": "subscribed",
+                "merge_fields": {
+                    "FNAME": name.split(" ")[0],
+                    "LNAME": name.split(" ")[-1],
+                    "FORM": form_name,
+                }
+            }
+            send_contact_info(request, member_info)
+
         response = {'success': True}
 
-        member_info = {
-            "email_address": email,
-            "status": "subscribed",
-            "merge_fields": {
-                "FNAME": name.split(" ")[0],
-                "LNAME": name.split(" ")[-1],
-                "FORM": form_name,
-            }
-        }
-        send_contact_info(request, member_info)
-
         return JsonResponse(response)
+

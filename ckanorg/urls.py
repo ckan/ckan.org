@@ -21,6 +21,7 @@ urlpatterns = [
     path('search/', search_views.search, name='search'),
 
     path('ajax-posting/', ajax_email, name='ajax_email'),
+    path('contacts/', include('contact.urls')),
     path('csrf/', csrf, name='csrf'),
     path('404/', ckanorg_views.not_found, name='not_found'),
     path('500/', ckanorg_views.server_error, name='server_error'),

@@ -1,6 +1,6 @@
 var modal = document.getElementById("thanks-modal");
 var span = $(".close")[0];
-var thanks = "<h4>Thank you for getting in touch!</h4><p style='text-align: center;'>We’ll get back to you within one business day!</p>"
+var thanks = "<h4>Thank you for being with us!</h4><p style='text-align: center;'>We have sent you a confirmation email. By click on the link in this email, you will confirm your email address and complete you subscription.</p>"
 var blog_thanks = "<h4>Thank you for subscribing our blog!</h4>"
 
 span.onclick = function() {
@@ -19,12 +19,11 @@ function showError(error, form_id) {
 }
 
 function subscribeSubmitAction(e){
-    submitAction(e, '#subscribe_email');
+    submitAction(e, '#subscribe_email', '#subscribe_name');
 }
 
 function blogSubscribeSubmitAction(e){
     submitAction(e, '#blog_subscribe_email', '#blog_subscribe_name');
-    console.log("Submit action (e):", e)
 }
 
 function stewardSubmitAction(e){
@@ -73,7 +72,6 @@ function submitAction(e, form_id, form_input_name){
             showError('Please try again later', form_id);
         } else {
             window.localStorage.setItem(form_id, new Date());
-            // $(form_id).addClass('waiting');
             $.ajax({
                 type : "POST", 
                 url: "/ajax-posting/",
@@ -82,12 +80,12 @@ function submitAction(e, form_id, form_input_name){
                     email: $(form_id).val(),
                     form_id: form_id,
                     csrfmiddlewaretoken: token,
+                    url: window.location.href,
                     dataType: "json",
                 },
                 success: function(data){
                     $(form_id)[0].value = '';
-                    $(form_input_name).value = '';
-                    // $(form_id).removeClass('waiting');
+                    $(form_input_name).val('');
                     $(form_id).removeClass('contactFormError');
                     $(form_id).attr('placeholder', 'your@email.com');
                     $(form_input_name).attr('placeholder', 'your name');
@@ -112,10 +110,11 @@ $('#blogForm').on('submit', blogSubmitAction);
 
 $.each([
     '#subscribe_email',
+    '#subscribe_name',
     '#blog_subscribe_email',
+    '#blog_subscribe_name',
     '#steward_email',
-    '#blog_email',
-    '#blog_subscribe_name'], 
+    '#blog_email'], 
     function(_, id){
     $(id).focus(function(){
         $(id).attr('placeholder', '');
@@ -135,7 +134,7 @@ $.each([
     });
 });
 
-$.each(['#blog_subscribe_name'], function(_, id){
+$.each(['#subscribe_name', '#blog_subscribe_name'], function(_, id){
     $(id).focusout(function(){
         $(id)
             .attr('placeholder', 'your name')
