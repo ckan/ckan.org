@@ -212,18 +212,30 @@ class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
 @register_snippet
 class Email(models.Model):
 
-    submitted = models.DateTimeField(
-        default=datetime.now,
-    )
     form_name = models.CharField(
         max_length=64,
         blank=False,
         null=False,
     )
+    full_name = models.CharField(
+        max_length=64,
+        blank=True,
+        null=True,
+    )
     address = models.EmailField(
+        verbose_name="Email",
         max_length=254,
         blank=False,
         null=False,
+    )
+    subscribed = models.BooleanField(
+        default=False,
+    )
+    submitted = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated = models.DateTimeField(
+        auto_now=True,
     )
 
     def __str__(self):

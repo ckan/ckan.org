@@ -13,6 +13,13 @@
         .blog-subscribe {
             border-radius: 0;
             box-shadow: none;
+            .blog-subscribe-form {
+                .unsubscribe {
+                    display: flex;
+                    justify-content: center;
+                    font-size: 14px;
+                }
+            }
         }
     }
 }

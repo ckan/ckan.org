@@ -10,8 +10,8 @@ class EmailAdmin(ModelAdmin):
     menu_order = 290
     add_to_settings_menu = False
     exclude_from_explorer = False
-    list_display = ['submitted', 'form_name', 'address']
-    list_filter = ['form_name', 'submitted']
+    list_display = ['submitted', 'form_name', 'address', 'full_name', 'subscribed']
+    list_filter = ['form_name', 'submitted', 'subscribed']
     search_fields = ['submitted', 'form_name', 'address']
 
 

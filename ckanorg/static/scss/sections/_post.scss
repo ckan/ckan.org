@@ -455,10 +455,10 @@ ul.blog-nav {
 }
 
 .blog-subscribe {
-  background: url('/static/img/newsletter-01.max-800x600.png');
+  background: url('/static/img/newsletter-blog.svg');
   background-repeat: no-repeat;
   background-position: right top;
-  background-size: 40%;
+  background-size: 50%;
   border-radius: 22px;
   overflow: hidden;
   box-shadow: 0 1px 20px rgba(0, 0, 0, 0.2);
@@ -486,13 +486,13 @@ ul.blog-nav {
       input[type=text] {
         background-color: transparent;
         color: #333;
-        border: 1px solid #777;
-        border-radius: 6px;
+        border: none;
+        border-bottom: 1px solid #777;
       }
       input[type=submit] {
         background: $btn-grey-color;
         border: 2px solid $btn-grey-color;
-        border-radius: 6px;
+        border-radius: 100px;
         color: $white;
         svg{
           path{
