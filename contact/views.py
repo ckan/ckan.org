@@ -4,76 +4,122 @@ import traceback
 
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import redirect
+from django.utils import timezone
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
+from django.contrib import messages
 
-from .models import Email, send_contact_info
+from .models import Email, send_contact_info, Message
 from .token import user_activation_token
 from .email import send_subscription_email
 
 
 form_mapping = {
-    '#subscribe_email': 'Subscribe Form',
-    '#blog_subscribe_email': 'Subscribe Form',
-    '#blog_email': 'Blog Subscription Form',
+    '#subscribe_form': 'Subscribe Form',
+    '#blog_subscribe_form': 'Subscribe Form',
+    '#blog_unsubscribe_form': 'Subscribe Form',
 }
 
 def activate_subscription(request, eidb64, token):
     try:
         eid = force_text(urlsafe_base64_decode(eidb64))
-        email = Email.objects.filter(address=eid).first()
+        subscriber = Email.objects.filter(
+            form_name = 'Subscribe Form',
+            address=eid
+        ).first()
         url = request._current_scheme_host
-    except(TypeError, ValueError, OverflowError, email.DoesNotExist):
+    except(TypeError, ValueError, OverflowError, subscriber.DoesNotExist):
         logging.getLogger("error_logger").error(traceback.format_exc())
-        email = None
-    if email is not None and user_activation_token.check_token(email, token):
-        email.subscribed = True
-        email.save()
+        subscriber = None
+    if subscriber is not None and user_activation_token.check_token(subscriber, token):
+        subscriber.subscribed = True
+        subscriber.save()
         return redirect(url)
     else:
         return HttpResponse('Activation link is invalid!')
 
 
+def ajax_unsubscribe(request):
+    form_id = request.POST.get('form_id', None)
+    form_name = form_mapping.get(form_id, None)
+    email = request.POST.get('email', None)
+    subscriber = Email.objects.filter(
+        form_name=form_name,
+        address=email,
+    ).first()
+    print(form_id, form_name, email, subscriber)
+
+    if not subscriber:
+        message = Message.objects.get(slug='unsubscribed-failed-message')
+        response = {
+            'failed': True,
+            'message_content': message.content
+        }
+        return JsonResponse(response)
+
+    subscriber.subscribed = False
+    subscriber.update = timezone.now()
+    subscriber.save()
+    message = Message.objects.get(slug='unsubscribed-message')
+    response = {
+        'unsubscribed': True,
+        'message_content': message.content
+    }
+    return JsonResponse(response)
+
+
+
 def ajax_email(request):
     if request.is_ajax():
         form_id = request.POST.get('form_id', None)
-        form_name = form_mapping.get(form_id, 'Unknown form')
-        name = request.POST.get('name', 'Unknown')
+        form_name = form_mapping.get(form_id, None)
+        name = request.POST.get('name', None)
         email = request.POST.get('email', None)
         token = user_activation_token.make_token(email)
         current_site = request._current_scheme_host
 
         response = {}
+        subscriber, created = Email.objects.get_or_create(
+            form_name=form_name,
+            address=email,
+        )
+        if created:
+            subscriber.full_name = name
+            subscriber.save()
+        elif subscriber.subscribed:
+            message = Message.objects.get(slug='subscribed-message')
+            response = {
+                'subscribed': True,
+                'message_content': message.content
+            }
+            return JsonResponse(response)
+        else:
+            subscriber.full_name = name
+            subscriber.update = timezone.now()
+            subscriber.save()
 
-        status = True
-        if not Email.objects.filter(address=email).exists():
-            Email.objects.create(
-                form_name=form_name,
-                full_name=name, 
-                address=email,
-                subscribed=False,
-            )
-            status = send_subscription_email(
+        send_subscription_email(
                 email=email,
                 current_site=current_site,
                 token=token
             )
-        else:
-            Email.objects.filter(address=email).first().update(subscribed=True)
 
-        if status is True:
-            member_info = {
-                "email_address": email,
-                "status": "subscribed",
-                "merge_fields": {
-                    "FNAME": name.split(" ")[0],
-                    "LNAME": name.split(" ")[-1],
-                    "FORM": form_name,
-                }
+        member_info = {
+            "email_address": email,
+            "status": "subscribed",
+            "merge_fields": {
+                "FNAME": name.split(" ")[0],
+                "LNAME": name.split(" ")[-1],
+                "FORM": form_name,
             }
-            send_contact_info(request, member_info)
+        }
+        send_contact_info(request, member_info)
 
-        response = {'success': True}
+        message = Message.objects.get(slug='thanks-message')
+        response = {
+            'success': True,
+            'message_content': message.content
+        }
 
         return JsonResponse(response)
 

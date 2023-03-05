@@ -240,3 +240,32 @@ class Email(models.Model):
 
     def __str__(self):
         return self.address
+
+
+@register_snippet
+class Message(models.Model):
+
+    title = models.CharField(
+        max_length=254,
+        blank=False,
+        null=False,
+    )
+    slug = models.CharField(
+        max_length=64,
+        blank=True,
+        null=True,
+        help_text='Used for references in templates.',
+    )
+    type = models.CharField(
+        max_length=64,
+        blank=True,
+        null=True,
+    )
+    content = models.TextField(
+        blank=True,
+        null=True,
+        help_text='Use HTML tags for text design.',
+    )
+
+    def __str__(self):
+        return self.title

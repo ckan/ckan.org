@@ -1161,6 +1161,31 @@ blockquote cite:not(:last-child) {
     width: 100%;
   }
 }
+.modal-content {
+  background: url("/static/img/newsletter-blog.svg") right !important;
+  background-color: #fefefe !important;
+  background-repeat: no-repeat !important;
+  border-radius: 6px;
+  padding-bottom: 30px !important;
+  width: -moz-fit-content !important;
+  width: fit-content !important;
+  height: -moz-fit-content !important;
+  height: fit-content !important;
+}
+.modal-content .close {
+  line-height: 20px;
+}
+.modal-content .close:hover {
+  color: #000;
+}
+.modal-content h1, .modal-content h2, .modal-content h3, .modal-content h4 {
+  margin: 15px 0 10px !important;
+}
+.modal-content p {
+  margin: 0;
+  text-align: center;
+}
+
 .section-banner {
   padding: 40px 0;
   display: flex;
@@ -2126,30 +2151,38 @@ ul.blog-nav li.last {
   font-size: 15px;
   text-transform: uppercase;
 }
-.blog-subscribe .blog-subscribe-content .blog-subscribe-form {
+.blog-subscribe .blog-subscribe-content .blog-subscribe-form, .blog-subscribe .blog-subscribe-content .blog-unsubscribe-form {
   margin-top: 30px;
 }
-.blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=text] {
+.blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=text], .blog-subscribe .blog-subscribe-content .blog-unsubscribe-form input[type=text] {
   background-color: transparent;
   color: #333;
   border: none;
   border-bottom: 1px solid #777;
 }
-.blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit] {
+.blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit], .blog-subscribe .blog-subscribe-content .blog-unsubscribe-form input[type=submit] {
   background: #333;
   border: 2px solid #333;
   border-radius: 100px;
   color: #fff;
 }
-.blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit] svg path {
+.blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit] svg path, .blog-subscribe .blog-subscribe-content .blog-unsubscribe-form input[type=submit] svg path {
   fill: #fff;
 }
-.blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:active, .blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:focus, .blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:hover {
+.blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:active, .blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:focus, .blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:hover, .blog-subscribe .blog-subscribe-content .blog-unsubscribe-form input[type=submit]:active, .blog-subscribe .blog-subscribe-content .blog-unsubscribe-form input[type=submit]:focus, .blog-subscribe .blog-subscribe-content .blog-unsubscribe-form input[type=submit]:hover {
   background: transparent;
   color: #333;
 }
-.blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:active svg path, .blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:focus svg path, .blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:hover svg path {
+.blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:active svg path, .blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:focus svg path, .blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:hover svg path, .blog-subscribe .blog-subscribe-content .blog-unsubscribe-form input[type=submit]:active svg path, .blog-subscribe .blog-subscribe-content .blog-unsubscribe-form input[type=submit]:focus svg path, .blog-subscribe .blog-subscribe-content .blog-unsubscribe-form input[type=submit]:hover svg path {
   fill: #333;
+}
+.blog-subscribe .blog-subscribe-content .unsubscribe-section {
+  display: flex;
+  justify-content: right;
+}
+.blog-subscribe .blog-subscribe-content .unsubscribe-section label[for=blog_unsubscribe_newsletter] {
+  margin-bottom: 0;
+  font-size: 13px;
 }
 
 .government-working-group {
@@ -2556,7 +2589,8 @@ ul.blog-nav li.last {
   }
 }
 .subscribe-page-content {
-  margin-top: 30px;
+  margin-top: 7%;
+  margin-bottom: 7%;
 }
 
 .two-columns-item.subscribe-page-info {
@@ -4557,4 +4591,11 @@ img.full-width {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+#loading-spinner {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 99;
 }/*# sourceMappingURL=main.css.map */

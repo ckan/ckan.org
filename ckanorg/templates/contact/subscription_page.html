@@ -7,7 +7,7 @@
 
     <div class="container-sm t-center">
         <h1 class="h1">Subscription</h1>
-        <p class="body_extra_large">Email newsletter sign-up</p>
+        <p class="body_extra_large">CKAN Monthly Newsletter Sign-Up</p>
     </div>
     <div class="subscribe-page-content">
         <div class="container-lg">
@@ -25,11 +25,27 @@
                                     <form action="#" id="blog_subscribe_form">
                                         {% include "snippets/iframe.html" %}
                                         <div class="row">
-                                            <input type="text" id="blog_subscribe_name" placeholder="your name" autocomplete="off"/>
-                                            <input type="text" id="blog_subscribe_email" placeholder="your@email.com" autocomplete="off"/>
+                                            <input type="text" id="blog_subscribe_name" name="name" placeholder="your name" autocomplete="off"/>
+                                            <input type="text" id="blog_subscribe_email" name="email" placeholder="your@email.com" autocomplete="off"/>
                                             <input type="submit" value="Subscribe" class="btn">
                                         </div>
                                     </form>
+                                </div>
+                                <div class="blog-unsubscribe-form" hidden>
+                                    <form action="#" id="blog_unsubscribe_form">
+                                        {% include "snippets/iframe.html" %}
+                                        <div class="row">
+                                            <input type="text" id="blog_unsubscribe_name" name="name" placeholder="your name" autocomplete="off"/>
+                                            <input type="text" id="blog_unsubscribe_email" name="email" placeholder="your@email.com" autocomplete="off"/>
+                                            <input type="submit" value="Unsubscribe" class="btn">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="unsubscribe-section">
+                                    <input type="checkbox" id="blog_unsubscribe_newsletter" name="unsubscribe">
+                                    <label for="blog_unsubscribe_newsletter">
+                                        &nbsp;Unsubscribe from CKAN monthly newsletters
+                                    </label>
                                 </div>
                             </div>
                         </div>
