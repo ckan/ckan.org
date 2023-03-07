@@ -1,0 +1,26 @@
+.subscribe-page-content {
+    margin-top: 7%;
+    margin-bottom: 7%;
+}
+
+.two-columns-item {
+    &.subscribe-page-info {
+        display: flex;
+        align-items: center;
+    }
+    &.subscribe-page-form {
+        display: flex;
+        align-items: center;
+        .blog-subscribe {
+            border-radius: 0;
+            box-shadow: none;
+            .blog-subscribe-form {
+                .unsubscribe {
+                    display: flex;
+                    justify-content: center;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}

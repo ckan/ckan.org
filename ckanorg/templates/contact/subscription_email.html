@@ -1,0 +1,19 @@
+<div style="padding: 20px; background: #fafafa;font-size:15px;">
+    Hi<br>
+    Thanks for subscribing to CKAN.org newsletter.<br>
+    We will be sending you latest published news, articles on <a href="https://ckan.org/">CKAN.org</a>. Mail frequency won't be more than twice a month.<br>
+    We hate spamming as much as you do.<br>
+    <br>
+    To confirm your subscription, please click on the link given below. If clicking doesn't work, copy paste the URL in browser.<br>
+    If you think this is a mistake, just ignore this email and we won't bother you again.
+    <br>
+    <br>
+    {{ domain }}{% url 'subscription_activate' eidb64=eid token=token %}
+
+    <br>
+    <br>
+    <p>
+        Note:<br>
+        This is notification only email. Please do not reply on this email.<br>
+    </p>
+</div>
