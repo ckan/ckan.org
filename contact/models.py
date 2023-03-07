@@ -161,10 +161,10 @@ class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
         addresses = [x.strip() for x in self.to_address.split(',')]
         plain_message = self.render_email(form).replace('Your', 'Sender')
         fields = parse_contact_form(plain_message)
-        if self.form_name == "Contact Form":
-            html_message = render_to_string('contact/contact_form_mail.html', fields)
-        else:
+        if self.form_name == "Webinar Form":
             html_message = render_to_string('contact/webinar_form_mail.html', fields)
+        else:
+            html_message = render_to_string('contact/contact_form_mail.html', fields)
         sender_name  = fields.get('sender_name', '')
         if sender_name:
             self.subject = f'{self.subject} Sender name: {sender_name}'
@@ -175,18 +175,32 @@ class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
             form = self.get_form(request.POST, request.FILES, page=self, user=request.user)
             if form.is_valid():
                 form_submission = self.process_form_submission(form)
+                email = form.cleaned_data.get("your_e_mail_address", '')
+                name = form.cleaned_data.get("your_name", '')
+                phone = form.cleaned_data.get("your_phone_number", '')
+                company = form.cleaned_data.get("your_companyorganization_name", '')
+
+                ##* Create email object and save form data in DB
+                Email.objects.create(
+                    form_name=self.form_name,
+                    full_name = name,
+                    address=email
+                )
+
+                ##* Send form data to Mailchimp audience
                 member_info = {
-                    "email_address": form.cleaned_data.get("your_e_mail_address"),
+                    "email_address": email,
                     "status": "subscribed",
                     "merge_fields": {
-                        "FNAME": form.cleaned_data.get("your_name").split(" ")[0],
-                        "LNAME": form.cleaned_data.get("your_name").split(" ")[-1],
-                        "PHONE": form.cleaned_data.get("your_phone_number"),
-                        "COMPANY": form.cleaned_data.get("your_companyorganization_name"),
+                        "FNAME": name.split(" ")[0],
+                        "LNAME": name.split(" ")[-1],
+                        "PHONE": phone,
+                        "COMPANY": company,
                         "FORM": self.form_name,
                     }
                 }
                 send_contact_info(request, member_info)
+
                 return self.render_landing_page(request, form_submission, *args, **kwargs)
             elif form.errors.get('wagtailcaptcha', '') != '':
                 return render(request, "recaptcha_error.html")
@@ -194,11 +208,7 @@ class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
             form = self.get_form(page=self, user=request.user)
         context = self.get_context(request)
         context['form'] = form
-        return TemplateResponse(
-            request,
-            self.get_template(request),
-            context
-        )
+        return TemplateResponse(request, self.get_template(request), context)
 
     def render_landing_page(self, request, form_submission=None, *args, **kwargs):
         redirect_page = Page.objects.get(id=request.POST.get('source-page-id'))
@@ -213,12 +223,17 @@ class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
 class Email(models.Model):
 
     submitted = models.DateTimeField(
-        default=datetime.now,
+        auto_now_add=True,
     )
     form_name = models.CharField(
         max_length=64,
         blank=False,
         null=False,
+    )
+    full_name = models.CharField(
+        max_length=128,
+        blank=True,
+        null=True,
     )
     address = models.EmailField(
         max_length=254,

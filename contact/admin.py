@@ -10,14 +10,14 @@ class EmailAdmin(ModelAdmin):
     menu_order = 290
     add_to_settings_menu = False
     exclude_from_explorer = False
-    list_display = ['submitted', 'form_name', 'address']
+    list_display = ['submitted', 'form_name', 'address', 'full_name']
     list_filter = ['form_name', 'submitted']
-    search_fields = ['submitted', 'form_name', 'address']
+    search_fields = ['submitted', 'form_name', 'address', 'full_name']
 
 
 class ContactPageAdmin(ModelAdmin):
     model = ContactPage
-    menu_label = "Pages"
+    menu_label = "Forms"
     menu_icon = 'form'
     menu_order = 200
     list_display = ('title',)

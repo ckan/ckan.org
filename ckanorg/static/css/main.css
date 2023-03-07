@@ -346,6 +346,15 @@ template {
 .modal__container #contact-modal p textarea {
   margin-bottom: 10px;
   font-size: 16px;
+  height: 80px;
+}
+.modal__container #contact-modal p.checkbox-container {
+  display: flex;
+}
+.modal__container #contact-modal p .checkbox-label {
+  padding-left: 20px;
+  margin-bottom: 10px;
+  text-align: justify;
 }
 .modal__container #contact-modal p input[type=checkbox] {
   position: absolute;
@@ -371,9 +380,6 @@ template {
   background-position: right 5px top 5px;
   font-size: 16px;
 }
-.modal__container #contact-modal label[for=id_i_consent_to_ckanorg_sending_me_marketing_emails_i_would_like_to_sign_up_to_receive_email_updates_from_ckanorg] {
-  padding: 0px 40px 15px 20px;
-}
 .modal__container #contact-modal ul {
   display: inline-flex;
   list-style-type: none;
@@ -385,6 +391,7 @@ template {
 }
 .modal__container #contact-modal .modal-intro {
   font-size: 12px;
+  margin-bottom: 10px;
 }
 .modal__container #contact-modal .modal-intro p {
   text-align: justify;
