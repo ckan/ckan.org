@@ -1,6 +1,6 @@
 from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, modeladmin_register
 
-from .models import Email, ContactPage
+from .models import Email, ContactPage, Message
 
 
 class EmailAdmin(ModelAdmin):
@@ -10,9 +10,9 @@ class EmailAdmin(ModelAdmin):
     menu_order = 290
     add_to_settings_menu = False
     exclude_from_explorer = False
-    list_display = ['submitted', 'form_name', 'address', 'full_name']
-    list_filter = ['form_name', 'submitted']
-    search_fields = ['submitted', 'form_name', 'address', 'full_name']
+    list_display = ['submitted', 'form_name', 'address', 'full_name', 'updated', 'subscribed']
+    list_filter = ['form_name', 'submitted', 'subscribed']
+    search_fields = ['submitted', 'form_name', 'address']
 
 
 class ContactPageAdmin(ModelAdmin):
@@ -24,9 +24,20 @@ class ContactPageAdmin(ModelAdmin):
     empty_value = 'No category'
 
 
+class MessageAdmin(ModelAdmin):
+    model = Message
+    menu_label = "Messages"
+    menu_icon = 'list-ul'
+    menu_order = 292
+    list_display = ('title', 'slug', 'type')
+    list_filter = ('type',)
+    empty_value = 'No category'
+
+
+
 @modeladmin_register
 class ContactGroup(ModelAdminGroup):
     menu_label = 'Contacts'
     menu_icon = 'folder-open-inverse'
     menu_order = 170  
-    items = (ContactPageAdmin, EmailAdmin)
+    items = (ContactPageAdmin, EmailAdmin, MessageAdmin)

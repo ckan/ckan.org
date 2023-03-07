@@ -1,7 +1,6 @@
 var modal = document.getElementById("thanks-modal");
 var span = $(".close")[0];
-var thanks = "<h4>Thank you for getting in touch!</h4><p>We’ll get back to you within one business day!</p>"
-var blog_thanks = "<h4>Thank you for subscribing our blog!</h4>"
+var message_error = "<h4>Error!</h4><p style='text-align: center;'>Error on submit. Please try again.</p>"
 
 span.onclick = function() {
     $('#thanks-modal').fadeOut();
@@ -12,107 +11,129 @@ window.onclick = function(event) {
     }
 }
 
-function showError(error, form_id) {
-    $(form_id)[0].value = '';
-    $(form_id).addClass('contactFormError');
-    $(form_id).attr('placeholder', error);
+function showError(error, form_field) {
+    form_field.attr('value', '');
+    form_field.addClass('contactFormError');
+    form_field.attr('placeholder', error);
 }
 
-function webinarSubmitAction(e){
-    submitAction(e, '#webinar_email');
+function subscribeSubmitAction(e){
+    submitAction(e, '/ajax-posting/', '#subscribe_form');
 }
 
-function stewardSubmitAction(e){
-    submitAction(e, '#steward_email');
+function blogSubscribeSubmitAction(e){
+    submitAction(e, '/ajax-posting/', '#blog_subscribe_form');
 }
 
-function stewardSendSubmitAction(e){
-    submitAction(e, '#steward_email_send');
+function blogUnsubscribeSubmitAction(e){
+    submitAction(e, '/ajax-unsubscribe/', '#blog_unsubscribe_form');
 }
 
-function blogSubmitAction(e){
-    submitAction(e, '#blog_email');
-}
-
-function isTooFast(form_id) {
-    var now = new Date();
-    var minutes = 1;
-    var delta = minutes * 60 * 1000;
-    var item = window.localStorage.getItem(form_id);
-    if (item) {
-        var was_set = new Date(item);
-        var current_delta = now - was_set;
-        if (current_delta < delta) {
-            return true;
-        } else {
-            window.localStorage.removeItem(form_id);
-            return false;
-        }
-    } else {
-        return false
-    }
-}
-
-function submitAction(e, form_id){
+function submitAction(e, url, form_id){
     e.preventDefault();
+    var name = $(form_id).find('input[name="name"]');
+    var email = $(form_id).find('input[name="email"]');
+    var valid_name = typeof name.val() !== 'undefined' && name.val() != '';
     var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    var valid = re.test($(form_id)[0].value);
-    var token = $(form_id)[0]['form'].querySelector(
-        'iframe').contentDocument.getElementById(
-            'iframe-csrf').getAttribute('value');
-    if (!valid) {
-        showError('Please enter a valid e-mail', form_id);
-    } else {
-        var too_fast = isTooFast(form_id);
-        if (too_fast) {
-            showError('Please try again later', form_id);
-        } else {
-            window.localStorage.setItem(form_id, new Date());
-            $(form_id).addClass('waiting');
-            $.ajax({
-                type : "POST", 
-                url: "/ajax-posting/",
-                data: {
-                    email: $(form_id).val(),
-                    form_id: form_id,
-                    csrfmiddlewaretoken: token,
-                    dataType: "json",
-                },
-                success: function(data){
-                    $(form_id)[0].value = '';
-                    $(form_id).removeClass('waiting');
-                    $(form_id).removeClass('contactFormError');
-                    $(form_id).attr('placeholder', 'Your email');
-                    if (form_id == "#blog_email") {
-                        $("#thanks-text").html(blog_thanks)
-                    } else {
-                        $("#thanks-text").html(thanks)
-                    }
-                    $('#thanks-modal').fadeIn();
-                },
-                error: function(){
-                    showError('Error on submit. Please try again.');
+    var valid_email = re.test(email.val());
+    var token = $(form_id).find('iframe').contents().find('#iframe-csrf').attr('value');
+
+    if (!valid_name) {
+        showError('Please enter your name', name);
+    }
+    if (!valid_email) {
+        showError('Please enter a valid e-mail', email);
+    } 
+    if (valid_name && valid_email) {
+        window.localStorage.setItem(form_id, new Date());
+        $('#loading-spinner').html('<img src="/static/img/spin.gif">');
+        $.ajax({
+            type : "POST", 
+            url: url,
+            data: {
+                name: name.val(),
+                email: email.val(),
+                form_id: form_id,
+                csrfmiddlewaretoken: token,
+                url: window.location.href,
+                dataType: "json",
+            },
+            success: function(data){
+                email.val('');
+                name.val('');
+                $('#loading-spinner').html('');
+                email.removeClass('contactFormError');
+                name.removeClass('contactFormError');
+                email.attr('placeholder', 'your@email.com');
+                name.attr('placeholder', 'your name');
+                if (data.subscribed) {
+                    $("#thanks-text").html(data.message_content);
+                } else if (data.unsubscribed) {
+                    $("#thanks-text").html(data.message_content);
+                } else if (data.failed) {
+                    $("#thanks-text").html(data.message_content);
+                } else {
+                    $("#thanks-text").html(data.message_content);
                 }
-            });
-        }
+                $('#thanks-modal').fadeIn();
+            },
+            error: function(){
+                $("#thanks-text").html(message_error);
+                $('#thanks-modal').fadeIn();
+            }
+        });
     }
 }
 
-$('#webinarForm').on('submit', webinarSubmitAction);
-// $('#stewardForm').on('submit', stewardSubmitAction);
-// $('#stewardFormSend').on('submit', stewardSendSubmitAction);
-$('#blogForm').on('submit', blogSubmitAction);
+$('#subscribe_form').on('submit', subscribeSubmitAction);
+$('#blog_subscribe_form').on('submit', blogSubscribeSubmitAction);
+$('#blog_unsubscribe_form').on('submit', blogUnsubscribeSubmitAction);
 
-$.each(['#webinar_email', '#steward_email', '#blog_email'], function(_, id){
+$('#blog_unsubscribe_newsletter').on('change', function(){
+    if ($(this).is(':checked')) {
+        $('.blog-subscribe-form').hide();
+        $('#blog_unsubscribe_name')
+            .attr('value', 'Unknown')
+            .hide();
+        $('#blog_unsubscribe_email')
+            .attr('value', '');
+        $('.blog-unsubscribe-form').show();
+    } else {
+        $('.blog-unsubscribe-form').hide();
+        $('#blog_unsubscribe_name')
+            .attr('value', 'Unknown');
+        $('#blog_unsubscribe_email')
+            .attr('value', '');
+        $('.blog-subscribe-form').show();
+    }
+});
+
+$.each([
+    '#subscribe_email',
+    '#subscribe_name',
+    '#blog_subscribe_email',
+    '#blog_subscribe_name'], 
+    function(_, id){
     $(id).focus(function(){
         $(id).attr('placeholder', '');
     });
 });
 
-$.each(['#webinar_email', '#steward_email', '#blog_email'], function(_, id){
+$.each([
+    '#subscribe_email',
+    '#blog_subscribe_email'],
+    function(_, id){
     $(id).focusout(function(){
         $(id)
-            .attr('placeholder', 'Your email')
+            .attr('placeholder', 'your@email.com')
+            .removeClass('contactFormError');
+    });
+});
+
+$.each(['#subscribe_name', '#blog_subscribe_name'], function(_, id){
+    $(id).focusout(function(){
+        $(id)
+            .attr('placeholder', 'your name')
             .removeClass('contactFormError');
     });
 });

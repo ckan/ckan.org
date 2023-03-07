@@ -65,6 +65,26 @@
             </ul>           
         </div>
         <div class="container-md">
+            <div class="blog-subscribe">
+                <div class="blog-subscribe-content">
+                    <p class="title">Newsletter</p>
+                    <h2 class="h2">Ready to say ahead of the curve?</h2>
+                    <p>Join our CKAN Monthly Newsletter and get the inside scoop!</p>
+                    <p>From new developmetns to upcoming events and everything in between, you'll find it all here!</p>
+                    <div class="blog-subscribe-form">
+                        <form action="#" id="blog_subscribe_form">
+                            {% include "snippets/iframe.html" %}
+                            <div class="row">
+                                <input type="text" id="blog_subscribe_name" name="name" placeholder="your name" autocomplete="off"/>
+                                <input type="text" id="blog_subscribe_email" name="email" placeholder="your@email.com" autocomplete="off"/>
+                                <input type="submit" value="Subscribe" class="btn">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-md">
             {% block featured %}
                 {% if featured_post %}
                     {% include "../snippets/featured_blog_post_block.html" with post=featured_post %}
