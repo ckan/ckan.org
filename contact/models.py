@@ -142,7 +142,6 @@ class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
         default="Contact Us"
     )
 
-
     class Meta:
         verbose_name = 'Contact form'
         verbose_name_plural = "Contact forms"
