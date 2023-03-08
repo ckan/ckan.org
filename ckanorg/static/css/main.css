@@ -1169,9 +1169,7 @@ blockquote cite:not(:last-child) {
   }
 }
 .modal-content {
-  background: url("/static/img/newsletter-blog.svg") right !important;
   background-color: #fefefe !important;
-  background-repeat: no-repeat !important;
   border-radius: 6px;
   padding-bottom: 30px !important;
   width: -moz-fit-content !important;
