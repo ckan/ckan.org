@@ -137,3 +137,14 @@ $.each(['#subscribe_name', '#blog_subscribe_name'], function(_, id){
             .removeClass('contactFormError');
     });
 });
+
+// add red asteriks to labels of appropriate required fields
+$('input[required], select[required], textarea[required]').each(function(){
+    $($(this).parent()).find('label').append($("<span>").addClass("red").text(" *"));
+});
+
+// set label and checkbox positions for chekbox fields
+$('.modal__container').find('input[type=checkbox]').each(function(){
+    $($(this).parent()).attr('class', 'checkbox-container');
+    $($(this).parent()).find('label').attr('class', 'checkbox-label');
+});
