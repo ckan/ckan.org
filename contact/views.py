@@ -1,4 +1,3 @@
-import time
 import logging
 import traceback
 
@@ -7,7 +6,6 @@ from django.shortcuts import redirect
 from django.utils import timezone
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
-from django.contrib import messages
 
 from .models import Email, send_contact_info, Message
 from .token import user_activation_token
@@ -28,7 +26,7 @@ def activate_subscription(request, eidb64, token):
             address=eid
         ).first()
         url = request._current_scheme_host
-    except(TypeError, ValueError, OverflowError, subscriber.DoesNotExist):
+    except(TypeError, ValueError, OverflowError, Email.DoesNotExist):
         logging.getLogger("error_logger").error(traceback.format_exc())
         subscriber = None
     if subscriber is not None and user_activation_token.check_token(subscriber, token):
@@ -47,23 +45,32 @@ def ajax_unsubscribe(request):
         form_name=form_name,
         address=email,
     ).first()
-    print(form_id, form_name, email, subscriber)
 
     if not subscriber:
-        message = Message.objects.get(slug='unsubscribed-failed-message')
+        try:
+            message = Message.objects.get(slug='unsubscribed-failed-message')
+            message_content = message.content
+        except Message.DoesNotExist:
+            logging.getLogger("error_logger").error(traceback.format_exc())
+            message_content = "<p>Subscriber with this email is not registered!</p>"
         response = {
             'failed': True,
-            'message_content': message.content
+            'message_content': message_content
         }
         return JsonResponse(response)
 
     subscriber.subscribed = False
     subscriber.update = timezone.now()
     subscriber.save()
-    message = Message.objects.get(slug='unsubscribed-message')
+    try:
+        message = Message.objects.get(slug='unsubscribed-message')
+        message_content = message.content
+    except Message.DoesNotExist:
+        logging.getLogger("error_logger").error(traceback.format_exc())
+        message_content = "<p>You have been successfully unsubscribed!</p>"
     response = {
         'unsubscribed': True,
-        'message_content': message.content
+        'message_content': message_content
     }
     return JsonResponse(response)
 
@@ -87,10 +94,15 @@ def ajax_email(request):
             subscriber.full_name = name
             subscriber.save()
         elif subscriber.subscribed:
-            message = Message.objects.get(slug='subscribed-message')
+            try:
+                message = Message.objects.get(slug='subscribed-message')
+                message_content = message.content
+            except Message.DoesNotExist:
+                logging.getLogger("error_logger").error(traceback.format_exc())
+                message_content = "<p>You have been already subscribed!</p>"
             response = {
                 'subscribed': True,
-                'message_content': message.content
+                'message_content': message_content
             }
             return JsonResponse(response)
         else:
@@ -115,10 +127,15 @@ def ajax_email(request):
         }
         send_contact_info(request, member_info)
 
-        message = Message.objects.get(slug='thanks-message')
+        try:
+            message = Message.objects.get(slug='thanks-message')
+            message_content = message.content
+        except Message.DoesNotExist:
+            logging.getLogger("error_logger").error(traceback.format_exc())
+            message_content = "<p>We have sent you a confirmation email!</p>"
         response = {
             'success': True,
-            'message_content': message.content
+            'message_content': message_content
         }
 
         return JsonResponse(response)
