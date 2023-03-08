@@ -6,10 +6,10 @@
       .two-columns-item {
         margin-bottom: 0;
         .two-columns-item:first-of-type {
-          width: calc( 50% - 15px);
+          width: calc(50% - 15px);
         }
         .two-columns-item:last-of-type {
-          width: calc( 50% - 15px);
+          width: calc(50% - 15px);
         }
       }
     }
@@ -109,10 +109,11 @@
 }
 
 .footer-subscribe {
-  background-color: none;
   padding: 0px 2px;
-  border: 1px solid #777;
-  margin: -10px 0 20px;
+  margin: -20px 0 20px;
+  span {
+    margin-bottom: 5px;
+  }
   .row {
     display: flex;
     margin: 0;
@@ -124,6 +125,7 @@
     background-color: transparent;
     color: #333;
     border: none;
+    border-bottom: 1px solid #777;
     height: 34px;
     font-size: 16px;
     @media all and (max-width: 950px) {
@@ -133,7 +135,7 @@
   input[type=submit] {
     background: $btn-grey-color;
     border: 1px solid #777;
-    border-radius: 0;
+    border-radius: 100px;
     color: $white;
     @media all and (max-width: 950px) {
       width: 100%;

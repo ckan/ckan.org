@@ -16,11 +16,13 @@
                 <span>Held in trust by</span>
                 <p>CKAN assets are held in trust by <strong>Open Knowledge Foundation</strong>, a non-profit organization, with best practice policies on governing openly and for use of the trademark.</p>
                 <div class="footer-subscribe">
+                    <span>Sign up for our newsletter</span>
                     <form action="#" id="subscribe_form">
                         {% include "snippets/iframe.html" %}
                         <div class="row">
-                            <input type="text" id="subscribe_email" placeholder="your@email.com" autocomplete="off"/>
-                            <input type="submit" value="SIGN UP FOR OUR NEWSLETTER" class="btn btn-sm">
+                            <input type="text" id="subscribe_name" name="name" placeholder="your name" autocomplete="off"/>
+                            <input type="text" id="subscribe_email" name="email" placeholder="your@email.com" autocomplete="off"/>
+                            <input type="submit" value="Subscribe" class="btn btn-sm">
                         </div>
                     </form>
                 </div>

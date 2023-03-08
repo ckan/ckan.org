@@ -1,54 +1,108 @@
-from datetime import datetime
+import time
+import logging
+import traceback
 
-from django.core.mail import send_mail
-from django.http import JsonResponse  
-from django.conf import settings
+from django.http import JsonResponse, HttpResponse
+from django.shortcuts import redirect
+from django.utils import timezone
+from django.utils.encoding import force_text
+from django.utils.http import urlsafe_base64_decode
+from django.contrib import messages
 
-from .models import Email, send_contact_info
-from managers.models import Manager
+from .models import Email, send_contact_info, Message
+from .token import user_activation_token
+from .email import send_subscription_email
 
-
-EMAIL_SUBJECT = 'Form submition from ckan.org'
-
-EMAIL_BODY = '''
-<b>{}</b> was submitted on {}
-with the following e-mail: {}
-'''
 
 form_mapping = {
-    '#subscribe_email': 'Subscribe Form',
-    '#blog_subscribe_email': 'Subscribe Form',
-    '#blog_email': 'Blog Subscription Form',
+    '#subscribe_form': 'Subscribe Form',
+    '#blog_subscribe_form': 'Subscribe Form',
+    '#blog_unsubscribe_form': 'Subscribe Form',
 }
+
+def activate_subscription(request, eidb64, token):
+    try:
+        eid = force_text(urlsafe_base64_decode(eidb64))
+        subscriber = Email.objects.filter(
+            form_name = 'Subscribe Form',
+            address=eid
+        ).first()
+        url = request._current_scheme_host
+    except(TypeError, ValueError, OverflowError, subscriber.DoesNotExist):
+        logging.getLogger("error_logger").error(traceback.format_exc())
+        subscriber = None
+    if subscriber is not None and user_activation_token.check_token(subscriber, token):
+        subscriber.subscribed = True
+        subscriber.save()
+        return redirect(url)
+    else:
+        return HttpResponse('Activation link is invalid!')
+
+
+def ajax_unsubscribe(request):
+    form_id = request.POST.get('form_id', None)
+    form_name = form_mapping.get(form_id, None)
+    email = request.POST.get('email', None)
+    subscriber = Email.objects.filter(
+        form_name=form_name,
+        address=email,
+    ).first()
+    print(form_id, form_name, email, subscriber)
+
+    if not subscriber:
+        message = Message.objects.get(slug='unsubscribed-failed-message')
+        response = {
+            'failed': True,
+            'message_content': message.content
+        }
+        return JsonResponse(response)
+
+    subscriber.subscribed = False
+    subscriber.update = timezone.now()
+    subscriber.save()
+    message = Message.objects.get(slug='unsubscribed-message')
+    response = {
+        'unsubscribed': True,
+        'message_content': message.content
+    }
+    return JsonResponse(response)
+
+
 
 def ajax_email(request):
     if request.is_ajax():
         form_id = request.POST.get('form_id', None)
-        form_name = form_mapping.get(form_id, 'Unknown form')
-        name = request.POST.get('name', 'Unknown')
+        form_name = form_mapping.get(form_id, None)
+        name = request.POST.get('name', None)
         email = request.POST.get('email', None)
+        token = user_activation_token.make_token(email)
+        current_site = request._current_scheme_host
+
         response = {}
-        Email.objects.create(
+        subscriber, created = Email.objects.get_or_create(
             form_name=form_name,
-            address=email
+            address=email,
         )
-        send_to = [x.email for x in Manager.objects.all()]
-        from django.template.loader import render_to_string
-        from django.utils.html import strip_tags
-        html_message = render_to_string('mail.html',
-                {'form_name': form_name,
-                 'time': datetime.now().strftime("%A, %d %B %Y, %I:%M%p"),
-                 'email': email
-                 })
-        plain_message = strip_tags(html_message)
-        send_mail(
-            EMAIL_SUBJECT,
-            plain_message,
-            settings.DEFAULT_FROM_EMAIL,
-            send_to,
-            fail_silently=False,
-            html_message=html_message),
-        response = {'success': True}
+        if created:
+            subscriber.full_name = name
+            subscriber.save()
+        elif subscriber.subscribed:
+            message = Message.objects.get(slug='subscribed-message')
+            response = {
+                'subscribed': True,
+                'message_content': message.content
+            }
+            return JsonResponse(response)
+        else:
+            subscriber.full_name = name
+            subscriber.update = timezone.now()
+            subscriber.save()
+
+        send_subscription_email(
+                email=email,
+                current_site=current_site,
+                token=token
+            )
 
         member_info = {
             "email_address": email,
@@ -61,4 +115,11 @@ def ajax_email(request):
         }
         send_contact_info(request, member_info)
 
+        message = Message.objects.get(slug='thanks-message')
+        response = {
+            'success': True,
+            'message_content': message.content
+        }
+
         return JsonResponse(response)
+
