@@ -6,11 +6,10 @@
 .two-columns-item {
     &.subscribe-page-info {
         display: flex;
-        align-items: center;
+        padding-top: 80px;
     }
     &.subscribe-page-form {
         display: flex;
-        align-items: center;
         .blog-subscribe {
             border-radius: 0;
             box-shadow: none;
