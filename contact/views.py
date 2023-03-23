@@ -1,11 +1,13 @@
 import logging
 import traceback
 
+from django.conf import settings
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
+from django.views.generic import TemplateView
 
 from .models import Email, send_contact_info, Message
 from .token import user_activation_token
@@ -140,3 +142,11 @@ def ajax_email(request):
 
         return JsonResponse(response)
 
+
+class SubscriptionPage(TemplateView):
+    template_name = "contact/subscription_page.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(SubscriptionPage, self).get_context_data(**kwargs)
+        context['recaptcha_sitekey'] = settings.RECAPTCHA_PUBLIC_KEY
+        return context
