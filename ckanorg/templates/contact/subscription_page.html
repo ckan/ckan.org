@@ -26,7 +26,11 @@
                                         <input type="text" id="blog_subscribe_email" name="email" placeholder="your@email.com" autocomplete="off"/>
                                     </div>
                                     <p class="info">Sign up to receive news and updates from CKAN. Your information will be used in accordance with our privacy policy. You may opt out at any time.</p>
-                                    <input type="submit" value="Subscribe" class="btn">
+                                    <div class="g-recaptcha"
+                                         data-sitekey="{{ recaptcha_sitekey }}"
+                                         data-size="invisible">
+                                    </div>
+                                    <input class="btn" type="submit" value="Subscribe"/>
                                 </form>
                             </div>
                         </div>
@@ -35,5 +39,4 @@
             </div>
         </div>
     </div>
-
 {% endblock content %}

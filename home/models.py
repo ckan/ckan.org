@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
@@ -168,7 +169,8 @@ class HomePage(MetadataPageMixin, Page):
         context['showcase_page'] = showcase[0] if showcase else None
         community = Page.objects.live(
             ).public().filter(title='Community')
-        context['community_page'] = community[0] if community else None        
+        context['community_page'] = community[0] if community else None
+        context['recaptcha_sitekey'] = settings.RECAPTCHA_PUBLIC_KEY
         return context
 
 @receiver(post_save, sender=User)
