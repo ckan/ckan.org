@@ -3482,10 +3482,6 @@ input.waiting[type=text] {
   font-size: 16px;
 }
 
-.g-recaptcha > div {
-  height: 100% !important;
-}
-
 form.login .g-recaptcha, form.signup .g-recaptcha {
   margin-top: 0;
   margin-left: 0;

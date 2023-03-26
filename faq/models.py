@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 from wagtail.core.models import Page
@@ -59,6 +60,7 @@ class FaqPage(MetadataPageMixin, Page):
     def get_context(self,request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         context['categories'] = FaqCategoryPage.objects.all()
+        context['recaptcha_sitekey'] = settings.RECAPTCHA_PUBLIC_KEY
         return context
 
 
@@ -109,6 +111,7 @@ class FaqCategoryPage(MetadataPageMixin, Page):
     def get_context(self,request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         context['questions'] = FaqQuestionPage.objects.all().filter(category=self.id)
+        context['recaptcha_sitekey'] = settings.RECAPTCHA_PUBLIC_KEY
         return context
 
 
@@ -160,3 +163,8 @@ class FaqQuestionPage(MetadataPageMixin, Page):
     class Meta:
         verbose_name = "question"
         verbose_name_plural = "questions"
+
+    def get_context(self,request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context['recaptcha_sitekey'] = settings.RECAPTCHA_PUBLIC_KEY
+        return context

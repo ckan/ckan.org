@@ -1,6 +1,7 @@
 
 from django import forms
 from django.db import models
+from django.conf import settings
 
 from wagtail.core.models import Page, Orderable
 from wagtailmetadata.models import MetadataPageMixin
@@ -129,6 +130,11 @@ class FeaturesPage(MetadataPageMixin, Page):
         ),
     ]
 
+    def get_context(self,request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context['recaptcha_sitekey'] = settings.RECAPTCHA_PUBLIC_KEY
+        return context
+
 class ShowCaseSection1(Orderable):
 
     page = ParentalKey('ckan_pages.ShowcasePage', related_name='showcase_section_1')
@@ -241,6 +247,11 @@ class ShowcasePage(MetadataPageMixin, Page):
             heading='Showcase section 3',
         ),        
     ]
+
+    def get_context(self,request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context['recaptcha_sitekey'] = settings.RECAPTCHA_PUBLIC_KEY
+        return context
 
 
 class SoftwareEngineers(Orderable):
@@ -424,8 +435,13 @@ class CommunityPage(MetadataPageMixin, Page):
                 InlinePanel('working_groups', label="Working Group", min_num=1),
             ],
             heading='Working Groups',
-        ),        
+        ),
     ]
+
+    def get_context(self,request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context['recaptcha_sitekey'] = settings.RECAPTCHA_PUBLIC_KEY
+        return context
 
 
 class CommercialSupportItem(Orderable):
@@ -472,6 +488,11 @@ class CommercialPage(MetadataPageMixin, Page):
             heading='Commercial',
         )
     ]
+
+    def get_context(self,request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context['recaptcha_sitekey'] = settings.RECAPTCHA_PUBLIC_KEY
+        return context
 
 
 class RadioSelectBlock(blocks.ChoiceBlock):
@@ -617,6 +638,7 @@ class CkanForPage(MetadataPageMixin, Page):
         community = Page.objects.live(
             ).public().filter(title='Community')
         context['community_page'] = community[0] if community else None
+        context['recaptcha_sitekey'] = settings.RECAPTCHA_PUBLIC_KEY
         return context
 
 
@@ -651,3 +673,8 @@ class FeatureDetailPage(MetadataPageMixin, Page):
         FieldPanel('subtitle'),
         StreamFieldPanel('body'),
     ]
+
+    def get_context(self,request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context['recaptcha_sitekey'] = settings.RECAPTCHA_PUBLIC_KEY
+        return context

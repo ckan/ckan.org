@@ -1,4 +1,5 @@
 from datetime import datetime, timezone
+from django.conf import settings
 from django.utils.timezone import now
 from django.contrib.auth.models import User
 
@@ -225,6 +226,7 @@ class BlogListingPage(MetadataPageMixin, Page):
         except EmptyPage:
             posts = paginator.page(paginator.num_pages)
         context["posts"] = posts
+        context['recaptcha_sitekey'] = settings.RECAPTCHA_PUBLIC_KEY
         return context
 
 
@@ -331,4 +333,5 @@ class BlogPostPage(MetadataPageMixin, Page):
             author_user = User.objects.filter(username=author).first()
             if author_user:
                 context['blog_author'] = author_user
+        context['recaptcha_sitekey'] = settings.RECAPTCHA_PUBLIC_KEY
         return context
