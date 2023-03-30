@@ -29,7 +29,10 @@
                         {% endif %}
                     </main>
                     <footer class="modal__footer">
-                        <input class="modal__btn modal__btn-primary g-recaptcha" type="submit" data-sitekey="6LcFjM8ZAAAAAFHIVecN6TLyn720IZ4BVw4DAw9z" data-callback="onContactSubmit_{{form_page.pk}}">
+                        <input  class="modal__btn modal__btn-primary g-recaptcha"
+                                type="submit"
+                                data-sitekey="{{ recaptcha_sitekey }}"
+                                data-callback="onContactSubmit_{{form_page.pk}}"/>
                     </footer>
                 </form>
             </div>
@@ -43,9 +46,10 @@
         $(id).find("#modal-content")
             .css("width", "100%")
             .html(
-                '<div style="text-align: center; padding: 30px 0px 30px 0px" id="thanks-text">\
-                <h4>Thank you for getting in touch!</h4>\
-                <p>We’ll get back to you within one business day!</p></div>'
+                "<div style='text-align: center; padding: 30px 0px 30px 0px' id='thanks-text'>\
+                <h4>Success!</h4>\
+                <p>Thank you for getting in touch with us! Your message has been successfully \
+                    submitted, and we'll respond shortly. Stay tuned!</p></div>"
             );
         }
     </script>
