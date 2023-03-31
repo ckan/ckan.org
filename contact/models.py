@@ -19,6 +19,10 @@ from wagtailcache.cache import WagtailCacheMixin
 
 from managers.models import Manager
 from wagtailcaptcha.models import WagtailCaptchaEmailForm
+from wagtailcaptcha.forms import WagtailCaptchaFormBuilder
+
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV3
 
 import mailchimp_marketing as MailchimpMarketing
 from mailchimp_marketing.api_client import ApiClientError
@@ -111,6 +115,16 @@ def send_contact_info(request, member_info:dict):
             print("An exception occurred: {}".format(error.text))
 
 
+class CustomFormBuilder(WagtailCaptchaFormBuilder):
+    wagtailcaptcha = ReCaptchaField(
+        widget=ReCaptchaV3(
+            attrs={
+                'required_score':0.85,
+            }
+        )
+    )
+
+
 class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
 
     def __init__(self, *args, **kwargs):
@@ -118,6 +132,7 @@ class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
         send_to = [x.email for x in Manager.objects.all()]
         self.to_address = ','.join(send_to)
 
+    form_builder = CustomFormBuilder
     template = 'contact/contact_page.html'
     landing_page_template = 'contact/contact_page_landing.html'
     subpage_types =[]
