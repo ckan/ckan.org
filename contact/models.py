@@ -116,13 +116,18 @@ def send_contact_info(request, member_info:dict):
 
 
 class CustomFormBuilder(WagtailCaptchaFormBuilder):
-    wagtailcaptcha = ReCaptchaField(
-        widget=ReCaptchaV3(
-            attrs={
-                'required_score':0.85,
-            }
+    @property
+    def formfields(self):
+        fields = super(WagtailCaptchaFormBuilder, self).formfields
+        fields[self.CAPTCHA_FIELD_NAME] = ReCaptchaField(
+            label='',
+            widget=ReCaptchaV3(
+                attrs={
+                    'required_score':0.85,
+                }
+            )
         )
-    )
+        return fields
 
 
 class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
@@ -132,12 +137,12 @@ class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
         send_to = [x.email for x in Manager.objects.all()]
         self.to_address = ','.join(send_to)
 
-    form_builder = CustomFormBuilder
     template = 'contact/contact_page.html'
     landing_page_template = 'contact/contact_page_landing.html'
     subpage_types =[]
-    max_count = 2
+    max_count = 5
     cache_control = 'no-cache'
+    form_builder = CustomFormBuilder
 
     form_name = models.CharField(
         max_length=255,
