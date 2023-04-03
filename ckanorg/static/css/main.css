@@ -330,34 +330,34 @@ template {
   margin-top: -15px;
   margin-bottom: -20px;
 }
-.modal__container #contact-modal p {
+.modal__container .contact-modal p {
   margin-bottom: 10px;
 }
-.modal__container #contact-modal p label {
+.modal__container .contact-modal p label {
   float: left;
   text-align: left;
 }
-.modal__container #contact-modal p label.checkbox-label {
+.modal__container .contact-modal p label.checkbox-label {
   padding-left: 20px;
   margin-bottom: 10px;
   text-align: justify;
 }
-.modal__container #contact-modal p input[type=text], .modal__container #contact-modal p input[type=email] {
+.modal__container .contact-modal p input[type=text], .modal__container .contact-modal p input[type=email] {
   height: 30px;
   margin-bottom: 10px;
   padding: 5px;
   font-size: 16px;
 }
-.modal__container #contact-modal p textarea {
+.modal__container .contact-modal p textarea {
   margin-bottom: 10px;
   font-size: 16px;
   height: 80px;
 }
-.modal__container #contact-modal p input[type=checkbox] {
+.modal__container .contact-modal p input[type=checkbox] {
   position: absolute;
   left: 30px;
 }
-.modal__container #contact-modal p select {
+.modal__container .contact-modal p select {
   box-sizing: border-box;
   font-weight: 400;
   line-height: 1.3;
@@ -377,22 +377,22 @@ template {
   background-position: right 5px top 5px;
   font-size: 16px;
 }
-.modal__container #contact-modal p.checkbox-container {
+.modal__container .contact-modal p.checkbox-container {
   display: flex;
 }
-.modal__container #contact-modal ul {
+.modal__container .contact-modal ul {
   display: inline-flex;
   list-style-type: none;
   float: left;
   padding: 0;
 }
-.modal__container #contact-modal ul li {
+.modal__container .contact-modal ul li {
   margin-right: 10px;
 }
-.modal__container #contact-modal .modal-intro {
+.modal__container .contact-modal .modal-intro {
   font-size: 12px;
 }
-.modal__container #contact-modal .modal-intro p {
+.modal__container .contact-modal .modal-intro p {
   text-align: justify;
 }
 
