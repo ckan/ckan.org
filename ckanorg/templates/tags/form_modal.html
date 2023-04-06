@@ -1,4 +1,6 @@
-{% load wagtailcore_tags %}
+{% load static wagtailcore_tags %}
+
+<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
 
 {% if form %}
 
@@ -17,7 +19,7 @@
                     </h2>
                     <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
                 </header>
-                <form action="{% pageurl form_page %}" method="POST" role="form" name="contact-form" id="contact-modal">
+                <form action="{% pageurl form_page %}" method="POST" role="form" class="contact-modal" id="modal-form-{{ form_page.pk }}">
                     <main class="modal__content" id="modal-1-content">
                         {% csrf_token %}
                         <div class="modal-intro">
@@ -29,25 +31,54 @@
                         {% endif %}
                     </main>
                     <footer class="modal__footer">
-                        <input class="modal__btn modal__btn-primary" type="submit"/>
+                        <input id="message-text" type="hidden" value="{{form_page.thank_you_text|safe}}">
+                        <button id="modal-btn-{{form_page.pk}}"
+                                class="modal__btn g-recaptcha"
+                                data-sitekey="{{recaptcha_sitekey}}"
+                                data-callback="onContactSubmit_{{form_page.pk}}"
+                                data-action="submit"
+                                disabled>
+                                Submit
+                        </button>
                     </footer>
                 </form>
             </div>
         </div>
     </div>
 
-    <script>
+    <script type="text/javascript">
+        $('a[id=contact]').on("click", function() {
+            var modal_trigger = $(this).attr("data-micromodal-trigger");
+            var modal_window = $('#' + modal_trigger);
+            var modal_form = modal_window.find("form");
+            var button = modal_form.find('.modal__btn');
+            var required = modal_form.find('input[required]:not([id="id_wagtailcaptcha"]), select[required], textarea[required]');
+
+            // check whether all required fields are fulfilled
+            required.on('blur keyup change', function() {
+                var all_required_filled = true;
+                required.each(function() {
+                    if (!$(this).val()) {
+                        all_required_filled = false;
+                    };
+                });
+                if (all_required_filled) {
+                    button.prop("disabled", false).addClass("modal__btn-primary");
+                } else {
+                    button.prop("disabled", true).removeClass("modal__btn-primary");
+                };
+            });
+
+            
+        });
+
         function onContactSubmit_{{form_page.pk}}(token) {
-        var id = "#modal-" + {{ form_page.pk }};
-        $(id).find("#contact-modal").submit();
-        $(id).find("#modal-content")
-            .css("width", "100%")
-            .html(
-                "<div style='text-align: center; padding: 30px 0px 30px 0px' id='thanks-text'>\
-                <h4>Success!</h4>\
-                <p>Thank you for getting in touch with us! Your message has been successfully \
-                    submitted, and we'll respond shortly. Stay tuned!</p></div>"
-            );
-        }
+            var id = "#modal-" + {{ form_page.pk }};
+            var message = $(id).find('#message-text').val();
+            $(id).find(".contact-modal").submit();
+            $(id).find("#modal-content")
+                .css("width", "100%")
+                .html("<div style='text-align: center; padding: 30px 0px 30px 0px' id='thanks-text'>"+message+"</div>");
+        };
     </script>
 {% endif %}

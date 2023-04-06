@@ -18,11 +18,6 @@ from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, PageChooserPane
 from wagtailcache.cache import WagtailCacheMixin
 
 from managers.models import Manager
-from wagtailcaptcha.models import WagtailCaptchaEmailForm
-from wagtailcaptcha.forms import WagtailCaptchaFormBuilder
-
-from captcha.fields import ReCaptchaField
-from captcha.widgets import ReCaptchaV3
 
 import mailchimp_marketing as MailchimpMarketing
 from mailchimp_marketing.api_client import ApiClientError
@@ -115,22 +110,7 @@ def send_contact_info(request, member_info:dict):
             print("An exception occurred: {}".format(error.text))
 
 
-class CustomFormBuilder(WagtailCaptchaFormBuilder):
-    @property
-    def formfields(self):
-        fields = super(WagtailCaptchaFormBuilder, self).formfields
-        fields[self.CAPTCHA_FIELD_NAME] = ReCaptchaField(
-            label='',
-            widget=ReCaptchaV3(
-                attrs={
-                    'required_score':0.85,
-                }
-            )
-        )
-        return fields
-
-
-class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
+class ContactPage(WagtailCacheMixin, AbstractEmailForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -142,7 +122,6 @@ class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
     subpage_types =[]
     max_count = 5
     cache_control = 'no-cache'
-    form_builder = CustomFormBuilder
 
     form_name = models.CharField(
         max_length=255,
@@ -152,8 +131,10 @@ class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
         features=['h2', 'h3', 'h4', 'h5', 'h6', 'bold', 'italic', 'link', 'superscript', 'subscript'],
         blank=True,
     )
-    thank_you_text = RichTextField(
+    thank_you_text = models.TextField(
         blank=True,
+        null=True,
+        help_text='Use HTML tags for text design.',
     )
     button_text = models.CharField(
         max_length = 50,
