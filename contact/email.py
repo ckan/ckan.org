@@ -21,7 +21,7 @@ with the following e-mail: {}
 
 
 def send_subscription_email(email, current_site, token):
-    mail_subject = 'Please confirm CKAN newsletter subscription'
+    mail_subject = 'Welcome Aboard! Confirm Your CKAN Monthly Newsletter Subscription'
     message = render_to_string('contact/subscription_email.html', {
         'domain': current_site,
         'eid': urlsafe_base64_encode(force_bytes(email)),
