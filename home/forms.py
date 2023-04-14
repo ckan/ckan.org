@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from wagtailcaptcha.models import WagtailCaptchaEmailForm
 from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV3
  
  
 class CkanorgSignupForm(SignupForm):
@@ -18,7 +19,14 @@ class CkanorgSignupForm(SignupForm):
  
     password1 = PasswordField(label=_("Password"))
     password2 = PasswordField(label=_("Password (again)")) 
-    captcha = ReCaptchaField(label=False)
+    captcha = ReCaptchaField(
+        label=False,
+        widget=ReCaptchaV3(
+            attrs={
+                'required_score':0.85,
+            }
+        )
+    )
 
     def signup(self, request, user):
         user.first_name = self.cleaned_data['first_name']
@@ -28,6 +36,13 @@ class CkanorgSignupForm(SignupForm):
 
 
 class CkanorgLoginForm(LoginForm):
-    captcha = ReCaptchaField(label=False)
+    captcha = ReCaptchaField(
+        label=False,
+        widget=ReCaptchaV3(
+            attrs={
+                'required_score':0.85,
+            }
+        )
+    )
     def login(self, *args, **kwargs):
         return super(CkanorgLoginForm, self).login(*args, **kwargs)
