@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'blog',
     'events',
     'dashboard',
+    'faq',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
@@ -74,7 +75,6 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = '/admin/'
 
 ACCOUNT_FORMS = {
-    'login': 'home.forms.CkanorgLoginForm',
     'signup': 'home.forms.CkanorgSignupForm',
 }
 
