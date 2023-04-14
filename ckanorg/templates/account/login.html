@@ -3,51 +3,62 @@
 {% load i18n %}
 {% load account socialaccount %}
 
+{% load wagtailsettings_tags %}
+{% get_settings %}
+
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
-<div class="row">
-<div class="center-block ckanorg-auth-form">
-<h1>{% trans "Sign In" %}</h1>
+    <div class="row">
+        <div class="center-block ckanorg-auth-form">
+            <h1>{% trans "Sign In" %}</h1>
 
-{% get_providers as socialaccount_providers %}
+            {% get_providers as socialaccount_providers %}
 
-{% if socialaccount_providers %}
-<p>{% blocktrans with site.name as site_name %}Please sign in with one
-of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+            {% if socialaccount_providers %}
+                <p>{% blocktrans with site.name as site_name %}Please sign in with one
+                of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+                for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
-<div class="socialaccount_ballot">
+                <div class="socialaccount_ballot">
+                    <ul class="socialaccount_providers">
+                        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                    </ul>
+                    <div class="login-or">{% trans 'or' %}</div>
+                </div>
 
-  <ul class="socialaccount_providers">
-    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-  </ul>
+                {% include "socialaccount/snippets/login_extra.html" %}
 
-  <div class="login-or">{% trans 'or' %}</div>
+            {% else %}
+                <p>{% blocktrans %}
+                Want to write a blog post? Contact 
+                <a href="mailto:blog@ckan.org">blog@ckan.org</a>. Or use our 
+                <a data-micromodal-trigger="modal-1" href="javascript:void(0);" id="contact">Contact form</a>.
+                {% endblocktrans %}</p>
+            {% endif %}
 
-</div>
-
-
-{% include "socialaccount/snippets/login_extra.html" %}
-
-{% else %}
-<p>{% blocktrans %}
-  Want to write a blog post? Contact 
-  <a href="mailto:blog@ckan.org">blog@ckan.org</a>. Or use our 
-  <a data-micromodal-trigger="modal-1" href="javascript:void(0);" id="contact">Contact form</a>.
-  {% endblocktrans %}</p>
-{% endif %}
-
-<form class="login" method="POST" action="{% url 'account_login' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-  <button class="primaryAction btn" type="submit">{% trans "Sign In" %}</button>
-</form>
-</div>
-</div>
-
+            <form class="login" method="POST" action="{% url 'account_login' %}" id="login-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                {#<button class="primaryAction btn" type="submit">{% trans "Sign In" %}</button>#}
+                <button id="login-button"
+                    class="primaryAction btn g-recaptcha"
+                    type="submit"
+                    data-sitekey="{{ settings.home.ReCaptchaSettings.public_key }}"
+                    data-callback="onLoginSubmit"
+                    data-action="submit">
+                    {% trans "Sign In" %}
+                </button>
+            </form>
+        </div>
+    </div>
+    <script>
+        function onLoginSubmit(token) {
+            $("#login-form").submit();
+        };
+    </script>
 {% endblock %}
