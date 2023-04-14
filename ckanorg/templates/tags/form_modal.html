@@ -1,4 +1,6 @@
 {% load static wagtailcore_tags %}
+{% load wagtailsettings_tags %}
+{% get_settings %}
 
 <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
 
@@ -34,7 +36,7 @@
                         <input id="message-text" type="hidden" value="{{form_page.thank_you_text|safe}}">
                         <button id="modal-btn-{{form_page.pk}}"
                                 class="modal__btn g-recaptcha"
-                                data-sitekey="{{recaptcha_sitekey}}"
+                                data-sitekey="{{ settings.home.ReCaptchaSettings.public_key }}"
                                 data-callback="onContactSubmit_{{form_page.pk}}"
                                 data-action="submit"
                                 disabled>
