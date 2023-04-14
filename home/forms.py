@@ -23,7 +23,7 @@ class CkanorgSignupForm(SignupForm):
         label=False,
         widget=ReCaptchaV3(
             attrs={
-                'required_score':0.85,
+                'required_score':0.5,
             }
         )
     )
@@ -40,7 +40,7 @@ class CkanorgLoginForm(LoginForm):
         label=False,
         widget=ReCaptchaV3(
             attrs={
-                'required_score':0.85,
+                'required_score':0.5,
             }
         )
     )
