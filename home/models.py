@@ -15,6 +15,7 @@ from wagtailmetadata.models import MetadataPageMixin
 from wagtail.snippets.blocks import SnippetChooserBlock
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
+from wagtail.contrib.settings.models import BaseSetting, register_setting
 
 from wagtail.admin.edit_handlers import (
     FieldPanel,
@@ -178,3 +179,19 @@ def update_profile_signal(sender, instance, created, **kwargs):
     if created:
         group, _ = Group.objects.get_or_create(name='Blog Post Creators')
         instance.groups.add(group)
+
+@register_setting
+class ReCaptchaSettings(BaseSetting):
+    public_key = models.CharField(
+        max_length=255,
+        help_text="ReCaptcha public key",
+        blank=True,
+    )
+
+    class Meta:
+        verbose_name = 'ReCaptcha settings'
+        verbose_name_plural = "ReCaptcha settings"
+
+    panels = [
+        FieldPanel('public_key'),
+    ]

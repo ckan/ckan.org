@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'blog',
     'events',
     'dashboard',
+    'faq',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',

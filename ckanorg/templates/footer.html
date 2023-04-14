@@ -1,5 +1,8 @@
 {% load static modal_tags page_tags %}
 
+{% load wagtailsettings_tags %}
+{% get_settings %}
+
 <footer class="footer">
     <div class="container-lg">
         <div class="two-columns">
@@ -23,7 +26,7 @@
                             <input type="text" id="subscribe_name" name="name" placeholder="your name" autocomplete="off"/>
                             <input type="text" id="subscribe_email" name="email" placeholder="your@email.com" autocomplete="off"/>
                             <div class="g-recaptcha"
-                                 data-sitekey="{{ recaptcha_sitekey }}"
+                                 data-sitekey="{{ settings.home.ReCaptchaSettings.public_key }}"
                                  data-size="invisible">
                             </div>
                             <input type="submit" value="Subscribe" class="btn btn-sm"/>
