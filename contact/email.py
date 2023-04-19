@@ -1,5 +1,7 @@
 import datetime
+from email.mime.image import MIMEImage
 import logging
+import os
 import traceback
 
 from django.conf import settings
@@ -21,7 +23,7 @@ with the following e-mail: {}
 
 
 def send_subscription_email(email, current_site, token):
-    mail_subject = 'Please confirm CKAN newsletter subscription'
+    mail_subject = 'Welcome Aboard! Confirm Your CKAN Monthly Newsletter Subscription'
     message = render_to_string('contact/subscription_email.html', {
         'domain': current_site,
         'eid': urlsafe_base64_encode(force_bytes(email)),
@@ -30,6 +32,12 @@ def send_subscription_email(email, current_site, token):
     try:
         complete_email = EmailMessage(mail_subject, message, to=[email])
         complete_email.content_subtype = 'html'
+        for f in ['logo_ckan.png', 'cowboy.png', 'icons8-linkedin-circled-50.png', 'icons8-twitter-circled-50.png', 'globe-circle-icon.png', 'youtube-round-icon.png']:
+            fp = open(os.path.join(settings.BASE_DIR, f'static/img/{f}'), 'rb')
+            msg_img = MIMEImage(fp.read())
+            fp.close()
+            msg_img.add_header('Content-ID', '<{}>'.format(f))
+            complete_email.attach(msg_img)
         complete_email.send()
     except Exception as e:
         logging.getLogger("error").error(traceback.format_exc())
