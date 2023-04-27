@@ -21,8 +21,7 @@ from wagtail.core.models import Page
 from wagtail.core.fields import StreamField
 from wagtail.core import blocks
 from wagtailmetadata.models import MetadataPageMixin
-from wagtail.admin.forms import WagtailAdminPageForm
-from wagtail.snippets.models import register_snippet
+from wagtail.search import index
 
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey
@@ -308,6 +307,14 @@ class BlogPostPage(MetadataPageMixin, Page):
     null=True,
     blank=True
     )
+
+    search_fields = [
+        index.SearchField('post_title'),
+        index.SearchField('post_subtitle'),
+        index.SearchField('body'),
+        index.FilterField('author'),
+        index.FilterField('date'),
+    ]
 
     promote_panels = [
             MultiFieldPanel(COMMON_PANELS, heading="Common page configuration"),
