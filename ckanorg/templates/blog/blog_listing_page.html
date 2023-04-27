@@ -36,33 +36,46 @@
                           </svg>
                     </a>
                 </li>
-                <li class="last">
+                <li>
                     <a href="{% url 'wagtailadmin_pages:add' content_type_app_name='blog' content_type_model_name='blogpostpage' parent_page_id=7 %}" target="_blank" rel="noopener" title="Add post">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#000" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
                             <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
                         </svg>
                     </a>
-                </li> 
+                </li>
+                <li class="last">
+                    <a href="#" onclick="showSearchbar(); return false;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#000" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </a>
+                </li>
                 <li class="category">
-                    <div class="styled-select">              
+                    <div class="styled-select">
                         <select id="cat_select" size="1" autocomplete="off" onChange="update()" title="Choose a category">
                             <option value="0">Select category...</option>
                             <option value="999">
                                 <a id="link" href="" rel="noopener">
                                     All
-                                </a>                                   
+                                </a>
                             </option>
                             {% for category in categories %}
                                 <option value="{{ category.id }}">
                                     <a id="link" href="" rel="noopener">
                                         {{ category.category_title }}
-                                    </a>                                   
+                                    </a>
                                 </option>
                             {% endfor %}
-                        </select>      
-                    </div>                                                         
-                </li>               
-            </ul>           
+                        </select>
+                    </div>
+                </li>
+            </ul>
+            <div class="searchbar" id="searchbar-block" hidden>
+                <form action="{% url "search_post_list" %}" method="get">
+                    <input type="text" name="query" placeholder="Search for posts. . .">
+                    <input type="submit" value="Search" class="btn">
+                </form>
+            </div>
         </div>
         <div class="container-md">
             <div class="blog-subscribe">
@@ -164,6 +177,14 @@
         }        
         var link = $('#link');
         window.open(cat_link, '_self');
+    }
+    function showSearchbar() {
+        var select = document.getElementById('searchbar-block');
+        if (select.hidden == true) {
+            select.hidden = false;
+        } else {
+            select.hidden = true;
+        }
     }
 </script>
 
