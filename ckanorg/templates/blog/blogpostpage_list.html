@@ -116,25 +116,6 @@
                         </svg>
                     </a>
                 </li>  
-                <li class="category">
-                    <div class="styled-select">
-                        <select id="cat_select" size="1" autocomplete="off" onChange="update()" title="Choose a category">
-                            <option value="0">Select category...</option>
-                            <option value="999">
-                                <a id="link" href="" rel="noopener">
-                                    All
-                                </a>
-                            </option>
-                            {% for category in categories %}
-                                <option value="{{ category.id }}" {% if category.id == cat_selected.id %}selected="selected"{% endif %}>
-                                    <a id="link" href="" rel="noopener">
-                                        {{ category.category_title }}
-                                    </a>
-                                </option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </li>
                 <li class="last">
                     <a href="{% slugurl 'blog' %}" rel="noopener" title="Go back">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#000" class="bi bi-reply-fill" viewBox="0 0 16 16">
@@ -202,18 +183,5 @@
             {% include "../snippets/connect_with_ckan_block.html" %}
         <div class="separator alt"></div>
     </div>
-    
-    <script type="text/javascript">
-        function update() {
-            var select = document.getElementById('cat_select').value;
-            if (select == '999') {
-                var cat_link = "{% slugurl 'blog' %}";
-            } else {
-                var cat_link = "{% url "category_post_list" cat_id=0 %}".replace('0', select); 
-            }        
-            var link = $('#link');
-            window.open(cat_link, '_self');
-        }
-    </script>
 
 {% endblock %}
