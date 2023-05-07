@@ -1,0 +1,50 @@
+.social-sidebar {
+    position: fixed;
+    top: 35%;
+    right: 70px;
+    z-index: 999;
+    ul {
+        padding: 0px;
+        transform: translate(100%, 0);
+        li {
+            display: block;
+            margin: 5px;
+            background: rgba(0, 0, 0, 0.26);
+            width: 300px;
+            text-align: left;
+            padding: 10px 5px;
+            border-radius: 30px 0px 0px 30px;
+            transition: all 1s;
+            &:hover {
+                transform: translate(-100px, 0);
+                background: rgba(0, 0, 0, 0.5);
+                a {
+                    color: #000;
+                    text-decoration: none;
+                }
+                i {
+                    color: #fff;
+                    background: rgba(0, 0, 0);
+                    transform: rotate(360deg);
+                    transition: all 1s;
+                }
+            }
+            i {
+                margin-left: 10px;
+                color: #000;
+                background: #fff;
+                padding: 10px;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+                background: #ffffff;
+                transform: rotate(0deg);
+            }
+            a {
+                color: #000;
+                font: 400 20px/1.5 "SF Pro Display", sans-serif;
+            }
+        }
+    }
+}
