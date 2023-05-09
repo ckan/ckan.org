@@ -3840,9 +3840,18 @@ img.full-width {
 
 /* content style */
 .st-menu ul {
+  position: fixed;
+  top: 100px;
   margin: 0;
   padding: 0;
   list-style: none;
+  overflow-y: auto;
+  height: 85%;
+}
+@media all and (max-width: 1024px) {
+  .st-menu ul {
+    top: 55px;
+  }
 }
 .st-menu ul li a {
   display: block;
@@ -3854,6 +3863,7 @@ img.full-width {
   text-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
   text-decoration: none;
   letter-spacing: 1px;
+  font-size: 14px;
   font-weight: 600;
   transition: background 0.3s, box-shadow 0.3s;
 }
@@ -3876,13 +3886,34 @@ img.full-width {
 /* Individual effects */
 /* Effect: Slide in on top */
 .st-effect.st-menu {
+  position: fixed;
   visibility: visible;
   transform: translate3d(-100%, 0, 0);
 }
 
 .st-effect.st-menu-open .st-effect.st-menu {
+  position: fixed;
   visibility: visible;
   transform: translate3d(0, 0, 0);
+}
+.st-effect.st-menu-open .st-effect.st-menu .st-btn-close {
+  display: block;
+  position: fixed;
+  top: 125px;
+  right: -60px;
+  border: none;
+  background-color: transparent;
+  z-index: 999;
+}
+@media all and (max-width: 1024px) {
+  .st-effect.st-menu-open .st-effect.st-menu .st-btn-close {
+    top: 80px;
+  }
+}
+.st-effect.st-menu-open .st-effect.st-menu .st-btn-close:hover {
+  background-color: transparent;
+  transform: rotate(360deg);
+  transition: all 1s;
 }
 
 .st-effect.st-menu::after {
@@ -3909,9 +3940,13 @@ img.full-width {
   transition: all 1s;
 }
 
+.st-btn-close {
+  display: none;
+}
+
 .sidebar-search {
   display: flex;
-  margin: 10px 5px;
+  margin: 30px 5px 20px 5px;
 }
 .sidebar-search input {
   margin: 0px;

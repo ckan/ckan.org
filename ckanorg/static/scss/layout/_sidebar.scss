@@ -90,9 +90,16 @@
 
 .st-menu {
 	ul {
+		position: fixed;
+		top: 100px;
 		margin: 0;
 		padding: 0;
 		list-style: none;
+		overflow-y: auto;
+		height: 85%;
+		@media all and (max-width: 1024px){
+			top: 55px;
+		}
 		li {
 			a {
 				display: block;
@@ -104,6 +111,7 @@
 				text-shadow: 0 0 1px rgba(255,255,255,0.1);
 				text-decoration: none;
 				letter-spacing: 1px;
+				font-size: 14px;
 				font-weight: 600;
 				-webkit-transition: background 0.3s, box-shadow 0.3s;
 				transition: background 0.3s, box-shadow 0.3s;
@@ -133,15 +141,34 @@
 
 /* Effect: Slide in on top */
 .st-effect.st-menu {
+	position: fixed;
 	visibility: visible;
 	-webkit-transform: translate3d(-100%, 0, 0);
 	transform: translate3d(-100%, 0, 0);
 }
 
 .st-effect.st-menu-open .st-effect.st-menu {
+	position: fixed;
 	visibility: visible;
 	-webkit-transform: translate3d(0, 0, 0);
 	transform: translate3d(0, 0, 0);
+	.st-btn-close {
+		display: block;
+		position: fixed;
+		top: 125px;
+		right: -60px;
+		border: none;
+		background-color: transparent;
+		z-index: 999;
+		@media all and (max-width: 1024px){
+			top: 80px;
+		}
+		&:hover {
+			background-color: transparent ;
+			transform: rotate(360deg);
+			transition: all 1s;
+		}
+	}
 }
 
 .st-effect.st-menu::after {
@@ -166,9 +193,13 @@
 	}
 }
 
+.st-btn-close {
+	display: none;
+};
+
 .sidebar-search {
 	display: flex;
-	margin: 10px 5px;
+	margin: 30px 5px 20px 5px;
 	input {
 		margin: 0px;
 		border-radius: 30px 0px 0px 30px;
