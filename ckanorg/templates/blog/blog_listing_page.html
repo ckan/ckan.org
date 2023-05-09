@@ -13,26 +13,7 @@
 
     <div id="st-container" class="st-container st-effect">
 
-        <nav class="st-menu st-effect" id="menu-1">
-            <ul>
-                <li>
-                    <form action="{% url "search_post_list" %}" method="get" class="sidebar-search">
-                        <input type="text" name="query" placeholder="Search for posts. . .">
-                        <button type="submit" value="Search" class="btn">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </form>
-                </li>
-                <h3><i class="fa fa-tags"></i>&nbsp;&nbsp;Categories</h3>
-                {% for category in categories %}
-                   <li>
-                        <a class="item" id="link" href="{% url "category_post_list" cat_id=category.id %}" rel="noopener">
-                            {{ category.category_title }}
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </nav>
+        {% include "blog/blocks/blog_sidebar.html" %}
 
         <div class="st-pusher">
             <div class="st-content">
@@ -171,27 +152,6 @@
 
     </div>
 
-    <script type="text/javascript">
-
-        // Sidebar open/close logic
-        var click = document.querySelector('#st-button');
-        var menu = document.querySelector('#st-container');
-        var pusher = document.querySelector('.st-pusher');
-
-        click.addEventListener('click', addClass);
-        pusher.addEventListener('click', closeMenu);
-
-        function addClass(e) {
-            menu.classList.toggle('st-menu-open');
-        }
-
-        function closeMenu(el) {
-            // if the click target has this class then we close the menu by removing all the classes
-            if (el.target.classList.contains('st-pusher')) {
-                menu.classList.toggle('st-menu-open');
-            }
-        }
-
-    </script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
 
 {% endblock content %}
