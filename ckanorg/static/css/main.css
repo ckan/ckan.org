@@ -3900,7 +3900,7 @@ img.full-width {
   display: block;
   position: fixed;
   top: 125px;
-  right: -60px;
+  right: -40px;
   border: none;
   background-color: transparent;
   z-index: 999;
@@ -3946,7 +3946,7 @@ img.full-width {
 
 .sidebar-search {
   display: flex;
-  margin: 30px 5px 20px 5px;
+  margin: 20px 5px 20px 5px;
 }
 .sidebar-search input {
   margin: 0px;
