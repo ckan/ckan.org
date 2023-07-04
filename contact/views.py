@@ -5,7 +5,7 @@ from django.conf import settings
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import redirect
 from django.utils import timezone
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_decode
 from django.views.generic import TemplateView
 
@@ -22,7 +22,7 @@ form_mapping = {
 
 def activate_subscription(request, eidb64, token):
     try:
-        eid = force_text(urlsafe_base64_decode(eidb64))
+        eid = force_str(urlsafe_base64_decode(eidb64))
         subscriber = Email.objects.filter(
             form_name = 'Subscribe Form',
             address=eid
