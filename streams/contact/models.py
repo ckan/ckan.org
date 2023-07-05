@@ -6,11 +6,11 @@ from django.template.loader import render_to_string
 from modelcluster.models import ParentalKey
 
 from wagtail.admin.mail import send_mail
-from wagtail.core.fields import RichTextField
+from wagtail.fields import RichTextField
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.snippets.models import register_snippet
-from wagtail.admin.edit_handlers import (
+from wagtail.admin.panels import (
     FieldPanel,
     InlinePanel,
     PageChooserPanel
@@ -90,7 +90,7 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
 
 
     def render_landing_page(self, request, form_submission=None, *args, **kwargs):
-        from wagtail.core.models import Page
+        from wagtail.models import Page
         from django.shortcuts import redirect
         redirect_page = Page.objects.get(id=request.POST.get('source-page-id'))
         if redirect_page:

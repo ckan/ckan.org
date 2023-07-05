@@ -3,20 +3,17 @@ from django import forms
 from django.db import models
 from django.conf import settings
 
-from wagtail.core.models import Page, Orderable
+from wagtail.models import Page, Orderable
 from wagtailmetadata.models import MetadataPageMixin
 
-from wagtail.admin.edit_handlers import (
+from wagtail.admin.panels import (
     FieldPanel,
     MultiFieldPanel,
     InlinePanel
 )
-from wagtail.admin.edit_handlers import StreamFieldPanel, MultiFieldPanel
-from wagtail.images.edit_handlers import ImageChooserPanel
-from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.snippets.models import register_snippet
-from wagtail.core import blocks
-from wagtail.core.fields import StreamField
+from wagtail import blocks
+from wagtail.fields import StreamField
 
 from modelcluster.fields import ParentalKey
 from blog.models import BlogPostPage
@@ -27,7 +24,7 @@ COMMON_PANELS = (
     FieldPanel('seo_title'),
     FieldPanel('search_description'),
     FieldPanel('keywords'),
-    ImageChooserPanel('search_image'),
+    FieldPanel('search_image'),
 )
 
 
@@ -39,7 +36,7 @@ class GeneralFeatures(Orderable):
         on_delete=models.CASCADE,
     )
     panels = [
-        SnippetChooserPanel('feature'),
+        FieldPanel('feature'),
     ]
 
 
@@ -51,7 +48,7 @@ class Features(Orderable):
         on_delete=models.CASCADE,
     )
     panels = [
-        SnippetChooserPanel('feature'),
+        FieldPanel('feature'),
     ]
 
 
@@ -63,7 +60,7 @@ class Extensions(Orderable):
         on_delete=models.CASCADE,
     )
     panels = [
-        SnippetChooserPanel('extension'),
+        FieldPanel('extension'),
     ]
 
 
@@ -75,7 +72,7 @@ class CkanForFeatures(Orderable):
         on_delete=models.CASCADE,
     )
     panels = [
-        SnippetChooserPanel('ckan_for_card'),
+        FieldPanel('ckan_for_card'),
     ]
 
 
@@ -143,7 +140,7 @@ class ShowCaseSection1(Orderable):
         on_delete=models.CASCADE,
     )
     panels = [
-        SnippetChooserPanel('showcase'),
+        FieldPanel('showcase'),
     ]
 
 
@@ -155,7 +152,7 @@ class ShowCaseSection2(Orderable):
         on_delete=models.CASCADE,
     )
     panels = [
-        SnippetChooserPanel('showcase'),
+        FieldPanel('showcase'),
     ]
 
 class ShowCaseSection3(Orderable):
@@ -166,7 +163,7 @@ class ShowCaseSection3(Orderable):
         on_delete=models.CASCADE,
     )
     panels = [
-        SnippetChooserPanel('showcase'),
+        FieldPanel('showcase'),
     ]
 
 class FeedbackSection1(Orderable):
@@ -177,7 +174,7 @@ class FeedbackSection1(Orderable):
         on_delete=models.CASCADE,
     )
     panels = [
-        SnippetChooserPanel('feedback'),
+        FieldPanel('feedback'),
     ]
 
 class FeedbackSection2(Orderable):
@@ -188,7 +185,7 @@ class FeedbackSection2(Orderable):
         on_delete=models.CASCADE,
     )
     panels = [
-        SnippetChooserPanel('feedback'),
+        FieldPanel('feedback'),
     ]
 
 class ShowcasePage(MetadataPageMixin, Page):
@@ -262,7 +259,7 @@ class SoftwareEngineers(Orderable):
         on_delete=models.CASCADE,
     )
     panels = [
-        SnippetChooserPanel('developer'),
+        FieldPanel('developer'),
     ]
 
 
@@ -275,7 +272,7 @@ class Stewards(Orderable):
         on_delete=models.CASCADE,
     )
     panels = [
-        SnippetChooserPanel('steward'),
+        FieldPanel('steward'),
     ]
 
 
@@ -287,7 +284,7 @@ class WorkingGroups(Orderable):
         on_delete=models.CASCADE,
     )
     panels = [
-        SnippetChooserPanel('working_group'),
+        FieldPanel('working_group'),
     ]    
 
 
@@ -387,7 +384,7 @@ class CommunityPage(MetadataPageMixin, Page):
         ]
 
     content_panels = Page.content_panels + [
-        ImageChooserPanel('contributors_image'),
+        FieldPanel('contributors_image'),
         FieldPanel('subtitle'),
         MultiFieldPanel(
             [
@@ -419,7 +416,7 @@ class CommunityPage(MetadataPageMixin, Page):
             [
                 FieldPanel('open_knowledge_foundation_title'),
                 FieldPanel('open_knowledge_foundation_subtitle'),
-                ImageChooserPanel('open_knowledge_foundation_image')
+                FieldPanel('open_knowledge_foundation_image')
             ],
             heading='Open Knowledge Foundation section',
         ),
@@ -452,7 +449,7 @@ class CommercialSupportItem(Orderable):
         on_delete=models.CASCADE,
     )
     panels = [
-        SnippetChooserPanel('commercial'),
+        FieldPanel('commercial'),
     ]
 
 class CommercialPage(MetadataPageMixin, Page):
@@ -511,7 +508,7 @@ class PweredItems(Orderable):
         on_delete=models.CASCADE,
     )
     panels = [
-        SnippetChooserPanel('powered_item'),
+        FieldPanel('powered_item'),
     ]    
 
 
@@ -523,7 +520,7 @@ class FeedbackItems(Orderable):
         on_delete=models.CASCADE,
     )
     panels = [
-        SnippetChooserPanel('feedback_item'),
+        FieldPanel('feedback_item'),
     ]
 
 
@@ -535,7 +532,7 @@ class WorkingGroupItems(Orderable):
         on_delete=models.CASCADE,
     )
     panels = [
-        SnippetChooserPanel('group_item'),
+        FieldPanel('group_item'),
     ]   
 
 class CkanForPage(MetadataPageMixin, Page):
@@ -600,7 +597,7 @@ class CkanForPage(MetadataPageMixin, Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('page_for'),
-        ImageChooserPanel('image'),
+        FieldPanel('image'),
         FieldPanel('page_title'),
         FieldPanel('subtitle'),
         FieldPanel('upper_text'),
@@ -622,7 +619,7 @@ class CkanForPage(MetadataPageMixin, Page):
             ],
             heading='Working Group',
         ),
-        StreamFieldPanel('bottom_text'),
+        FieldPanel('bottom_text'),
     ]
 
 
@@ -671,7 +668,7 @@ class FeatureDetailPage(MetadataPageMixin, Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('subtitle'),
-        StreamFieldPanel('body'),
+        FieldPanel('body'),
     ]
 
     def get_context(self,request, *args, **kwargs):

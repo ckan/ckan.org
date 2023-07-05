@@ -2,8 +2,8 @@
 
 import datetime
 from django.db import migrations, models
-import wagtail.core.blocks
-import wagtail.core.fields
+import wagtail.blocks
+import wagtail.fields
 import wagtail.images.blocks
 
 
@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='blogpostpage',
             name='body',
-            field=wagtail.core.fields.StreamField([('paragraph', wagtail.core.blocks.RichTextBlock()), ('post_image', wagtail.core.blocks.StructBlock([('image', wagtail.images.blocks.ImageChooserBlock(help_text='Add an Image', label='Image', required=True)), ('caption', wagtail.core.blocks.CharBlock(help_text='Provide a caption for the image', label='Capture', required=True))]))], blank=True, null=True),
+            field=wagtail.fields.StreamField([('paragraph', wagtail.blocks.RichTextBlock()), ('post_image', wagtail.blocks.StructBlock([('image', wagtail.images.blocks.ImageChooserBlock(help_text='Add an Image', label='Image', required=True)), ('caption', wagtail.blocks.CharBlock(help_text='Provide a caption for the image', label='Capture', required=True))]))], blank=True, null=True),
         ),
         migrations.AddField(
             model_name='blogpostpage',

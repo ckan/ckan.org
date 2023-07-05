@@ -1,23 +1,21 @@
 from django import forms
 from django.db import models
 from django.utils.timezone import now
-from wagtail.core.models import Page
+from wagtail.models import Page
 from wagtailmetadata.models import MetadataPageMixin
 from blog.models import BlogListingPage
 from modelcluster.contrib.taggit import ClusterTaggableManager
-from wagtail.core.fields import StreamField
-from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, MultiFieldPanel
-from wagtail.core import blocks
+from wagtail.fields import StreamField
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail import blocks
 from blog.blocks import ImageWithCaption
-from wagtail.images.edit_handlers import ImageChooserPanel
-from wagtail.admin.edit_handlers import FieldPanel
 
 
 COMMON_PANELS = (
     FieldPanel('slug'),
     FieldPanel('seo_title'),
     FieldPanel('search_description'),
-    ImageChooserPanel('search_image'),
+    FieldPanel('search_image'),
 )
 
 
@@ -146,14 +144,14 @@ class EventPostPage(MetadataPageMixin, Page):
         ]
 
     content_panels = Page.content_panels + [
-        ImageChooserPanel('main_image'),
+        FieldPanel('main_image'),
         FieldPanel('post_title'),
         FieldPanel('event_type'),
         FieldPanel('featured', widget=forms.CheckboxInput),
         FieldPanel('post_subtitle'),
         FieldPanel('start_date'),
         FieldPanel('end_date'),
-        StreamFieldPanel('body'),
+        FieldPanel('body'),
     ]
 
     base_form_class = EventPageForm

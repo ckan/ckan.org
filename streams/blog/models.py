@@ -10,11 +10,10 @@ from django.core.paginator import (
     Paginator
 )
 
-from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, MultiFieldPanel
-from wagtail.images.edit_handlers import ImageChooserPanel
-from wagtail.core.models import Page
-from wagtail.core.fields import StreamField
-from wagtail.core import blocks
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail.models import Page
+from wagtail.fields import StreamField
+from wagtail import blocks
 from wagtailmetadata.models import MetadataPageMixin
 
 from modelcluster.contrib.taggit import ClusterTaggableManager
@@ -31,7 +30,7 @@ COMMON_PANELS = (
     FieldPanel('seo_title'),
     FieldPanel('search_description'),
     FieldPanel('keywords'),
-    ImageChooserPanel('search_image'),
+    FieldPanel('search_image'),
 )
 
 
@@ -177,13 +176,13 @@ class BlogPostPage(MetadataPageMixin, Page):
         ]
 
     content_panels = Page.content_panels + [
-        ImageChooserPanel('main_image'),
+        FieldPanel('main_image'),
         FieldPanel('author'),
         FieldPanel('post_title'),
         FieldPanel('featured', widget=forms.CheckboxInput),
         FieldPanel('post_subtitle'),
         FieldPanel('tags'),
-        StreamFieldPanel('body'),
+        FieldPanel('body'),
     ]
 
     def get_context(self,request, *args, **kwargs):

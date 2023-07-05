@@ -1,12 +1,12 @@
 Django==4.0.10
-wagtail==2.16.3
+wagtail==3.0.3
 django-extensions>=3.0,<3.1
 whitenoise
-wagtail-cache<2.0.0,>=1.1.0
+wagtail-cache==2.1.1
 psycopg2
-wagtail-metadata<4.0.0
+wagtail-metadata==4.0.3
 requests-cache
 django-allauth
 wagtail-django-recaptcha==1.0
-wagtailcodeblock==1.25.0.2
+wagtailcodeblock==1.28.0.0
 mailchimp-marketing

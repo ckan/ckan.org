@@ -1,7 +1,7 @@
 from django import template
 from django.conf import settings
 import requests, requests_cache, json
-from wagtail.core.models import Page
+from wagtail.models import Page
 
 requests_cache.install_cache(cache_name='{}/github_cache'.format(settings.GITHUB_CACHE_DIR), backend="sqlite", expire_after=86400)
 

@@ -1,11 +1,10 @@
 from django.conf import settings
 from django.db import models
 
-from wagtail.core.models import Page
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, StreamFieldPanel
-from wagtail.images.edit_handlers import ImageChooserPanel
-from wagtail.core.fields import StreamField
-from wagtail.core import blocks
+from wagtail.models import Page
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail.fields import StreamField
+from wagtail import blocks
 
 from wagtailmetadata.models import MetadataPageMixin
 from wagtailcodeblock.blocks import CodeBlock
@@ -16,7 +15,7 @@ COMMON_PANELS = (
     FieldPanel('seo_title'),
     FieldPanel('search_description'),
     FieldPanel('keywords'),
-    ImageChooserPanel('search_image'),
+    FieldPanel('search_image'),
 )
 
 
@@ -101,7 +100,7 @@ class FaqCategoryPage(MetadataPageMixin, Page):
     content_panels = Page.content_panels + [
         FieldPanel('name'),
         FieldPanel('description'),
-        ImageChooserPanel('image'),
+        FieldPanel('image'),
     ]
 
     class Meta:
@@ -157,7 +156,7 @@ class FaqQuestionPage(MetadataPageMixin, Page):
     content_panels = Page.content_panels + [
         FieldPanel('category'),
         FieldPanel('question'),
-        StreamFieldPanel('answer'),
+        FieldPanel('answer'),
     ]
 
     class Meta:
