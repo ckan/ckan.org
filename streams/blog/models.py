@@ -168,7 +168,8 @@ class BlogPostPage(MetadataPageMixin, Page):
         ('post_image', ImageWithCaption()),
     ],
     null=True,
-    blank=True
+    blank=True,
+    use_json_field=True
     )
 
     promote_panels = [

@@ -567,7 +567,8 @@ class CkanForPage(MetadataPageMixin, Page):
             ])),
     ],
         null=True,
-        blank=True
+        blank=True,
+        use_json_field=True
     )
 
     promote_panels = [
@@ -637,7 +638,8 @@ class FeatureDetailPage(MetadataPageMixin, Page):
         ('paragraph', blocks.RichTextBlock()),
     ],
         null=True,
-        blank=True
+        blank=True,
+        use_json_field=True
     )
 
     promote_panels = [

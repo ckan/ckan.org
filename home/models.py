@@ -13,7 +13,7 @@ from wagtail.models import Page, Orderable
 from wagtailmetadata.models import MetadataPageMixin
 from wagtail.snippets.blocks import SnippetChooserBlock
 from wagtail.snippets.models import register_snippet
-from wagtail.contrib.settings.models import BaseSetting, register_setting
+from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 
 from wagtail.admin.panels import (
     FieldPanel,
@@ -114,7 +114,8 @@ class HomePage(MetadataPageMixin, Page):
         ], max_num=1, min_num=1),
         blank=False,
         null=True,
-        help_text='CKAN Git section',        
+        help_text='CKAN Git section',
+        use_json_field=True
     )
 
     home_page_subtitle_image = models.ForeignKey(
@@ -178,7 +179,7 @@ def update_profile_signal(sender, instance, created, **kwargs):
         instance.groups.add(group)
 
 @register_setting
-class ReCaptchaSettings(BaseSetting):
+class ReCaptchaSettings(BaseSiteSetting):
     public_key = models.CharField(
         max_length=255,
         help_text="ReCaptcha public key",

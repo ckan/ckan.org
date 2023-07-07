@@ -8,7 +8,7 @@ from modelcluster.models import ParentalKey
 from wagtail.admin.mail import send_mail
 from wagtail.fields import RichTextField
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
-from wagtail.contrib.settings.models import BaseSetting, register_setting
+from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.snippets.models import register_snippet
 from wagtail.admin.panels import (
     FieldPanel,
@@ -21,7 +21,7 @@ from managers.models import Manager
 
 
 @register_setting
-class CkanOrgSettings(BaseSetting):
+class CkanOrgSettings(BaseSiteSetting):
     modal_form_page = models.ForeignKey(
         'wagtailcore.Page',
         null=True,
