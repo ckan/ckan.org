@@ -27,6 +27,7 @@ Source code for the ckan.org website
 |        |—— ckan_pages
 |        |—— contact
 |        |—— events
+|        |—— faq
 |        |—— home
 |        |—— snippets
 |        |—— tags
@@ -35,6 +36,7 @@ Source code for the ckan.org website
 |—— contact
 |—— dashboard
 |—— events
+|—— faq
 |—— home
 |—— managers
 |—— menus
@@ -58,10 +60,11 @@ Source code for the ckan.org website
 |—— requirements.txt
 ```
 
-## Install & Dependences
+## Install & Dependencies
 - Python 3.8 or higher
-- Django >=3.1, <3.2
-- Wagtail >=2.10,<2.11
+- Django 4.1
+- Wagtail 4.2.4
+- all dependencies from `requirements.txt`
 
 ### Local environment setup
 #### 1. Create a virtual environment and activate it.
@@ -85,7 +88,7 @@ Source code for the ckan.org website
 (wagenv) #:~/wagtail$ pip install wheel
 ```
 
-#### 5. Install all required dependences from `requirements.txt` in project root folder. Be aware about versions of these dependences!!!
+#### 5. Install all required dependencies from `requirements.txt` in project root folder. Be aware about versions of these dependencies!!!
 ```
 (wagenv) #:~/wagtail$ pip install -r requirements.txt
 ```
@@ -215,6 +218,12 @@ You will not see some images, as media folder is empty. If you need them, you ca
 
 to work with django models and styles.
 
+#### 17. Populate reference table:
+
+Populate the references table and ensure that usage counts for images, documents and snippets are displayed accurately
+
+`python manage.py rebuild_references_index`
+
 ## Instructions on how to deploy changes
 1. Create a new fork from `main` branch of the repository `https://github.com/ckan/ckan.org`. A fork is a copy of a repository. Forking a repository allows you to freely experiment with changes without affecting the original project. So all tasks that you push are going to our fork repository, not the main one.
 If it was done earlier be sure you have cloned `main` branch of the repository with last updates.
@@ -227,8 +236,8 @@ If it was done earlier be sure you have cloned `main` branch of the repository w
 ### Tested Platform
 - software
   ```
-  OS: Ubuntu 20.04.4 LTS
-  Python: 3.8.10
+  OS: Ubuntu 22.04.2 LTS (Jammy)
+  Python: 3.8.17
   ```
 - hardware
   ```
