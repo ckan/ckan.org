@@ -3,13 +3,10 @@ from django.db import models
 from wagtail import blocks
 from wagtail.images.blocks import ImageChooserBlock
 
-from wagtail.fields import (
-    StreamField,
-)
-
 from wagtail.admin.panels import (
     FieldPanel,
-    MultiFieldPanel
+    MultiFieldPanel,
+    TitleFieldPanel
 )
 
 from wagtail.snippets.models import register_snippet
@@ -58,7 +55,7 @@ class GeneralFeature(models.Model):
         MultiFieldPanel(
             [
                 FieldPanel('icon'),
-                FieldPanel('title'),
+                TitleFieldPanel('title'),
                 FieldPanel('sub_title'),
                 FieldPanel('image'),
                 FieldPanel('text'),
@@ -106,7 +103,7 @@ class Feature(models.Model):
         MultiFieldPanel(
             [
                 FieldPanel('icon'),
-                FieldPanel('title'),
+                TitleFieldPanel('title'),
                 FieldPanel('sub_title'),
                 FieldPanel('read_more_page'),
             ],
@@ -148,7 +145,7 @@ class Extension(models.Model):
     panels = [
         MultiFieldPanel(
             [
-                FieldPanel('title'),
+                TitleFieldPanel('title'),
                 FieldPanel('author'),
                 FieldPanel('description'),
                 FieldPanel('rating'),
@@ -333,7 +330,7 @@ class CkanForCard(models.Model):
     panels = [
         MultiFieldPanel(
             [
-                FieldPanel('title'),
+                TitleFieldPanel('title'),
                 FieldPanel('image'),
                 FieldPanel('text'),
                 FieldPanel('link_text'),
@@ -374,7 +371,7 @@ class PoweredCard(models.Model):
     panels = [
         MultiFieldPanel(
             [
-                FieldPanel('title'),
+                TitleFieldPanel('title'),
                 FieldPanel('image'),
                 FieldPanel('text'),
                 FieldPanel('link'),
@@ -601,7 +598,7 @@ class PoweringImage(models.Model):
     panels = [
         MultiFieldPanel(
             [
-                FieldPanel('title'),
+                TitleFieldPanel('title'),
                 FieldPanel('image'),
                 FieldPanel('link'),
             ],

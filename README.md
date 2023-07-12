@@ -62,8 +62,8 @@ Source code for the ckan.org website
 
 ## Install & Dependencies
 - Python 3.8 or higher
-- Django 4.1
-- Wagtail 4.2.4
+- Django 4.2
+- Wagtail 5.0.2
 - all dependencies from `requirements.txt`
 
 ### Local environment setup
@@ -121,6 +121,7 @@ index be311ca..ec8777f 100644
      }
  }
 ```
+NOTE. Wagtail 5.0.2 uses PostgreSQL 12 or later
 
 #### 10. To not create all pages from the scratch you can use existing dummy sqlite database.
 (Ask managers for `db.sqlite3` file and copy it into the `ckan.org` folder).
@@ -135,8 +136,7 @@ index be311ca..3837822 100644
 +++ b/ckanorg/settings/base.py
 @@ -49,7 +49,6 @@ INSTALLED_APPS = [
      'wagtail.admin',
-     'wagtail.core',
- 
+
 -    'wagtailcache',
      'modelcluster',
      'taggit',
@@ -256,5 +256,3 @@ This material is copyright (c) 2006-2018 Open Knowledge Foundation and contribut
 It is open and licensed under the GNU Affero General Public License (AGPL) v3.0 whose full text may be found at:
 
 http://www.fsf.org/licensing/licenses/agpl-3.0.html 
-
-

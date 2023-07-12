@@ -8,6 +8,7 @@ from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import (
     FieldPanel,
     InlinePanel,
+    TitleFieldPanel
 )
 from wagtail.models import Orderable
 
@@ -20,7 +21,7 @@ class Menu(ClusterableModel):
     )
 
     panels = [
-        FieldPanel('title'),
+        TitleFieldPanel('title'),
         FieldPanel('slug'),
         InlinePanel('menu_items', label='Menu Item'),
     ]
