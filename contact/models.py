@@ -9,12 +9,12 @@ from django.shortcuts import redirect
 from modelcluster.models import ParentalKey
 
 from wagtail.admin.mail import send_mail
-from wagtail.core.models import Page
-from wagtail.core.fields import RichTextField
+from wagtail.models import Page
+from wagtail.fields import RichTextField
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
-from wagtail.contrib.settings.models import BaseSetting, register_setting
+from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.snippets.models import register_snippet
-from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, PageChooserPanel, HelpPanel
+from wagtail.admin.panels import FieldPanel, InlinePanel, PageChooserPanel, HelpPanel
 from wagtailcache.cache import WagtailCacheMixin
 
 from managers.models import Manager
@@ -24,7 +24,7 @@ from mailchimp_marketing.api_client import ApiClientError
 
 
 @register_setting
-class MailChimpSettings(BaseSetting):
+class MailChimpSettings(BaseSiteSetting):
     api_key = models.CharField(
         max_length=255,
         help_text="Mailchimp API key",
@@ -51,7 +51,7 @@ class MailChimpSettings(BaseSetting):
 
 
 @register_setting
-class CkanOrgSettings(BaseSetting):
+class CkanOrgSettings(BaseSiteSetting):
     modal_form_page = models.ForeignKey(
         'wagtailcore.Page',
         null=True,

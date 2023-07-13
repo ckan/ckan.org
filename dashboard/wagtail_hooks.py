@@ -1,9 +1,10 @@
 from django.utils.safestring import mark_safe
 from django.conf import settings
 from django.core.files import File
-from wagtail.admin.models import Page
+from django.forms import Media
 
-from wagtail.core import hooks
+from wagtail.admin.models import Page
+from wagtail import hooks
 
 MODERATORS = 'Moderators'
 EDITORS = 'Editors'
@@ -14,6 +15,7 @@ class QuickLinksPanel:
 
     def __init__(self, request):
         self.request = request
+        self.media = Media()
 
     def render(self):
         path = '/ckanorg/templates/snippets/admin_home_quick_links_block.html'
@@ -54,4 +56,4 @@ def hide_site_history_from_blogger(request, menu_items):
 def hide_events_from_editor(request, menu_items):
     user_groups = [x.name for x in request.user.groups.all()]
     if not request.user.is_superuser and MODERATORS not in user_groups:
-        menu_items[:] = [item for item in menu_items if item.name != 'events']        
+        menu_items[:] = [item for item in menu_items if item.name != 'events']

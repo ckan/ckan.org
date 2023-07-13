@@ -21,6 +21,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
+    #Site apps
     'home',
     'search',
     'streams',
@@ -33,6 +34,7 @@ INSTALLED_APPS = [
     'dashboard',
     'faq',
 
+    #Core Wagtail apps
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
     'wagtail.contrib.modeladmin',
@@ -45,12 +47,9 @@ INSTALLED_APPS = [
     'wagtail.images',
     'wagtail.search',
     'wagtail.admin',
-    'wagtail.core',
+    'wagtail',
 
-    'wagtailcache',
-    'modelcluster',
-    'taggit',
-
+    #Core Django apps
     'django.contrib.admin',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -60,14 +59,19 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.sites',
 
+    #Additional apps
     'wagtailmetadata',
+    'wagtailcache',
+    'modelcluster',
+    'taggit',
+    'wagtailcodeblock',
+
+    #Auth and Security apps
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-
     'captcha',
     'wagtailcaptcha',
-    'wagtailcodeblock',
 ]
 
 SITE_ID = 1
@@ -118,6 +122,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'wagtail.contrib.settings.context_processors.settings',
             ],
         },
     },
@@ -192,7 +197,7 @@ WAGTAIL_SITE_NAME = "ckanorg"
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-BASE_URL = 'https://ckan.org'
+WAGTAILADMIN_BASE_URL = 'https://ckan.org'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'email-smtp.eu-central-1.amazonaws.com'
@@ -219,6 +224,8 @@ GITHUB_CACHE_DIR = '{}/cache'.format(BASE_DIR)
 ALLOWED_HOSTS = ['*']
 
 WAGTAIL_APPEND_SLASH = False
+
+WAGTAIL_ENABLE_UPDATE_CHECK = True
 
 with open(BASE_DIR + '/../config/secret.txt') as f:
     data = f.read().strip().split(',')
@@ -255,3 +262,5 @@ WAGTAIL_CODE_BLOCK_LANGUAGES = (
     ('scss', 'SCSS'),
     ('yaml', 'YAML'),
 )
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

@@ -3,8 +3,8 @@
 from django.db import migrations, models
 import django.db.models.deletion
 import modelcluster.fields
-import wagtail.core.blocks
-import wagtail.core.fields
+import wagtail.blocks
+import wagtail.fields
 
 
 class Migration(migrations.Migration):
@@ -21,10 +21,10 @@ class Migration(migrations.Migration):
             name='CkanForPage',
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.page')),
-                ('page_for', wagtail.core.fields.StreamField([('working_group', wagtail.core.blocks.ChoiceBlock(choices=[('government', 'CKAN for Government'), ('enterprise', 'CKAN for Enterprise')], help_text='Select CKAN for Government/Enterprise'))])),
+                ('page_for', wagtail.fields.StreamField([('working_group', wagtail.blocks.ChoiceBlock(choices=[('government', 'CKAN for Government'), ('enterprise', 'CKAN for Enterprise')], help_text='Select CKAN for Government/Enterprise'))])),
                 ('subtitle', models.CharField(blank=True, help_text='Subtitle text under the header', max_length=512)),
-                ('upper_text', wagtail.core.fields.StreamField([('paragraph', wagtail.core.blocks.RichTextBlock(features=['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'bold', 'italic', 'link', 'ol', 'ul', 'hr']))])),
-                ('bottom_text', wagtail.core.fields.StreamField([('paragraph', wagtail.core.blocks.RichTextBlock(features=['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'bold', 'italic', 'link', 'ol', 'ul', 'hr']))], blank=True, null=True)),
+                ('upper_text', wagtail.fields.StreamField([('paragraph', wagtail.blocks.RichTextBlock(features=['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'bold', 'italic', 'link', 'ol', 'ul', 'hr']))])),
+                ('bottom_text', wagtail.fields.StreamField([('paragraph', wagtail.blocks.RichTextBlock(features=['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'bold', 'italic', 'link', 'ol', 'ul', 'hr']))], blank=True, null=True)),
                 ('image', models.ForeignKey(help_text='Main image', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='wagtailimages.image')),
             ],
             options={

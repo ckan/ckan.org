@@ -3,7 +3,7 @@ from django.conf import settings
 from django.core.files import File
 from wagtail.admin.models import Page
 
-from wagtail.core import hooks
+from wagtail import hooks
 
 class QuickLinksPanel:
     order = 100

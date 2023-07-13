@@ -3,7 +3,7 @@
 from django.db import migrations, models
 import django.db.models.deletion
 import modelcluster.fields
-import wagtail.core.fields
+import wagtail.fields
 
 
 class Migration(migrations.Migration):
@@ -23,8 +23,8 @@ class Migration(migrations.Migration):
                 ('to_address', models.CharField(blank=True, help_text='Optional - form submissions will be emailed to these addresses. Separate multiple addresses by comma.', max_length=255, verbose_name='to address')),
                 ('from_address', models.CharField(blank=True, max_length=255, verbose_name='from address')),
                 ('subject', models.CharField(blank=True, max_length=255, verbose_name='subject')),
-                ('intro', wagtail.core.fields.RichTextField(blank=True)),
-                ('thank_you_text', wagtail.core.fields.RichTextField(blank=True)),
+                ('intro', wagtail.fields.RichTextField(blank=True)),
+                ('thank_you_text', wagtail.fields.RichTextField(blank=True)),
                 ('map_url', models.URLField(blank=True, help_text='Optional. If you provide a link here the map image will become a link')),
                 ('map_image', models.ForeignKey(help_text='Please choose an Image', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='wagtailimages.image')),
             ],
