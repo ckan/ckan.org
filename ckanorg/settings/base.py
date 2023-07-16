@@ -264,3 +264,5 @@ WAGTAIL_CODE_BLOCK_LANGUAGES = (
 )
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+CSRF_TRUSTED_ORIGINS = ['https://ckan.org', 'https://devweb.ckan-org.links.com.au']
