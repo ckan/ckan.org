@@ -79,7 +79,7 @@ def ajax_unsubscribe(request):
 
 
 def ajax_email(request):
-    if request.is_ajax():
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         form_id = request.POST.get('form_id', None)
         form_name = form_mapping.get(form_id, None)
         name = request.POST.get('name', None)
