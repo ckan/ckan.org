@@ -1,18 +1,12 @@
 from django.db import models
 
-from wagtail.core import blocks
+from wagtail import blocks
 from wagtail.images.blocks import ImageChooserBlock
-from wagtail.images.edit_handlers import ImageChooserPanel
 
-from wagtail.core.fields import (
-    StreamField,
-)
-
-from wagtail.admin.edit_handlers import (
+from wagtail.admin.panels import (
     FieldPanel,
-    StreamFieldPanel,
-    PageChooserPanel,
-    MultiFieldPanel
+    MultiFieldPanel,
+    TitleFieldPanel
 )
 
 from wagtail.snippets.models import register_snippet
@@ -60,12 +54,12 @@ class GeneralFeature(models.Model):
     panels = [
         MultiFieldPanel(
             [
-                ImageChooserPanel('icon'),
-                FieldPanel('title'),
+                FieldPanel('icon'),
+                TitleFieldPanel('title'),
                 FieldPanel('sub_title'),
-                ImageChooserPanel('image'),
+                FieldPanel('image'),
                 FieldPanel('text'),
-                PageChooserPanel('read_more_page'),
+                FieldPanel('read_more_page'),
             ],
             heading = "General Feature"
         )
@@ -108,10 +102,10 @@ class Feature(models.Model):
     panels = [
         MultiFieldPanel(
             [
-                ImageChooserPanel('icon'),
-                FieldPanel('title'),
+                FieldPanel('icon'),
+                TitleFieldPanel('title'),
                 FieldPanel('sub_title'),
-                PageChooserPanel('read_more_page'),
+                FieldPanel('read_more_page'),
             ],
             heading = "Feature"
         )
@@ -151,7 +145,7 @@ class Extension(models.Model):
     panels = [
         MultiFieldPanel(
             [
-                FieldPanel('title'),
+                TitleFieldPanel('title'),
                 FieldPanel('author'),
                 FieldPanel('description'),
                 FieldPanel('rating'),
@@ -208,7 +202,7 @@ class SoftwareEngineer(models.Model):
     panels = [
         MultiFieldPanel(
             [
-                ImageChooserPanel('photo'),
+                FieldPanel('photo'),
                 FieldPanel('name'),
                 FieldPanel('role'),
                 FieldPanel('twitter'),
@@ -278,7 +272,7 @@ class Steward(models.Model):
     panels = [
         MultiFieldPanel(
             [
-                ImageChooserPanel('photo'),
+                FieldPanel('photo'),
                 FieldPanel('name'),
                 FieldPanel('about'),
                 FieldPanel('represented_by'),
@@ -336,11 +330,11 @@ class CkanForCard(models.Model):
     panels = [
         MultiFieldPanel(
             [
-                FieldPanel('title'),
-                ImageChooserPanel('image'),
+                TitleFieldPanel('title'),
+                FieldPanel('image'),
                 FieldPanel('text'),
                 FieldPanel('link_text'),
-                PageChooserPanel('internal_page'),
+                FieldPanel('internal_page'),
             ],
             heading = "Ckan For ... Card"
         )
@@ -377,8 +371,8 @@ class PoweredCard(models.Model):
     panels = [
         MultiFieldPanel(
             [
-                FieldPanel('title'),
-                ImageChooserPanel('image'),
+                TitleFieldPanel('title'),
+                FieldPanel('image'),
                 FieldPanel('text'),
                 FieldPanel('link'),
             ],
@@ -502,12 +496,12 @@ class WorkingGroup(models.Model):
     panels = [
         MultiFieldPanel(
             [
-                ImageChooserPanel('image'),
+                FieldPanel('image'),
                 FieldPanel('name'),
                 FieldPanel('description'),
                 MultiFieldPanel(
                     [
-                        ImageChooserPanel('member_1_image'),
+                        FieldPanel('member_1_image'),
                         FieldPanel('member_1_description'),
                         FieldPanel('member_1_url'),
                     ],
@@ -515,7 +509,7 @@ class WorkingGroup(models.Model):
                 ),
                 MultiFieldPanel(
                     [
-                        ImageChooserPanel('member_2_image'),
+                        FieldPanel('member_2_image'),
                         FieldPanel('member_2_description'),
                         FieldPanel('member_2_url'),
                     ],
@@ -523,7 +517,7 @@ class WorkingGroup(models.Model):
                 ),
                 MultiFieldPanel(
                     [
-                        ImageChooserPanel('member_3_image'),
+                        FieldPanel('member_3_image'),
                         FieldPanel('member_3_description'),
                         FieldPanel('member_3_url'),
                     ],
@@ -569,7 +563,7 @@ class Feedback(models.Model):
             [
                 FieldPanel('name'),
                 FieldPanel('role'),
-                ImageChooserPanel('image'),
+                FieldPanel('image'),
                 FieldPanel('text'),
             ],
             heading = "Feedbacks"
@@ -604,8 +598,8 @@ class PoweringImage(models.Model):
     panels = [
         MultiFieldPanel(
             [
-                FieldPanel('title'),
-                ImageChooserPanel('image'),
+                TitleFieldPanel('title'),
+                FieldPanel('image'),
                 FieldPanel('link'),
             ],
             heading = "Powering open data item"
@@ -644,7 +638,7 @@ class Commercial(models.Model):
     panels = [
         MultiFieldPanel(
             [
-                ImageChooserPanel('image'),
+                FieldPanel('image'),
                 FieldPanel('name'),
                 FieldPanel('url'),
                 FieldPanel('level'),

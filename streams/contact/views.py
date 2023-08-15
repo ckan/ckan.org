@@ -23,7 +23,7 @@ form_mapping = {
 }
 
 def ajax_email(request):
-    if request.is_ajax():
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         form_id = request.POST.get('form_id', None)
         form_name = form_mapping.get(form_id, 'Unknown form')
         email = request.POST.get('email', None)

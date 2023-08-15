@@ -3,8 +3,8 @@
 from django.db import migrations, models
 import django.db.models.deletion
 import django.utils.timezone
-import wagtail.core.blocks
-import wagtail.core.fields
+import wagtail.blocks
+import wagtail.fields
 import wagtail.images.blocks
 import wagtailmetadata.models
 
@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
                 ('start_date', models.DateTimeField(default=django.utils.timezone.now)),
                 ('end_date', models.DateTimeField(blank=True, null=True)),
                 ('post_subtitle', models.CharField(blank=True, max_length=512, null=True)),
-                ('body', wagtail.core.fields.StreamField([('html', wagtail.core.blocks.RawHTMLBlock()), ('paragraph', wagtail.core.blocks.RichTextBlock(features=['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'bold', 'italic', 'link', 'ol', 'ul', 'hr'])), ('post_image', wagtail.core.blocks.StructBlock([('image', wagtail.images.blocks.ImageChooserBlock(help_text='Add an Image', label='Image', required=True)), ('caption', wagtail.core.blocks.CharBlock(help_text='Provide a caption for the image', label='Caption', required=True))]))], blank=True, null=True)),
+                ('body', wagtail.fields.StreamField([('html', wagtail.blocks.RawHTMLBlock()), ('paragraph', wagtail.blocks.RichTextBlock(features=['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'bold', 'italic', 'link', 'ol', 'ul', 'hr'])), ('post_image', wagtail.blocks.StructBlock([('image', wagtail.images.blocks.ImageChooserBlock(help_text='Add an Image', label='Image', required=True)), ('caption', wagtail.blocks.CharBlock(help_text='Provide a caption for the image', label='Caption', required=True))]))], blank=True, null=True)),
                 ('main_image', models.ForeignKey(blank=True, help_text='Image', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='wagtailimages.image')),
                 ('search_image', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='wagtailimages.image', verbose_name='Search image')),
             ],

@@ -2,18 +2,15 @@ from django.db import models
 
 from modelcluster.fields import ParentalKey
 
-from wagtail.images.edit_handlers import ImageChooserPanel
-from wagtail.core.fields import StreamField
-from wagtail.core import blocks
-from wagtail.core.models import Page, Orderable
+from wagtail.fields import StreamField
+from wagtail import blocks
+from wagtail.models import Page, Orderable
 from wagtailmetadata.models import MetadataPageMixin
 from wagtail.snippets.blocks import SnippetChooserBlock
 from wagtail.snippets.models import register_snippet
-from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
-from wagtail.admin.edit_handlers import (
+from wagtail.admin.panels import (
     FieldPanel,
-    StreamFieldPanel,
     MultiFieldPanel,
     InlinePanel
 )
@@ -27,7 +24,7 @@ COMMON_PANELS = (
     FieldPanel('seo_title'),
     FieldPanel('search_description'),
     FieldPanel('keywords'),
-    ImageChooserPanel('search_image'),
+    FieldPanel('search_image'),
 )
 
 
@@ -39,7 +36,7 @@ class CkanForHomeOrderable(Orderable):
         on_delete=models.CASCADE,
     )
     panels = [
-        SnippetChooserPanel('ckan_for_card'),
+        FieldPanel('ckan_for_card'),
     ]
 
 
@@ -51,7 +48,7 @@ class PoweredCardHomeOrderable(Orderable):
         on_delete=models.CASCADE,
     )
     panels = [
-        SnippetChooserPanel('powered_card'),
+        FieldPanel('powered_card'),
     ]
 
 
@@ -63,7 +60,7 @@ class PoweringImages(Orderable):
         on_delete=models.CASCADE,
     )
     panels = [
-        SnippetChooserPanel('powering_image'),
+        FieldPanel('powering_image'),
     ]
 
 
@@ -109,7 +106,8 @@ class HomePage(MetadataPageMixin, Page):
         ], max_num=1, min_num=1),
         blank=False,
         null=True,
-        help_text='CKAN Git section',        
+        help_text='CKAN Git section',
+        use_json_field=True
     )
 
     home_page_subtitle_image = models.ForeignKey(
@@ -126,9 +124,9 @@ class HomePage(MetadataPageMixin, Page):
         ]
 
     content_panels = Page.content_panels + [
-        ImageChooserPanel('favicon'),
+        FieldPanel('favicon'),
         FieldPanel('home_page_subtitle'),
-        StreamFieldPanel('ckan_git'),
+        FieldPanel('ckan_git'),
         MultiFieldPanel(
             [
                 InlinePanel('powering_images', label="Powering open data item", min_num=1),
