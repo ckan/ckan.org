@@ -1,0 +1,8 @@
+{% if messages %}
+    {% for message in messages %}
+        <script type=text/javascript>
+            $("#thanks-text").html("{{ message.message|safe }}");
+            $('#thanks-modal').fadeIn();
+        </script>
+    {% endfor %}
+{% endif %}

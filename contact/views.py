@@ -13,6 +13,8 @@ from .models import Email, send_contact_info, Message
 from .token import user_activation_token
 from .email import send_subscription_email
 
+from django.contrib import messages
+
 
 form_mapping = {
     '#subscribe_form': 'Subscribe Form',
@@ -34,6 +36,13 @@ def activate_subscription(request, eidb64, token):
     if subscriber is not None and user_activation_token.check_token(subscriber, token):
         subscriber.subscribed = True
         subscriber.save()
+        try:
+            message = Message.objects.get(slug='confirmation-message')
+            message_content = message.content
+        except Message.DoesNotExist:
+            logging.getLogger("error_logger").error(traceback.format_exc())
+            message_content = "<p>Congratulations! You have been successfully subscribed.</p>"
+        messages.success(request, message_content)
         return redirect(url)
     else:
         return HttpResponse('Activation link is invalid!')
