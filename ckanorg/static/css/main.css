@@ -2133,6 +2133,7 @@ ul.blog-nav li.last {
   overflow: hidden;
   box-shadow: 0 1px 20px rgba(0, 0, 0, 0.2);
   display: flex;
+  margin-top: 50px;
 }
 .blog-subscribe .blog-subscribe-content {
   padding: 40px 40px;
@@ -3756,13 +3757,216 @@ img.full-width {
   fill: #333;
 }
 
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+.st-container,
+.st-pusher,
+.st-content {
+  height: 100%;
+  background: #fff;
+}
+
+.st-content,
+.st-content-inner {
+  position: relative;
+}
+
+.st-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.st-pusher {
+  position: relative;
+  left: 0;
+  z-index: 99;
+  transition: transform 0.5s;
+}
+
+.st-pusher::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  background: rgba(0, 0, 0, 0.2);
+  content: "";
+  opacity: 0;
+  transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+}
+
+.st-menu-open .st-pusher::after {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+.st-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  visibility: hidden;
+  width: 300px;
+  height: 100%;
+  background: #fff;
+  transition: all 0.5s;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.st-menu::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  content: "";
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+.st-menu-open .st-menu::after {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+}
+
+/* content style */
+.st-menu ul {
+  position: fixed;
+  top: 100px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-y: auto;
+  height: 85%;
+}
+@media all and (max-width: 1024px) {
+  .st-menu ul {
+    top: 55px;
+  }
+}
+.st-menu ul li a {
+  display: block;
+  padding: 1em 1em 1em 1.2em;
+  outline: none;
+  box-shadow: inset 0 -1px rgba(0, 0, 0, 0.2);
+  color: #333;
+  text-transform: uppercase;
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  letter-spacing: 1px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.st-menu ul li a:hover {
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 -1px rgba(0, 0, 0, 0);
+  color: #000;
+}
+.st-menu ul li:first-child a {
+  box-shadow: inset 0 -1px rgba(0, 0, 0, 0.2), inset 0 1px rgba(0, 0, 0, 0.2);
+}
+.st-menu h3 {
+  margin: 0;
+  padding: 1em;
+  color: rgba(0, 0, 0, 0.4);
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+  font-weight: 300;
+}
+
+/* Individual effects */
+/* Effect: Slide in on top */
+.st-effect.st-menu {
+  position: fixed;
+  visibility: visible;
+  transform: translate3d(-100%, 0, 0);
+}
+
+.st-effect.st-menu-open .st-effect.st-menu {
+  position: fixed;
+  visibility: visible;
+  transform: translate3d(0, 0, 0);
+}
+.st-effect.st-menu-open .st-effect.st-menu .st-btn-close {
+  display: block;
+  position: fixed;
+  top: 125px;
+  right: -40px;
+  border: none;
+  background-color: transparent;
+  z-index: 999;
+}
+@media all and (max-width: 1024px) {
+  .st-effect.st-menu-open .st-effect.st-menu .st-btn-close {
+    top: 80px;
+  }
+}
+.st-effect.st-menu-open .st-effect.st-menu .st-btn-close:hover {
+  background-color: transparent;
+  transform: rotate(360deg);
+  transition: all 1s;
+}
+
+.st-effect.st-menu::after {
+  display: none;
+}
+
+.st-btn {
+  position: fixed;
+  top: 50%;
+  left: 0%;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  z-index: 999;
+}
+@media all and (max-width: 820px) {
+  .st-btn {
+    top: 10%;
+  }
+}
+.st-btn:hover {
+  background-color: transparent;
+  transform: rotate(360deg);
+  transition: all 1s;
+}
+
+.st-btn-close {
+  display: none;
+}
+
+.sidebar-search {
+  display: flex;
+  margin: 20px 5px 20px 5px;
+}
+.sidebar-search input {
+  margin: 0px;
+  border-radius: 30px 0px 0px 30px;
+}
+.sidebar-search button {
+  padding: 10px;
+  border-radius: 0px 30px 30px 0px;
+}
+.sidebar-search button:hover {
+  color: #000;
+}
+
 .header {
   transition: all ease 0.5s;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 3;
+  z-index: 999;
   background: #fff;
 }
 .header .header-holder {
@@ -4619,4 +4823,55 @@ img.full-width {
 .searchbar form input[type=submit]:hover {
   color: #000000;
   background: #fff;
+}
+
+.social-sidebar {
+  position: fixed;
+  top: 35%;
+  right: 70px;
+  z-index: 999;
+}
+.social-sidebar ul {
+  padding: 0px;
+  transform: translate(100%, 0);
+}
+.social-sidebar ul li {
+  display: block;
+  margin: 5px;
+  background: rgba(0, 0, 0, 0.26);
+  width: 300px;
+  text-align: left;
+  padding: 10px 5px;
+  border-radius: 30px 0px 0px 30px;
+  transition: all 1s;
+}
+.social-sidebar ul li:hover {
+  transform: translate(-100px, 0);
+  background: rgba(0, 0, 0, 0.5);
+}
+.social-sidebar ul li:hover a {
+  color: #000;
+  text-decoration: none;
+}
+.social-sidebar ul li:hover i {
+  color: #fff;
+  background: rgb(0, 0, 0);
+  transform: rotate(360deg);
+  transition: all 1s;
+}
+.social-sidebar ul li i {
+  margin-left: 10px;
+  color: #000;
+  background: #fff;
+  padding: 10px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  background: #ffffff;
+  transform: rotate(0deg);
+}
+.social-sidebar ul li a {
+  color: #000;
+  font: 400 20px/1.5 "SF Pro Display", sans-serif;
 }/*# sourceMappingURL=main.css.map */
