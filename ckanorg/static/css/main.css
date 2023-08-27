@@ -2193,6 +2193,12 @@ ul.blog-nav li.last {
   font-size: 13px;
 }
 
+.rss {
+  position: absolute;
+  margin-top: -10px;
+  margin-left: 5px;
+}
+
 .government-working-group {
   background: #F3F3F3;
   border: 1px solid #DDDDDD;
@@ -4180,8 +4186,6 @@ img.full-width {
     background: linear-gradient(to right, rgba(255, 255, 255, 0.8) 1%, rgba(255, 255, 255, 0.8) 85%, rgb(255, 255, 255) 86%, rgb(255, 255, 255) 100%);
     z-index: 1;
   }
-}
-@media all and (max-width: 1024px) {
   .nav .nav-menu > li {
     font-size: 16px;
     display: block;
@@ -4192,8 +4196,6 @@ img.full-width {
     font-size: 16px;
     line-height: 20px;
   }
-}
-@media all and (max-width: 1024px) {
   .nav.nav-active .nav-menu:before {
     display: block;
   }
