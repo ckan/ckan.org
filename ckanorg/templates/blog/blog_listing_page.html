@@ -23,7 +23,16 @@
                         <section class="section-banner">
                             <div class="container-sm t-center">
                                 <h1>{{ page.title }}</h1>
-                                <p class="body_extra_large">{{ page.page_caption }}</p>
+                                <p class="body_extra_large">
+                                    {{ page.page_caption }}
+                                    {% if request.path == "/blog" %}
+                                        <a class="rss" href="{% url 'blog_feed_rss' %}"
+                                            title="RSS feed"
+                                            target="_blank">
+                                            <i class="fa fa-rss"></i>
+                                        </a>
+                                    {% endif %}
+                                </p>
                             </div>
 
                             <div class="container-sm t-center">
