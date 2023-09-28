@@ -45,7 +45,7 @@
                     {% if page.tags.all %}
                         <li>
                             {% for tag in page.tags.all %}
-                                <a href="{% url 'tag_post_list' tag %}">{{ tag }}{% if page.tags.all|length > 1 and not forloop.last %}, {% endif %}</a>
+                                <a href="{% url 'tag_post_list' tag|slugify %}">{{ tag }}{% if page.tags.all|length > 1 and not forloop.last %}, {% endif %}</a>
                             {% endfor %}
                         </li>
                     {% endif %}
