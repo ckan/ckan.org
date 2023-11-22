@@ -1,4 +1,3 @@
-from datetime import datetime, timezone
 from django.conf import settings
 from django.utils.timezone import now
 from django.contrib.auth.models import User
@@ -8,19 +7,18 @@ from django.dispatch import receiver
 
 from django import forms
 from django.db import models
-from django.core.validators import MinValueValidator, ValidationError
-from django.core.paginator import (
-    EmptyPage,
-    PageNotAnInteger,
-    Paginator
-)
+from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.models import Page
 from wagtail.fields import StreamField
 from wagtail import blocks
-from wagtailmetadata.models import MetadataPageMixin
 from wagtail.search import index
+
+from wagtailcodeblock.blocks import CodeBlock
+from wagtailmetadata.models import MetadataPageMixin
 
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey
@@ -28,17 +26,14 @@ from modelcluster.fields import ParentalKey
 from taggit.models import TaggedItemBase
 
 from .blocks import ImageWithCaption
-from wagtailcodeblock.blocks import CodeBlock
-
-import events
 
 
 COMMON_PANELS = (
-    FieldPanel('slug'),
-    FieldPanel('seo_title'),
-    FieldPanel('search_description'),
-    FieldPanel('keywords'),
-    FieldPanel('search_image'),
+    FieldPanel("slug"),
+    FieldPanel("seo_title"),
+    FieldPanel("search_description"),
+    FieldPanel("keywords"),
+    FieldPanel("search_image"),
 )
 
 
@@ -53,24 +48,11 @@ def check_username_exists(value):
 
 class Profile(models.Model):
     user = models.OneToOneField(
-        User, 
-        null=True,
-        blank=True,
-        on_delete=models.CASCADE,
-        related_name='profile'
+        User, null=True, blank=True, on_delete=models.CASCADE, related_name="profile"
     )
-    bio = models.TextField(
-        max_length=500, 
-        blank=True
-    )
-    company = models.CharField(
-        max_length=100, 
-        blank=True
-    )
-    location = models.CharField(
-        max_length=30, 
-        blank=True
-    )
+    bio = models.TextField(max_length=500, blank=True)
+    company = models.CharField(max_length=100, blank=True)
+    location = models.CharField(max_length=30, blank=True)
     site = models.CharField(
         null=True,
         blank=True,
@@ -78,37 +60,37 @@ class Profile(models.Model):
     )
     linkedin = models.CharField(
         null=True,
-        blank=True,        
+        blank=True,
         max_length=512,
     )
     github = models.CharField(
         null=True,
-        blank=True,        
+        blank=True,
         max_length=512,
     )
-       
+
     def __str__(self):
         return self.user.username
-    
+
     panels = [
         MultiFieldPanel(
             [
-                FieldPanel('user'),
-                FieldPanel('bio'),
-                FieldPanel('company'),
-                FieldPanel('location'),
-                FieldPanel('site'),
-                FieldPanel('linkedin'),
-                FieldPanel('github'),
+                FieldPanel("user"),
+                FieldPanel("bio"),
+                FieldPanel("company"),
+                FieldPanel("location"),
+                FieldPanel("site"),
+                FieldPanel("linkedin"),
+                FieldPanel("github"),
             ],
-            heading = "User profile"
+            heading="User profile",
         )
     ]
-    
+
     class Meta:
         verbose_name = "Profile"
         verbose_name_plural = "Profiles"
-    
+
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
@@ -117,45 +99,55 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 
 class PostCategoryPage(models.Model):
-
     category_image = models.ForeignKey(
-        'wagtailimages.Image',
+        "wagtailimages.Image",
         blank=True,
         null=True,
-        related_name='+',
+        related_name="+",
         help_text="Image",
         on_delete=models.SET_NULL,
     )
-    category_title = models.CharField(
-        max_length=512,
-        null=True,
-        blank=True
-    )
-    description = StreamField([
-        ('paragraph', blocks.RichTextBlock(
-            features=[
-                'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-                'bold', 'italic', 'link', 'ol', 'ul', 'hr'
-            ])),
+    category_title = models.CharField(max_length=512, null=True, blank=True)
+    description = StreamField(
+        [
+            (
+                "paragraph",
+                blocks.RichTextBlock(
+                    features=[
+                        "h1",
+                        "h2",
+                        "h3",
+                        "h4",
+                        "h5",
+                        "h6",
+                        "bold",
+                        "italic",
+                        "link",
+                        "ol",
+                        "ul",
+                        "hr",
+                    ]
+                ),
+            ),
         ],
         null=True,
         blank=True,
-        use_json_field=True
+        use_json_field=True,
     )
-    
+
     def __str__(self):
         return self.category_title
 
     panels = [
         MultiFieldPanel(
             [
-                FieldPanel('category_title'),
-                FieldPanel('category_image'),
-                FieldPanel('description')
+                FieldPanel("category_title"),
+                FieldPanel("category_image"),
+                FieldPanel("description"),
             ]
         )
     ]
-    
+
     class Meta:
         verbose_name = "Category"
         verbose_name_plural = "Categories"
@@ -163,61 +155,65 @@ class PostCategoryPage(models.Model):
 
 class BlogPageTag(TaggedItemBase):
     content_object = ParentalKey(
-        'BlogPostPage',
-        related_name='tagged_items',
+        "BlogPostPage",
+        related_name="tagged_items",
         on_delete=models.CASCADE,
     )
 
 
 class BlogListingPage(MetadataPageMixin, Page):
-    parent_page_types = ['home.HomePage']
-    subpage_types = ['blog.BlogPostPage']
+    parent_page_types = ["home.HomePage"]
+    subpage_types = ["blog.BlogPostPage"]
     max_count = 1
 
     page_subtitle = models.CharField(
         max_length=128,
         null=True,
         blank=True,
-        help_text='Page subtitle. Goes under the header.',
-
+        help_text="Page subtitle. Goes under the header.",
     )
     page_caption = models.CharField(
         max_length=512,
         null=True,
         blank=True,
-        help_text='Page caption. Goes under the page subtitle.',
+        help_text="Page caption. Goes under the page subtitle.",
     )
     posts_per_page = models.PositiveIntegerField(
-        default = 1,
-        validators=[MinValueValidator(1)]
+        default=1, validators=[MinValueValidator(1)]
     )
-    keywords = models.CharField(
-        max_length=512,
-        blank=True,
-        null=True
-    )
+    keywords = models.CharField(max_length=512, blank=True, null=True)
 
     promote_panels = [
-            MultiFieldPanel(COMMON_PANELS, heading="Common page configuration"),
-        ]
-    
-    content_panels = Page.content_panels + [
-        FieldPanel('page_subtitle'),
-        FieldPanel('page_caption'),
-        FieldPanel('posts_per_page'),
+        MultiFieldPanel(COMMON_PANELS, heading="Common page configuration"),
     ]
 
-    def get_context(self,request, *args, **kwargs):
+    content_panels = Page.content_panels + [
+        FieldPanel("page_subtitle"),
+        FieldPanel("page_caption"),
+        FieldPanel("posts_per_page"),
+    ]
+
+    def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        all_posts = BlogPostPage.objects.live().public().order_by('-last_published_at')
-        featured_posts = BlogPostPage.objects.live().public(
-            ).filter(featured=True).order_by('-last_published_at')
+        all_posts = BlogPostPage.objects.live().public().order_by("-last_published_at")
+        featured_posts = (
+            BlogPostPage.objects.live()
+            .public()
+            .filter(featured=True)
+            .order_by("-last_published_at")
+        )
         featured_post = featured_posts[0] if featured_posts else all_posts[0]
-        context['featured_post'] = featured_post
-        context['categories'] = PostCategoryPage.objects.all().order_by('category_title')
-        all_posts = all_posts.exclude(id__in=[featured_post.id,])
+        context["featured_post"] = featured_post
+        context["categories"] = PostCategoryPage.objects.all().order_by(
+            "category_title"
+        )
+        all_posts = all_posts.exclude(
+            id__in=[
+                featured_post.id,
+            ]
+        )
         paginator = Paginator(all_posts, self.posts_per_page)
-        page = request.GET.get('page')
+        page = request.GET.get("page")
         try:
             posts = paginator.page(page)
         except PageNotAnInteger:
@@ -225,27 +221,25 @@ class BlogListingPage(MetadataPageMixin, Page):
         except EmptyPage:
             posts = paginator.page(paginator.num_pages)
         context["posts"] = posts
-        context['recaptcha_sitekey'] = settings.RECAPTCHA_PUBLIC_KEY
+        context["recaptcha_sitekey"] = settings.RECAPTCHA_PUBLIC_KEY
         return context
 
 
 class RadioSelectBlock(blocks.ChoiceBlock):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.field.widget = forms.RadioSelect(
-            choices=self.field.widget.choices
-        )
+        self.field.widget = forms.RadioSelect(choices=self.field.widget.choices)
+
 
 class BlogPostPage(MetadataPageMixin, Page):
-
-    parent_page_types = ['blog.BlogListingPage']
+    parent_page_types = ["blog.BlogListingPage"]
     subpage_types = []
 
     main_image = models.ForeignKey(
-        'wagtailimages.Image',
+        "wagtailimages.Image",
         blank=True,
         null=True,
-        related_name='+',
+        related_name="+",
         help_text="Image",
         on_delete=models.SET_NULL,
     )
@@ -253,93 +247,100 @@ class BlogPostPage(MetadataPageMixin, Page):
         max_length=255,
         null=True,
         blank=True,
-        help_text='If value is empty, it will be filled by the current User.'
+        help_text="If value is empty, it will be filled by the current User.",
     )
     created = models.DateTimeField(
         blank=True,
         default=now,
     )
-    post_title = models.CharField(
-        max_length=512,
-        null=True,
-        blank=True
-    )
+    post_title = models.CharField(max_length=512, null=True, blank=True)
     category = models.ForeignKey(
-        PostCategoryPage, 
+        PostCategoryPage,
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='post_category'
+        related_name="post_category",
     )
-    featured = models.BooleanField(
-        null=True,
-        default=False
-    )
-    imported = models.BooleanField(
-        null=True,
-        default=False
-    )
+    featured = models.BooleanField(null=True, default=False)
+    imported = models.BooleanField(null=True, default=False)
     post_subtitle = models.CharField(
         max_length=512,
         null=True,
         blank=True,
     )
-    keywords = models.CharField(
-        max_length=512,
+    keywords = models.CharField(max_length=512, blank=True, null=True)
+    tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
+    body = StreamField(
+        [
+            ("html", blocks.RawHTMLBlock()),
+            (
+                "paragraph",
+                blocks.RichTextBlock(
+                    features=[
+                        "h1",
+                        "h2",
+                        "h3",
+                        "h4",
+                        "h5",
+                        "h6",
+                        "bold",
+                        "italic",
+                        "link",
+                        "ol",
+                        "ul",
+                        "hr",
+                        "image",
+                        "code",
+                        "blockquote",
+                    ]
+                ),
+            ),
+            ("code", CodeBlock(label="Code")),
+            ("post_image", ImageWithCaption()),
+        ],
+        null=True,
         blank=True,
-        null=True
-    )    
-    tags = ClusterTaggableManager(
-        through=BlogPageTag,
-        blank=True
-    )
-    body = StreamField([
-        ('html', blocks.RawHTMLBlock()),
-        ('paragraph', blocks.RichTextBlock(
-            features=[
-                'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-                'bold', 'italic', 'link', 'ol', 'ul', 'hr', 'image',
-                'code', 'blockquote',
-            ])),
-        ('code', CodeBlock(label='Code')),
-        ('post_image', ImageWithCaption()),
-    ],
-    null=True,
-    blank=True,
-    use_json_field=True
+        use_json_field=True,
     )
 
     search_fields = Page.search_fields + [
-        index.SearchField('post_title'),
-        index.SearchField('post_subtitle'),
-        index.SearchField('body'),
-        index.FilterField('author'),
-        index.FilterField('created'),
+        index.SearchField("post_title"),
+        index.SearchField("post_subtitle"),
+        index.FilterField("author"),
+        index.FilterField("created"),
     ]
 
     promote_panels = [
-            MultiFieldPanel(COMMON_PANELS, heading="Common page configuration"),
-        ]
-
-    content_panels = Page.content_panels + [
-        FieldPanel('main_image'),
-        FieldPanel('category'),
-        FieldPanel('post_title'),
-        FieldPanel('featured', widget=forms.CheckboxInput),
-        FieldPanel('post_subtitle'),
-        FieldPanel('tags'),
-        FieldPanel('body'),
-        FieldPanel('author')
+        MultiFieldPanel(COMMON_PANELS, heading="Common page configuration"),
     ]
 
-    def get_context(self,request, *args, **kwargs):
+    content_panels = Page.content_panels + [
+        FieldPanel("main_image"),
+        FieldPanel("category"),
+        FieldPanel("post_title"),
+        FieldPanel("featured", widget=forms.CheckboxInput),
+        FieldPanel("post_subtitle"),
+        FieldPanel("tags"),
+        FieldPanel("body"),
+        FieldPanel("author"),
+    ]
+
+    def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['last_posts'] = BlogPostPage.objects.live().public(
-            ).exclude(id__in=[self.id,]).order_by('-created')[:2]
-        author = context.get('page').author
+        context["last_posts"] = (
+            BlogPostPage.objects.live()
+            .public()
+            .exclude(
+                id__in=[
+                    self.id,
+                ]
+            )
+            .order_by("-created")[:2]
+        )
+        author = context.get("page").author
         if author:
             author_user = User.objects.filter(username=author).first()
             if author_user:
-                context['blog_author'] = author_user
-        context['recaptcha_sitekey'] = settings.RECAPTCHA_PUBLIC_KEY
+                context["blog_author"] = author_user
+        context["recaptcha_sitekey"] = settings.RECAPTCHA_PUBLIC_KEY
         return context
