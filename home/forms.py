@@ -1,13 +1,20 @@
 from allauth.account.forms import SignupForm, LoginForm, PasswordField
 from django import forms
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
-from wagtailcaptcha.models import WagtailCaptchaEmailForm
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV3
- 
- 
+
+
 class CkanorgSignupForm(SignupForm):
+    """Generate ckan.org Signup form
+
+    Args:
+        SignupForm (class): class inherited from 'allauth' package
+
+    Returns:
+        object: Signup form object
+    """
     first_name = forms.CharField(
         max_length=30,
         label='First Name',
@@ -16,7 +23,6 @@ class CkanorgSignupForm(SignupForm):
         max_length=30,
         label='Last Name',
         widget=forms.TextInput(attrs={'placeholder': 'Last Name'}))
- 
     password1 = PasswordField(label=_("Password"))
     password2 = PasswordField(label=_("Password (again)")) 
     captcha = ReCaptchaField(
@@ -36,6 +42,14 @@ class CkanorgSignupForm(SignupForm):
 
 
 class CkanorgLoginForm(LoginForm):
+    """Generate ckan.org Login form
+
+    Args:
+        LoginForm (class): class inherited from 'allauth' package
+
+    Returns:
+        object: Login form object
+    """
     captcha = ReCaptchaField(
         label=False,
         widget=ReCaptchaV3(
@@ -44,5 +58,6 @@ class CkanorgLoginForm(LoginForm):
             }
         )
     )
+
     def login(self, *args, **kwargs):
         return super(CkanorgLoginForm, self).login(*args, **kwargs)
