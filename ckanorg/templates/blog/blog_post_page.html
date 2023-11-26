@@ -33,7 +33,7 @@
                                     {{ page.author }}
                                 {% endif %}
                             </li>
-                        {% else %}                       
+                        {% else %}
                             {% if page.owner %}
                                 <li><a href="{% url 'user_post_list' page.owner %}" title="Author: {{ page.owner.first_name}} {{ page.owner.last_name}}&#013;Email: {{ page.owner.email }}&#013;Company: {{ page.owner.profile.company }}">
                                     {{page.owner.first_name}}
@@ -50,7 +50,7 @@
                         </li>
                     {% endif %}
                     {% block date %}
-                        <li>{{ page.last_published_at|date:"d M Y" }}</li>
+                        <li>{{ page.first_published_at|date:"d M Y" }}</li>
                     {% endblock %}
                     <li>
                         <div class="share-container">
