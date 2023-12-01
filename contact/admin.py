@@ -1,43 +1,43 @@
-from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, modeladmin_register
+from wagtail.snippets.models import register_snippet
+from wagtail.snippets.views.snippets import SnippetViewSet, SnippetViewSetGroup
+from wagtail.admin.ui.tables import BooleanColumn
 
-from .models import Email, ContactPage, Message
+from .models import Email, Message
 
 
-class EmailAdmin(ModelAdmin):
+class EmailAdmin(SnippetViewSet):
     model = Email
-    menu_label = 'Emails'
-    menu_icon = 'mail'
-    menu_order = 290
-    add_to_settings_menu = False
-    exclude_from_explorer = False
-    list_display = ['submitted', 'form_name', 'address', 'full_name', 'updated', 'subscribed']
-    list_filter = ['form_name', 'submitted', 'subscribed']
-    search_fields = ['submitted', 'form_name', 'address']
+    menu_label = "Emails"
+    icon = "mail"
+    menu_order = 260
+    list_display = (
+        "form_name",
+        "address",
+        "full_name",
+        "submitted",
+        "updated",
+        BooleanColumn("subscribed"),
+    )
+    ordering = "-updated"
+    list_export = ["full_name", "address"]
+    list_filter = ["form_name", "submitted", "subscribed"]
+    search_fields = ["address", "full_name"]
 
 
-class ContactPageAdmin(ModelAdmin):
-    model = ContactPage
-    menu_label = "Forms"
-    menu_icon = 'form'
-    menu_order = 200
-    list_display = ('title',)
-    empty_value = 'No category'
-
-
-class MessageAdmin(ModelAdmin):
+class MessageAdmin(SnippetViewSet):
     model = Message
     menu_label = "Messages"
-    menu_icon = 'list-ul'
+    icon = "list-ul"
     menu_order = 292
-    list_display = ('title', 'slug', 'type')
-    list_filter = ('type',)
-    empty_value = 'No category'
+    list_display = ("title", "slug", "type")
+    list_filter = ("type",)
+    empty_value = "No category"
 
 
-
-@modeladmin_register
-class ContactGroup(ModelAdminGroup):
-    menu_label = 'Contacts'
-    menu_icon = 'folder-open-inverse'
-    menu_order = 170  
-    items = (ContactPageAdmin, EmailAdmin, MessageAdmin)
+@register_snippet
+class ContactGroup(SnippetViewSetGroup):
+    items = (EmailAdmin, MessageAdmin)
+    icon = "folder-open-inverse"
+    menu_label = "Contacts"
+    menu_name = "contacts"
+    menu_order = 170
