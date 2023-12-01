@@ -1,17 +1,15 @@
-from wagtail.contrib.modeladmin.options import (
-    ModelAdmin,
-    modeladmin_register
-)
+from wagtail.snippets.models import register_snippet
+from wagtail.snippets.views.snippets import SnippetViewSet
 
 from .models import Manager
 
-@modeladmin_register
-class ManagerAdmin(ModelAdmin):
+
+@register_snippet
+class ManagerAdmin(SnippetViewSet):
     model = Manager
-    menu_label = 'Managers'
-    menu_icon = 'group'
+    menu_label = "Managers"
+    icon = "group"
     menu_order = 290
-    add_to_settings_menu = False
-    exclude_from_explorer = False
-    list_display = ['name', 'email']
-    search_fields = ['name', 'email']
+    add_to_settings_menu = True
+    list_display = ["name", "email"]
+    search_fields = ["name", "email"]

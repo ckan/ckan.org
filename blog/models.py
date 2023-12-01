@@ -305,9 +305,11 @@ class BlogPostPage(MetadataPageMixin, Page):
 
     search_fields = Page.search_fields + [
         index.SearchField("post_title"),
+        index.AutocompleteField("post_title"),
         index.SearchField("post_subtitle"),
+        index.AutocompleteField("post_subtitle"),
         index.FilterField("author"),
-        index.FilterField("created"),
+        index.AutocompleteField("author"),
     ]
 
     promote_panels = [

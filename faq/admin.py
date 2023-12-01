@@ -1,33 +1,32 @@
-from django.contrib import admin
-
-from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, modeladmin_register
+from wagtail.snippets.models import register_snippet
+from wagtail.snippets.views.snippets import SnippetViewSet, SnippetViewSetGroup
 
 from .models import FaqCategoryPage, FaqQuestionPage
 
 
-class FaqCategoryPageAdmin(ModelAdmin):
+class FaqCategoryPageAdmin(SnippetViewSet):
     model = FaqCategoryPage
     menu_label = "Categories"
-    menu_icon = 'list-ul'
+    icon = "list-ul"
     menu_order = 100
-    list_display = ('name', )
-    search_fields = ('name',) 
+    list_display = ("name",)
+    search_fields = ("name",)
 
 
-class FaqQuestionPageAdmin(ModelAdmin):
+class FaqQuestionPageAdmin(SnippetViewSet):
     model = FaqQuestionPage
     menu_label = "Questions"
-    menu_icon = 'help'
+    icon = "help"
     menu_order = 200
-    list_display = ('question', 'category')
-    list_filter = ('category',)
-    search_fields = ('question',) 
-    empty_value = 'No category'
+    list_display = ("question", "category")
+    list_filter = ("category",)
+    search_fields = ("question",)
+    empty_value = "No category"
 
 
-@modeladmin_register
-class FaqGroup(ModelAdminGroup):
-    menu_label = 'FAQ'
-    menu_icon = 'folder-open-inverse'
-    menu_order = 160  
+@register_snippet
+class FaqGroup(SnippetViewSetGroup):
+    menu_label = "FAQ"
+    icon = "folder-open-inverse"
+    menu_order = 160
     items = (FaqCategoryPageAdmin, FaqQuestionPageAdmin)
