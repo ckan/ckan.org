@@ -1,17 +1,21 @@
 from django.conf import settings
 from django.utils.timezone import now
 from django.contrib.auth.models import User
-
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
 from django import forms
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail.admin.panels import (
+    FieldPanel,
+    MultiFieldPanel,
+    TabbedInterface,
+    ObjectList,
+)
+from wagtail.admin.widgets.slug import SlugInput
 from wagtail.models import Page
 from wagtail.fields import StreamField
 from wagtail import blocks
@@ -29,7 +33,7 @@ from .blocks import ImageWithCaption
 
 
 COMMON_PANELS = (
-    FieldPanel("slug"),
+    FieldPanel("slug", widget=SlugInput),
     FieldPanel("seo_title"),
     FieldPanel("search_description"),
     FieldPanel("keywords"),
@@ -253,7 +257,7 @@ class BlogPostPage(MetadataPageMixin, Page):
         blank=True,
         default=now,
     )
-    post_title = models.CharField(max_length=512, null=True, blank=True)
+    post_title = models.CharField(max_length=512, null=False, blank=False)
     category = models.ForeignKey(
         PostCategoryPage,
         null=True,
@@ -317,15 +321,35 @@ class BlogPostPage(MetadataPageMixin, Page):
     ]
 
     content_panels = Page.content_panels + [
+        FieldPanel("post_title"),
+        FieldPanel("post_subtitle"),
         FieldPanel("main_image"),
         FieldPanel("category"),
-        FieldPanel("post_title"),
-        FieldPanel("featured", widget=forms.CheckboxInput),
-        FieldPanel("post_subtitle"),
         FieldPanel("tags"),
+        FieldPanel("featured", widget=forms.CheckboxInput),
         FieldPanel("body"),
         FieldPanel("author"),
     ]
+
+    settings_panels = Page.settings_panels + [
+        FieldPanel("id", read_only=True),
+        FieldPanel("live", read_only=True),
+        FieldPanel("owner"),
+        FieldPanel("content_type"),
+        FieldPanel("locked", read_only=True),
+        FieldPanel("first_published_at", read_only=True),
+        FieldPanel("last_published_at", read_only=True),
+        FieldPanel("latest_revision_created_at", read_only=True),
+        FieldPanel("show_in_menus"),
+    ]
+
+    edit_handler = TabbedInterface(
+        [
+            ObjectList(content_panels, heading="Content"),
+            ObjectList(promote_panels, heading="Promote"),
+            ObjectList(settings_panels, heading="Settings"),
+        ]
+    )
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)

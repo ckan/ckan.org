@@ -2,7 +2,7 @@ from wagtail.snippets.models import register_snippet
 from wagtail.snippets.views.snippets import SnippetViewSet, SnippetViewSetGroup
 
 from .models import Profile, BlogPostPage, PostCategoryPage
-from .views import ProfileCreateView
+from .views import ProfileCreateView, PostCreateView
 
 
 @register_snippet
@@ -40,6 +40,8 @@ class BlogPostPageAdmin(SnippetViewSet):
     ordering = "-first_published_at"
     list_filter = ("category", "live", "created", "last_published_at")
     search_fields = ("post_title", "author")
+    add_view_class = PostCreateView
+    
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
