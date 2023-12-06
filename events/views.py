@@ -1,16 +1,16 @@
 from wagtail.snippets.views.snippets import CreateView
 from wagtail.log_actions import log
 
-from .models import FaqPage, FaqCategoryPage, FaqQuestionPage
+from .models import EventListingPage
 
 
-class FaqCreateView(CreateView):
+class EventCreateView(CreateView):
     def save_instance(self):
         """
         Called after the form is successfully validated - saves the object to the db
         and returns the new object.
         """
-        parent = FaqPage.objects.first()
+        parent = EventListingPage.objects.first()
 
         if self.draftstate_enabled:
             instance = self.form.save(commit=False)
