@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from django.db import models
 from django.shortcuts import render
 from django.template.loader import render_to_string
@@ -18,6 +16,7 @@ from wagtail.admin.panels import FieldPanel, InlinePanel, PageChooserPanel, Help
 from wagtailcache.cache import WagtailCacheMixin
 
 from managers.models import Manager
+from contact.decorators import check_recaptcha
 
 import mailchimp_marketing as MailchimpMarketing
 from mailchimp_marketing.api_client import ApiClientError
@@ -76,6 +75,7 @@ class FormField(AbstractFormField):
         related_name='form_fields',
     )
 
+
 def parse_contact_form(message):
     out = {}
     items = message.split("\n")
@@ -87,6 +87,7 @@ def parse_contact_form(message):
             ".", "_").replace(
             "?", "").strip("_").lower()] = i[1]
     return out
+
 
 def send_contact_info(request, member_info:dict):
     """Send contact info to MailChimp audience/list
@@ -170,10 +171,12 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
             self.subject = f'{self.subject} Sender name: {sender_name}'
         send_mail(self.subject, plain_message, addresses, self.from_address, html_message=html_message)
 
+    @check_recaptcha(required_score=0.85)
     def serve(self, request, *args, **kwargs):
         if request.method == 'POST':
             form = self.get_form(request.POST, request.FILES, page=self, user=request.user)
-            if form.is_valid():
+
+            if form.is_valid() and request.recaptcha_is_valid:
                 form_submission = self.process_form_submission(form)
                 email = form.cleaned_data.get("your_e_mail_address", '')
                 name = form.cleaned_data.get("your_name", '')
@@ -202,10 +205,11 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
                 send_contact_info(request, member_info)
 
                 return self.render_landing_page(request, form_submission, *args, **kwargs)
-            elif form.errors.get('wagtailcaptcha', '') != '':
+            else:
                 return render(request, "recaptcha_error.html")
         else:
             form = self.get_form(page=self, user=request.user)
+
         context = self.get_context(request)
         context['form'] = form
         return TemplateResponse(request, self.get_template(request), context)

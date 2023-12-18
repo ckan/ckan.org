@@ -4,12 +4,12 @@
 
 {% block content %}
     <div class="message_404_500">
-        <h2>reCaptcha field is required.</h2>
+        <h2>Invalid reCAPTCHA. Please try again.</h2>
         <h3><a href="/">Home</a></h3>
     </div>
     <script>
-         setTimeout(function(){
+        setTimeout(function(){
             window.location.href = '/';
-         }, 5000);
+        }, 5000);
     </script>
 {% endblock %}
