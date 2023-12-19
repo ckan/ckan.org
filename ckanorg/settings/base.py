@@ -71,7 +71,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'captcha',
-    'wagtailcaptcha',
+    'django_recaptcha'
+
 ]
 
 SITE_ID = 1
@@ -266,3 +267,6 @@ WAGTAIL_CODE_BLOCK_LANGUAGES = (
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 CSRF_TRUSTED_ORIGINS = ['https://ckan.org', 'https://devweb.ckan-org.links.com.au']
+
+CAPTCHA_CHALLENGE_FUNCT = "captcha.helpers.math_challenge"
+CAPTCHA_NOISE_FUNCTIONS = ('captcha.helpers.noise_null',)
