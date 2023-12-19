@@ -34,10 +34,8 @@
                     </main>
                     <footer class="modal__footer">
                         <input id="message-text" type="hidden" value="{{form_page.thank_you_text|safe}}">
-                        <script src='https://www.google.com/recaptcha/api.js'></script>
                         <button id="modal-btn-{{form_page.pk}}"
-                                class="modal__btn g-recaptcha"
-                                data-sitekey="{{ settings.home.ReCaptchaSettings.public_key }}"
+                                class="modal__btn"
                                 data-callback="onContactSubmit_{{form_page.pk}}"
                                 data-action="submit"
                                 disabled>
@@ -73,6 +71,13 @@
             });
 
             
+        });
+
+        $('.captcha').click(function () {
+            $.getJSON("/captcha/refresh/", function (result) {
+                $('.captcha').attr('src', result['image_url']);
+                $('#id_captcha_0').val(result['key'])
+            });
         });
 
         function onContactSubmit_{{form_page.pk}}(token) {

@@ -16,7 +16,7 @@ from wagtail.admin.panels import FieldPanel, InlinePanel, PageChooserPanel, Help
 from wagtailcache.cache import WagtailCacheMixin
 
 from managers.models import Manager
-from contact.decorators import check_recaptcha
+from contact.forms import WagtailCaptchaEmailForm
 
 import mailchimp_marketing as MailchimpMarketing
 from mailchimp_marketing.api_client import ApiClientError
@@ -111,7 +111,7 @@ def send_contact_info(request, member_info:dict):
             print("An exception occurred: {}".format(error.text))
 
 
-class ContactPage(WagtailCacheMixin, AbstractEmailForm):
+class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -171,12 +171,12 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
             self.subject = f'{self.subject} Sender name: {sender_name}'
         send_mail(self.subject, plain_message, addresses, self.from_address, html_message=html_message)
 
-    @check_recaptcha(required_score=0.85)
+    # @check_recaptcha(required_score=0.85)
     def serve(self, request, *args, **kwargs):
         if request.method == 'POST':
             form = self.get_form(request.POST, request.FILES, page=self, user=request.user)
 
-            if form.is_valid() and request.recaptcha_is_valid:
+            if form.is_valid():
                 form_submission = self.process_form_submission(form)
                 email = form.cleaned_data.get("your_e_mail_address", '')
                 name = form.cleaned_data.get("your_name", '')
