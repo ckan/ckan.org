@@ -2175,6 +2175,8 @@ ul.blog-nav li.last {
 }
 .blog-subscribe .blog-subscribe-content .blog-subscribe-form, .blog-subscribe .blog-subscribe-content .blog-unsubscribe-form {
   margin-top: 30px;
+  position: relative;
+  z-index: 1000;
 }
 .blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=text], .blog-subscribe .blog-subscribe-content .blog-unsubscribe-form input[type=text] {
   background-color: transparent;
