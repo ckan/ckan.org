@@ -15,6 +15,7 @@ from wagtail.admin.panels import FieldPanel, InlinePanel, PageChooserPanel, Help
 from wagtailcache.cache import WagtailCacheMixin
 
 from managers.models import Manager
+from contact.forms import WagtailCaptchaEmailForm
 
 import mailchimp_marketing as MailchimpMarketing
 from mailchimp_marketing.api_client import ApiClientError
@@ -190,6 +191,7 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
             html_message=html_message,
         )
 
+    # @check_recaptcha(required_score=0.85)
     def serve(self, request, *args, **kwargs):
         if request.method == "POST":
             form = self.get_form(
@@ -228,6 +230,7 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
                 return render(request, "recaptcha_error.html")
         else:
             form = self.get_form(page=self, user=request.user)
+
         context = self.get_context(request)
         context["form"] = form
         return TemplateResponse(request, self.get_template(request), context)

@@ -489,6 +489,8 @@ ul.blog-nav {
     }
     .blog-subscribe-form, .blog-unsubscribe-form {
       margin-top: 30px;
+      position: relative;
+      z-index: 1000;
       input[type=text] {
         background-color: transparent;
         color: #333;

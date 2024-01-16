@@ -29,6 +29,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('blog/', include('blog.urls')),
     path('ckan/', include('ckan_pages.urls')),
+    path('captcha/', include('captcha.urls')),
 ]
 
 if settings.DEBUG:

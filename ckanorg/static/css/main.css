@@ -330,34 +330,34 @@ template {
   margin-top: -15px;
   margin-bottom: -20px;
 }
-.modal__container .contact-modal p {
+.modal__container .contact-modal main p {
   margin-bottom: 10px;
 }
-.modal__container .contact-modal p label {
+.modal__container .contact-modal main p label {
   float: left;
   text-align: left;
 }
-.modal__container .contact-modal p label.checkbox-label {
+.modal__container .contact-modal main p label.checkbox-label {
   padding-left: 20px;
   margin-bottom: 10px;
   text-align: justify;
 }
-.modal__container .contact-modal p input[type=text], .modal__container .contact-modal p input[type=email] {
+.modal__container .contact-modal main p input[type=text], .modal__container .contact-modal main p input[type=email] {
   height: 30px;
   margin-bottom: 10px;
   padding: 5px;
   font-size: 16px;
 }
-.modal__container .contact-modal p textarea {
+.modal__container .contact-modal main p textarea {
   margin-bottom: 10px;
   font-size: 16px;
   height: 80px;
 }
-.modal__container .contact-modal p input[type=checkbox] {
+.modal__container .contact-modal main p input[type=checkbox] {
   position: absolute;
   left: 30px;
 }
-.modal__container .contact-modal p select {
+.modal__container .contact-modal main p select {
   box-sizing: border-box;
   font-weight: 400;
   line-height: 1.3;
@@ -377,22 +377,36 @@ template {
   background-position: right 5px top 5px;
   font-size: 16px;
 }
-.modal__container .contact-modal p.checkbox-container {
+.modal__container .contact-modal main p.checkbox-container {
   display: flex;
 }
-.modal__container .contact-modal ul {
+.modal__container .contact-modal main > p:last-of-type {
+  display: inline-flex;
+}
+.modal__container .contact-modal main > div:not(.modal-intro) {
+  display: inline-flex;
+  float: inline-start;
+  margin: 10px 0;
+}
+.modal__container .contact-modal main > div:not(.modal-intro) div {
+  margin-right: 20px;
+}
+.modal__container .contact-modal main > div:not(.modal-intro) div input[type=radio] {
+  vertical-align: text-bottom;
+}
+.modal__container .contact-modal main ul {
   display: inline-flex;
   list-style-type: none;
   float: left;
   padding: 0;
 }
-.modal__container .contact-modal ul li {
+.modal__container .contact-modal main ul li {
   margin-right: 10px;
 }
-.modal__container .contact-modal .modal-intro {
+.modal__container .contact-modal main .modal-intro {
   font-size: 12px;
 }
-.modal__container .contact-modal .modal-intro p {
+.modal__container .contact-modal main .modal-intro p {
   text-align: justify;
 }
 
@@ -2161,6 +2175,8 @@ ul.blog-nav li.last {
 }
 .blog-subscribe .blog-subscribe-content .blog-subscribe-form, .blog-subscribe .blog-subscribe-content .blog-unsubscribe-form {
   margin-top: 30px;
+  position: relative;
+  z-index: 1000;
 }
 .blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=text], .blog-subscribe .blog-subscribe-content .blog-unsubscribe-form input[type=text] {
   background-color: transparent;
@@ -2377,10 +2393,13 @@ ul.blog-nav li.last {
 }
 
 .article h1, .article h2, .article h3, .article h4, .article h5, .article h6, .article img {
-  padding: 50px 0 20px 0;
+  margin: 20px 0;
 }
 .article pre {
   margin: 50px 0;
+}
+.article p:not(:last-child) {
+  margin: 0 0 20px;
 }
 
 .more-posts-bottom {
@@ -4117,7 +4136,7 @@ img.full-width {
   .nav .nav-drop:after {
     z-index: 2;
     width: 100vw;
-    background: #0000EE;
+    background: #000;
     transition: width 1.1s cubic-bezier(0.075, 0.82, 0.165, 1) 0.6s;
   }
   .resize-active .nav .nav-drop {
@@ -4423,7 +4442,7 @@ img.full-width {
 .mobile .nav .nav-drop:after {
   z-index: 2;
   width: 100vw;
-  background: #0000EE;
+  background: #000;
   transition: width 1.1s cubic-bezier(0.075, 0.82, 0.165, 1) 0.6s;
 }
 .resize-active .mobile .nav .nav-drop {
