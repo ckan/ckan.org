@@ -2393,10 +2393,13 @@ ul.blog-nav li.last {
 }
 
 .article h1, .article h2, .article h3, .article h4, .article h5, .article h6, .article img {
-  padding: 50px 0 20px 0;
+  margin: 20px 0;
 }
 .article pre {
   margin: 50px 0;
+}
+.article p:not(:last-child) {
+  margin: 0 0 20px;
 }
 
 .more-posts-bottom {
