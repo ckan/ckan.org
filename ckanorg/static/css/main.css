@@ -4846,6 +4846,59 @@ img.full-width {
   background: #fff;
 }
 
+.search-sidebar {
+  position: fixed;
+  top: 35%;
+  left: -210px;
+  z-index: 999;
+}
+.search-sidebar ul {
+  padding: 0px;
+  transform: translate(0, 100%);
+}
+.search-sidebar ul li {
+  display: block;
+  margin: 5px;
+  background: rgba(0, 0, 0, 0.26);
+  width: 270px;
+  text-align: right;
+  padding: 10px 5px;
+  border-radius: 0px 30px 30px 0px;
+  transition: all 1s;
+}
+.search-sidebar ul li:hover {
+  transform: translate(80px, 0);
+  background: rgba(0, 0, 0, 0.5);
+}
+.search-sidebar ul li:hover button {
+  color: #000;
+  text-decoration: none;
+}
+.search-sidebar ul li:hover i {
+  color: #fff;
+  background: rgb(0, 0, 0);
+  transform: rotate(360deg);
+  transition: all 1s;
+}
+.search-sidebar ul li i {
+  margin-left: 10px;
+  color: #000;
+  background: #fff;
+  padding: 10px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  background: #ffffff;
+  transform: rotate(0deg);
+}
+.search-sidebar ul li button {
+  background: unset;
+  border: unset;
+  color: #000;
+  font: 400 20px/1.5 "SF Pro Display", sans-serif;
+}
+
 .social-sidebar {
   position: fixed;
   top: 35%;
