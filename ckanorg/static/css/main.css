@@ -720,6 +720,14 @@ p:not(:last-child) {
   border: 2px solid #333;
   color: #fff;
 }
+.btn.btn-dark-grey.btn-standard {
+  margin-top: 30px;
+  border-radius: 100px;
+  text-decoration: none;
+  width: 210px;
+  height: 50px;
+  justify-content: center;
+}
 .btn.btn-dark-grey svg path {
   fill: #fff;
 }
@@ -3663,6 +3671,11 @@ img.full-width {
   margin-bottom: 20px;
 }
 @media all and (min-width: 768px) {
+  .footer ul li {
+    width: 45%;
+  }
+}
+@media all and (min-width: 768px) {
   .footer ul {
     display: flex;
     align-items: center;
@@ -3680,6 +3693,12 @@ img.full-width {
 
 .social-container {
   position: relative;
+}
+.social-container p {
+  margin-bottom: 15px;
+}
+.social-container .row {
+  justify-content: left;
 }
 
 .auth-links {
@@ -3706,6 +3725,7 @@ img.full-width {
   right: 0;
 }
 .footer-btns li {
+  width: unset !important;
   margin: 0px !important;
   margin-left: 1% !important;
   display: inline;
@@ -3732,7 +3752,7 @@ img.full-width {
 }
 .footer-subscribe {
   padding: 0px 2px;
-  margin: -20px 0 20px;
+  margin-bottom: 20px;
 }
 .footer-subscribe span {
   margin-bottom: 5px;
