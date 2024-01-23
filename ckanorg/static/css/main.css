@@ -731,11 +731,11 @@ p:not(:last-child) {
 .btn.btn-dark-grey svg path {
   fill: #fff;
 }
-.btn.btn-dark-grey:active, .btn.btn-dark-grey:focus, .btn.btn-dark-grey:hover {
+.btn.btn-dark-grey:hover {
   background: #fff;
   color: #333;
 }
-.btn.btn-dark-grey:active svg path, .btn.btn-dark-grey:focus svg path, .btn.btn-dark-grey:hover svg path {
+.btn.btn-dark-grey:hover svg path {
   fill: #333;
 }
 .btn.btn-sm {
@@ -2665,6 +2665,12 @@ ul.blog-nav li.last {
   .main {
     padding-top: 64px;
   }
+}
+
+.block-lg {
+  padding-top: 50px;
+  background: #f4f4f4;
+  border: 1px solid #dddddd;
 }
 
 .flex-box {
