@@ -88,13 +88,19 @@
     background: $btn-grey-color;
     border: $btn-grey-border;
     color: $white;
+    &.btn-standard {
+      margin-top: 30px;
+      border-radius: 100px;
+      text-decoration: none;
+      width: 210px;
+      height: 50px;
+      justify-content: center;
+    }
     svg{
       path{
         fill: $white;
       }
     }
-    &:active,
-    &:focus,
     &:hover{
       background: $white;
       color: $btn-grey-color;

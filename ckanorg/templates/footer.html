@@ -10,16 +10,20 @@
                 <span>CKAN stewards</span>
                 <p>Datopian and Link Digital are co-stewards of the CKAN project and some of the longest standing contributors to CKAN. They both play key roles in ensuring the CKAN project thrives and delivers the best results for CKAN’s end users and stakeholders.</p>
                 <ul>
-                    <li><a href="https://linkdigital.com.au/" target="_blank" rel="noopener"><img src="{% static 'img/linkdigital-logo-footer.svg' %}" alt=""></a></li>
-                    <li><a href="https://www.datopian.com/" target="_blank" rel="noopener"><img src="{% static 'img/datopian-logo-footer.svg' %}" alt=""></a></li>
+                    <li><a href="https://linkdigital.com.au/" target="_blank" rel="noopener"><img src="{% static 'img/linkdigital-logo-footer.svg' %}" alt="LinkDigital"></a></li>
+                    <li><a href="https://www.datopian.com/" target="_blank" rel="noopener"><img src="{% static 'img/datopian-logo-footer.svg' %}" alt="Datopian"></a></li>
+                </ul>
+                <span>Held in trust by</span>
+                <p>CKAN assets are held in trust by <strong>Open Knowledge Foundation</strong>, a non-profit organization, with best practice policies on governing openly and for use of the trademark.</p>
+                <ul>
+                    <li><a href="https://okfn.org/en/" target="_blank" rel="noopener"><img src="{% static 'img/logo-okfn.png' %}" alt="OpenKnowledge"></a></li>
                 </ul>
             </div>
             
             <div class="two-columns-item social-container">
-                <span>Held in trust by</span>
-                <p>CKAN assets are held in trust by <strong>Open Knowledge Foundation</strong>, a non-profit organization, with best practice policies on governing openly and for use of the trademark.</p>
+                <span>Sign up for our newsletter</span>
+                <p>Sign up to receive news and updates from CKAN. Your information will be used in accordance with our privacy policy. You may opt out at any time.</p>
                 <div class="footer-subscribe">
-                    <span>Sign up for our newsletter</span>
                     <form action="#" id="subscribe_form">
                         {% include "snippets/iframe.html" %}
                         <div class="row">
@@ -33,6 +37,9 @@
                         </div>
                     </form>
                 </div>
+
+                <span>Connect with us</span>
+                <p>Join our vibrant community! Follow us on Twitter, LinkedIn, Gitter and GitHub for real-time updates, discussions and contributions.</p>
                 <div class="footer-btns">
                     <ul class="auth-links">
                         {% if request.user.is_authenticated %}
@@ -46,14 +53,10 @@
                             <li>
                                 <a href="{% url 'account_login' %}">Login</a>
                             </li>
-                            <!-- <li>
-                                <a href="{% url 'account_signup' %}">Sign up</a>
-                            </li> -->
-                        {% endif %}  
+                        {% endif %}
                     </ul>
-                        
+
                     <ul class="social">
-                                            
                         <li>
                             <a href="https://twitter.com/ckanproject" target="_blank" rel="noopener">
                                 <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -78,10 +81,12 @@
                         </li>
                     </ul>
                 </div>
+
+                <span>We`are here to assist</span>
+                <p>Have questions or need support? Our team is ready to help you navigate and make the most of CKAN.</p>
+                {% form_modal %}
             </div>
         </div>
-
-        {% form_modal %}
 
     </div>
 </footer>

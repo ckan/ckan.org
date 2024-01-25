@@ -19,8 +19,8 @@
                 {% for card in page.ckan_git %}
                     {% include_block card %}
                 {% endfor %}
+        </section>
 
-        </section>       
         <div class="grey-bg gradient">
             <div class="container">
                 <div class="t-center partners inner-indent">
@@ -65,6 +65,14 @@
                         {% include "../snippets/pow_by_ckan_card_block.html" with card=item.powered_card %}
                     {% endfor %}
                 </div>
+            </div>
+        </div>
+        <div class="indent">
+            <div class="container-lg t-center inner-indent block-lg">
+                <h2>CKAN is now a Digital Public Good</h2>
+                <p>CKAN has been added to the Digital Public Registry and is now officially recognised as a data management system helping tackle 9 of the 17 Sustainable Development Goals (SDGs) of the 2030 Agenda set by the United Nations (UN).</p>
+                <img src="{% static 'img/dpga-logo.png' %}" alt="DPGA image">
+                <a href="https://blog.okfn.org/2023/06/15/ckan-is-now-a-digital-public-good/" class="btn btn-dark-grey btn-standard" target="_blank">Learn more</a>
             </div>
         </div>
         <div class="indent">
