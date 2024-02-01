@@ -462,7 +462,7 @@ figcaption {
 }
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, .h {
-  margin: 0 0 10px;
+  margin: 0;
   font-family: "SF Pro Display Bold", sans-serif;
   color: #000;
   position: relative;
@@ -472,7 +472,7 @@ h1, .h1 {
   font-size: 50px;
   line-height: 54px;
   font-weight: 800;
-  margin: 0 0 16px;
+  margin: 0 0 24px;
 }
 
 h2, .h2 {
@@ -480,27 +480,32 @@ h2, .h2 {
   font-weight: 800;
   line-height: 42px;
   color: #333;
+  margin: 0 0 22px;
 }
 
 h3, .h3 {
-  font-size: 24px;
-  line-height: 30px;
+  font-size: 32px;
+  line-height: 36px;
   font-weight: 800;
+  margin: 0 0 20px;
 }
 
 h4, .h4 {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 500;
+  margin: 0 0 18px;
 }
 
 h5, .h5 {
   font-size: 24px;
   font-weight: 500;
+  margin: 0 0 16px;
 }
 
 h6, .h6 {
   font-size: 20px;
   font-weight: normal;
+  margin: 0 0 14px;
 }
 
 a {
@@ -2400,9 +2405,6 @@ ul.blog-nav li.last {
   color: #444;
 }
 
-.article h1, .article h2, .article h3, .article h4, .article h5, .article h6, .article img {
-  margin: 20px 0;
-}
 .article pre {
   margin: 50px 0;
 }
