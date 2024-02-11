@@ -115,7 +115,7 @@ def send_contact_info(request, member_info: dict):
             print("An exception occurred: {}".format(error.text))
 
 
-class ContactPage(WagtailCacheMixin, AbstractEmailForm):
+class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         send_to = [x.email for x in Manager.objects.all()]
