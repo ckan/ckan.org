@@ -1,12 +1,12 @@
 from django.contrib.auth.models import User
 from django.http import Http404
-from django.views.generic.list import ListView
 from django.shortcuts import redirect
+from django.utils.translation import gettext as _
+from django.views.generic.list import ListView
 
-from wagtail.snippets.views.snippets import CreateView
 from wagtail.admin import messages
-from wagtail.search.models import Query
 from wagtail.log_actions import log
+from wagtail.snippets.views.snippets import CreateView
 
 from .models import BlogListingPage, BlogPostPage, PostCategoryPage
 
@@ -77,10 +77,8 @@ class SearchBlogPostListView(ListView):
 
         search_query = request.GET.get("query", None)
         if search_query:
-            search_results = BlogPostPage.objects.order_by("-created").search(
-                search_query
-            )
-            Query.get(search_query).add_hit()
+            search_results = BlogPostPage.objects.order_by("-created").live() \
+                    .autocomplete(search_query, fields=["post_title", "post_subtitle"])
         else:
             search_results = BlogPostPage.objects.none()
         context = self.get_context_data()

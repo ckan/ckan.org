@@ -312,7 +312,7 @@ class BlogPostPage(MetadataPageMixin, Page):
         index.AutocompleteField("post_title"),
         index.SearchField("post_subtitle"),
         index.AutocompleteField("post_subtitle"),
-        index.FilterField("author"),
+        index.SearchField("author"),
         index.AutocompleteField("author"),
     ]
 
