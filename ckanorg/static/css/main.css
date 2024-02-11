@@ -477,8 +477,8 @@ h1, .h1 {
 
 h2, .h2 {
   font-size: 40px;
+  line-height: 44px;
   font-weight: 800;
-  line-height: 42px;
   color: #333;
   margin: 0 0 22px;
 }
@@ -492,12 +492,14 @@ h3, .h3 {
 
 h4, .h4 {
   font-size: 28px;
+  line-height: 32px;
   font-weight: 500;
   margin: 0 0 18px;
 }
 
 h5, .h5 {
   font-size: 24px;
+  line-height: 28px;
   font-weight: 500;
   margin: 0 0 16px;
 }
