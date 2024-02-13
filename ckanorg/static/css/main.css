@@ -3538,6 +3538,9 @@ img.right {
 img.full-width {
   width: 100%;
 }
+img.dpga-logo {
+  width: 280px;
+}
 
 #dropbtn-Solutions,
 #dropbtn-Support {
@@ -3661,7 +3664,7 @@ img.full-width {
 }
 .footer span {
   display: inline-block;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   text-transform: uppercase;
   font-size: 15px;
   line-height: 16px;
@@ -3671,6 +3674,7 @@ img.full-width {
 .footer p {
   color: #333;
   font-size: 16px;
+  margin-bottom: 15px;
 }
 .footer ul {
   margin: 0;
@@ -3678,7 +3682,7 @@ img.full-width {
   list-style: none;
 }
 .footer ul li {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 @media all and (min-width: 768px) {
   .footer ul li {
@@ -3689,7 +3693,7 @@ img.full-width {
   .footer ul {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
   .footer ul li:first-of-type {
     margin-right: 60px;
@@ -3697,7 +3701,7 @@ img.full-width {
 }
 @media all and (max-width: 450px) {
   .footer ul {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 }
 
@@ -3762,7 +3766,7 @@ img.full-width {
 }
 .footer-subscribe {
   padding: 0px 2px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 .footer-subscribe span {
   margin-bottom: 5px;
