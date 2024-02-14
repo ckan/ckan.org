@@ -111,6 +111,12 @@
 .indent{
   margin-top: 60px;
   margin-bottom: 60px;
+  &.indent-accent {
+    background: $gray-background;
+    .block-lg {
+      border: none;
+    }
+  }
   @media all and (max-width: 767px){
     margin-bottom: 24px;
   }
@@ -879,6 +885,6 @@ img {
     width: 100%;
   }
   &.dpga-logo {
-    width: 280px;
+    width: 190px;
   }
 }
