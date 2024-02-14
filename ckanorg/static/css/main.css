@@ -2798,6 +2798,12 @@ ul.blog-nav li.last {
   margin-top: 60px;
   margin-bottom: 60px;
 }
+.indent.indent-accent {
+  background: #f4f4f4;
+}
+.indent.indent-accent .block-lg {
+  border: none;
+}
 @media all and (max-width: 767px) {
   .indent {
     margin-bottom: 24px;
@@ -3539,7 +3545,7 @@ img.full-width {
   width: 100%;
 }
 img.dpga-logo {
-  width: 280px;
+  width: 190px;
 }
 
 #dropbtn-Solutions,
