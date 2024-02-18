@@ -29,18 +29,22 @@
     }
   }
 }
+
 .article{
   h3{
     color: #444;
   }
-}
-
-.article{
   pre {
     margin: 50px 0;
   }
   p:not(:last-child) {
     margin: 0 0 20px;
+  }
+  figure {
+    img {
+      max-width: none;
+      max-height: 25vw;
+    }
   }
 }
 
