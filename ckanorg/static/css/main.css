@@ -2406,12 +2406,15 @@ ul.blog-nav li.last {
 .article h3 {
   color: #444;
 }
-
 .article pre {
   margin: 50px 0;
 }
 .article p:not(:last-child) {
   margin: 0 0 20px;
+}
+.article figure img {
+  max-width: none;
+  max-height: 25vw;
 }
 
 .more-posts-bottom {
