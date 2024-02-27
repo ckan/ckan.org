@@ -300,7 +300,7 @@ class BlogPostPage(MetadataPageMixin, Page):
                 ),
             ),
             ("code", CodeBlock(label="Code")),
-            ("post_image", ImageWithCaption()),
+            ("post_image", ImageWithCaption(label="Wide image")),
         ],
         null=True,
         blank=True,
