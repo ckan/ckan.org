@@ -47,18 +47,19 @@
     }
   }
   blockquote {
-    padding: 20px 0 20px 40px;
-    border-left: 5px solid $red;
+    margin-left: 75px;
+    padding: 20px 0 20px 48px;
+    border-left: 4px solid $red;
     color: $medium-gray;
     text-align: justify;
     font-family: "SF Pro Display", sans-serif;
-    font-style: italic;
+    font-size: 18px;
     &::before {
       content: "\201C";
       color: $red;
       font-size: 4em;
       position: absolute;
-      left: 10px; top: -10px;
+      left: 10px; top: -15px;
       font-family: Arial, sans-serif;
     }
   }
