@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Lato");
 @font-face {
@@ -2415,6 +2416,24 @@ ul.blog-nav li.last {
 .article figure img {
   width: 100vw;
   max-width: 100vw;
+}
+.article blockquote {
+  margin-left: 75px;
+  padding: 20px 0 20px 48px;
+  border-left: 4px solid #ED5248;
+  color: #666;
+  text-align: justify;
+  font-family: "SF Pro Display", sans-serif;
+  font-size: 18px;
+}
+.article blockquote::before {
+  content: "“";
+  color: #ED5248;
+  font-size: 4em;
+  position: absolute;
+  left: 10px;
+  top: -15px;
+  font-family: Arial, sans-serif;
 }
 
 .more-posts-bottom {
