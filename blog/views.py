@@ -77,8 +77,11 @@ class SearchBlogPostListView(ListView):
 
         search_query = request.GET.get("query", None)
         if search_query:
-            search_results = BlogPostPage.objects.order_by("-created").live() \
-                    .autocomplete(search_query, fields=["post_title", "post_subtitle"])
+            search_results = (
+                BlogPostPage.objects.order_by("-created")
+                .live()
+                .autocomplete(search_query, fields=["post_title", "post_subtitle"])
+            )
         else:
             search_results = BlogPostPage.objects.none()
         context = self.get_context_data()

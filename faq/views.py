@@ -1,7 +1,7 @@
-from wagtail.snippets.views.snippets import CreateView
 from wagtail.log_actions import log
+from wagtail.snippets.views.snippets import CreateView
 
-from .models import FaqPage, FaqCategoryPage, FaqQuestionPage
+from .models import FaqPage
 
 
 class FaqCreateView(CreateView):

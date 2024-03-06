@@ -1,5 +1,5 @@
-from wagtail.snippets.views.snippets import CreateView
 from wagtail.log_actions import log
+from wagtail.snippets.views.snippets import CreateView
 
 from .models import EventListingPage
 

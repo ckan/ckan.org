@@ -2,17 +2,17 @@ from django import forms
 from django.db import models
 from django.utils.timezone import now
 
-from wagtail.models import Page
 from wagtail import blocks
-from wagtail.fields import StreamField
+from wagtail.admin.forms import WagtailAdminPageForm
 from wagtail.admin.panels import (
     FieldPanel,
     MultiFieldPanel,
     TabbedInterface,
     ObjectList,
 )
-from wagtail.admin.forms import WagtailAdminPageForm
 from wagtail.admin.widgets.slug import SlugInput
+from wagtail.fields import StreamField
+from wagtail.models import Page
 
 from wagtailmetadata.models import MetadataPageMixin
 

@@ -9,5 +9,5 @@ class SoftwareEngineersListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['engineers'] = SoftwareEngineers.objects.filter(developer__active=False)
+        context["engineers"] = SoftwareEngineers.objects.filter(developer__active=False)
         return context
