@@ -11,8 +11,6 @@ from wagtail.fields import StreamField
 from wagtail import blocks
 from wagtail.models import Page, Orderable
 from wagtailmetadata.models import MetadataPageMixin
-from wagtail.snippets.blocks import SnippetChooserBlock
-from wagtail.snippets.models import register_snippet
 from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 
 from wagtail.admin.panels import (
@@ -21,8 +19,10 @@ from wagtail.admin.panels import (
     InlinePanel
 )
 
-from streams.models import GitCardBlock, PoweringOpendataBlock
+from streams.models import GitCardBlock
 from ckan_pages.models import CkanForPage
+
+import posthog
 
 
 COMMON_PANELS = (
@@ -170,6 +170,9 @@ class HomePage(MetadataPageMixin, Page):
             ).public().filter(title='Community')
         context['community_page'] = community[0] if community else None
         context['recaptcha_sitekey'] = settings.RECAPTCHA_PUBLIC_KEY
+
+        posthog.capture('test-id', 'test-event')
+
         return context
 
 @receiver(post_save, sender=User)
@@ -192,4 +195,27 @@ class ReCaptchaSettings(BaseSiteSetting):
 
     panels = [
         FieldPanel('public_key'),
+    ]
+
+
+@register_setting
+class PostHogSettings(BaseSiteSetting):
+    api_key = models.CharField(
+        max_length=255,
+        help_text="PostHog API key",
+        blank=True,
+    )
+    host = models.CharField(
+        max_length=255,
+        help_text="PostHog host address",
+        blank=True,
+    )
+
+    class Meta:
+        verbose_name = 'PostHog settings'
+        verbose_name_plural = "PostHog settings"
+
+    panels = [
+        FieldPanel('api_key'),
+        FieldPanel('host'),
     ]
