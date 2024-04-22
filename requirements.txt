@@ -1,5 +1,5 @@
 Django==4.2
-wagtail==5.2.3
+wagtail==5.2.4
 django-taggit==3.0.0
 django-extensions>=3.0,<3.1
 whitenoise==6.5.0
@@ -16,12 +16,13 @@ django-allauth==0.54.0
 django-recaptcha==4.0.0
 django-simple-captcha==0.6.0
 djangorestframework==3.14.0
-django-modelcluster==6.0
+django-modelcluster==6.3
 et-xmlfile==1.1.0
 idna==3.4
 l18n==2021.3
 oauthlib==3.2.2
 openpyxl==3.1.2
+posthog==3.5.0
 psycopg2==2.9.6
 pycparser==2.21
 PyJWT==2.7.0
