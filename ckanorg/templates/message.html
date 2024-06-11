@@ -2,7 +2,7 @@
     {% for message in messages %}
         <script type=text/javascript>
             $("#thanks-text").html("{{ message.message|safe }}");
-            $('#thanks-modal').fadeIn();
+            $('#thanks-modal').fadeIn().delay(5000).fadeOut("slow");
         </script>
     {% endfor %}
 {% endif %}
