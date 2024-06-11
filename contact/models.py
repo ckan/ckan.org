@@ -6,6 +6,7 @@ from django.db import models
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.template.response import TemplateResponse
+from django.utils.translation import gettext_lazy as _
 
 from modelcluster.models import ParentalKey
 
@@ -28,12 +29,12 @@ from mailchimp_marketing.api_client import ApiClientError
 class MailChimpSettings(BaseSiteSetting):
     api_key = models.CharField(
         max_length=255,
-        help_text="Mailchimp API key",
+        help_text=_("Mailchimp API key"),
         blank=True,
     )
     audience_id = models.CharField(
         max_length=255,
-        help_text="MailChimp list ID",
+        help_text=_("MailChimp list ID"),
         blank=True,
     )
 
@@ -152,13 +153,13 @@ class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
     thank_you_text = models.TextField(
         blank=True,
         null=True,
-        help_text="Use HTML tags for text design.",
+        help_text=_("Use HTML tags for text design."),
     )
     button_text = models.CharField(
         max_length=50,
         blank=True,
-        help_text="Submit button text for this form.",
-        default="Contact Us",
+        help_text=_("Submit button text for this form."),
+        default=_("Contact Us"),
     )
 
     class Meta:
@@ -172,7 +173,7 @@ class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
         FieldPanel("subject"),
         FieldPanel("from_address"),
         FieldPanel("button_text"),
-        InlinePanel("form_fields", label="Form Fields"),
+        InlinePanel("form_fields", label=_("Form Fields")),
     ]
 
 
@@ -231,8 +232,13 @@ class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
                 send_contact_info(request, member_info)
 
                 ##* Display confirmation message
-                confirmation_message = "<h4>Thank you for reaching out!</h4><p>We value your interest and are ready to help.</p><p>Our team will review your inquiry and respond within 48 hours.</p>"
-                messages.success(request, confirmation_message, extra_tags="safe")
+                try:
+                    message = Message.objects.get(slug='contact-form-confirmation')
+                    message_content = message.content
+                except Message.DoesNotExist:
+                    logging.getLogger("error_logger").error(traceback.format_exc())
+                    message_content = _("Thank you for contacting us!")
+                messages.success(request, message_content, extra_tags="safe")
 
                 return self.render_landing_page(
                     request, form_submission, *args, **kwargs
