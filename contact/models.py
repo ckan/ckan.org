@@ -257,7 +257,7 @@ class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
         redirect_page = Page.objects.get(id=request.POST.get("source-page-id"))
         if redirect_page:
             request.session["form_page_success"] = True
-            return redirect(redirect_page.url, permanent=False)
+            return redirect("/", permanent=False)
 
         return super().render_landing_page(request, form_submission, *args, **kwargs)
 
