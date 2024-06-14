@@ -1,8 +1,12 @@
+import logging
+import traceback
+
+from django.contrib import messages
 from django.db import models
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.template.response import TemplateResponse
-from django.shortcuts import redirect
+from django.utils.translation import gettext_lazy as _
 
 from modelcluster.models import ParentalKey
 
@@ -25,12 +29,12 @@ from mailchimp_marketing.api_client import ApiClientError
 class MailChimpSettings(BaseSiteSetting):
     api_key = models.CharField(
         max_length=255,
-        help_text="Mailchimp API key",
+        help_text=_("Mailchimp API key"),
         blank=True,
     )
     audience_id = models.CharField(
         max_length=255,
-        help_text="MailChimp list ID",
+        help_text=_("MailChimp list ID"),
         blank=True,
     )
 
@@ -111,8 +115,8 @@ def send_contact_info(request, member_info: dict):
                 }
             )
             client.lists.add_list_member(mailchimp_audience_id, member_info)
-        except ApiClientError as error:
-            print("An exception occurred: {}".format(error.text))
+        except ApiClientError:
+            logging.getLogger("error_logger").error(traceback.format_exc())
 
 
 class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
@@ -149,13 +153,13 @@ class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
     thank_you_text = models.TextField(
         blank=True,
         null=True,
-        help_text="Use HTML tags for text design.",
+        help_text=_("Use HTML tags for text design."),
     )
     button_text = models.CharField(
         max_length=50,
         blank=True,
-        help_text="Submit button text for this form.",
-        default="Contact Us",
+        help_text=_("Submit button text for this form."),
+        default=_("Contact Us"),
     )
 
     class Meta:
@@ -169,8 +173,9 @@ class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
         FieldPanel("subject"),
         FieldPanel("from_address"),
         FieldPanel("button_text"),
-        InlinePanel("form_fields", label="Form Fields"),
+        InlinePanel("form_fields", label=_("Form Fields")),
     ]
+
 
     def send_mail(self, form):
         addresses = [x.strip() for x in self.to_address.split(",")]
@@ -183,15 +188,18 @@ class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
         sender_name = fields.get("sender_name", "")
         if sender_name:
             self.subject = f"{self.subject} Sender name: {sender_name}"
-        send_mail(
-            self.subject,
-            plain_message,
-            addresses,
-            self.from_address,
-            html_message=html_message,
-        )
+        try:
+            send_mail(
+                self.subject,
+                plain_message,
+                addresses,
+                self.from_address,
+                html_message=html_message,
+            )
+        except Exception:
+            logging.getLogger("error_logger").error(traceback.format_exc())
 
-    # @check_recaptcha(required_score=0.85)
+
     def serve(self, request, *args, **kwargs):
         if request.method == "POST":
             form = self.get_form(
@@ -223,6 +231,15 @@ class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
                 }
                 send_contact_info(request, member_info)
 
+                ##* Display confirmation message
+                try:
+                    message = Message.objects.get(slug='contact-form-confirmation')
+                    message_content = message.content
+                except Message.DoesNotExist:
+                    logging.getLogger("error_logger").error(traceback.format_exc())
+                    message_content = _("Thank you for contacting us!")
+                messages.success(request, message_content, extra_tags="safe")
+
                 return self.render_landing_page(
                     request, form_submission, *args, **kwargs
                 )
@@ -235,11 +252,12 @@ class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
         context["form"] = form
         return TemplateResponse(request, self.get_template(request), context)
 
+
     def render_landing_page(self, request, form_submission=None, *args, **kwargs):
         redirect_page = Page.objects.get(id=request.POST.get("source-page-id"))
         if redirect_page:
             request.session["form_page_success"] = True
-            return redirect(redirect_page.url, permanent=False)
+            return redirect("/", permanent=False)
 
         return super().render_landing_page(request, form_submission, *args, **kwargs)
 
