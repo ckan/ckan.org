@@ -10,6 +10,7 @@ h1, .h1 {
   line-height: $h1-lh;
   font-weight: 800;
   margin: 0 0 24px;
+  letter-spacing: 1px;
 }
 
 h2, .h2 {
@@ -18,6 +19,7 @@ h2, .h2 {
   font-weight: 800;
   color: $dark-gray;
   margin: 0 0 22px;
+  letter-spacing: 1px;
 }
 
 h3, .h3 {
@@ -25,6 +27,7 @@ h3, .h3 {
   line-height: $h3-lh;
   font-weight: 800;
   margin: 0 0 20px;
+  letter-spacing: 1px;
 }
 
 h4, .h4 {
@@ -32,6 +35,7 @@ h4, .h4 {
   line-height: $h4-lh;
   font-weight: 500;
   margin: 0 0 18px;
+  letter-spacing: 1px;
 }
 
 h5, .h5 {
@@ -39,12 +43,14 @@ h5, .h5 {
   line-height: $h5-lh;
   font-weight: 500;
   margin: 0 0 16px;
+  letter-spacing: 1px;
 }
 
 h6, .h6 {
   font-size: $h6-font-size;
   font-weight: normal;
   margin: 0 0 14px;
+  letter-spacing: 1px;
 }
 
 a {
@@ -52,7 +58,6 @@ a {
   color: $base-link-color;
   outline: none;
   font-weight: $base-link-font-weight;
-  font-size: 16px;
   @include animate(color);
   &:visited {
     text-decoration: none;
