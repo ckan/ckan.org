@@ -1,0 +1,31 @@
+.Draftail-Editor {
+    h1 {
+        font-size: 3.125rem !important;
+        letter-spacing: 0.0625rem;
+    }
+
+    h2 {
+        font-size: 2.5rem !important;
+        letter-spacing: 0.0625rem;
+    }
+
+    h3 {
+        font-size: 2rem !important;
+        letter-spacing: 0.0625rem;
+    }
+
+    h4 {
+        font-size: 1.75rem !important;
+        letter-spacing: 0.0625rem;
+    }
+
+    h5 {
+        font-size: 1.5rem !important;
+        letter-spacing: 0.0625rem;
+    }
+
+    h6 {
+        font-size: 1.25rem !important;
+        letter-spacing: 0.0625rem;
+    }
+}
