@@ -3849,6 +3849,11 @@ img.dpga-logo {
   fill: #333;
 }
 
+img.linkdigital-logo {
+  max-width: 80%;
+  margin-top: 8px;
+}
+
 *,
 *::after,
 *::before {
