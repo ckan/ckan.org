@@ -44,7 +44,7 @@ class CategoriesBlogPostListView(ListView):
             context["posts"] = BlogPostPage.objects.all()
         else:
             context["posts"] = BlogPostPage.objects.filter(category=cat_id).order_by(
-                "-created"
+                "-last_published_at"
             )
             context["categories"] = PostCategoryPage.objects.all().order_by(
                 "category_title"
@@ -78,9 +78,13 @@ class SearchBlogPostListView(ListView):
         search_query = request.GET.get("query", None)
         if search_query:
             search_results = (
-                BlogPostPage.objects.order_by("-created")
+                BlogPostPage.objects.order_by("-last_published_at")
                 .live()
-                .autocomplete(search_query, fields=["post_title", "post_subtitle"])
+                .autocomplete(
+                    search_query,
+                    fields=["post_title", "post_subtitle"],
+                    order_by_relevance=False
+                )
             )
         else:
             search_results = BlogPostPage.objects.none()
