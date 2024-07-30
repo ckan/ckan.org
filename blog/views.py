@@ -78,7 +78,7 @@ class SearchBlogPostListView(ListView):
         search_query = request.GET.get("query", None)
         if search_query:
             search_results = (
-                BlogPostPage.objects.order_by("-last_published_at")
+                BlogPostPage.objects.order_by("-first_published_at")
                 .live()
                 .autocomplete(
                     search_query,
