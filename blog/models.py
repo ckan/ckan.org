@@ -314,7 +314,7 @@ class BlogPostPage(MetadataPageMixin, Page):
         index.AutocompleteField("post_subtitle"),
         index.SearchField("author"),
         index.AutocompleteField("author"),
-        index.FilterField('last_published_at'),
+        index.FilterField('first_published_at'),
     ]
 
     promote_panels = [
