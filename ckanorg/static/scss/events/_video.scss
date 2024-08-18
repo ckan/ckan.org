@@ -68,6 +68,7 @@
             .row-speakers {
                 margin: 0;
                 row-gap: 32px;
+                justify-content: left;
 
                 .speaker {
                     display: flex;

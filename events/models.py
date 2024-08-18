@@ -83,7 +83,6 @@ class EventListingPage(BlogListingPage):
         context = super().get_context(request, *args, **kwargs)
         _now = now()
         recently = datetime.datetime.now().date() - datetime.timedelta(days=183)
-        present = datetime.datetime.now().date()
         current_year = datetime.datetime.now().year
         current_month = datetime.datetime.now().month
         html_calendar = calendar.HTMLCalendar(firstweekday=-1)
@@ -94,50 +93,29 @@ class EventListingPage(BlogListingPage):
             EventPostPage.objects.live()
             .public()
             .filter(featured=True)
-            .order_by("-created")
+            .order_by("-start_date")
         )
-        featured_events = list(filter(lambda x: x.start_date > _now, featured_events))
 
         if all_events:
-            upcoming_events = list(filter(lambda x: x.start_date > _now, all_events))
-            featured_event = None
-
-            if featured_events:
-                featured_event = featured_events[0]
-            elif upcoming_events:
-                featured_event = upcoming_events[0]
-
-            if featured_event in upcoming_events:
-                upcoming_events.remove(featured_event)
-
-            if featured_event:
-                context["featured_event_start_date"] = featured_event \
-                    .start_date.strftime("%d %B %Y - %H:%M")
-
-            all_events = (
-                all_events.exclude(id__in=[featured_event.id,])
-                if featured_event else all_events
-            )
-
             all_events = all_events.order_by("-start_date")
-            past_events = list(filter(lambda x: x.start_date.date() < recently, all_events))
-            recent_events = list(filter(lambda x: x.start_date.date() < present and x.start_date.date() > recently, all_events))
+            archive_events = list(filter(lambda x: x.start_date.date() < recently, all_events))
+            recent_events = list(filter(lambda x: x.start_date < _now and x.start_date.date() > recently, all_events))
+            upcoming_events = list(filter(lambda x: x.start_date > _now, all_events))
             current_month_events = list(filter(lambda x: x.start_date.strftime("%Y-%m") == _now.strftime("%Y-%m"), all_events.order_by("start_date")))
 
-            paginator = Paginator(past_events, 8)
+            paginator = Paginator(archive_events, 8)
             page = request.GET.get("page")
             try:
-                all_past_events = paginator.page(page)
+                all_archive_events = paginator.page(page)
             except PageNotAnInteger:
-                all_past_events = paginator.page(1)
+                all_archive_events = paginator.page(1)
             except EmptyPage:
-                all_past_events = paginator.page(paginator.num_pages)
+                all_archive_events = paginator.page(paginator.num_pages)
 
-            context["featured_event"] = featured_event
             context["featured_events"] = featured_events
             context["upcoming_events"] = upcoming_events
             context["recent_events"] = recent_events
-            context["past_events"] = all_past_events
+            context["past_events"] = all_archive_events
             context["current_month_events"] = current_month_events
             context["events"] = all_events
             context["html_calendar"] = html_calendar.formatmonth(current_year, current_month, withyear=True)
