@@ -126,6 +126,10 @@
                 }
 
                 &:hover {
+                    background-color: $light-yellow;
+                }
+
+                &.selected {
                     background-color: $dark-gray;
                 }
             }

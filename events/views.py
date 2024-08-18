@@ -92,6 +92,7 @@ def get_events_data(request):
     for event in events:
         event_data = {
             "title": event.post_title,
+            "description": event.post_subtitle,
             "slug": event.slug,
             "day": str(event.start_date.day),
             "weekday": calendar.day_name[event.start_date.weekday()],
