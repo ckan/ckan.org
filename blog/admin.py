@@ -13,9 +13,19 @@ class ProfileAdmin(SnippetViewSet):
     icon = "user"
     menu_order = 600
     add_to_settings_menu = True
-    list_display = ("user", "company", "location")
-    list_filter = ("company", "location")
-    search_fields = ("user", "company")
+    list_display = (
+        "user",
+        "company",
+        "location"
+    )
+    list_filter = (
+        "company",
+        "location"
+    )
+    search_fields = (
+        "user",
+        "company"
+    )
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
@@ -35,13 +45,32 @@ class BlogPostPageAdmin(SnippetViewSet):
     menu_label = "Posts"
     icon = "doc-empty-inverse"
     menu_order = 100
-    list_display = ("post_title", "author", "created", "first_published_at", "last_published_at")
-    list_export = ("post_title", "author", "created", "first_published_at", "last_published_at")
+    list_display = (
+        "post_title",
+        "author",
+        "created",
+        "first_published_at",
+        "last_published_at",
+    )
+    list_export = (
+        "post_title",
+        "author",
+        "created",
+        "first_published_at",
+        "last_published_at",
+    )
     ordering = "-first_published_at"
-    list_filter = ("category", "live", "created", "last_published_at")
-    search_fields = ("post_title", "author")
+    list_filter = (
+        "category",
+        "live",
+        "created",
+        "last_published_at"
+    )
+    search_fields = (
+        "post_title",
+        "author"
+    )
     add_view_class = PostCreateView
-    
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
