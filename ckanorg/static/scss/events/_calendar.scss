@@ -45,6 +45,11 @@
                             transform: rotate(90deg);
                         }
                     }
+
+                    &:hover {
+                        border-radius: 6px;
+                        background-color: $light-blue;
+                    }
                 }
 
                 table {
@@ -104,6 +109,17 @@
 
                                 &:hover {
                                     cursor: pointer;
+                                    background-color: $yellow;
+                                    border-radius: 8px;
+
+                                    &.marked {
+                                        &::before {
+                                            content: url("../img/events/mark_dark.png");
+                                            position: absolute;
+                                            bottom: 5px;
+                                            left: 45%;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -119,7 +135,7 @@
 
             .calendar-event-info {
                 overflow-y: auto;
-                max-height: 400px;
+                max-height: 450px;
                 scrollbar-width: thin;
                 scrollbar-color: $dark-gray $gray-border;
 
@@ -152,7 +168,7 @@
                         text-align: left;
 
                         .item-title {
-                            margin-bottom: 8px;
+                            margin-bottom: 6px;
 
                             a {
                                 font-size: 15px;
@@ -163,6 +179,25 @@
                                 &:hover {
                                     color: $dark-gray;
                                 }
+                            }
+                        }
+
+                        .item-description {
+                            font-size: 15px;
+                            font-weight: 400;
+                            line-height: 24px;
+                            text-overflow: ellipsis;
+                            overflow: hidden; 
+                            white-space: nowrap;
+                            margin-bottom: 6px;
+
+                            @supports (-webkit-line-clamp: 2) {
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: initial;
+                                display: -webkit-box;
+                                -webkit-line-clamp: 2;
+                                -webkit-box-orient: vertical;
                             }
                         }
 

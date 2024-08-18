@@ -26,8 +26,9 @@ $(document).ready(function() {
 
                         $(".info-event-list").append(
                             "<div class='info-event-item' data-day='" + event.day + "'><div class='item-title'><a class='info-event-item-link' href='" +
-                            $(location).attr("href") + "/" + event.slug + "'>" + event.title + "</a></div><div class='item-time'>" +
-                            event.time + "</div></div>"
+                            $(location).attr("href") + "/" + event.slug + "'>" + event.title + "</a></div>" + 
+                            "<div class='item-description'>" + event.description + "</div>" + 
+                            "<div class='item-time'>" + event.time + "</div></div>"
                         );
                     });
 
@@ -84,6 +85,11 @@ $(document).ready(function() {
 
     // CALENDAR ACTIONS
     $("#btn-calendar").on("click", function() {
+        if ($("#btn-calendar").hasClass("selected")) {
+            $("#btn-calendar").removeClass("selected");
+        } else {
+            $("#btn-calendar").addClass("selected");
+        };
         $(".event-calendar").toggle();
     });
 
