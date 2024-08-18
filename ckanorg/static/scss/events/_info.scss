@@ -1,0 +1,137 @@
+.event-info {
+    margin-bottom: 64px;
+
+    .container {
+        display: grid;
+        gap: 24px;
+
+        .row {
+            align-items: start;
+            justify-content: left;
+
+            .col-3 {
+                font-size: 20px;
+                font-weight: 700;
+                line-height: 28px;
+                text-align: left;
+            }
+
+            .col-9 {
+                flex: auto;
+                font-size: 15px;
+                font-weight: 400;
+                line-height: 24px;
+                text-align: left;
+
+                p {
+                    margin: 0;
+                }
+
+                .event-speakers {
+                    .row-speakers {
+                        margin: 0;
+                        row-gap: 32px;
+
+                        .speaker {
+                            display: flex;
+                            gap: 16px;
+
+                            &:last-child {
+                                margin-bottom: 0;
+                            }
+
+                            .speaker-image {
+
+                                img {
+                                    border-radius: 50%;
+                                    max-width: 64px;
+
+                                    &.red {
+                                        border: 5px solid $red-border;
+                                    }
+    
+                                    &.yellow {
+                                        border: 5px solid $yellow;
+                                    }
+                                }
+                            }
+
+                            .speaker-info {
+                                display: grid;
+                                text-align: left;
+                                align-content: center;
+
+                                .speaker-name {
+                                    font-size: 15px;
+                                    font-weight: 700;
+                                    line-height: 24px;
+                                }
+
+                                .speaker-position {
+                                    font-size: 13px;
+                                    font-weight: 400;
+                                    line-height: 20px;
+                                    text-overflow: ellipsis;
+                                    overflow: hidden; 
+                                    white-space: nowrap;
+                                }
+                            }
+                        }
+
+                        .speaker-additional-info {
+                            font-size: 15px;
+                            font-weight: 400;
+                            line-height: 24px;
+                            text-align: left;
+                        }
+                    }
+                }
+
+                span {
+                    font-weight: 700;
+                    margin-right: 16px;
+                }
+
+                .event-details-resources {
+                    .row {
+                        row-gap: 16px;
+
+                        .col-6 {
+                            padding-left: 0;
+
+                            a {
+                                display: flex;
+                                align-items: center;
+                                font-size: 15px;
+                                font-weight: 700;
+                                line-height: 24px;
+                                text-align: left;
+                                text-decoration: none;
+                                color: $dark-gray;
+                                text-overflow: ellipsis;
+                                overflow: hidden; 
+                                white-space: nowrap;
+                                gap: 16px;
+
+                                .resource-icon {
+                                    width: 48px;
+                                    height: 48px;
+                                    background-color: $light-blue;
+                                    border-radius: 200px;
+                                    align-content: center;
+                                    text-align: center;
+
+                                    svg {
+                                        width: 30px;
+                                        height: 30px;
+                                        padding: 4px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

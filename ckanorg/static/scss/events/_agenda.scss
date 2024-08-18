@@ -1,0 +1,178 @@
+.row {
+    &.event-details-agenda {
+        text-align: left;
+
+        .col-12 {
+            padding: 0;
+
+            .event-agenda-label {
+                font-size: 20px;
+                font-weight: 700;
+                line-height: 28px;
+                margin-bottom: 64px;
+            }
+
+            .event-agenda-table {
+                .table-header {
+                    .row {
+                        flex-wrap: nowrap;
+                        gap: 16px;
+                        margin-bottom: 0;
+
+                        .col-name {
+                            border-bottom: 1px solid $gray-nobel;
+                            font-size: 20px;
+                            font-weight: 400;
+                            line-height: 28px;
+                            text-align: left;
+                            color: $grey-sonic;
+                            display: flex;
+                            padding-left: 0;
+                            padding-bottom: 24px;
+                        }
+                    }
+                }
+
+                .table-content {
+                    .row {
+                        flex-wrap: nowrap;
+                        align-items: stretch;
+                        margin-bottom: 0;
+                        gap: 16px;
+
+                        .col-3 {
+                            padding: 24px 0;
+                            border-bottom: 1px solid $gray-nobel;
+                            font-size: 20px;
+                            font-weight: 400;
+                            line-height: 28px;
+                            text-align: left;
+                            color: $grey-sonic;
+                            display: grid;
+                        }
+
+                        .col-9 {
+                            padding: 24px 0;
+                            border-bottom: 1px solid $gray-nobel;
+                            font-size: 20px;
+                            font-weight: 400;
+                            line-height: 28px;
+                            text-align: left;
+                            color: $grey-sonic;
+                            display: grid;
+
+                            .accordion {
+                                .accordion-item {
+                                    border: none;
+                                    color: $dark-gray;
+
+                                    .accordion-header {
+                                        .accordion-button {
+                                            padding: 0;
+
+                                            &:focus {
+                                                border: none;
+                                                outline: transparent;
+                                                border-color: unset;
+                                                box-shadow: none;
+                                            }
+
+                                            &:not(.collapsed) {
+                                                color: $dark-gray;
+                                                background-color: unset;
+                                                border: none;
+
+                                                &::after {
+                                                    background-image: var(--bs-accordion-btn-icon);
+                                                }
+                                            }
+
+                                            .video-session-header {
+                                                .video-session-title {
+                                                    font-size: 30px;
+                                                    font-weight: 700;
+                                                    line-height: 40px;
+                                                    text-align: left;
+                                                }
+
+                                                .video-session-speakers {
+                                                    gap: 16px;
+                                                    font-size: 15px;
+                                                    font-weight: 200;
+                                                    line-height: 24px;
+                                                    text-align: left;
+                                                    color: $dark-gray;
+
+                                                    ul {
+                                                        display: flex;
+                                                        gap: 16px;
+                                                        padding: 16px 0;
+                                                        list-style: none;
+                                                        margin-bottom: 0;
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        .video-session-links {
+                                            display: flex;
+                                            gap: 32px;
+                                            color: $red-border;
+
+                                            a, button {
+                                                display: flex;
+                                                align-items: center;
+                                                gap: 5px;
+                                                font-size: 15px;
+                                                font-weight: 700;
+                                                line-height: 26px;
+
+                                                &:visited {
+                                                    color: $red-border;
+                                                }
+
+                                                svg {
+                                                    width: 14px;
+                                                    height: 10px;
+
+                                                    path {
+                                                        stroke: $red-border;
+                                                    }
+                                                }
+                                            }
+
+                                            button {
+                                                border: none;
+                                                background-color: transparent;
+                                                color: $red-border;
+
+                                                &:hover {
+                                                    text-decoration: underline;
+                                                }
+                                            }
+
+                                            .watch-video {
+                                                path {
+                                                    fill: $red-border;
+                                                    stroke: $white;
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    .accordion-body {
+                                        font-size: 15px;
+                                        font-weight: 400;
+                                        line-height: 24px;
+                                        text-align: left;
+                                        padding: 16px 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

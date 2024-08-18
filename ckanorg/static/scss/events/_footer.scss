@@ -1,0 +1,33 @@
+.invite-card {
+    display: flex;
+    padding: 64px 80px 64px 80px;
+    gap: 0px;
+    border-radius: 32px;
+    border: 1.5px solid $dark-gray;
+    justify-content: space-between;
+    margin-bottom: 64px;
+
+    .invite-info {
+        text-align: left;
+        color: $dark-gray;
+
+        .invite-info-title {
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 47.73px;
+            margin-bottom: 12px;
+        }
+
+        .invite-info-text {
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 30px;
+        }
+    }
+
+    .invite-action {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+}

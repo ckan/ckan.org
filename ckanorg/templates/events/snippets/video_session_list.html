@@ -1,0 +1,93 @@
+{% load static i18n wagtailcore_tags wagtailadmin_tags %}
+
+
+<div class="row event-details-agenda">
+    <div class="col-12">
+        <div class="event-agenda-label">
+            {% translate "Meeting agenda" %}
+        </div>
+
+        <div class="event-agenda-table">
+            <div class="table-header">
+                <div class="row">
+                    <div class="col-3 col-name">
+                        {% translate "Time" %}
+                    </div>
+
+                    <div class="col-9 col-name">
+                        {% translate "Title" %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-content">
+                {% for item in sessions %}
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="table-content-time">
+                                {% include_block item.time_start|date:"h:i A" %} - {% include_block item.time_end|date:"h:i A" %}
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <div class="table-content-title">
+                                <div class="accordion" id="accordion{{forloop.counter}}">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading{{forloop.counter}}">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{forloop.counter}}" aria-expanded="true" aria-controls="collapse{{forloop.counter}}">
+                                                <div class="video-session-header">
+                                                    <div class="video-session-title">
+                                                        {% include_block item.title %}
+                                                    </div>
+
+                                                    <div class="video-session-speakers">
+                                                        {% include_block item.speakers %}
+                                                    </div>
+                                                </div>
+                                            </button>
+                                            <div class="video-session-links">
+                                                <div class="watch-video">
+                                                    <a href="{% url 'event_video_page' slug=event.slug timelog=forloop.counter0 %}">
+                                                        <svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.2606 0.737765C13.4774 0.961222 13.6313 1.23792 13.7069 1.53992C13.9088 2.65903 14.0068 3.79441 13.9996 4.93156C14.0036 6.05171 13.9057 7.1699 13.7069 8.27229C13.6313 8.57428 13.4774 8.85098 13.2606 9.07444C13.0439 9.2979 12.772 9.4602 12.4724 9.54495C11.3779 9.83766 6.99999 9.83766 6.99999 9.83766C6.99999 9.83766 2.62204 9.83766 1.52756 9.54495C1.23409 9.46465 0.966301 9.31002 0.750052 9.096C0.533803 8.88198 0.376409 8.61581 0.293075 8.32319C0.0912111 7.20408 -0.00677632 6.06871 0.000363754 4.93156C-0.00521309 3.8029 0.0927681 2.67612 0.293075 1.56537C0.368664 1.26338 0.52261 0.986675 0.739363 0.763218C0.956117 0.539761 1.228 0.377461 1.52756 0.292712C2.62204 0 6.99999 0 6.99999 0C6.99999 0 11.3779 0 12.4724 0.267259C12.772 0.352008 13.0439 0.514308 13.2606 0.737765ZM9.22712 4.93154L5.56822 7.01234V2.85075L9.22712 4.93154Z" fill="#333333"/>
+                                                        </svg>
+                                                        {% translate "Watch video session" %}
+                                                    </a>
+                                                </div>
+
+                                                <div class="copy-video-link">
+                                                    <input type="text" value="{% include_block item.video_link %}" id="video-link-{{forloop.counter}}" hidden>
+                                                    <button onclick="copyLinkToClipboard('video-link-{{forloop.counter}}')">
+                                                        <svg width="14" height="7" viewBox="0 0 14 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M8.63636 1H10.2727C10.6309 1 10.9855 1.06466 11.3164 1.1903C11.6473 1.31594 11.9479 1.50009 12.2012 1.73223C12.4545 1.96438 12.6553 2.23998 12.7924 2.54329C12.9295 2.84661 13 3.1717 13 3.5C13 3.8283 12.9295 4.15339 12.7924 4.45671C12.6553 4.76002 12.4545 5.03562 12.2012 5.26777C11.9479 5.49991 11.6473 5.68406 11.3164 5.8097C10.9855 5.93534 10.6309 6 10.2727 6H8.63636M5.36364 6H3.72727C3.36912 6 3.01448 5.93534 2.68359 5.8097C2.3527 5.68406 2.05205 5.49991 1.7988 5.26777C1.28734 4.79893 1 4.16304 1 3.5C1 2.83696 1.28734 2.20107 1.7988 1.73223C2.31026 1.26339 3.00396 1 3.72727 1H5.36364M4.81818 3.5H9.18182" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>
+                                                        {% translate "Copy link to share session" %}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </h2>
+                                        <div id="collapse{{forloop.counter}}" class="accordion-collapse collapse" aria-labelledby="heading{{forloop.counter}}" data-bs-parent="#accordion{{forloop.counter}}">
+                                            <div class="accordion-body">
+                                                <div class="video-session-description">
+                                                    {% include_block item.description %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function copyLinkToClipboard(element) {
+        var copiedtext = document.getElementById(element);
+        copiedtext.select();
+        copiedtext.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(copiedtext.value);
+    }
+</script>      

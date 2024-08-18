@@ -1,0 +1,59 @@
+// FEATERED EVENTS SECTION STYLES
+
+.archive-section-wrapper,
+.featured-section-wrapper {
+    margin-bottom: 64px;
+
+    .featured-section-header {
+        margin-bottom: 56px;
+
+        .section_title {
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 52px;
+            text-align: center;
+            color: $dark-gray;
+        }
+
+        .section_description {
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 30px;
+            text-align: center;
+            color: $dark-gray;
+        }
+    }
+
+    .row {
+        justify-content: left;
+        align-items: stretch;
+
+        .col-6 {
+            display: flex;
+            align-items: stretch;
+            padding: 12px;
+
+            .event-link {
+                display: flex;
+                text-decoration: none;
+                color: unset;
+            }
+        }
+    }
+
+    .more-events {
+        .btn-more-events {
+            border: none;
+            background-color: transparent;
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 28px;
+            letter-spacing: 0.1em;
+            text-align: center;
+        }
+    }
+
+    .pagination-holder.indent {
+        margin-bottom: 120px;
+    }
+}

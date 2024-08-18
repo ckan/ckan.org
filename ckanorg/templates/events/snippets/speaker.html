@@ -1,0 +1,29 @@
+{% load static wagtailimages_tags %}
+{% image speaker.image fill-200x200-c100 as image %}
+
+
+<div class="speaker">
+    <div class="speaker-image">
+        {% if image.url %}
+            <img class="{{ color }}" src="{{ image.url }}" alt='Default image'>
+        {% else %}
+            <img class="{{ color }}" src="{% static "img/events/speaker_default.png" %}" alt='Default image'>
+        {% endif %}
+    </div>
+
+    <div class="speaker-info">
+        <div class="speaker-name">
+            {{ speaker.first_name }} {{ speaker.last_name }}
+        </div>
+
+        <div class="speaker-position">
+            {{ speaker.position }}
+        </div>
+    </div>
+</div>
+
+{% if additional_info %}
+    <div class="speaker-additional-info">
+        {{ speaker.info }}
+    </div>
+{% endif %}

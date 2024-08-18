@@ -1,0 +1,81 @@
+.event-card {
+    gap: 40px;
+    margin-bottom: 96px;
+
+    .container {
+        .row {
+            align-items: start;
+            margin-bottom: 0;
+
+            .event-info {
+                display: grid;
+                gap: 32px;
+                text-align: left;
+
+                .event-title {
+                    a {
+                        font-size: 40px;
+                        font-weight: 700;
+                        line-height: 52px;
+                        text-decoration: none;
+                        color: unset;
+                    }
+                }
+
+                .event-date {
+                    display: flex;
+                    gap: 8px;
+                    font-size: 18px;
+                    font-weight: 700;
+                    line-height: 24px;
+                    align-items: center;
+
+                    &:before {
+                        content: url("../img/events/event.svg");
+                        padding: 8px;
+                        border-radius: 8px;
+                        background-color: $light-blue;
+                        line-height: 16px;
+                    }
+                }
+
+                .event-description {
+                    font-size: 15px;
+                    font-weight: 400;
+                    line-height: 24px;
+                }
+
+                .event-action {
+                    .webinar-contact {
+                        .row {
+                            div {
+                                padding: 0;
+
+                                #contact {
+                                    float: inline-start;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .event-image {
+                display: grid;
+                gap: 24px;
+
+                img {
+                    max-height: 500px;
+                    border-radius: 24px;
+                }
+
+                iframe {
+                    width: 100%;
+                    height: 100%;
+                    min-height: 500px;
+                    border-radius: 16px;
+                }
+            }
+        }
+    }
+}

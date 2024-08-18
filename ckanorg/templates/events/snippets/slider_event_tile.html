@@ -1,0 +1,25 @@
+{% load static i18n %}
+
+
+<div class="event-slider-tile">
+    <div class="tile-header">
+        <div class="tile-event-title">
+            {{ event.post_title }}
+        </div>
+
+        <div class="tile-event-description">
+            {{ event.post_subtitle}}
+        </div>
+    </div>
+
+    <div class="tile-content">
+        <div class="tile-event-speakers">
+            {% for speaker in event.speakers.all %}
+                {% if forloop.counter < 3 %}
+                    {% cycle 'red' 'yellow' as bordercolors silent %}
+                    {% include "events/snippets/speaker.html" with speaker=speaker color=bordercolors %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>

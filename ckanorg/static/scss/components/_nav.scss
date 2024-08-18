@@ -82,6 +82,10 @@
     }
     .btn{
       width: auto;
+
+      &.btn-link {
+        align-items: normal;
+      }
     }
     &.active {
       a {

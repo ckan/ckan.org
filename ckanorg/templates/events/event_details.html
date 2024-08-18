@@ -1,0 +1,36 @@
+{% extends "events/page.html" %}
+
+{% load static i18n wagtailimages_tags wagtailcore_tags page_tags wagtailmetadata_tags %}
+
+
+{% block meta_tags %}{% meta_tags %}{% endblock %}
+
+{% block content %}
+    {% block header_content %}
+    {% endblock header_content %}
+
+    {% block primary_content %}
+        <div class="event-details">
+            <div class="container">
+                <div class="row event-header">
+                    <div class="col-4">
+                        <div class="col-name">{% translate "Event Details" %}</div>
+                    </div>
+                    <div class="col-8">
+                    </div>
+                </div>
+            </div>
+
+            {% include "events/snippets/event_card.html" with event=self status=self.get_event_status %}
+
+            {% include "events/snippets/event_info.html" with event=self status=self.get_event_status %}
+        </div>
+    {% endblock primary_content %}
+
+    {% block secondary_content %}
+    {% endblock secondary_content %}
+
+    {% block footer_content %}
+        {% include "events/snippets/invite.html" %}
+    {% endblock footer_content %}
+{% endblock content %}

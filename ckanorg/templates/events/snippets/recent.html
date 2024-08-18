@@ -1,0 +1,74 @@
+{% load static i18n wagtailimages_tags modal_tags %}
+
+
+<div class="recent-events">
+    <div class="container">
+        <div class="row event-header">
+            <div class="col-4">
+                <div class="col-name">{% translate "Recent Events" %}</div>
+            </div>
+            <div class="col-8">
+                <div class="col-name actions">
+                    <button class="btn-previous" type="button" data-bs-target="#event-slider-recent" data-bs-slide="prev">
+                        <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 8H1M1 8L8 15M1 8L8 1" stroke="#757575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class=""> Prev</span>
+                    </button>
+                    <button class="btn-next" type="button" data-bs-target="#event-slider-recent" data-bs-slide="next">
+                        <span class="">Next </span>
+                        <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 8H21M21 8L14 1M21 8L14 15" stroke="#757575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="event-slider-recent" class="carousel slide" data-bs-touch="false">
+        <div class="carousel-inner">
+            {% for event in recent_events %}
+                <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}" id="event{{ forloop.counter }}">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="event-slider-info">
+                                    <div class="event-title">
+                                        <a class="event-link" href="{{ event.url }}">
+                                            {{ event.post_title }}
+                                        </a>
+                                    </div>
+
+                                    <div class="event-date">
+                                        {{ event.start_date|date:"j F Y  h:i A T" }}
+                                    </div>
+
+                                    <div class="event-description">
+                                        {{ event.post_subtitle }}
+                                    </div>
+
+                                    <div class="event-action">
+                                        <a class="btn-more-details" href="{{ event.url }}">
+                                            {% translate "More details" %}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <div class="event-slider-image">
+                                    {% image event.main_image scale-100 as image %}
+                                    {% if image.url %}
+                                        <img src="{{ image.url }}" alt="Event image">
+                                    {% else %}
+                                        <img src="{% static 'img/ckan_default.png' %}" alt="Event image">
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
