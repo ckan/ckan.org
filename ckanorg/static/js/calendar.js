@@ -55,20 +55,32 @@ $(document).ready(function() {
         return text.slice(0, -2);
     });
 
-    $.each($("[data-day]"), function(index, item) {
-        var day = $(this).attr("data-day");
-        if (index === 0) {
-            $("td").filter(function() { 
+    if ($("[data-day]").length) {
+        $.each($("[data-day]"), function(index, item) {
+            var day = $(this).attr("data-day");
+            if (index === 0) {
+                $("td").filter(function() { 
+                    return $(this).text() === day;
+                }).addClass("selected");
+
+                $(".info-event-item[data-day=" + day + "]").show();
+            };
+
+            $("td").filter(function() {
                 return $(this).text() === day;
-            }).addClass("selected");
+            }).addClass("marked");
+        });
+    } else {
+        $("td").filter(function() { 
+            return $(this).text() === "1";
+        }).addClass("selected");
 
-            $(".info-event-item[data-day=" + day + "]").show();
-        };
+        var weekday = $("td.selected").attr("class").split(" ")[0];
 
-        $("td").filter(function() {
-            return $(this).text() === day;
-        }).addClass("marked");
-    });
+        $(".info-date-day").text("1");
+        $(".info-date-weekday").text(weekday);
+        $(".empty-list").css("display", "grid").show();
+    };
 
     // CALENDAR ACTIONS
     $("#btn-calendar").on("click", function() {

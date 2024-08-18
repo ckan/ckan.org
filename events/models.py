@@ -97,11 +97,10 @@ class EventListingPage(BlogListingPage):
         )
 
         if all_events:
-            all_events = all_events.order_by("-start_date")
-            archive_events = list(filter(lambda x: x.start_date.date() < recently, all_events))
-            recent_events = list(filter(lambda x: x.start_date < _now and x.start_date.date() > recently, all_events))
+            archive_events = list(filter(lambda x: x.start_date.date() < recently, all_events.order_by("-start_date")))
+            recent_events = list(filter(lambda x: x.start_date < _now and x.start_date.date() > recently, all_events.order_by("-start_date")))
             upcoming_events = list(filter(lambda x: x.start_date > _now, all_events))
-            current_month_events = list(filter(lambda x: x.start_date.strftime("%Y-%m") == _now.strftime("%Y-%m"), all_events.order_by("start_date")))
+            current_month_events = list(filter(lambda x: x.start_date.strftime("%Y-%m") == _now.strftime("%Y-%m"), all_events))
 
             paginator = Paginator(archive_events, 8)
             page = request.GET.get("page")
