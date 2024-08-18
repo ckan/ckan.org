@@ -1,0 +1,134 @@
+.filters-wrapper {
+    margin-bottom: 64px;
+
+    .container-sm {
+        margin-bottom: 64px;
+
+        .filters {
+            padding: 8px;
+            gap: 8px;
+            border-radius: 20px;
+            border: 1px solid $gray-border;
+            display: inline-flex;
+
+            .nav {
+                width: fit-content;
+                margin: 0 auto;
+                gap: 0px;
+                border-radius: 16px;
+                background-color: $white-smoke;
+
+                .nav-item {
+                    .nav-link {
+                        display: inline-block;
+                        padding: 16px 40px;
+                        gap: 16px;
+                        border-radius: 16px;
+                        border: 1.5px solid $white-smoke;
+                        color: $dark-gray;
+                        font-size: 20px;
+                        font-weight: 400;
+                        line-height: 28px;
+                        text-align: center;
+
+                        &:hover {
+                            border: 1.5px solid $gray-hover;
+                            background-color: $gray-hover !important;
+                        }
+
+                        &.active {
+                            background-color: $white-smoke;
+                            border: 1.5px solid $dark-gray;
+                            transition: border-color 0.5s;
+
+                            &:hover {
+                                border: 1.5px solid $gray-hover;
+                            }
+                        }
+
+                        &.upcoming {
+                            margin: 0;
+
+                            &::before {
+                                content: url("../img/events/live.svg");
+                                display: inline-block;
+                                padding: 4px 8px;
+                                border-radius: 200px;
+                                background-color: $white;
+                                margin-right: 16px;
+                            }
+                        }
+
+                        &.recent {
+                            &::before {
+                                content: url("../img/events/event.svg");
+                                display: inline-block;
+                                padding: 4px 8px;
+                                border-radius: 200px;
+                                background-color: $white;
+                                margin-right: 16px;
+                            }
+                        }
+
+                        &.archive {
+                            &::before {
+                                content: url("../img/events/archive.svg");
+                                display: inline-block;
+                                padding: 4px 10px;
+                                border-radius: 200px;
+                                background-color: $white;
+                                margin-right: 16px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .btn-search {
+                display: flex;
+                align-items: center;
+                padding: 0px 16px;
+                gap: 8px;
+                background-color: transparent;
+                color: $gray-nobel;
+                border: none;
+
+                svg {
+                    margin-right: 8px;
+                }
+
+                path {
+                    stroke: $gray-nobel;
+                }
+
+                &:hover {
+                    color: $dark-gray;
+
+                    path {
+                        fill: none;
+                        stroke: $dark-gray;
+                    }
+                }
+            }
+
+            .btn-calendar {
+                width: 70px;
+                padding: 16px;
+                border-radius: 16px;
+                border-width: 0;
+                background-color: $yellow;
+
+                &:before {
+                    content: url("../img/events/calendar.svg");
+                    padding: 2px 8px;
+                    border-radius: 200px;
+                    background-color: $white;
+                }
+
+                &:hover {
+                    background-color: $dark-gray;
+                }
+            }
+        }
+    }
+}

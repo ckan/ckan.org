@@ -1,0 +1,38 @@
+{% extends "events/page.html" %}
+
+{% load static i18n wagtailimages_tags wagtailcore_tags page_tags wagtailmetadata_tags %}
+
+
+{% block meta_tags %}{% meta_tags %}{% endblock %}
+
+{% block content %}
+    {% block header_content %}
+        <div class="container-sm t-center">
+            <div class="page-header">
+                <div class="page-title">
+                    <h1>{% translate "Events" %}</h1>
+                </div>
+                <div class="page-description">
+                    {% translate "Join us for our virtual events" %}
+                </div>
+            </div>
+        </div>
+    {% endblock header_content %}
+
+    {% block primary_content %}
+        {% block filters %}
+            {% include "events/snippets/filters.html" %}
+        {% endblock filters %}
+
+        {% block featured_events %}
+            {% include "events/snippets/section_featured.html" %}
+        {% endblock featured_events %}
+    {% endblock primary_content %}
+
+    {% block secondary_content %}
+    {% endblock secondary_content %}
+
+    {% block footer_content %}
+        {% include "events/snippets/invite.html" %}
+    {% endblock footer_content %}
+{% endblock content %}

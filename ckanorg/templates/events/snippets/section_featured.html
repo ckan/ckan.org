@@ -1,0 +1,49 @@
+{% load i18n %}
+
+
+<div class="container-sm t-center featured-section-wrapper">
+    <div class="featured-section-header">
+        <div class="section-title">
+            <h2>{% translate "Trending sessions" %}</h2>
+        </div>
+        <div class="section-description">
+            {% translate "Where we showcase CKAN to people - it's free to join and open to everyone" %}
+        </div>
+    </div>
+</div>
+
+<div class="container-lg t-center featured-section-wrapper">
+    <div class="row">
+        {% for event in featured_events %}
+            {% if forloop.counter < 5 %}
+                <div class="col-6 event-item">
+            {% else %}
+                <div class="col-6 event-item" hidden>
+            {% endif %}
+                <a class="event-link" href="{{ event.url }}">
+                    {% include "events/snippets/event_tile.html" with event=event %}
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="more-events">
+        <button id="btn-more-events" class="btn-more-events">
+            {% translate "MORE EVENTS" %}
+        </button>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function() {
+        $("#btn-more-events").click(function(){
+            $(".event-item").each(function(i, obj) {
+                if ($(this).attr("hidden")) {
+                    $(this).removeAttr("hidden");
+                    $(".more-events").hide();
+                }
+            });
+        });
+    });
+</script>

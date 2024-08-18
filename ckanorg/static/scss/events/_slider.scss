@@ -1,0 +1,280 @@
+// UPCOMING EVENTS SLIDER STYLES
+
+.upcoming-events{    
+    .event-header {
+        div {
+            .col-name {
+                border-bottom: 1px solid $gray-nobel;
+                font-size: 20px;
+                font-weight: 400;
+                line-height: 28px;
+                text-align: left;
+                color: $grey-sonic;
+                display: flex;
+                padding-bottom: 24px;
+                gap: 16px;
+
+                button {
+                    display: flex;
+                    border: none;
+                    background-color: transparent;
+                    color: $grey-sonic;
+
+                    &:hover {
+                        color: $dark-gray;
+                    }
+
+                    svg {
+                        margin: auto;
+
+                        path:hover {
+                            fill: $dark-gray;
+                            stroke: $dark-gray;
+                        }
+                    }
+
+                    &.btn-previous {
+                        svg {
+                            margin-right: 8px;
+                        }
+                    }
+
+                    &.btn-next {
+                        svg {
+                            margin-left: 8px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #event-slider-upcoming {
+        text-align: left;
+        color: $dark-gray;
+
+        .carousel-item {
+            .container {
+                .row {
+                    align-items: start;
+                    margin-bottom: 0;
+
+                    .event-slider-date {
+                        display: grid;
+                        gap: 16px;
+
+                        .date-month {
+                            font-size: 20px;
+                            font-weight: 400;
+                            line-height: 28px;
+                        }
+
+                        .date-day {
+                            font-size: 50px;
+                            font-weight: 500;
+                            line-height: 54px;
+                        }
+                    }
+
+                    .event-slider-time {
+                        .date-time {
+                            font-size: 20px;
+                            font-weight: 400;
+                            line-height: 28px;
+                            letter-spacing: 0.1em;
+                        }
+                    }
+
+                    .event-slider-action {
+                        display: grid;
+                        gap: 24px;
+
+                        .webinar-contact {
+                            .row {
+                                div {
+                                    padding: 0;
+
+                                    #contact {
+                                        width: auto;
+                                    }
+                                }
+                            }
+                        }
+
+                        .more-details {
+                            text-align: center;
+
+                            a {
+                                text-decoration: none;
+                                font-size: 20px;
+                                font-weight: 400;
+                                line-height: 28px;
+                                color: $dark-gray;
+
+                                &:hover {
+                                    text-decoration: underline;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// RECENT EVENTS SLIDER STYLES
+
+.recent-events{    
+    .event-header {
+        div {
+            .col-name {
+                font-size: 20px;
+                font-weight: 400;
+                line-height: 28px;
+                text-align: left;
+                color: $grey-sonic;
+                display: flex;
+                padding-bottom: 24px;
+                gap: 16px;
+
+                &.actions {
+                    justify-content: flex-end;
+
+                    button {
+                        display: flex;
+                        border: none;
+                        background-color: transparent;
+                        color: $grey-sonic;
+
+                        &:hover {
+                            color: $dark-gray;
+                        }
+
+                        svg {
+                            margin: auto;
+
+                            path:hover {
+                                fill: $dark-gray;
+                                stroke: $dark-gray;
+                            }
+                        }
+
+                        &.btn-previous {
+                            svg {
+                                margin-right: 8px;
+                            }
+                        }
+
+                        &.btn-next {
+                            svg {
+                                margin-left: 8px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #event-slider-recent {
+        text-align: left;
+        color: $dark-gray;
+
+        .carousel-item {
+            .container {
+                .row {
+                    align-items: start;
+                    margin-bottom: 0;
+
+                    .event-slider-info {
+                        display: grid;
+                        gap: 32px;
+                        text-align: left;
+
+                        .event-title {
+                            a {
+                                font-size: 40px;
+                                font-weight: 700;
+                                line-height: 52px;
+                                text-decoration: none;
+                                color: unset;
+                            }
+                        }
+
+                        .event-date {
+                            display: flex;
+                            gap: 8px;
+                            font-size: 18px;
+                            font-weight: 700;
+                            line-height: 24px;
+                            align-items: center;
+
+                            &:before {
+                                content: url("../img/events/event.svg");
+                                padding: 8px;
+                                border-radius: 8px;
+                                background-color: $light-blue;
+                                line-height: 16px;
+                            }
+                        }
+
+                        .event-description {
+                            font-size: 15px;
+                            font-weight: 400;
+                            line-height: 24px;
+                        }
+
+                        .event-action {
+                            .webinar-contact {
+                                .row {
+                                    div {
+                                        padding: 0;
+
+                                        #contact {
+                                            float: inline-start;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .btn-more-details {
+                                display: inline-flex;
+                                width: 210px;
+                                height: 50px;
+                                color: $white;
+                                background: $dark-gray;
+                                outline: none;
+                                border: 2px solid $dark-gray;
+                                padding: 7px 20px;
+                                line-height: 1.3;
+                                cursor: pointer;
+                                text-decoration: none;
+                                align-items: center;
+                                justify-content: center;
+                                transition: border 0.3s ease-in-out, color 0.3s ease-in-out, background 0.3s ease-in-out;
+                                border-radius: 100px;
+
+                                &:hover {
+                                    color: $dark-gray;
+                                    background: $white;
+                                }
+                            }
+                        }
+                    }
+
+                    .event-slider-image {
+                        display: grid;
+                        gap: 24px;
+
+                        img {
+                            max-height: 500px;
+                            border-radius: 24px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

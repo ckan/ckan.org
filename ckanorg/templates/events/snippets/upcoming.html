@@ -1,0 +1,80 @@
+{% load static i18n modal_tags %}
+
+
+<div class="upcoming-events">
+    <div class="container">
+        <div class="row event-header">
+            <div class="col-2">
+                <div class="col-name">{% translate "Date" %}</div>
+            </div>
+            <div class="col-2">
+                <div class="col-name">{% translate "Time" %}</div>
+            </div>
+            <div class="col-6">
+                <div class="col-name">{% translate "Upcoming Events" %}</div>
+            </div>
+            <div class="col-2">
+                <div class="col-name">
+                    <button class="btn-previous" type="button" data-bs-target="#event-slider-upcoming" data-bs-slide="prev">
+                        <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 8H1M1 8L8 15M1 8L8 1" stroke="#757575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class=""> Prev</span>
+                    </button>
+                    <button class="btn-next" type="button" data-bs-target="#event-slider-upcoming" data-bs-slide="next">
+                        <span class="">Next </span>
+                        <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 8H21M21 8L14 1M21 8L14 15" stroke="#757575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="event-slider-upcoming" class="carousel slide" data-bs-touch="false">
+        <div class="carousel-inner">
+            {% for event in upcoming_events %}
+                <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}" id="event{{ forloop.counter }}">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-2">
+                                <div class="event-slider-date">
+                                    <div class="date-month">
+                                        {{ event.start_date|date:"F" }}
+                                    </div>
+                                    <div class="date-day">
+                                        {{ event.start_date|date:"j" }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="event-slider-date">
+                                    <div class="date-time">
+                                        {{ event.start_date|date:"h:i A T" }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                {% include "events/snippets/slider_event_tile.html" with event=event %}
+                            </div>
+                            <div class="col-2">
+                                <div class="event-slider-action">
+                                    <div class="webinar-contact">
+                                        {% form_modal form_name="Webinar Form" %}
+                                    </div>
+
+                                    <div class="more-details">
+                                        <a class="btn-more-details" href="{{ event.url }}">
+                                            {% translate "More details" %}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

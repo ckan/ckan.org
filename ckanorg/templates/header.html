@@ -8,7 +8,7 @@
             <div class="logo">
                 <a href="/"><img src="{% static 'img/ckan-dpg.svg' %}" alt="Logotype" width="160" height="44"></a>
             </div>
-            <nav class="nav">
+            <nav class="nav justify-content-end">
                 <div class="nav-opener"><span></span></div>
                 <div class="nav-drop">
                     <ul class="nav-menu">
@@ -36,10 +36,12 @@
                                 <li {% if active%} class="active" {% endif %}>
                                     <a href="{{ item.link }}"
                                     {% if item.open_in_new_tab %}target="_blank"{% endif %}
-                                    {% if item.show_as_button == True %}class="btn btn-sm btn-grey"{% endif %}
-                                    >{% if item.svg_icon and item.icon_before_text %}{{item.svg_icon|safe}}{% endif %}
-                                    {{ item.link_title }}{% if item.svg_icon and not item.icon_before_text %}
-                                    {{item.svg_icon|safe}}{%endif%}</a>
+                                    {% if item.show_as_button == True %}class="btn btn-sm btn-grey btn-link"{% endif %}
+                                    >
+                                        {% if item.svg_icon and item.icon_before_text %}{{item.svg_icon|safe}}{% endif %}
+                                        {{ item.link_title }}{% if item.svg_icon and not item.icon_before_text %}
+                                        {{item.svg_icon|safe}}{%endif%}
+                                    </a>
                                 </li>
                             {% endif %}
                         {% endfor %}
