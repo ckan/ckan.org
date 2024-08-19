@@ -5512,6 +5512,10 @@ img.linkdigital-logo {
   text-decoration: none;
   color: unset;
 }
+.archive-section-wrapper .more-events,
+.featured-section-wrapper .more-events {
+  padding-bottom: 28px;
+}
 .archive-section-wrapper .more-events .btn-more-events,
 .featured-section-wrapper .more-events .btn-more-events {
   border: none;
