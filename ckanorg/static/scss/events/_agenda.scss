@@ -10,6 +10,11 @@
                 font-weight: 700;
                 line-height: 28px;
                 margin-bottom: 64px;
+
+                @media all and (max-width: 768px) {
+                    font-size: 18px;
+                    margin-bottom: 40px;
+                }
             }
 
             .event-agenda-table {
@@ -29,6 +34,20 @@
                             display: flex;
                             padding-left: 0;
                             padding-bottom: 24px;
+
+                            @media all and (max-width: 768px) {
+                                font-size: 16px;
+                            }
+
+                            @media all and (max-width: 425px) {
+                                padding-bottom: 8px;
+                            }
+
+                            &.col-9 {
+                                @media all and (max-width: 425px) {
+                                    display: none;
+                                }
+                            }
                         }
                     }
                 }
@@ -40,6 +59,10 @@
                         margin-bottom: 0;
                         gap: 16px;
 
+                        @media all and (max-width: 425px) {
+                            gap: 0;
+                        }
+
                         .col-3 {
                             padding: 24px 0;
                             border-bottom: 1px solid $gray-nobel;
@@ -49,6 +72,10 @@
                             text-align: left;
                             color: $grey-sonic;
                             display: grid;
+
+                            @media all and (max-width: 768px) {
+                                font-size: 16px;
+                            }
                         }
 
                         .col-9 {
@@ -60,6 +87,10 @@
                             text-align: left;
                             color: $grey-sonic;
                             display: grid;
+
+                            @media all and (max-width: 768px) {
+                                font-size: 16px;
+                            }
 
                             .accordion {
                                 .accordion-item {
@@ -93,6 +124,11 @@
                                                     font-weight: 700;
                                                     line-height: 40px;
                                                     text-align: left;
+
+                                                    @media all and (max-width: 768px) {
+                                                        font-size: 18px;
+                                                        line-height: 28px;
+                                                    }
                                                 }
 
                                                 .video-session-speakers {
@@ -102,6 +138,11 @@
                                                     line-height: 24px;
                                                     text-align: left;
                                                     color: $dark-gray;
+
+                                                    @media all and (max-width: 768px) {
+                                                        font-size: 15px;
+                                                        line-height: 24px;
+                                                    }
 
                                                     ul {
                                                         display: flex;
@@ -119,6 +160,11 @@
                                             gap: 32px;
                                             color: $red-border;
 
+                                            @media all and (max-width: 425px) {
+                                                flex-direction: column;
+                                                gap: 8px;
+                                            }
+
                                             a, button {
                                                 display: flex;
                                                 align-items: center;
@@ -126,6 +172,10 @@
                                                 font-size: 15px;
                                                 font-weight: 700;
                                                 line-height: 26px;
+
+                                                @media all and (max-width: 425px) {
+                                                    padding: 0;
+                                                }
 
                                                 &:visited {
                                                     color: $red-border;

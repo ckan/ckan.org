@@ -20,13 +20,13 @@
                         {{ event.post_subtitle }}
                     </div>
 
-                    <div class="event-action">
-                        {% if event.get_event_status %}
+                    {% if event.get_event_status %}
+                        <div class="event-action">
                             <div class="webinar-contact">
                                 {% form_modal form_name="Webinar Form" %}
                             </div>
-                        {% endif %}
-                    </div>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-8">

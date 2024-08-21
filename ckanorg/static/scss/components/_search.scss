@@ -104,6 +104,10 @@
             height: auto;
             padding: 0;
             z-index: 10;
+
+            @media all and (max-width: 425px) {
+                margin-bottom: 0;
+            }
         }
 
         svg {

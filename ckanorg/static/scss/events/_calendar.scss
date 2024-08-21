@@ -17,6 +17,10 @@
             border-radius: 16px;
             padding: 16px;
 
+            @media all and (max-width: 425px) {
+                padding: 0;
+            }
+
             .calendar-wrapper {
                 position: relative;
 
@@ -29,6 +33,10 @@
                     &#btn-prev-month {
                         left: 15px;
 
+                        @media all and (max-width: 425px) {
+                            left: 5px;
+                        }
+
                         &::before {
                             content: url("../img/events/arrow_up.svg");
                             display: inline-block;
@@ -38,6 +46,10 @@
 
                     &#btn-next-month {
                         right: 15px;
+
+                        @media all and (max-width: 425px) {
+                            right: 5px;
+                        }
 
                         &::before {
                             content: url("../img/events/arrow_up.svg");
@@ -63,6 +75,10 @@
 
                             th {
                                 padding: 20px;
+
+                                @media all and (max-width: 425px) {
+                                    padding: 8px;
+                                }
 
                                 &.month {
                                     padding: 16px;
@@ -93,6 +109,14 @@
                                 width: 66px;
                                 height: 66px;
 
+                                @media all and (max-width: 425px) {
+                                    padding: 8px;
+                                    line-height: 14px;
+                                    width: 50px;
+                                    height: 40px;
+                                    border: 1px solid transparent;
+                                }
+
                                 &.selected {
                                     border: 1px solid $dark-gray;
                                     border-radius: 8px;
@@ -104,6 +128,11 @@
                                         position: absolute;
                                         bottom: 5px;
                                         left: 45%;
+
+                                        @media all and (max-width: 425px) {
+                                            bottom: 2px;
+                                            left: 38%;
+                                        }
                                     }
                                 }
 
@@ -118,6 +147,11 @@
                                             position: absolute;
                                             bottom: 5px;
                                             left: 45%;
+
+                                            @media all and (max-width: 425px) {
+                                                bottom: 2px;
+                                                left: 38%;
+                                            }
                                         }
                                     }
                                 }
@@ -133,6 +167,10 @@
             padding-top: 16px;
             padding-bottom: 16px;
 
+            @media all and (max-width: 425px) {
+                width: 100%;
+            }
+
             .calendar-event-info {
                 overflow-y: auto;
                 max-height: 450px;
@@ -144,11 +182,26 @@
                     color: $dark-gray;
                     margin-bottom: 36px;
 
+                    @media all and (max-width: 425px) {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 8px;
+                        margin-bottom: 0;
+                    }
+
                     .info-date-day {
                         font-size: 96px;
                         font-weight: 700;
                         line-height: 96px;
                         margin-bottom: 8px;
+
+                        @media all and (max-width: 425px) {
+                            font-size: 48px;
+                            font-weight: 700;
+                            line-height: 56px;
+                            margin-bottom: 0;
+                        }
                     }
 
                     .info-date-weekday {
@@ -157,14 +210,21 @@
                         line-height: 28px;
                         letter-spacing: 0.1em;
                         text-transform: uppercase;
+
+                        @media all and (max-width: 425px) {
+                            font-size: 16px;
+                            font-weight: 400;
+                            line-height: 28px;
+                            letter-spacing: 0.1em;
+                        }
                     }
                 }
 
                 .info-event-list {
                     .info-event-item {
                         display: none;
-                        margin: 24px 0px;
-                        padding: 0 5px;
+                        padding: 24px 5px;
+                        border-bottom: 1px solid $gray-border;
                         text-align: left;
 
                         .item-title {

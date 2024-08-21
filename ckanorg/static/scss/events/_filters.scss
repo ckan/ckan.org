@@ -4,6 +4,16 @@
     .container-sm {
         margin-bottom: 64px;
 
+        @media all and (max-width: 768px) {
+            padding: 0;
+            margin-bottom: 40px;
+        }
+
+        @media all and (max-width: 425px) {
+            padding: 0;
+            margin-bottom: 40px;
+        }
+
         .filters {
             padding: 8px;
             gap: 8px;
@@ -11,77 +21,9 @@
             border: 1px solid $gray-border;
             display: inline-flex;
 
-            .nav {
-                width: fit-content;
-                margin: 0 auto;
-                gap: 0px;
-                border-radius: 16px;
-                background-color: $white-smoke;
-
-                .nav-item {
-                    .nav-link {
-                        display: inline-block;
-                        padding: 16px 40px;
-                        gap: 16px;
-                        border-radius: 16px;
-                        border: 1.5px solid $white-smoke;
-                        color: $dark-gray;
-                        font-size: 20px;
-                        font-weight: 400;
-                        line-height: 28px;
-                        text-align: center;
-
-                        &:hover {
-                            border: 1.5px solid $gray-hover;
-                            background-color: $gray-hover !important;
-                        }
-
-                        &.active {
-                            background-color: $white-smoke;
-                            border: 1.5px solid $dark-gray;
-                            transition: border-color 0.5s;
-
-                            &:hover {
-                                border: 1.5px solid $gray-hover;
-                            }
-                        }
-
-                        &.upcoming {
-                            margin: 0;
-
-                            &::before {
-                                content: url("../img/events/live.svg");
-                                display: inline-block;
-                                padding: 4px 8px;
-                                border-radius: 200px;
-                                background-color: $white;
-                                margin-right: 16px;
-                            }
-                        }
-
-                        &.recent {
-                            &::before {
-                                content: url("../img/events/event.svg");
-                                display: inline-block;
-                                padding: 4px 8px;
-                                border-radius: 200px;
-                                background-color: $white;
-                                margin-right: 16px;
-                            }
-                        }
-
-                        &.archive {
-                            &::before {
-                                content: url("../img/events/archive.svg");
-                                display: inline-block;
-                                padding: 4px 10px;
-                                border-radius: 200px;
-                                background-color: $white;
-                                margin-right: 16px;
-                            }
-                        }
-                    }
-                }
+            @media all and (max-width: 425px) {
+                display: block;
+                border: none;
             }
 
             .btn-search {
@@ -92,6 +34,12 @@
                 background-color: transparent;
                 color: $gray-nobel;
                 border: none;
+
+                @media all and (max-width: 425px) {
+                    padding: 6px 14px;
+                    font-size: 15px;
+                    margin: 8px auto;
+                }
 
                 svg {
                     margin-right: 8px;
@@ -111,26 +59,156 @@
                 }
             }
 
-            .btn-calendar {
-                width: 70px;
-                padding: 16px;
-                border-radius: 16px;
-                border-width: 0;
-                background-color: $yellow;
+            .row {
+                margin-bottom: 0;
+                gap: 8px;
 
-                &:before {
-                    content: url("../img/events/calendar.svg");
-                    padding: 2px 8px;
-                    border-radius: 200px;
-                    background-color: $white;
+                @media all and (max-width: 425px) {
+                    padding: 8px;
+                    border-radius: 16px;
+                    border: 1px solid $gray-border;
                 }
 
-                &:hover {
-                    background-color: $light-yellow;
+                .nav {
+                    width: fit-content;
+                    margin: 0 auto;
+                    gap: 0px;
+                    border-radius: 16px;
+                    background-color: $white-smoke;
+                    padding-left: 0;
+                    padding-right: 0;
+                    flex-flow: row;
+
+                    @media all and (max-width: 768px) {
+                        flex-flow: row;
+                    }
+
+                    @media all and (max-width: 425px) {
+                        margin: 0;
+                        flex-grow: 1;
+                        border-radius: 12px;
+                        justify-content: space-between !important;
+                    }
+
+                    .nav-item {
+
+                        .nav-link {
+                            display: inline-block;
+                            padding: 16px 40px;
+                            gap: 16px;
+                            border-radius: 16px;
+                            border: 1.5px solid $white-smoke;
+                            color: $dark-gray;
+                            font-size: 20px;
+                            font-weight: 400;
+                            line-height: 28px;
+                            text-align: center;
+
+                            @media all and (max-width: 768px) {
+                                padding: 16px 16px;
+                            }
+
+                            @media all and (max-width: 425px) {
+                                padding: 6px 14px;
+                                font-size: 15px;
+                                border-radius: 12px;
+
+                                &::before {
+                                    display: none !important;
+                                }
+
+                                span {
+                                    margin: 0 auto;
+                                }
+                            }
+
+                            &:hover {
+                                border: 1.5px solid $gray-hover;
+                                background-color: $gray-hover !important;
+                            }
+
+                            &.active {
+                                background-color: $white-smoke;
+                                border: 1.5px solid $dark-gray;
+                                transition: border-color 0.5s;
+
+                                &:hover {
+                                    border: 1.5px solid $gray-hover;
+
+                                    @media all and (max-width: 768px) {
+                                        background-color: $white-smoke !important;
+                                        border: 1.5px solid $dark-gray;
+                                    }
+                                }
+                            }
+
+                            &.upcoming {
+                                margin: 0;
+
+                                &::before {
+                                    content: url("../img/events/live.svg");
+                                    display: inline-block;
+                                    padding: 4px 8px;
+                                    border-radius: 200px;
+                                    background-color: $white;
+                                    margin-right: 16px;
+                                }
+                            }
+
+                            &.recent {
+                                &::before {
+                                    content: url("../img/events/event.svg");
+                                    display: inline-block;
+                                    padding: 4px 8px;
+                                    border-radius: 200px;
+                                    background-color: $white;
+                                    margin-right: 16px;
+                                }
+                            }
+
+                            &.archive {
+                                &::before {
+                                    content: url("../img/events/archive.svg");
+                                    display: inline-block;
+                                    padding: 4px 10px;
+                                    border-radius: 200px;
+                                    background-color: $white;
+                                    margin-right: 16px;
+                                }
+                            }
+                        }
+                    }
                 }
 
-                &.selected {
-                    background-color: $dark-gray;
+                .btn-calendar {
+                    width: 70px;
+                    padding: 16px;
+                    border-radius: 16px;
+                    border-width: 0;
+                    background-color: $yellow;
+                    line-height: 38px;
+
+                    @media all and (max-width: 425px) {
+                        padding: 8px;
+                        width: unset;
+                        border-radius: 12px;
+                        line-height: initial;
+                    }
+
+                    &:before {
+                        content: url("../img/events/calendar.svg");
+                        padding: 2px 8px;
+                        border-radius: 200px;
+                        background-color: $white;
+                    }
+
+                    &:hover {
+                        background-color: $light-yellow;
+                    }
+
+                    &.selected {
+                        background-color: $dark-gray;
+                    }
                 }
             }
         }

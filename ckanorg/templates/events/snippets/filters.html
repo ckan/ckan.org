@@ -12,24 +12,26 @@
                 </svg>
                 {% translate "Search" %}
             </button>
-            <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link upcoming {% if not querystring|cut:"?" %}active{% endif %}" id="pills-upcoming-tab" data-bs-toggle="pill" data-bs-target="#pills-upcoming" type="button" role="tab" aria-controls="pills-upcoming" aria-selected="true">
-                        {% translate "Upcoming" %}
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link recent" id="pills-recent-tab" data-bs-toggle="pill" data-bs-target="#pills-recent" type="button" role="tab" aria-controls="pills-recent" aria-selected="false">
-                        {% translate "Recent" %}
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link archive {% if querystring|cut:"?" %}active{% endif %}" id="pills-archive-tab" data-bs-toggle="pill" data-bs-target="#pills-archive" type="button" role="tab" aria-controls="pills-archive" aria-selected="false">
-                        {% translate "Archive" %}
-                    </button>
-                </li>
-            </ul>
-            <button id="btn-calendar" type="button" class="btn-calendar"></button>
+            <div class="row">
+                <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link upcoming {% if not querystring|cut:"?" %}active{% endif %}" id="pills-upcoming-tab" data-bs-toggle="pill" data-bs-target="#pills-upcoming" type="button" role="tab" aria-controls="pills-upcoming" aria-selected="true">
+                            <span>{% translate "Upcoming" %}</span>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link recent" id="pills-recent-tab" data-bs-toggle="pill" data-bs-target="#pills-recent" type="button" role="tab" aria-controls="pills-recent" aria-selected="false">
+                            <span>{% translate "Recent" %}</span>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link archive {% if querystring|cut:"?" %}active{% endif %}" id="pills-archive-tab" data-bs-toggle="pill" data-bs-target="#pills-archive" type="button" role="tab" aria-controls="pills-archive" aria-selected="false">
+                            <span>{% translate "Archive" %}</span>
+                        </button>
+                    </li>
+                </ul>
+                <button id="btn-calendar" type="button" class="btn-calendar"></button>
+            </div>
         </div>
 
         <div class="search-events">
