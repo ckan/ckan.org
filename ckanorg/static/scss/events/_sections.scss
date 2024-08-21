@@ -4,8 +4,16 @@
 .featured-section-wrapper {
     margin-bottom: 64px;
 
+    @media all and (max-width: 425px) {
+        margin-bottom: 12px;
+    }
+
     .featured-section-header {
         margin-bottom: 56px;
+
+        @media all and (max-width: 425px) {
+            margin-bottom: 0;
+        }
 
         .section_title {
             font-size: 40px;
@@ -28,10 +36,27 @@
         justify-content: left;
         align-items: stretch;
 
+        @media all and (max-width: 768px) {
+            display: block;
+        }
+
+        @media all and (max-width: 425px) {
+            margin-bottom: 24px;
+        }
+
         .col-6 {
             display: flex;
             align-items: stretch;
             padding: 12px;
+
+            @media all and (max-width: 768px) {
+                width: 100%;
+            }
+
+            @media all and (max-width: 425px) {
+                padding-right: 0;
+                padding-left: 0;
+            }
 
             .event-link {
                 display: flex;
@@ -43,6 +68,10 @@
 
     .more-events {
         padding-bottom: 28px;
+
+        @media all and (max-width: 425px) {
+            padding-bottom: 40px;
+        }
 
         .btn-more-events {
             border: none;
@@ -57,5 +86,83 @@
 
     .pagination-holder.indent {
         margin-bottom: 120px;
+    }
+}
+
+.archive-events {
+    .event-header {
+        @media all and (max-width: 768px) {
+            margin-bottom: 24px;
+        }
+
+        .col-name {
+            color: $grey-sonic; 
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 28px;
+            text-align: left;
+        }
+    }
+}
+
+@media all and (max-width: 768px) {
+    .archive-section-wrapper {
+        padding-right: 0;
+        padding-left: 0;
+
+        .event-item:first-of-type {
+            padding-top: 0;
+        }
+
+        .pagination-holder.indent {
+            margin-top: 40px;
+            margin-bottom: 64px;
+
+            .pagination {
+                li {
+                    display: flex;
+                    align-items: center;
+                }
+            }
+        }
+    }
+}
+
+@media all and (max-width: 425px) {
+    .archive-events {
+        .event-header {
+            display: none;
+        }
+    }
+
+    .archive-section-wrapper {
+        padding-right: 0;
+        padding-left: 0;
+
+        .event-item:first-of-type {
+            padding-top: 0;
+        }
+
+        .pagination-holder.indent {
+            margin-top: 24px;
+            margin-bottom: 40px;
+
+            .pagination {
+                li {
+                    display: flex;
+                    align-items: center;
+                }
+            }
+        }
+    }
+}
+
+.event-details {
+    .col-4 {
+        width: 100%;
+    }
+
+    .col-name {
+        color: $grey-sonic;
     }
 }
