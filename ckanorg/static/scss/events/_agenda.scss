@@ -11,7 +11,7 @@
                 line-height: 28px;
                 margin-bottom: 64px;
 
-                @media all and (max-width: 768px) {
+                @media all and (max-width: 910px) {
                     font-size: 18px;
                     margin-bottom: 40px;
                 }
@@ -35,7 +35,7 @@
                             padding-left: 0;
                             padding-bottom: 24px;
 
-                            @media all and (max-width: 768px) {
+                            @media all and (max-width: 910px) {
                                 font-size: 16px;
                             }
 
@@ -73,7 +73,7 @@
                             color: $grey-sonic;
                             display: grid;
 
-                            @media all and (max-width: 768px) {
+                            @media all and (max-width: 910px) {
                                 font-size: 16px;
                             }
                         }
@@ -88,7 +88,7 @@
                             color: $grey-sonic;
                             display: grid;
 
-                            @media all and (max-width: 768px) {
+                            @media all and (max-width: 910px) {
                                 font-size: 16px;
                             }
 
@@ -125,7 +125,7 @@
                                                     line-height: 40px;
                                                     text-align: left;
 
-                                                    @media all and (max-width: 768px) {
+                                                    @media all and (max-width: 910px) {
                                                         font-size: 18px;
                                                         line-height: 28px;
                                                     }
@@ -139,7 +139,7 @@
                                                     text-align: left;
                                                     color: $dark-gray;
 
-                                                    @media all and (max-width: 768px) {
+                                                    @media all and (max-width: 910px) {
                                                         font-size: 15px;
                                                         line-height: 24px;
                                                     }
