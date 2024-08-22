@@ -15,7 +15,7 @@
                     width: 50%;
                 }
 
-                @media all and (max-width: 768px) {
+                @media all and (max-width: 910px) {
                     .date {
                         width: 100% !important;
                     }
@@ -31,7 +31,7 @@
                 align-items: end;
                 gap: 12px;
 
-                @media all and (max-width: 768px) {
+                @media all and (max-width: 910px) {
                     gap: 0;
 
                     .col-9.info {
@@ -138,7 +138,7 @@
                             width: 50%;
                         }
 
-                        @media all and (max-width: 768px) {
+                        @media all and (max-width: 910px) {
                             display: block;
 
                             .col-6 {
@@ -181,7 +181,7 @@
                     .col-8 {
                         display: flex;
 
-                        @media all and (max-width: 768px) {
+                        @media all and (max-width: 910px) {
                             display: block;
 
                             .col-9.info {
@@ -301,7 +301,7 @@
 
 .recent-events{    
     .event-header {
-        @media all and (max-width: 768px) {
+        @media all and (max-width: 910px) {
             flex-direction: column-reverse;
 
             .col-4 {
@@ -382,7 +382,7 @@
                     align-items: start;
                     margin-bottom: 0;
 
-                    @media all and (max-width: 768px) {
+                    @media all and (max-width: 910px) {
                         flex-direction: column-reverse;
                         gap: 40px;
 
@@ -400,7 +400,7 @@
                         gap: 32px;
                         text-align: left;
 
-                        @media all and (max-width: 768px) {
+                        @media all and (max-width: 910px) {
                             text-align: center;
                         }
 
@@ -412,7 +412,7 @@
                                 text-decoration: none;
                                 color: unset;
 
-                                @media all and (max-width: 768px) {
+                                @media all and (max-width: 910px) {
                                     font-size: 30px;
                                 }
                             }
@@ -426,7 +426,7 @@
                             line-height: 24px;
                             align-items: center;
 
-                            @media all and (max-width: 768px) {
+                            @media all and (max-width: 910px) {
                                 justify-content: center;
                                 font-size: 15px;
                             }
@@ -445,7 +445,7 @@
                             font-weight: 400;
                             line-height: 24px;
 
-                            @media all and (max-width: 768px) {
+                            @media all and (max-width: 910px) {
                                 text-align: left;
                             }
                         }

@@ -5141,7 +5141,7 @@ img.linkdigital-logo {
 .filters-wrapper .container-sm {
   margin-bottom: 64px;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .filters-wrapper .container-sm {
     padding: 0;
     margin-bottom: 40px;
@@ -5217,7 +5217,7 @@ img.linkdigital-logo {
   padding-right: 0;
   flex-flow: row;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .filters-wrapper .container-sm .filters .row .nav {
     flex-flow: row;
   }
@@ -5242,7 +5242,7 @@ img.linkdigital-logo {
   line-height: 28px;
   text-align: center;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .filters-wrapper .container-sm .filters .row .nav .nav-item .nav-link {
     padding: 16px 16px;
   }
@@ -5272,7 +5272,7 @@ img.linkdigital-logo {
 .filters-wrapper .container-sm .filters .row .nav .nav-item .nav-link.active:hover {
   border: 1.5px solid #d5d5d5;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .filters-wrapper .container-sm .filters .row .nav .nav-item .nav-link.active:hover {
     background-color: #f3f3f3 !important;
     border: 1.5px solid #333;
@@ -5344,7 +5344,7 @@ img.linkdigital-logo {
   align-items: center;
   margin-bottom: 64px;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .container-lg .invite-card {
     padding: 40px 24px;
   }
@@ -5359,7 +5359,7 @@ img.linkdigital-logo {
   display: flex;
   margin-bottom: 0;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .container-lg .invite-card .row {
     display: block;
   }
@@ -5375,7 +5375,7 @@ img.linkdigital-logo {
   line-height: 47.73px;
   margin-bottom: 12px;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .container-lg .invite-card .row .invite-info .invite-info-title {
     font-size: 36px;
   }
@@ -5407,7 +5407,7 @@ img.linkdigital-logo {
   justify-content: center;
   width: unset;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .container-lg .invite-card .row .invite-action {
     margin-top: 24px;
     justify-content: left;
@@ -5439,7 +5439,7 @@ img.linkdigital-logo {
 .upcoming-events .event-header div.col-4 .col-2 {
   width: 50%;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .upcoming-events .event-header div.col-4 .date {
     width: 100% !important;
   }
@@ -5452,7 +5452,7 @@ img.linkdigital-logo {
   align-items: end;
   gap: 12px;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .upcoming-events .event-header div.col-8 {
     gap: 0;
   }
@@ -5538,7 +5538,7 @@ img.linkdigital-logo {
 .upcoming-events #event-slider-upcoming .carousel-item .container .row .col-4 .col-6, .upcoming-events #event-slider-upcoming .carousel-item .container-lg .row .col-4 .col-6, .upcoming-events #event-slider-upcoming .carousel-item .container-md .row .col-4 .col-6, .upcoming-events #event-slider-upcoming .carousel-item .container-sm .row .col-4 .col-6 {
   width: 50%;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .upcoming-events #event-slider-upcoming .carousel-item .container .row .col-4, .upcoming-events #event-slider-upcoming .carousel-item .container-lg .row .col-4, .upcoming-events #event-slider-upcoming .carousel-item .container-md .row .col-4, .upcoming-events #event-slider-upcoming .carousel-item .container-sm .row .col-4 {
     display: block;
   }
@@ -5577,7 +5577,7 @@ img.linkdigital-logo {
 .upcoming-events #event-slider-upcoming .carousel-item .container .row .col-8, .upcoming-events #event-slider-upcoming .carousel-item .container-lg .row .col-8, .upcoming-events #event-slider-upcoming .carousel-item .container-md .row .col-8, .upcoming-events #event-slider-upcoming .carousel-item .container-sm .row .col-8 {
   display: flex;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .upcoming-events #event-slider-upcoming .carousel-item .container .row .col-8, .upcoming-events #event-slider-upcoming .carousel-item .container-lg .row .col-8, .upcoming-events #event-slider-upcoming .carousel-item .container-md .row .col-8, .upcoming-events #event-slider-upcoming .carousel-item .container-sm .row .col-8 {
     display: block;
   }
@@ -5664,7 +5664,7 @@ img.linkdigital-logo {
   text-decoration: underline;
 }
 
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .recent-events .event-header {
     flex-direction: column-reverse;
   }
@@ -5725,7 +5725,7 @@ img.linkdigital-logo {
   align-items: start;
   margin-bottom: 0;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .recent-events #event-slider-recent .carousel-item .container .row, .recent-events #event-slider-recent .carousel-item .container-lg .row, .recent-events #event-slider-recent .carousel-item .container-md .row, .recent-events #event-slider-recent .carousel-item .container-sm .row {
     flex-direction: column-reverse;
     gap: 40px;
@@ -5742,7 +5742,7 @@ img.linkdigital-logo {
   gap: 32px;
   text-align: left;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .recent-events #event-slider-recent .carousel-item .container .row .event-slider-info, .recent-events #event-slider-recent .carousel-item .container-lg .row .event-slider-info, .recent-events #event-slider-recent .carousel-item .container-md .row .event-slider-info, .recent-events #event-slider-recent .carousel-item .container-sm .row .event-slider-info {
     text-align: center;
   }
@@ -5754,7 +5754,7 @@ img.linkdigital-logo {
   text-decoration: none;
   color: unset;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .recent-events #event-slider-recent .carousel-item .container .row .event-slider-info .event-title a, .recent-events #event-slider-recent .carousel-item .container-lg .row .event-slider-info .event-title a, .recent-events #event-slider-recent .carousel-item .container-md .row .event-slider-info .event-title a, .recent-events #event-slider-recent .carousel-item .container-sm .row .event-slider-info .event-title a {
     font-size: 30px;
   }
@@ -5767,7 +5767,7 @@ img.linkdigital-logo {
   line-height: 24px;
   align-items: center;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .recent-events #event-slider-recent .carousel-item .container .row .event-slider-info .event-date, .recent-events #event-slider-recent .carousel-item .container-lg .row .event-slider-info .event-date, .recent-events #event-slider-recent .carousel-item .container-md .row .event-slider-info .event-date, .recent-events #event-slider-recent .carousel-item .container-sm .row .event-slider-info .event-date {
     justify-content: center;
     font-size: 15px;
@@ -5785,7 +5785,7 @@ img.linkdigital-logo {
   font-weight: 400;
   line-height: 24px;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .recent-events #event-slider-recent .carousel-item .container .row .event-slider-info .event-description, .recent-events #event-slider-recent .carousel-item .container-lg .row .event-slider-info .event-description, .recent-events #event-slider-recent .carousel-item .container-md .row .event-slider-info .event-description, .recent-events #event-slider-recent .carousel-item .container-sm .row .event-slider-info .event-description {
     text-align: left;
   }
@@ -5867,7 +5867,7 @@ img.linkdigital-logo {
   justify-content: left;
   align-items: stretch;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .archive-section-wrapper .row,
   .featured-section-wrapper .row {
     display: block;
@@ -5885,7 +5885,7 @@ img.linkdigital-logo {
   align-items: stretch;
   padding: 12px;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .archive-section-wrapper .row .col-6,
   .featured-section-wrapper .row .col-6 {
     width: 100%;
@@ -5929,7 +5929,7 @@ img.linkdigital-logo {
   margin-bottom: 120px;
 }
 
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .archive-events .event-header {
     margin-bottom: 24px;
   }
@@ -5942,7 +5942,7 @@ img.linkdigital-logo {
   text-align: left;
 }
 
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .archive-section-wrapper {
     padding-right: 0;
     padding-left: 0;
@@ -6032,7 +6032,7 @@ img.linkdigital-logo {
 .event-tile .tile-content .tile-event-speakers .row-speakers {
   margin: 0;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .event-tile .tile-content .tile-event-speakers .row-speakers {
     display: flex;
   }
@@ -6182,7 +6182,7 @@ img.linkdigital-logo {
   gap: 40px;
   margin-bottom: 96px;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .event-card {
     margin-bottom: 40px;
   }
@@ -6191,7 +6191,7 @@ img.linkdigital-logo {
   align-items: start;
   margin-bottom: 0;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .event-card .container .row, .event-card .container-lg .row, .event-card .container-md .row, .event-card .container-sm .row {
     flex-direction: column-reverse;
     gap: 40px;
@@ -6223,12 +6223,12 @@ img.linkdigital-logo {
   gap: 32px;
   text-align: left;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .event-card .container .row .event-info, .event-card .container-lg .row .event-info, .event-card .container-md .row .event-info, .event-card .container-sm .row .event-info {
     margin-bottom: 0;
   }
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .event-card .container .row .event-info .event-title, .event-card .container-lg .row .event-info .event-title, .event-card .container-md .row .event-info .event-title, .event-card .container-sm .row .event-info .event-title {
     text-align: center;
   }
@@ -6240,7 +6240,7 @@ img.linkdigital-logo {
   text-decoration: none;
   color: unset;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .event-card .container .row .event-info .event-title a, .event-card .container-lg .row .event-info .event-title a, .event-card .container-md .row .event-info .event-title a, .event-card .container-sm .row .event-info .event-title a {
     font-size: 30px;
     line-height: 40px;
@@ -6260,7 +6260,7 @@ img.linkdigital-logo {
   line-height: 24px;
   align-items: center;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .event-card .container .row .event-info .event-date, .event-card .container-lg .row .event-info .event-date, .event-card .container-md .row .event-info .event-date, .event-card .container-sm .row .event-info .event-date {
     justify-content: center;
     font-size: 15px;
@@ -6279,7 +6279,7 @@ img.linkdigital-logo {
   font-weight: 400;
   line-height: 24px;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .event-card .container .row .event-info .event-action, .event-card .container-lg .row .event-info .event-action, .event-card .container-md .row .event-info .event-action, .event-card .container-sm .row .event-info .event-action {
     margin: 0 auto;
   }
@@ -6317,7 +6317,7 @@ img.linkdigital-logo {
   display: grid;
   gap: 24px;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .event-info .container, .event-info .container-lg, .event-info .container-md, .event-info .container-sm {
     gap: 40px;
   }
@@ -6331,7 +6331,7 @@ img.linkdigital-logo {
   align-items: start;
   justify-content: left;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .event-info .container .row, .event-info .container-lg .row, .event-info .container-md .row, .event-info .container-sm .row {
     margin-bottom: 0;
   }
@@ -6349,7 +6349,7 @@ img.linkdigital-logo {
   line-height: 28px;
   text-align: left;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .event-info .container .row .col-3, .event-info .container-lg .row .col-3, .event-info .container-md .row .col-3, .event-info .container-sm .row .col-3 {
     font-size: 18px;
     font-weight: 700;
@@ -6378,7 +6378,7 @@ img.linkdigital-logo {
 .event-info .container .row .col-9 p, .event-info .container-lg .row .col-9 p, .event-info .container-md .row .col-9 p, .event-info .container-sm .row .col-9 p {
   margin: 0;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .event-info .container .row .col-9 p, .event-info .container-lg .row .col-9 p, .event-info .container-md .row .col-9 p, .event-info .container-sm .row .col-9 p {
     font-size: 15px;
     font-weight: 400;
@@ -6440,7 +6440,7 @@ img.linkdigital-logo {
   font-weight: 700;
   margin-right: 16px;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .event-info .container .row .col-9 .event-details-resources, .event-info .container-lg .row .col-9 .event-details-resources, .event-info .container-md .row .col-9 .event-details-resources, .event-info .container-sm .row .col-9 .event-details-resources {
     width: 100%;
   }
@@ -6496,7 +6496,7 @@ img.linkdigital-logo {
   line-height: 28px;
   margin-bottom: 64px;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .row.event-details-agenda .col-12 .event-agenda-label {
     font-size: 18px;
     margin-bottom: 40px;
@@ -6518,7 +6518,7 @@ img.linkdigital-logo {
   padding-left: 0;
   padding-bottom: 24px;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .row.event-details-agenda .col-12 .event-agenda-table .table-header .row .col-name {
     font-size: 16px;
   }
@@ -6554,7 +6554,7 @@ img.linkdigital-logo {
   color: #757575;
   display: grid;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .row.event-details-agenda .col-12 .event-agenda-table .table-content .row .col-3 {
     font-size: 16px;
   }
@@ -6569,7 +6569,7 @@ img.linkdigital-logo {
   color: #757575;
   display: grid;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .row.event-details-agenda .col-12 .event-agenda-table .table-content .row .col-9 {
     font-size: 16px;
   }
@@ -6601,7 +6601,7 @@ img.linkdigital-logo {
   line-height: 40px;
   text-align: left;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .row.event-details-agenda .col-12 .event-agenda-table .table-content .row .col-9 .accordion .accordion-item .accordion-header .accordion-button .video-session-header .video-session-title {
     font-size: 18px;
     line-height: 28px;
@@ -6615,7 +6615,7 @@ img.linkdigital-logo {
   text-align: left;
   color: #333;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .row.event-details-agenda .col-12 .event-agenda-table .table-content .row .col-9 .accordion .accordion-item .accordion-header .accordion-button .video-session-header .video-session-speakers {
     font-size: 15px;
     line-height: 24px;
@@ -6685,7 +6685,7 @@ img.linkdigital-logo {
 .video-container .video-wrapper {
   margin-bottom: 96px;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .video-container .video-wrapper {
     margin-bottom: 40px;
   }
@@ -6700,7 +6700,7 @@ img.linkdigital-logo {
   height: 636px;
   border-radius: 16px;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .video-container .video-wrapper iframe {
     max-height: 400px;
   }
@@ -6717,7 +6717,7 @@ img.linkdigital-logo {
   text-align: center;
   margin-bottom: 32px;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .video-container .video-info .video-title {
     font-size: 30px;
     font-weight: 700;
@@ -6745,7 +6745,7 @@ img.linkdigital-logo {
   justify-content: center;
   margin-bottom: 64px;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .video-container .video-info .video-datetime {
     font-size: 15px;
     font-weight: 700;
@@ -6782,7 +6782,7 @@ img.linkdigital-logo {
   position: relative;
   left: 6px;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .video-container .video-info .video-datetime .share-container .back svg {
     left: 0;
   }
@@ -6794,7 +6794,7 @@ img.linkdigital-logo {
   text-align: left;
   margin-bottom: 64px;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .video-container .video-info .video-description {
     font-size: 15px;
     line-height: 24px;
@@ -6809,7 +6809,7 @@ img.linkdigital-logo {
 .video-container .video-info .video-speakers {
   margin-bottom: 128px;
 }
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
   .video-container .video-info .video-speakers {
     margin-bottom: 64px;
   }

@@ -9,7 +9,7 @@
         display: grid;
         gap: 24px;
 
-        @media all and (max-width: 768px) {
+        @media all and (max-width: 910px) {
             gap: 40px;
 
             p {
@@ -23,7 +23,7 @@
             align-items: start;
             justify-content: left;
 
-            @media all and (max-width: 768px) {
+            @media all and (max-width: 910px) {
                 margin-bottom: 0;
             }
 
@@ -39,7 +39,7 @@
                 line-height: 28px;
                 text-align: left;
 
-                @media all and (max-width: 768px) {
+                @media all and (max-width: 910px) {
                     font-size: 18px;
                     font-weight: 700;
                     line-height: 28px;
@@ -66,7 +66,7 @@
                 p {
                     margin: 0;
 
-                    @media all and (max-width: 768px) {
+                    @media all and (max-width: 910px) {
                         font-size: 15px;
                         font-weight: 400;
                         line-height: 24px;
@@ -146,7 +146,7 @@
                 }
 
                 .event-details-resources {
-                    @media all and (max-width: 768px) {
+                    @media all and (max-width: 910px) {
                         width: 100%;
                     }
 

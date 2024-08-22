@@ -36,7 +36,7 @@
         justify-content: left;
         align-items: stretch;
 
-        @media all and (max-width: 768px) {
+        @media all and (max-width: 910px) {
             display: block;
         }
 
@@ -49,7 +49,7 @@
             align-items: stretch;
             padding: 12px;
 
-            @media all and (max-width: 768px) {
+            @media all and (max-width: 910px) {
                 width: 100%;
             }
 
@@ -91,7 +91,7 @@
 
 .archive-events {
     .event-header {
-        @media all and (max-width: 768px) {
+        @media all and (max-width: 910px) {
             margin-bottom: 24px;
         }
 
@@ -105,7 +105,7 @@
     }
 }
 
-@media all and (max-width: 768px) {
+@media all and (max-width: 910px) {
     .archive-section-wrapper {
         padding-right: 0;
         padding-left: 0;

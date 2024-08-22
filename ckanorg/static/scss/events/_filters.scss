@@ -4,7 +4,7 @@
     .container-sm {
         margin-bottom: 64px;
 
-        @media all and (max-width: 768px) {
+        @media all and (max-width: 910px) {
             padding: 0;
             margin-bottom: 40px;
         }
@@ -79,7 +79,7 @@
                     padding-right: 0;
                     flex-flow: row;
 
-                    @media all and (max-width: 768px) {
+                    @media all and (max-width: 910px) {
                         flex-flow: row;
                     }
 
@@ -104,7 +104,7 @@
                             line-height: 28px;
                             text-align: center;
 
-                            @media all and (max-width: 768px) {
+                            @media all and (max-width: 910px) {
                                 padding: 16px 16px;
                             }
 
@@ -135,7 +135,7 @@
                                 &:hover {
                                     border: 1.5px solid $gray-hover;
 
-                                    @media all and (max-width: 768px) {
+                                    @media all and (max-width: 910px) {
                                         background-color: $white-smoke !important;
                                         border: 1.5px solid $dark-gray;
                                     }

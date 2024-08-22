@@ -9,7 +9,7 @@
         align-items: center;
         margin-bottom: 64px;
 
-        @media all and (max-width: 768px) {
+        @media all and (max-width: 910px) {
             padding: 40px 24px;
         }
 
@@ -22,7 +22,7 @@
             display: flex;
             margin-bottom: 0;
 
-            @media all and (max-width: 768px) {
+            @media all and (max-width: 910px) {
                 display: block;
             }
 
@@ -37,7 +37,7 @@
                     line-height: 47.73px;
                     margin-bottom: 12px;
 
-                    @media all and (max-width: 768px) {
+                    @media all and (max-width: 910px) {
                         font-size: 36px;
                     }
 
@@ -69,7 +69,7 @@
                 justify-content: center;
                 width: unset;
 
-                @media all and (max-width: 768px) {
+                @media all and (max-width: 910px) {
                     margin-top: 24px;
                     justify-content: left;
                 }
