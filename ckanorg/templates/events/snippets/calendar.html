@@ -1,0 +1,51 @@
+{% load static i18n wagtailadmin_tags %}
+
+
+<div class="row">
+    <div class="col-8">
+        <div id="clendar-wrapper" class="calendar-wrapper">
+            <button id='btn-prev-month'></button>
+            <button id='btn-next-month'></button>
+            {{ html_calendar|safe }}
+        </div>
+    </div>
+
+    <div class="col-4">
+        <div class="calendar-event-info">
+            <div class="info-date">
+                <div class="info-date-day">
+                    {{ current_month_events.0.start_date|date:"j" }}
+                </div>
+
+                <div class="info-date-weekday">
+                    {{ current_month_events.0.start_date|date:"l" }}
+                </div>
+            </div>
+
+            <div class="info-event-list">
+                {% for event in current_month_events %}
+                    
+                    <div class="info-event-item" data-day="{{ event.start_date|date:"j" }}">
+                        <div class="item-title">
+                            <a class="info-event-item-link" href="{{ event.url }}">
+                                {{ event.post_title }}
+                            </a>
+                        </div>
+
+                        <div class="item-description">
+                            {{ event.post_subtitle }}
+                        </div>
+
+                        <div class="item-time">
+                            {{ event.start_date|date:"h:iA" }}
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <div class="empty-list">
+                    {% translate "There are no events registered on this date, please try another one" %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

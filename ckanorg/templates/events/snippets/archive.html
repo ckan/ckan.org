@@ -1,0 +1,43 @@
+{% load static i18n wagtailimages_tags modal_tags %}
+
+
+<div class="archive-events">
+    <div class="container">
+        <div class="row event-header">
+            <div class="col-12">
+                <div class="col-name">{% translate "Archive events" %}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-lg t-center archive-section-wrapper">
+        <div class="row">
+            {% for event in past_events %}
+                <div class="col-6 event-item">
+                    <a class="event-link" href="{{ event.url }}">
+                        {% include "events/snippets/event_tile.html" with event=event %}
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+
+        {% include "events/snippets/pagination.html" with events=past_events %}
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#pills-archive-tab").hasClass("active")) {
+            $(".featured-section-wrapper").hide();
+        } else {
+            $(".featured-section-wrapper").show();
+        };
+        $(".nav-link").click(function(){
+            if ($("#pills-archive-tab").hasClass("active")) {
+                $(".featured-section-wrapper").hide();
+            } else {
+                $(".featured-section-wrapper").show();
+            };
+        });
+    });
+</script>

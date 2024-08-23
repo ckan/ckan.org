@@ -1,0 +1,17 @@
+.page-header {
+  gap: 32px;
+}
+.page-header .page-title {
+  font-size: 50px;
+  font-weight: 500;
+  line-height: 54px;
+  text-align: center;
+  color: #000;
+}
+.page-header .page-description {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 28px;
+  text-align: center;
+  color: #333;
+}/*# sourceMappingURL=header.css.map */

@@ -1,0 +1,228 @@
+.row {
+    &.event-details-agenda {
+        text-align: left;
+
+        .col-12 {
+            padding: 0;
+
+            .event-agenda-label {
+                font-size: 20px;
+                font-weight: 700;
+                line-height: 28px;
+                margin-bottom: 64px;
+
+                @media all and (max-width: 910px) {
+                    font-size: 18px;
+                    margin-bottom: 40px;
+                }
+            }
+
+            .event-agenda-table {
+                .table-header {
+                    .row {
+                        flex-wrap: nowrap;
+                        gap: 16px;
+                        margin-bottom: 0;
+
+                        .col-name {
+                            border-bottom: 1px solid $gray-nobel;
+                            font-size: 20px;
+                            font-weight: 400;
+                            line-height: 28px;
+                            text-align: left;
+                            color: $grey-sonic;
+                            display: flex;
+                            padding-left: 0;
+                            padding-bottom: 24px;
+
+                            @media all and (max-width: 910px) {
+                                font-size: 16px;
+                            }
+
+                            @media all and (max-width: 425px) {
+                                padding-bottom: 8px;
+                            }
+
+                            &.col-9 {
+                                @media all and (max-width: 425px) {
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .table-content {
+                    .row {
+                        flex-wrap: nowrap;
+                        align-items: stretch;
+                        margin-bottom: 0;
+                        gap: 16px;
+
+                        @media all and (max-width: 425px) {
+                            gap: 0;
+                        }
+
+                        .col-3 {
+                            padding: 24px 0;
+                            border-bottom: 1px solid $gray-nobel;
+                            font-size: 20px;
+                            font-weight: 400;
+                            line-height: 28px;
+                            text-align: left;
+                            color: $grey-sonic;
+                            display: grid;
+
+                            @media all and (max-width: 910px) {
+                                font-size: 16px;
+                            }
+                        }
+
+                        .col-9 {
+                            padding: 24px 0;
+                            border-bottom: 1px solid $gray-nobel;
+                            font-size: 20px;
+                            font-weight: 400;
+                            line-height: 28px;
+                            text-align: left;
+                            color: $grey-sonic;
+                            display: grid;
+
+                            @media all and (max-width: 910px) {
+                                font-size: 16px;
+                            }
+
+                            .accordion {
+                                .accordion-item {
+                                    border: none;
+                                    color: $dark-gray;
+
+                                    .accordion-header {
+                                        .accordion-button {
+                                            padding: 0;
+
+                                            &:focus {
+                                                border: none;
+                                                outline: transparent;
+                                                border-color: unset;
+                                                box-shadow: none;
+                                            }
+
+                                            &:not(.collapsed) {
+                                                color: $dark-gray;
+                                                background-color: unset;
+                                                border: none;
+
+                                                &::after {
+                                                    background-image: var(--bs-accordion-btn-icon);
+                                                }
+                                            }
+
+                                            .video-session-header {
+                                                .video-session-title {
+                                                    font-size: 30px;
+                                                    font-weight: 700;
+                                                    line-height: 40px;
+                                                    text-align: left;
+
+                                                    @media all and (max-width: 910px) {
+                                                        font-size: 18px;
+                                                        line-height: 28px;
+                                                    }
+                                                }
+
+                                                .video-session-speakers {
+                                                    gap: 16px;
+                                                    font-size: 15px;
+                                                    font-weight: 200;
+                                                    line-height: 24px;
+                                                    text-align: left;
+                                                    color: $dark-gray;
+
+                                                    @media all and (max-width: 910px) {
+                                                        font-size: 15px;
+                                                        line-height: 24px;
+                                                    }
+
+                                                    ul {
+                                                        display: flex;
+                                                        gap: 16px;
+                                                        padding: 16px 0;
+                                                        list-style: none;
+                                                        margin-bottom: 0;
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        .video-session-links {
+                                            display: flex;
+                                            gap: 32px;
+                                            color: $red-border;
+
+                                            @media all and (max-width: 425px) {
+                                                flex-direction: column;
+                                                gap: 8px;
+                                            }
+
+                                            a, button {
+                                                display: flex;
+                                                align-items: center;
+                                                gap: 5px;
+                                                font-size: 15px;
+                                                font-weight: 700;
+                                                line-height: 26px;
+
+                                                @media all and (max-width: 425px) {
+                                                    padding: 0;
+                                                }
+
+                                                &:visited {
+                                                    color: $red-border;
+                                                }
+
+                                                svg {
+                                                    width: 14px;
+                                                    height: 10px;
+
+                                                    path {
+                                                        stroke: $red-border;
+                                                    }
+                                                }
+                                            }
+
+                                            button {
+                                                border: none;
+                                                background-color: transparent;
+                                                color: $red-border;
+
+                                                &:hover {
+                                                    text-decoration: underline;
+                                                }
+                                            }
+
+                                            .watch-video {
+                                                path {
+                                                    fill: $red-border;
+                                                    stroke: $white;
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    .accordion-body {
+                                        font-size: 15px;
+                                        font-weight: 400;
+                                        line-height: 24px;
+                                        text-align: left;
+                                        padding: 16px 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

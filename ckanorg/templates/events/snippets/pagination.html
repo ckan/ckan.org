@@ -1,0 +1,44 @@
+{% load i18n %}
+
+
+<div class="pagination-holder indent">
+    {% block pagination %}
+        <ul class="pagination">
+            {% if events.paginator.num_pages > 1 %}
+                {% if events.has_previous %}
+                    <li class="prev">
+                        <a href="?page={{ events.previous_page_number }}">
+                            <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2.00009 0.855957L0.590088 2.26596L5.17009 6.85596L0.590088 11.446L2.00009 12.856L8.00009 6.85596L2.00009 0.855957Z" fill="#0000EE"/>
+                            </svg>
+                            {% translate "Previous" %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="?page=1">...</a>
+                    </li>
+                {% endif %}
+                {% for page_num in events.paginator.page_range %}
+                    {% if page_num == events.number %}
+                        <li><a href="?page={{ page_num }}" style="font-weight: bold;">{{ page_num }}</a></li>
+                    {% elif page_num > events.number|add:'-3' and page_num < events.number|add:'3' %}
+                        <li><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if events.has_next %}
+                    <li>
+                        <a href="?page={{ events.paginator.num_pages }}">...</a>
+                    </li>
+                    <li class="next">
+                        <a href="?page={{ events.next_page_number }}">
+                            {% translate "Next" %}
+                            <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2.00009 0.855957L0.590088 2.26596L5.17009 6.85596L0.590088 11.446L2.00009 12.856L8.00009 6.85596L2.00009 0.855957Z" fill="#0000EE"/>
+                            </svg>
+                        </a>
+                    </li>
+                {% endif %}
+            {% endif %}
+        </ul>
+    {% endblock %}
+</div>

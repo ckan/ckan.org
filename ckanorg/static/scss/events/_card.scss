@@ -1,0 +1,142 @@
+.event-card {
+    gap: 40px;
+    margin-bottom: 96px;
+
+    @media all and (max-width: 910px) {
+        margin-bottom: 40px;
+    }
+
+    .container {
+        .row {
+            align-items: start;
+            margin-bottom: 0;
+
+            @media all and (max-width: 910px) {
+                flex-direction: column-reverse;
+                gap: 40px;
+
+                .col-4 {
+                    width: 100%;
+                    padding: 0;
+                }
+
+                .col-8 {
+                    width: 100%;
+                    padding: 0;
+                }
+            }
+
+            @media all and (max-width: 425px) {
+                gap: 24px;
+
+                .col-4 {
+                    width: 100%;
+                    padding: 0;
+                }
+
+                .col-8 {
+                    width: 100%;
+                    padding: 0;
+                }
+            }
+
+            .event-info {
+                display: grid;
+                gap: 32px;
+                text-align: left;
+
+                @media all and (max-width: 910px) {
+                    margin-bottom: 0;
+                }
+
+                .event-title {
+                    @media all and (max-width: 910px) {
+                        text-align: center;
+                    }
+
+                    a {
+                        font-size: 40px;
+                        font-weight: 700;
+                        line-height: 52px;
+                        text-decoration: none;
+                        color: unset;
+
+                        @media all and (max-width: 910px) {
+                            font-size: 30px;
+                            line-height: 40px;
+                        }
+
+                        @media all and (max-width: 425px) {
+                            font-size: 24px;
+                            line-height: 32px;
+                        }
+                    }
+                }
+
+                .event-date {
+                    display: flex;
+                    gap: 8px;
+                    font-size: 18px;
+                    font-weight: 700;
+                    line-height: 24px;
+                    align-items: center;
+
+                    @media all and (max-width: 910px) {
+                        justify-content: center;
+                        font-size: 15px;
+                        line-height: 24px;
+                    }
+
+                    &:before {
+                        content: url("../img/events/event.svg");
+                        padding: 8px;
+                        border-radius: 8px;
+                        background-color: $light-blue;
+                        line-height: 16px;
+                    }
+                }
+
+                .event-description {
+                    font-size: 15px;
+                    font-weight: 400;
+                    line-height: 24px;
+                }
+
+                .event-action {
+                    @media all and (max-width: 910px) {
+                        margin: 0 auto;
+                    }
+
+                    .webinar-contact {
+                        .row {
+                            div {
+                                padding: 0;
+
+                                #contact {
+                                    float: inline-start;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .event-image {
+                display: grid;
+                gap: 24px;
+
+                img {
+                    max-height: 500px;
+                    border-radius: 24px;
+                }
+
+                iframe {
+                    width: 100%;
+                    height: 100%;
+                    min-height: 500px;
+                    border-radius: 16px;
+                }
+            }
+        }
+    }
+}

@@ -693,13 +693,6 @@ input.waiting[type='text'] {
   }
 }
 
-.upcoming {
-  margin: -21px 0 33px 0;
-  @media all and (max-width: 768px) {
-    margin-top: 15px !important;
-  }
-}
-
 .past-events {
   .row {
     align-items: normal;

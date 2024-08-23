@@ -1,0 +1,28 @@
+{% load static i18n modal_tags %}
+
+
+<div class="container-lg t-center">
+    <div class="invite-card">
+        <div class="invite-image">
+            <img src="{% static 'img/events/invite.png' %}">
+        </div>
+
+        <div class="row">
+            <div class="invite-info">
+                <div class="invite-info-title">
+                    {% translate "Join our next webinar" %}
+                </div>
+
+                <div class="invite-info-text">
+                    {% translate "Where we showcase CKAN to people - it's free to join and open to everyone." %}
+                </div>
+            </div>
+
+            <div class="invite-action">
+                <div class="webinar-contact">
+                    {% form_modal form_name="Webinar Form" %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+.page-header {
+    font-family: $base-font-sans-serif;
+    text-align: center;
+    gap: 32px;
+    margin-bottom: 64px;
+
+    @media all and (max-width: 425px) {
+        margin-bottom: 26px;
+    }
+
+    .page-title {
+        font-size: 50px;
+        font-weight: 500;
+        line-height: 54px;
+        color: $black;
+
+        @media all and (max-width: 425px) {
+            h1 {
+                margin-bottom: 8px;
+            }
+        }
+    }
+
+    .page-description {
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 28px;
+        color: $dark-gray;
+    }
+}

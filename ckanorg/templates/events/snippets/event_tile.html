@@ -1,0 +1,57 @@
+{% load static i18n %}
+
+
+<div class="event-tile">
+    <div class="tile-header">
+        <div class="tile-event-title" title="{{ event.post_title }}">
+            {{ event.post_title }}
+        </div>
+
+        <div class="tile-event-description" title="{{ event.post_subtitle }}">
+            {{ event.post_subtitle }}
+        </div>
+    </div>
+
+    <div class="tile-content">
+        <div class="tile-event-speakers">
+            <div class="row row-speakers">
+                {% for speaker in event.speakers.all %}
+                    {% if forloop.counter < 5 %}
+                        <div class="col-6">
+                    {% else %}
+                        <div class="col-6" hidden>
+                    {% endif %}
+                        {% cycle 'red' 'yellow' 'yellow' 'red' as bordercolors silent %}
+                        {% include "events/snippets/speaker.html" with speaker=speaker color=bordercolors %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="tile-footer">
+        <div class="row">
+            <div class="tile-start-date" title="{% translate "Start date" %}">
+                <img src="{% static "img/events/event.svg" %}">
+                {{ event.start_date|date:"j M Y" }}
+            </div>
+
+            <div class="tile-start-time" title="{% translate "Start time" %}">
+                <img src="{% static "img/events/clock.svg" %}">
+                {{ event.start_date|date:"h:i A" }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="tile-event-duration" title="{% translate "Duration in minutes" %}">
+                <img src="{% static "img/events/eye.svg" %}">
+                {{ event.get_event_duration|default:"0" }}
+            </div>
+
+            <div class="tile-event-attendies" title="{% translate "Attendies" %}">
+                <img src="{% static "img/events/user.svg" %}">
+                {{ event.attendies|default:"0" }}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 .footer {
   padding: 40px 0;
-  background: #f4f4f4;
+  background: $gray-background;
   @media all and (min-width: 768px){
     .two-columns {
       .two-columns-item {
@@ -28,7 +28,7 @@
     color: #555;
   }
   p{
-    color: #333;
+    color: $dark-gray;
     font-size: 16px;
     margin-bottom: 15px;
   }
@@ -74,7 +74,7 @@
   li {
     margin-right: 30px !important;
     a {
-      color: #666;
+      color: $medium-gray;
       font-family: "SF Pro Display Bold", sans-serif;
       align-items: center;
       font-weight: 800;
@@ -122,46 +122,66 @@
 .footer-subscribe {
   padding: 0px 2px;
   margin-bottom: 15px;
+
   span {
     margin-bottom: 5px;
   }
+
   .row {
     display: flex;
     margin: 0;
+
+    &>* {
+      width: auto;
+
+      @media all and (max-width: 950px) {
+        width: 100%;
+      }
+    }
+
     @media all and (max-width: 950px) {
       display: block;
     }
   }
+
   input[type=text] {
     background-color: transparent;
-    color: #333;
+    color: $dark-gray;
     border: none;
     border-bottom: 1px solid #777;
     height: 34px;
     font-size: 16px;
+    flex: 1 0 auto;
+
     @media all and (max-width: 950px) {
       text-align: center;
     }
   }
+
   input[type=submit] {
     background: $btn-grey-color;
     border: 1px solid #777;
     border-radius: 100px;
     color: $white;
+    flex: 1 0 auto;
+
     @media all and (max-width: 950px) {
       width: 100%;
       justify-content: center;
     }
+
     svg{
       path{
         fill: $white;
       }
     }
+
     &:active,
     &:focus,
     &:hover{
-      background: #f4f4f4;
+      background: $gray-background;
       color: $btn-grey-color;
+
       svg{
         path{
           fill: $dark-gray;

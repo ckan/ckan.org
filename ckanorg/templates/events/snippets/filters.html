@@ -1,0 +1,57 @@
+{% load static i18n wagtailadmin_tags %}
+
+{% querystring as querystring %}
+
+
+<div class="container-lg t-center filters-wrapper">
+    <div class="container-sm t-center">
+        <div class="filters">
+            <button id="btn-search" type="button" class="btn-search">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13 13L10.1 10.1M11.6667 6.33333C11.6667 9.27885 9.27885 11.6667 6.33333 11.6667C3.38781 11.6667 1 9.27885 1 6.33333C1 3.38781 3.38781 1 6.33333 1C9.27885 1 11.6667 3.38781 11.6667 6.33333Z" stroke="#b6b6b6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                {% translate "Search" %}
+            </button>
+            <div class="row">
+                <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link upcoming {% if not querystring|cut:"?" %}active{% endif %}" id="pills-upcoming-tab" data-bs-toggle="pill" data-bs-target="#pills-upcoming" type="button" role="tab" aria-controls="pills-upcoming" aria-selected="true">
+                            <span>{% translate "Upcoming" %}</span>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link recent" id="pills-recent-tab" data-bs-toggle="pill" data-bs-target="#pills-recent" type="button" role="tab" aria-controls="pills-recent" aria-selected="false">
+                            <span>{% translate "Recent" %}</span>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link archive {% if querystring|cut:"?" %}active{% endif %}" id="pills-archive-tab" data-bs-toggle="pill" data-bs-target="#pills-archive" type="button" role="tab" aria-controls="pills-archive" aria-selected="false">
+                            <span>{% translate "Archive" %}</span>
+                        </button>
+                    </li>
+                </ul>
+                <button id="btn-calendar" type="button" class="btn-calendar"></button>
+            </div>
+        </div>
+
+        <div class="search-events">
+            {% include "events/snippets/search.html" %}
+        </div>
+
+        <div class="event-calendar">
+            {% include "events/snippets/calendar.html" %}
+        </div>
+    </div>
+
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade {% if querystring == "?" %}show active{% endif %}" id="pills-upcoming" role="tabpanel" aria-labelledby="pills-upcoming-tab" tabindex="0">
+            {% include "events/snippets/upcoming.html" %}
+        </div>
+        <div class="tab-pane fade" id="pills-recent" role="tabpanel" aria-labelledby="pills-recent-tab" tabindex="0">
+            {% include "events/snippets/recent.html" %}
+        </div>
+        <div class="tab-pane fade {% if "page" in querystring %}show active{% endif %}" id="pills-archive" role="tabpanel" aria-labelledby="pills-archive-tab" tabindex="0">
+            {% include "events/snippets/archive.html" %}
+        </div>
+    </div>
+</div>

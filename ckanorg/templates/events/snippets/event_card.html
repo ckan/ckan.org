@@ -1,0 +1,48 @@
+{% load static i18n wagtailimages_tags wagtailembeds_tags modal_tags %}
+
+
+<div id="event-card" class="event-card">
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <div class="event-info">
+                    <div class="event-title">
+                        <a class="event-link" href="{{ event.url }}">
+                            {{ event.post_title }}
+                        </a>
+                    </div>
+
+                    <div class="event-date">
+                        {{ event.start_date|date:"j F Y  h:i A T" }}
+                    </div>
+
+                    <div class="event-description">
+                        {{ event.post_subtitle }}
+                    </div>
+
+                    {% if event.get_event_status %}
+                        <div class="event-action">
+                            <div class="webinar-contact">
+                                {% form_modal form_name="Webinar Form" %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="event-image">
+                    {% if event.video %}
+                        {% embed event.video %}
+                    {% else %}
+                        {% image event.main_image scale-100 as image %}
+                        {% if image.url %}
+                            <img src="{{ image.url }}" alt="Event image">
+                        {% else %}
+                            <img src="{% static 'img/ckan_default.png' %}" alt="Event image">
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

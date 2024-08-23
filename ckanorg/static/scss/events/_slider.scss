@@ -1,0 +1,504 @@
+// UPCOMING EVENTS SLIDER STYLES
+
+.upcoming-events{    
+    .event-header {
+        div {
+            &.col-4 {
+                display: flex;
+                gap: 12px;
+
+                @media all and (max-width: 425px) {
+                    display: none;
+                }
+
+                .col-2 {
+                    width: 50%;
+                }
+
+                @media all and (max-width: 910px) {
+                    .date {
+                        width: 100% !important;
+                    }
+
+                    .time {
+                        display: none;
+                    }
+                }
+            }
+
+            &.col-8 {
+                display: flex;
+                align-items: end;
+                gap: 12px;
+
+                @media all and (max-width: 910px) {
+                    gap: 0;
+
+                    .col-9.info {
+                        width: 50% !important;
+                    }
+    
+                    .col-3.action {
+                        width: 50%;
+
+                        .col-name {
+                            justify-content: end;
+                        }
+                    }
+                }
+
+                @media all and (max-width: 425px) {
+                    flex-direction: column-reverse;
+                    width: 100%;
+
+                    .col-9.info {
+                        width: 100% !important;
+
+                        .col-name {
+                            justify-content: left;
+                        }
+                    }
+    
+                    .col-3.action {
+                        width: 100% !important;
+
+                        .col-name {
+                            justify-content: center;
+                            border-bottom: none;
+                        }
+                    }
+                }
+            }
+
+            .col-name {
+                border-bottom: 1px solid $gray-nobel;
+                font-size: 20px;
+                font-weight: 400;
+                line-height: 28px;
+                text-align: left;
+                color: $grey-sonic;
+                display: flex;
+                padding-bottom: 24px;
+                gap: 16px;
+
+                button {
+                    display: flex;
+                    border: none;
+                    background-color: transparent;
+                    color: $grey-sonic;
+
+                    &:hover {
+                        color: $dark-gray;
+                        text-decoration: underline;
+                    }
+
+                    svg {
+                        margin: auto;
+
+                        path:hover {
+                            fill: $dark-gray;
+                            stroke: $dark-gray;
+                        }
+                    }
+
+                    &.btn-previous {
+                        svg {
+                            margin-right: 8px;
+                        }
+                    }
+
+                    &.btn-next {
+                        svg {
+                            margin-left: 8px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #event-slider-upcoming {
+        text-align: left;
+        color: $dark-gray;
+
+        .carousel-item {
+            .container {
+                .row {
+                    align-items: start;
+                    margin-bottom: 0;
+
+                    @media all and (max-width: 425px) {
+                        display: block;
+                    }
+
+                    .col-4 {
+                        display: flex;
+
+                        .col-6 {
+                            width: 50%;
+                        }
+
+                        @media all and (max-width: 910px) {
+                            display: block;
+
+                            .col-6 {
+                                width: 100%;
+                                margin-bottom: 12px;
+                            }
+                        }
+
+                        @media all and (max-width: 425px) {
+                            display: flex;
+                            width: 100%;
+
+                            .col-6 {
+                                width: 50%;
+                                margin-bottom: 12px;
+
+                                .event-slider-date {
+                                    display: flex;
+                                    flex-direction: row-reverse;
+                                    align-items: center;
+                                    justify-content: start;
+
+                                    .date-day {
+                                        font-size: 24px;
+                                        font-weight: 500;
+                                        line-height: 24px;
+                                        text-align: center;
+                                    }
+
+                                    .date-month, .date-time {
+                                        font-size: 16px;
+                                        font-weight: 400;
+                                        line-height: 22px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .col-8 {
+                        display: flex;
+
+                        @media all and (max-width: 910px) {
+                            display: block;
+
+                            .col-9.info {
+                                width: 100%;
+                                margin-bottom: 40px;
+                            }
+
+                            .col-3.action {
+                                width: 100%;
+
+                                .event-slider-action {
+                                    display: flex;
+                                    align-items: center;
+                                }
+                            }
+                        }
+
+                        @media all and (max-width: 425px) {
+                            width: 100%;
+
+                            .col-9.info {
+                                width: 100%;
+
+                                .tile-event-speakers {
+                                    display: none;
+                                }
+
+                                .tile-event-title {
+                                    font-size: 24px;
+                                    font-weight: 700;
+                                    line-height: 32px;
+                                }
+                            }
+                            
+                            .col-3.action {
+                                width: 100%;
+
+                                .event-slider-action {
+                                    display: block;
+                                    align-items: center;
+
+                                    #contact {
+                                        margin-bottom: 24px;
+                                        width: 100%;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .event-slider-date {
+                        display: grid;
+                        gap: 16px;
+
+                        .date-month {
+                            font-size: 20px;
+                            font-weight: 400;
+                            line-height: 28px;
+                        }
+
+                        .date-day {
+                            font-size: 50px;
+                            font-weight: 500;
+                            line-height: 54px;
+                        }
+                    }
+
+                    .event-slider-time {
+                        .date-time {
+                            font-size: 20px;
+                            font-weight: 400;
+                            line-height: 28px;
+                            letter-spacing: 0.1em;
+                        }
+                    }
+
+                    .event-slider-action {
+                        display: grid;
+                        gap: 24px;
+
+                        .webinar-contact {
+                            .row {
+                                div {
+                                    padding: 0;
+
+                                    #contact {
+                                        width: auto;
+                                    }
+                                }
+                            }
+                        }
+
+                        .more-details {
+                            text-align: center;
+
+                            a {
+                                text-decoration: none;
+                                font-size: 20px;
+                                font-weight: 400;
+                                line-height: 28px;
+                                color: $dark-gray;
+
+                                &:hover {
+                                    text-decoration: underline;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// RECENT EVENTS SLIDER STYLES
+
+.recent-events{    
+    .event-header {
+        @media all and (max-width: 910px) {
+            flex-direction: column-reverse;
+
+            .col-4 {
+                width: 100%;
+
+                .col-name {
+                    border-bottom: 1px solid $gray-nobel;
+                }
+            }
+
+            .col-8 {
+                width: 100%;
+
+                .actions {
+                    justify-content: center !important;
+                }
+            }
+        }
+
+        div {
+            .col-name {
+                font-size: 20px;
+                font-weight: 400;
+                line-height: 28px;
+                text-align: left;
+                color: $grey-sonic;
+                display: flex;
+                padding-bottom: 24px;
+                gap: 16px;
+
+                &.actions {
+                    justify-content: flex-end;
+
+                    button {
+                        display: flex;
+                        border: none;
+                        background-color: transparent;
+                        color: $grey-sonic;
+
+                        &:hover {
+                            color: $dark-gray;
+                            text-decoration: underline;
+                        }
+
+                        svg {
+                            margin: auto;
+
+                            path:hover {
+                                fill: $dark-gray;
+                                stroke: $dark-gray;
+                            }
+                        }
+
+                        &.btn-previous {
+                            svg {
+                                margin-right: 8px;
+                            }
+                        }
+
+                        &.btn-next {
+                            svg {
+                                margin-left: 8px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #event-slider-recent {
+        text-align: left;
+        color: $dark-gray;
+
+        .carousel-item {
+            .container {
+                .row {
+                    align-items: start;
+                    margin-bottom: 0;
+
+                    @media all and (max-width: 910px) {
+                        flex-direction: column-reverse;
+                        gap: 40px;
+
+                        .col-8 {
+                            width: 100%;
+                        }
+
+                        .col-4 {
+                            width: 100%;
+                        }
+                    }
+
+                    .event-slider-info {
+                        display: grid;
+                        gap: 32px;
+                        text-align: left;
+
+                        @media all and (max-width: 910px) {
+                            text-align: center;
+                        }
+
+                        .event-title {
+                            a {
+                                font-size: 40px;
+                                font-weight: 700;
+                                line-height: 52px;
+                                text-decoration: none;
+                                color: unset;
+
+                                @media all and (max-width: 910px) {
+                                    font-size: 30px;
+                                }
+                            }
+                        }
+
+                        .event-date {
+                            display: flex;
+                            gap: 8px;
+                            font-size: 18px;
+                            font-weight: 700;
+                            line-height: 24px;
+                            align-items: center;
+
+                            @media all and (max-width: 910px) {
+                                justify-content: center;
+                                font-size: 15px;
+                            }
+
+                            &:before {
+                                content: url("../img/events/event.svg");
+                                padding: 8px;
+                                border-radius: 8px;
+                                background-color: $light-blue;
+                                line-height: 16px;
+                            }
+                        }
+
+                        .event-description {
+                            font-size: 15px;
+                            font-weight: 400;
+                            line-height: 24px;
+
+                            @media all and (max-width: 910px) {
+                                text-align: left;
+                            }
+                        }
+
+                        .event-action {
+                            .webinar-contact {
+                                .row {
+                                    div {
+                                        padding: 0;
+
+                                        #contact {
+                                            float: inline-start;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .btn-more-details {
+                                display: inline-flex;
+                                width: 210px;
+                                height: 50px;
+                                color: $white;
+                                background: $dark-gray;
+                                outline: none;
+                                border: 2px solid $dark-gray;
+                                padding: 7px 20px;
+                                line-height: 1.3;
+                                cursor: pointer;
+                                text-decoration: none;
+                                align-items: center;
+                                justify-content: center;
+                                transition: border 0.3s ease-in-out, color 0.3s ease-in-out, background 0.3s ease-in-out;
+                                border-radius: 100px;
+
+                                &:hover {
+                                    color: $dark-gray;
+                                    background: $white;
+                                }
+                            }
+                        }
+                    }
+
+                    .event-slider-image {
+                        display: grid;
+                        gap: 24px;
+
+                        img {
+                            max-height: 500px;
+                            border-radius: 24px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,157 @@
+{% load static i18n wagtailcore_tags wagtailadmin_tags %}
+
+
+<div class="event-info">
+    <div class="container">
+        {% for block in page.body %}
+            {% if block.block_type == "event_info" %}
+                {% if block.value.agenda %}
+                    <div class="row">
+                        <div class="col-3">
+                            {% translate "Meeting agenda" %}
+                        </div>
+                        <div class="col-9">
+                            {{ block.value.agenda }}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if block.value.show_speakers and event.speakers.all %}
+                    <div class="row">
+                        <div class="col-3">
+                            {% translate "Speakers" %}
+                        </div>
+                        <div class="col-9">
+                            <div class="event-speakers">
+                                <div class="row row-speakers">
+                                    {% for speaker in event.speakers.all %}
+                                        <div class="col-6">
+                                            {% cycle "red" "yellow" "yellow" "red" as bordercolors silent %}
+                                            {% include "events/snippets/speaker.html" with speaker=speaker color=bordercolors additional_info=True %}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if block.value.overview %}
+                    <div class="row">
+                        <div class="col-3">
+                            {% translate "Project overview" %}
+                        </div>
+                        <div class="col-9">
+                            {{ block.value.overview }}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if block.value.community_activities %}
+                    <div class="row">
+                        <div class="col-3">
+                            {% translate "Community alignment and activities" %}
+                        </div>
+                        <div class="col-9">
+                            {{ block.value.community_activities }}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if block.value.highlights %}
+                    <div class="row">
+                        <div class="col-3">
+                            {% translate "Key Presentation Highlights" %}
+                        </div>
+                        <div class="col-9">
+                            {{ block.value.highlights }}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if block.value.why_attend %}
+                    <div class="row">
+                        <div class="col-3">
+                            {% translate "Why Attend?" %}
+                        </div>
+                        <div class="col-9">
+                            {{ block.value.why_attend }}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if block.value.joining_info %}
+                    <div class="row">
+                        <div class="col-3">
+                            {% translate "Google Meet joining info" %}
+                        </div>
+                        <div class="col-9">
+                            {{ block.value.joining_info }}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if block.value.stay_connected %}
+                    <div class="row">
+                        <div class="col-3">
+                            {% translate "Stay Connected" %}
+                        </div>
+                        <div class="col-9">
+                            {{ block.value.stay_connected }}
+                        </div>
+                    </div>
+                {% endif %}
+
+                <div class="row">
+                    <div class="col-3">
+                        {% translate "Details" %}
+                    </div>
+                    <div class="col-9">
+                        <div class="event-details-date">
+                            <span>{% translate "Date" %}:</span> {{ event.start_date|date:"l, F j, Y" }}
+                        </div>
+                        <div class="event-details-time">
+                            <span>{% translate "Time" %}:</span> {{ event.start_date|date:"h:i A" }}
+                        </div>
+                        <div class="event-details-duration">
+                            <span>{% translate "How long" %}:</span> {{ event.get_event_duration|default:"0" }}
+                        </div>
+                        <div class="event-details-language">
+                            <span>{% translate "Language" %}:</span> {{ block.value.language }}
+                        </div>
+                    </div>
+                </div>
+
+            {% elif block.block_type == "event_video_sessions" %}
+                {% include "events/snippets/video_session_list.html" with sessions=block.value %}
+
+            {% elif block.block_type == "event_resources" %}
+                <div class="row">
+                    <div class="col-3">
+                        {% translate "Shared resources" %}
+                    </div>
+                    <div class="col-9">
+                        <div class="col-8 event-details-resources">
+                            <div class="row">
+                                {% for item in block.value %}
+                                    <div class="col-6">
+                                        <a href="{% include_block item.resource.url %}" title="{% translate "Download resource" %}">
+                                            <div class="resource-icon">
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M0 2.5C0 1.83696 0.263392 1.20107 0.732233 0.732233C1.20107 0.263392 1.83696 0 2.5 0H9.5C10.163 0 10.7989 0.263392 11.2678 0.732233C11.7366 1.20107 12 1.83696 12 2.5V6H8.5C7.83696 6 7.20107 6.26339 6.73223 6.73223C6.26339 7.20107 6 7.83696 6 8.5V12H2.5C1.83696 12 1.20107 11.7366 0.732233 11.2678C0.263392 10.7989 0 10.163 0 9.5V2.5ZM7 11.859C7.35367 11.735 7.67493 11.533 7.94 11.268L11.268 7.939C11.5325 7.67412 11.7341 7.35322 11.858 7H8.5C8.10218 7 7.72064 7.15804 7.43934 7.43934C7.15804 7.72064 7 8.10218 7 8.5V11.859Z" fill="#819FB4"/>
+                                                </svg>
+                                            </div>
+                                            {% include_block item.resource %}
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                {{ block }}
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
