@@ -199,12 +199,12 @@ class BlogListingPage(MetadataPageMixin, Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        all_posts = BlogPostPage.objects.live().public().order_by("-last_published_at")
+        all_posts = BlogPostPage.objects.live().public().order_by("-first_published_at")
         featured_posts = (
             BlogPostPage.objects.live()
             .public()
             .filter(featured=True)
-            .order_by("-last_published_at")
+            .order_by("-first_published_at")
         )
         featured_post = featured_posts[0] if featured_posts else all_posts[0]
         context["featured_post"] = featured_post
