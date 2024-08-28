@@ -44,7 +44,7 @@ class CategoriesBlogPostListView(ListView):
             context["posts"] = BlogPostPage.objects.all()
         else:
             context["posts"] = BlogPostPage.objects.filter(category=cat_id).order_by(
-                "-last_published_at"
+                "-first_published_at"
             )
             context["categories"] = PostCategoryPage.objects.all().order_by(
                 "category_title"
