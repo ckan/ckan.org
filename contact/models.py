@@ -233,8 +233,12 @@ class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
 
                 ##* Display confirmation message
                 try:
-                    message = Message.objects.get(slug='contact-form-confirmation')
-                    message_content = message.content
+                    if self.form_name == "Webinar Form":
+                        message = Message.objects.get(slug='webinar-form-confirmation')
+                        message_content = message.content
+                    else:
+                        message = Message.objects.get(slug='contact-form-confirmation')
+                        message_content = message.content
                 except Message.DoesNotExist:
                     logging.getLogger("error_logger").error(traceback.format_exc())
                     message_content = _("Thank you for contacting us!")
