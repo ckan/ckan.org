@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     #Core Wagtail apps
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
-    'wagtail.contrib.modeladmin',
+    #'wagtail.contrib.modeladmin',
+    'wagtail.contrib.search_promotions',
     'wagtail.contrib.settings',
     'wagtail.embeds',
     'wagtail.sites',

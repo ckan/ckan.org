@@ -50,6 +50,7 @@ function submitAction(e, url, form_id){
         $.ajax({
             type : "POST", 
             url: url,
+            cache: false,
             data: {
                 name: name.val(),
                 email: email.val(),
