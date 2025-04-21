@@ -136,7 +136,6 @@ class PostCategoryPage(models.Model):
         ],
         null=True,
         blank=True,
-        use_json_field=True,
     )
 
     def __str__(self):
@@ -304,7 +303,6 @@ class BlogPostPage(MetadataPageMixin, Page):
         ],
         null=True,
         blank=True,
-        use_json_field=True,
     )
 
     search_fields = Page.search_fields + [
