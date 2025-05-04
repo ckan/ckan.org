@@ -182,7 +182,6 @@ class FaqQuestionPage(MetadataPageMixin, Page):
         ],
         null=True,
         blank=True,
-        use_json_field=True,
     )
     keywords = models.CharField(max_length=512, blank=True, null=True)
 
