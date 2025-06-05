@@ -2440,6 +2440,10 @@ ul.blog-nav li.last {
   top: -15px;
   font-family: Arial, sans-serif;
 }
+.article .richtext-image.left + p,
+.article .richtext-image.right + p {
+  clear: both;
+}
 
 .more-posts-bottom {
   margin-top: 40px;
