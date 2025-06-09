@@ -2,7 +2,15 @@
     {% for message in messages %}
         <script type=text/javascript>
             $("#thanks-text").html("{{ message.message|safe }}");
-            $('#thanks-modal').fadeIn().delay(5000).fadeOut("slow");
+            $('#thanks-modal').fadeIn();
+            var modalTimeout = setTimeout(function() {
+                $('#thanks-modal').fadeOut("slow");
+            }, 5000);
+            
+            $('.modal .close, [data-dismiss="modal"]').on('click', function() {
+                clearTimeout(modalTimeout);
+                $('#thanks-modal').modal('hide');
+            });
         </script>
     {% endfor %}
 {% endif %}
