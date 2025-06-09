@@ -6,6 +6,10 @@
     height: fit-content !important;
     .close {
         line-height: 20px;
+        position: relative;
+        z-index: 1;
+        border: none;
+        background-color: transparent;
         &:hover {
             color: #000;
         }
