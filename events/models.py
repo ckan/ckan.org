@@ -243,7 +243,6 @@ class EventPostPage(MetadataPageMixin, Page):
         ],
         null=True,
         blank=True,
-        use_json_field=True,
     )
 
     attendies = models.IntegerField(

@@ -107,7 +107,6 @@ class HomePage(MetadataPageMixin, Page):
         blank=False,
         null=True,
         help_text='CKAN Git section',
-        use_json_field=True
     )
 
     home_page_subtitle_image = models.ForeignKey(

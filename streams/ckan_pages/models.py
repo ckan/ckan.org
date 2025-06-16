@@ -568,7 +568,6 @@ class CkanForPage(MetadataPageMixin, Page):
     ],
         null=True,
         blank=True,
-        use_json_field=True
     )
 
     promote_panels = [
@@ -639,7 +638,6 @@ class FeatureDetailPage(MetadataPageMixin, Page):
     ],
         null=True,
         blank=True,
-        use_json_field=True
     )
 
     promote_panels = [
