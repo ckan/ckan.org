@@ -96,7 +96,7 @@ def parse_contact_form(message):
 
 
 def send_contact_info(request, member_info: dict):
-    """Send contact info to MailChimp audience/list
+    """Send contact info to MailChimp audience/list.
 
     Args:
         request (_type_): _description_
@@ -115,8 +115,18 @@ def send_contact_info(request, member_info: dict):
                 }
             )
             client.lists.add_list_member(mailchimp_audience_id, member_info)
-        except ApiClientError:
-            logging.getLogger("error_logger").error(traceback.format_exc())
+        except ApiClientError as error:
+            if error.status_code == 400 and "is already a list member" in error.text:
+                message_content = (
+                    "<p>The member {} already exists in the subscription list.</p>".format(member_info.get("email_address", ""))
+                )
+                messages.success(request, message_content, extra_tags="safe")
+            else:
+                logging.getLogger("error_logger").error(traceback.format_exc())
+                message_content = (
+                    "<p>Sorry, we could not add you to the subscription list at the moment. Please try again later.</p>"
+                )
+                messages.error(request, message_content, extra_tags="safe")
 
 
 class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):

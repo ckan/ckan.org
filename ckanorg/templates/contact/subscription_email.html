@@ -1,33 +1,37 @@
 {% load static %}
 <div style="padding: 20px; background: #ffffff;font-size:15px;">
-    <p style="text-align: center;"><img src="cid:logo_ckan.png"></p>
-    <h3 style="text-align: center;">Thank you for subscribing to the CKAN Monthly Newsletter!</h3>
+    <p>Hi there,</p>
 
-    <p>Hello,</p>
+    <p style="text-align: justify;">Thanks for subscribing to the <strong>CKAN Monthly Newsletter</strong> — your gateway to the latest updates, community stories, and product news from the world’s leading open-source data management system.</p>
 
-    <p style="text-align: justify;">Thank you for subscribing to the CKAN Monthly Newsletter! We're excited to share the latest news, articles, and updates about CKAN with you! Rest assured, our mailing frequency won't exceed twice a month, as we value your time and dislike spam as much as you do.<img src="cid:cowboy.png" width="20px"></p>
+    <p style="text-align: justify;">We send no more than <strong>two emails per month</strong>, and every one is packed with real value — no spam, ever.</p>
 
-    <p style="text-align: justify;">To confirm your subscription and ensure you don't miss an email, please follow these two steps:</p>
+    <p style="text-align: justify;"><strong>One last step to confirm your subscription:</strong></p>
 
-    <p style="text-align: justify;">1. Click the link below to activate your subscription. If clicking doesn't work, copy and paste the URL into your browser. If you received this email by mistake, simply ignore it, and we won't contact you again.</p>
+    <p style="text-align: justify;">Click the link below to activate your subscription. If the link doesn’t work, copy and paste it into your browser.</p>
 
-    <p>{{ domain }}{% url 'subscription_activate' eidb64=eid token=token %}</p>
+    <p style="text-align: justify; font-style: italic;">If you received this email by mistake, feel free to ignore it — you won’t be subscribed.</p>
 
-    <p style="text-align: justify;">2. To prevent our emails from landing in your spam or promotions folder, add our email address <a href="mailto:noreply@ckan.org">noreply@ckan.org</a> to your contacts. In most email clients, you can do this by opening the email, clicking on our email address, and selecting "Add to Contacts.”</p>
+    <p>👉️ {{ domain }}{% url "subscription_activate" eidb64=eid token=token %}</p>
 
-    <p style="text-align: justify;">Please note that this is a notification-only email. Do not reply to this message.</p>
+    <p style="text-align: justify;"><strong>Make sure you get our updates:</strong></p>
 
-    <p>Best regards,</p>
-    <p style="font-style: italic;">The CKAN Project Team</p>
+    <p style="text-align: justify;">Add <a href="mailto:comms@ckan.org">comms@ckan.org</a> to your contacts so our emails don’t end up in your spam or promotions tab.</p>
 
-    <hr>
-    <p><strong>Share Your Experience</strong></p>
-    <p style="text-align: justify;">Join the conversation on <a href="https://twitter.com/ckanproject">@CKANproject</a> and share your experience using #CKANMonthlyNewsletter! Don’t forget to subscribe to the <a href="https://www.youtube.com/channel/UCVeS3fHRae7BzXVn8wMcQVw">CKAN Association YouTube Channel</a> to receive updates!</p>
+    <p style="text-align: justify;"><strong>Explore more:</strong></p>
 
-    <p><strong>Stay Connected</strong></p>
-    <p style="text-align: justify;">Follow us on <a href="https://twitter.com/ckanproject">Twitter</a>, <a href="https://www.linkedin.com/company/80804045">LinkedIn</a>, and <a href="https://www.youtube.com/channel/UCVeS3fHRae7BzXVn8wMcQVw">YouTube</a> and join our <a href="https://www.linkedin.com/groups/6795833/">LinkedIn Group</a>! You can also visit our <a href="https://ckan.org/">website</a> and <a href="https://ckan.org/blog">blog</a> to learn more!</p>
+    <ul dir="auto">
+        <li><a href="https://ckan.org/blog" rel="nofollow">CKAN Blog</a></li>
+        <li><a href="https://ckan.org/events" rel="nofollow">Community Events</a></li>
+        <li><a href="https://x.com/CKANproject" rel="nofollow">CKAN on X/Twitter</a></li>
+        <li><a href="https://www.linkedin.com/company/80804045" rel="nofollow">CKAN on LinkedIn</a></li>
+        <li><a href="https://www.linkedin.com/groups/6795833" rel="nofollow">Join our LinkedIn Group</a></li>
+        <li><a href="https://www.youtube.com/channel/UCVeS3fHRae7BzXVn8wMcQVw" rel="nofollow">CKAN on YouTube</a></li>
+    </ul>
 
-    <p>Our <a href="https://www.linkedin.com/company/80804045">LinkedIn Page</a> is brand new - follow us there and spread the word!</p>
+    <p>Welcome aboard!</p>
+    <p><strong>The CKAN Project Team</strong></p>
+
     <hr>
 
     <p style="text-align: center;">
@@ -46,7 +50,7 @@
     </p>
 
     <p style="text-align: center;"><img src="cid:logo_ckan.png" width="100px"></p>
-    <p style="text-align: center;font-style: italic;font-size: 12px;">Copyright (C) 2023 CKAN. All rights reserved.</p>
+    <p style="text-align: center;font-style: italic;font-size: 12px;">Copyright (C) 2025 CKAN. All rights reserved.</p>
     <p style="text-align: center;font-size: 12px;">You are receiving this email because you opted in at our website <a href="https://ckan.org/">ckan.org</a>.</p>
     
     <p style="text-align: center;font-size: 12px;">Want to change how you receive these emails?</p>
