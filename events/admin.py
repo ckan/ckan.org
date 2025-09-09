@@ -9,6 +9,7 @@ from .views import EventCreateView
 class EventPostPageAdmin(SnippetViewSet):
     model = EventPostPage
     menu_label = "Events"
+    menu_item_name = "events"
     icon = "date"
     menu_order = 290
     add_to_admin_menu = True
