@@ -94,7 +94,7 @@ def ajax_email(request):
         name = request.POST.get('name', None)
         email = request.POST.get('email', None)
         token = user_activation_token.make_token(email)
-        current_site = request._current_scheme_host
+        current_site = f"{request.scheme}://{request.get_host()}"
 
         response = {}
         subscriber, created = Email.objects.get_or_create(
