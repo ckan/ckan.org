@@ -37,6 +37,19 @@ COMMON_PANELS = (
 
 
 class EventPageSpeaker(Orderable):
+    """
+    Represents a speaker for an event page, allowing ordering of speakers.
+    Attributes:
+        page (ParentalKey): Reference to the associated EventPostPage.
+        first_name (str): The speaker's first name.
+        last_name (str): The speaker's last name.
+        image (ForeignKey): Optional image of the speaker.
+        position (str): The speaker's position or title.
+        info (str): Additional information about the speaker.
+    Class Attributes:
+        api_fields (tuple): Fields exposed via the API.
+        panels (list): Wagtail admin panels for editing speaker details.
+    """
     page = ParentalKey(
         "EventPostPage",
         related_name="speakers",
@@ -74,6 +87,22 @@ class EventPageSpeaker(Orderable):
 
 
 class EventListingPage(BlogListingPage):
+    """
+    EventListingPage is a specialized listing page for events.
+    Attributes:
+        template (str): Path to the template used for rendering the event listing.
+        parent_page_types (list): Allowed parent page types for this page.
+        subpage_types (list): Allowed subpage types that can be created under this page.
+        max_count (int): Maximum number of EventListingPage instances allowed.
+    Methods:
+        get_context(request, *args, **kwargs):
+            Extends the context for rendering the event listing page.
+            - Retrieves all live and public events, orders them by start date.
+            - Filters events into featured, upcoming, recent, archived month categories.
+            - Paginates archived events.
+            - Generates an HTML calendar for the current month.
+            - Adds all relevant event lists and calendar to the context.
+    """
     template = "events/event_list.html"
     parent_page_types = ["home.HomePage"]
     subpage_types = ["events.EventPostPage"]
@@ -86,7 +115,9 @@ class EventListingPage(BlogListingPage):
         current_year = datetime.datetime.now().year
         current_month = datetime.datetime.now().month
         html_calendar = calendar.HTMLCalendar(firstweekday=-1)
-        html_calendar.cssclasses = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+        html_calendar.cssclasses = [
+            "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"
+        ]
         all_events = EventPostPage.objects.live().public().order_by("start_date")
 
         featured_events = (
@@ -97,10 +128,22 @@ class EventListingPage(BlogListingPage):
         )
 
         if all_events:
-            archive_events = list(filter(lambda x: x.start_date.date() < recently, all_events.order_by("-start_date")))
-            recent_events = list(filter(lambda x: x.start_date < _now and x.start_date.date() > recently, all_events.order_by("-start_date")))
-            upcoming_events = list(filter(lambda x: x.start_date > _now, all_events))
-            current_month_events = list(filter(lambda x: x.start_date.strftime("%Y-%m") == _now.strftime("%Y-%m"), all_events))
+            archive_events = list(filter(
+                lambda x: x.start_date.date() < recently,
+                all_events.order_by("-start_date")
+            ))
+            recent_events = list(filter(
+                lambda x: x.start_date < _now and x.start_date.date() > recently,
+                all_events.order_by("-start_date")
+            ))
+            upcoming_events = list(filter(
+                lambda x: x.start_date > _now,
+                all_events
+            ))
+            current_month_events = list(filter(
+                lambda x: x.start_date.strftime("%Y-%m") == _now.strftime("%Y-%m"),
+                all_events
+            ))
 
             paginator = Paginator(archive_events, 8)
             page = request.GET.get("page")
@@ -117,14 +160,28 @@ class EventListingPage(BlogListingPage):
             context["past_events"] = all_archive_events
             context["current_month_events"] = current_month_events
             context["events"] = all_events
-            context["html_calendar"] = html_calendar.formatmonth(current_year, current_month, withyear=True)
+            context["html_calendar"] = html_calendar.formatmonth(
+                current_year, current_month, withyear=True
+            )
         else:
-            context["html_calendar"] = html_calendar.formatmonth(current_year, current_month, withyear=True)
+            context["html_calendar"] = html_calendar.formatmonth(
+                current_year, current_month, withyear=True
+            )
             context["events"] = []
         return context
 
 
 class EventPageForm(WagtailAdminPageForm):
+    """
+    A custom Wagtail admin form for event pages.
+
+    This form validates the relationship between start and end dates.
+    Methods
+    -------
+    clean():
+        Ensures that the 'end_date' is not earlier than the 'start_date'.
+        Adds a validation error to 'end_date' if this condition is not met.
+    """
     def clean(self):
         cleaned_data = super(EventPageForm, self).clean()
         start_date = cleaned_data["start_date"]
@@ -136,6 +193,40 @@ class EventPageForm(WagtailAdminPageForm):
 
 
 class EventPostPage(MetadataPageMixin, Page):
+    """
+    EventPostPage represents a detailed event page within the CKAN.org site.
+
+    This model extends MetadataPageMixin and Wagtail's Page, providing fields and panels
+    for configuring event details, such as title, subtitle, images, video session URL,
+    event type, featured status, start/end dates, body content, and attendee count.
+    It supports rich content via StreamField, including HTML, rich text, images with
+    captions, event info, video sessions, and resources.
+    Attributes:
+        template (str): Path to the template used for rendering the event details page.
+        parent_page_types (list): Allowed parent page types for this page.
+        subpage_types (list): Allowed subpage types under this page.
+        base_form_class (Form): Form class used for editing this page.
+        EVENT_TYPE_CHOICES (list): Choices for the event type field.
+        main_image (ForeignKey): Reference to the main image for the event.
+        video (URLField): URL for the event's video session.
+        created (DateTimeField): Timestamp when the event was created.
+        post_title (CharField): Title of the event.
+        event_type (CharField): Type of the event (e.g., Webinar, Conference).
+        featured (BooleanField): Indicates if the event is featured.
+        start_date (DateTimeField): Start date and time of the event.
+        end_date (DateTimeField): End date and time of the event.
+        post_subtitle (CharField): Subtitle of the event.
+        body (StreamField): Rich content describing the event, including agenda, speakers, resources, etc.
+        attendies (IntegerField): Number of attendees for the event.
+    Panels:
+        promote_panels: Panels for common page configuration.
+        content_panels: Panels for editing event content.
+        settings_panels: Panels for page settings.
+    Methods:
+        get_context(request, *args, **kwargs): Adds formatted start_date to the template context.
+        get_event_duration(): Returns the event duration in minutes if end_date is set.
+        get_event_status(): Returns "upcoming" if the event's start_date is in the future.
+    """
     template = "events/event_details.html"
     parent_page_types = ["events.EventListingPage"]
     subpage_types = []
@@ -177,6 +268,7 @@ class EventPostPage(MetadataPageMixin, Page):
     )
 
     featured = models.BooleanField(null=True, default=False)
+
     start_date = models.DateTimeField(
         null=False,
         blank=False,
@@ -215,31 +307,31 @@ class EventPostPage(MetadataPageMixin, Page):
                 ),
             ),
             ("post_image", ImageWithCaption()),
-            ('event_info', blocks.StructBlock([
-                ('overview', blocks.RichTextBlock(required=False)),
-                ('community_activities', blocks.RichTextBlock(required=False)),
-                ('highlights', blocks.RichTextBlock(required=False)),
-                ('why_attend', blocks.RichTextBlock(required=False)),
-                ('language', blocks.CharBlock(required=False)),
-                ('joining_info', blocks.RichTextBlock(required=False)),
-                ('agenda', blocks.RichTextBlock(required=False)),
-                ('show_speakers', blocks.BooleanBlock(required=False)),
-                ('stay_connected', blocks.RichTextBlock(required=False)),
-            ], icon='list-ul')),
-            ('event_video_sessions', blocks.ListBlock(blocks.StructBlock([
-                ('time_start', blocks.DateTimeBlock(required=False)),
-                ('time_end', blocks.DateTimeBlock(required=False)),
-                ('title', blocks.CharBlock(required=False)),
-                ('description', blocks.RichTextBlock(required=False)),
-                ('speakers', blocks.RichTextBlock(
+            ("event_info", blocks.StructBlock([
+                ("overview", blocks.RichTextBlock(required=False)),
+                ("community_activities", blocks.RichTextBlock(required=False)),
+                ("highlights", blocks.RichTextBlock(required=False)),
+                ("why_attend", blocks.RichTextBlock(required=False)),
+                ("language", blocks.CharBlock(required=False)),
+                ("joining_info", blocks.RichTextBlock(required=False)),
+                ("agenda", blocks.RichTextBlock(required=False)),
+                ("show_speakers", blocks.BooleanBlock(required=False)),
+                ("stay_connected", blocks.RichTextBlock(required=False)),
+            ], icon="list-ul")),
+            ("event_video_sessions", blocks.ListBlock(blocks.StructBlock([
+                ("time_start", blocks.DateTimeBlock(required=False)),
+                ("time_end", blocks.DateTimeBlock(required=False)),
+                ("title", blocks.CharBlock(required=False)),
+                ("description", blocks.RichTextBlock(required=False)),
+                ("speakers", blocks.RichTextBlock(
                     required=False,
                     help_text=_("Use a numbered or bulleted list feature to point out the speakers' names")
                 )),
-                ('video_link', blocks.URLBlock(required=False)),
-            ]), icon='media')),
-            ('event_resources', blocks.ListBlock(blocks.StructBlock([
-                ('resource', DocumentChooserBlock(required=False)),
-            ]), icon='doc-full-inverse')),
+                ("video_link", blocks.URLBlock(required=False)),
+            ]), icon="media")),
+            ("event_resources", blocks.ListBlock(blocks.StructBlock([
+                ("resource", DocumentChooserBlock(required=False)),
+            ]), icon="doc-full-inverse")),
         ],
         null=True,
         blank=True,
@@ -274,7 +366,6 @@ class EventPostPage(MetadataPageMixin, Page):
         FieldPanel("id", read_only=True),
         FieldPanel("live", read_only=True),
         FieldPanel("owner"),
-        FieldPanel("content_type"),
         FieldPanel("locked", read_only=True),
         FieldPanel("first_published_at", read_only=True),
         FieldPanel("last_published_at", read_only=True),
