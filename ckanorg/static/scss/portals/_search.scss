@@ -1,0 +1,155 @@
+.search-section {
+    .search-section-title {
+        font-family: SF Pro Display;
+        font-weight: 400;
+        font-style: Regular;
+        font-size: 15px;
+        line-height: 16px;
+        letter-spacing: 1.05px;
+        vertical-align: middle;
+        text-transform: uppercase;
+        color: #555;
+    }
+
+    .search-section-form {
+        margin-top: 20px;
+        margin-bottom: 40px;
+
+        form {
+            display: flex;
+            gap: 40px;
+
+            .form-input-group {
+                display: flex;
+                flex-grow: 1;
+                gap: 8px;
+                border-radius: 8px;
+                border: 1px solid $silver;
+                padding: 16px;
+
+                input[type="text"] {
+                    height: 28px;
+                    border: none;
+                    padding: 0;
+                    font-weight: 400;
+                    font-size: 20px;
+                    color: $dark-gray;
+
+                    &::placeholder {
+                        color: $silver;
+                    }
+                }
+
+                .search-button {
+                    background-color: $white;
+                    color: $silver;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+
+                    i {
+                        width: 12;
+                        height: 12;
+                        border-width: 2px;
+                        top: 2px;
+                        left: 2px;
+                        color: $silver;
+                    }
+
+                    &:hover, &:focus {
+                        color: #000;
+
+                        path {
+                            fill: none;
+                            stroke: $dark-gray;
+                        }
+                    }
+                }
+            }
+
+            .form-select-group {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+
+                label[for="order_by"] {
+                    align-content: center;
+                    font-weight: 400;
+                    font-size: 20px;
+                    line-height: 28px;
+                    color: $dark-gray;
+                }
+
+                .select-wrapper {
+                    position: relative; /* create positioning context for the arrow */
+
+                    select[name="sort"] {
+                        -webkit-appearance: none; /* For Safari and Chrome */
+                        -moz-appearance: none; /* For Firefox */
+                        appearance: none; /* Standard property */
+
+                        border: 1px solid $silver;
+                        border-radius: 8px;
+                        padding: 16px 48px 16px 16px; /* reduce right padding to make room for arrow */
+                        font-weight: 400;
+                        font-size: 20px;
+                        line-height: 28px;
+                        color: $dark-gray;
+                        background-color: $white;
+                        cursor: pointer;
+
+                        &:hover, &:focus {
+                            border-color: $dark-gray;
+                        }
+
+                        option {
+                            &:hover {
+                                background-color: #333; /* desired hover color */
+                                color: #fff;
+                            }
+
+                            &:checked {
+                                background-color: #333;
+                                color: #fff;
+                            }
+                        }
+                    }
+
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        right: 16px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        pointer-events: none;
+                        width: 16px;
+                        height: 16px;
+                        background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23777777' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        transition: transform 0.3s ease, opacity 0.2s ease;
+                    }
+
+                    select:hover + &::after {
+                        opacity: 0.8;
+                    }
+
+                    &.active::after {
+                        opacity: 0.8;
+                        transform: translateY(-50%) rotate(180deg);
+                    }
+                }
+            }
+        }
+    }
+
+    .search-section-results {
+        display: grid;
+        grid-template-columns: 1fr 1fr; // Creates two equal-width columns
+        gap: 20px; // Adds space between columns and rows
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+}

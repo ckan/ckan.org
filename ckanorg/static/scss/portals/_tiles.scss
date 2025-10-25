@@ -1,0 +1,91 @@
+.portal-item {
+    list-style: none;
+    border: 1px solid $gray-border;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.2s ease-in-out;
+
+    &:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .portal-link {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 180px;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .portal-info {
+        text-decoration: none;
+        color: inherit;
+
+        .portal-title {
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 28px;
+            color: $dark-gray;
+        }
+
+        .portal-url {
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 24px;
+            color: $medium-gray;
+        }
+    }
+
+    .portal-statistics {
+        display: flex;
+        margin-top: 12px;
+
+        .statistic-item {
+            display: flex;
+            flex-direction: column;
+            margin-right: 16px;
+            width: 85;
+            height: 52;
+            border-radius: 8px;
+            padding: 8px;
+            gap: 8px;
+            opacity: 1;
+            background-size: 24px 24px;
+            padding-right: 64px;
+
+            &.datasets {
+                background: $gray-background url("../img/fa-layer-group.svg") no-repeat;
+                background-position: calc(100% - 12px) 12px;
+            }
+
+            &.users {
+                background: $gray-background url("../img/fa-user-group.svg") no-repeat;
+                background-position: calc(100% - 12px) 12px;
+            }
+
+            &.resources {
+                background: $gray-background url("../img/fa-file-lines.svg") no-repeat;
+                background-position: calc(100% - 12px) 12px;
+            }
+
+            .statistic-label {
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 18px;
+                color: $light-gray-2;
+            }
+
+            .statistic-value {
+                font-weight: 700;
+                font-size: 15px;
+                line-height: 18px;
+                color: $dark-gray;
+            }
+        }
+    }
+}

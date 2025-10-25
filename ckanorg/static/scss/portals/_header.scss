@@ -1,0 +1,58 @@
+.container-sm {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+
+    .statistics-content {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 40px;
+
+        .statistic-item {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            min-width: 100px;
+            width: 216px;
+            height: 96px;
+            border: 1px solid $gray-border;
+            border-radius: 8px;
+            padding: 8px;
+            gap: 8px;
+            opacity: 1;
+            background-size: 24px 24px;
+            padding-right: 64px;
+
+            &.dataportals {
+                background: transparent url("../img/fa-table.svg") no-repeat;
+                background-position: calc(100% - 12px) 12px;
+            }
+
+            &.datasets {
+                background: transparent url("../img/fa-layer-group.svg") no-repeat;
+                background-position: calc(100% - 12px) 12px;
+            }
+
+            &.users {
+                background: transparent url("../img/fa-user-group.svg") no-repeat;
+                background-position: calc(100% - 12px) 12px;
+            }
+
+            .statistic-value {
+                margin: 0;
+                font-weight: 700;
+                font-size: 50px;
+                line-height: 54px;
+                color: $black;
+            }
+
+            .statistic-label {
+                font-weight: 400;
+                font-size: 15px;
+                line-height: 18px;
+                color: $silver;
+            }
+        }
+    }
+}

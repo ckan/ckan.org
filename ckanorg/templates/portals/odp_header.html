@@ -1,0 +1,21 @@
+{% load static i18n wagtailcore_tags %}
+
+<div class="container-sm t-center">
+    <h1>{{ page.intro|richtext }}</h1>
+
+    <div class="statistics-content">
+        {# Icons are declared in the SCSS file according to the item type #}
+        <div class="statistic-item dataportals">
+            <h2 class="statistic-value">{{ stats.total_portals }}</h2>
+            <p class="statistic-label"><trans>Data portals</trans></p>
+        </div>
+        <div class="statistic-item datasets">
+            <h2 class="statistic-value">{{ stats.total_datasets }}</h2>
+            <p class="statistic-label"><trans>Datasets</trans></p>
+        </div>
+        <div class="statistic-item users">
+            <h2 class="statistic-value">{{ stats.total_users }}+</h2>
+            <p class="statistic-label"><trans>Active users</trans></p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,95 @@
+{% load static %}
+
+<div class="container">
+
+    <p class="search-section-title"><trans>CKAN DATA PORTALS WORLDWIDE</trans></p>
+
+    <div class="search-section-form">
+        <form method="get">
+            <div class="form-input-group">
+                <button type="submit" value="Search" class="search-button">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 13L10.1 10.1M11.6667 6.33333C11.6667 9.27885 9.27885 11.6667 6.33333 11.6667C3.38781 11.6667 1 9.27885 1 6.33333C1 3.38781 3.38781 1 6.33333 1C9.27885 1 11.6667 3.38781 11.6667 6.33333Z" stroke="#b6b6b6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <input type="text" name="q" placeholder="Search" value="{{ query }}" autocomplete="off">
+            </div>
+
+            <div class="form-select-group">
+                <label for="order_by"><trans>Order by:</trans></label>
+                <div class="select-wrapper">
+                    <select id="order_by" name="sort" onchange="this.form.submit()">
+                        <option value="datasets" {% if sort == "datasets" %}selected{% endif %}>
+                            <trans>Most datasets</trans>
+                        </option>
+                        <option value="users" {% if sort == "users" %}selected{% endif %}>
+                            <trans>Most users</trans>
+                        </option>
+                        <option value="resources" {% if sort == "resources" %}selected{% endif %}>
+                            <trans>Most resources</trans>
+                        </option>
+                        <option value="name_asc" {% if sort == "name_asc" %}selected{% endif %}>
+                            <trans>Name ascending</trans>
+                        </option>
+                        <option value="name_desc" {% if sort == "name_desc" %}selected{% endif %}>
+                            <trans>Name descending</trans>
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <ul class="search-section-results">
+        {% for portal in portals %}
+            {% include "portals/snippets/odp_item.html" with portal=portal %}
+        {% empty %}
+            <li><trans>No portals found.</trans></li>
+        {% endfor %}
+    </ul>
+
+    <div class="pagination-holder indent">
+        {% block pagination %}
+            <ul class="pagination">
+                {% if page_obj.paginator.num_pages > 1 %}
+                    {% if page_obj.has_previous %}
+                        <li class="prev">
+                            <a href="?q={{ query }}&sort={{ sort }}&page={{ page_obj.previous_page_number }}">
+                                <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2.00009 0.855957L0.590088 2.26596L5.17009 6.85596L0.590088 11.446L2.00009 12.856L8.00009 6.85596L2.00009 0.855957Z" fill="#0000EE"/>
+                                </svg>
+                                Previous
+                            </a>
+                        </li>
+                        <li>
+                            <a href="?q={{ query }}&sort={{ sort }}&page=1">...</a>
+                        </li>
+                    {% endif %}
+                    {% for page_num in page_obj.paginator.page_range %}
+                        {% if page_num == page_obj.number %}
+                            <li><a href="?q={{ query }}&sort={{ sort }}&page={{ page_num }}" style="font-weight: bold;">{{ page_num }}</a></li>
+                        {% elif page_num > page_obj.number|add:'-3' and page_num < page_obj.number|add:'3' %}
+                            <li><a href="?q={{ query }}&sort={{ sort }}&page={{ page_num }}">{{ page_num }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                        <li>
+                            <a href="?q={{ query }}&sort={{ sort }}&page={{ page_obj.paginator.num_pages }}">...</a>
+                        </li>
+                        <li class="next">
+                            <a href="?q={{ query }}&sort={{ sort }}&page={{ page_obj.next_page_number }}">
+                                Next
+                                <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2.00009 0.855957L0.590088 2.26596L5.17009 6.85596L0.590088 11.446L2.00009 12.856L8.00009 6.85596L2.00009 0.855957Z" fill="#0000EE"/>
+                                </svg>
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+        {% endblock %}
+    </div>
+
+</div>
+
+<script src="{% static 'js/select-arrow.js' %}"></script>

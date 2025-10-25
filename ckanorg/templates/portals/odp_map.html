@@ -1,0 +1,25 @@
+{% load static %}
+
+<div class="container">
+    <div class="map-container">
+        <!-- Map container with defined height -->
+        <div id="portal-map" style="height: 600px; width: 100%; position: relative;">
+            {{ map_html|safe }}
+        </div>
+    </div>
+    <div class="map-caption">
+        <p>
+            <trans>
+                Data provided by a global platform that collects, analyses, and provides 
+                statistics for CKAN-powered open data portals from around the world.
+            </trans>
+        </p>
+        <img src="{% static 'img/datashades-logo.svg' %}" alt="Map Caption Image" class="datashades-logo">
+        <a href="https://datashades.info/" target="_blank">
+            <trans>Explore more data</trans>
+            <span>
+                <img src="{% static 'img/external-link.svg' %}" alt="External Link Icon" class="external-link-icon">
+            </span>
+        </a>
+    </div>
+</div>
