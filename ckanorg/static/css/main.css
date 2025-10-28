@@ -731,6 +731,7 @@ p:not(:last-child) {
   background: #333;
   border: 2px solid #333;
   color: #fff;
+  letter-spacing: 1px;
 }
 .btn.btn-dark-grey.btn-standard {
   margin-top: 30px;
