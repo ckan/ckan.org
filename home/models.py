@@ -83,6 +83,7 @@ class HomePage(MetadataPageMixin, Page):
         'blog.BlogListingPage',
         'events.EventListingPage',
         'faq.FaqPage',
+        'portals.OpenDataPortalPage',
     ]
     max_count = 1
 

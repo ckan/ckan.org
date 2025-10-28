@@ -88,14 +88,28 @@
                 </div>
             </div>
         </div>
-            <!-- TESTIMONIAL SECTION 1 -->
-            <div class="container-sm t-center">
-                <ul class="quotes-slider top">
-                    {% for item in page.feedback_section_1.all %}
-                        {% include "../snippets/feedback_block.html" with feedback=item.feedback %}
-                    {% endfor %}
-                </ul>
-            </div><br>
-            <!-- END TESTIMONIAL SECTION 1 -->
+
+        <!-- TESTIMONIAL SECTION 1 -->
+        <div class="container-sm t-center">
+            <ul class="quotes-slider top">
+                {% for item in page.feedback_section_1.all %}
+                    {% include "../snippets/feedback_block.html" with feedback=item.feedback %}
+                {% endfor %}
+            </ul>
+
+            <div class="separator"></div>
+            <h2>
+                <trans>Discover hundreds of CKAN-powered data portals worldwide</trans>
+            </h2>
+            <p>
+                <trans>Interactive map and statistics of real-world CKAN implementations.</trans>
+            </p>
+            <div class="t-center mb-56">
+                <a href="{% slugurl 'portals' %}" target="_blank" rel="noopener" class="btn btn-dark-grey btn-lg">
+                    <trans>Explore the map</trans>
+                </a>
+            </div>
+        </div>
+        <!-- END TESTIMONIAL SECTION 1 -->
 
 {% endblock content %}
