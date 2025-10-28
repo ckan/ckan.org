@@ -17,6 +17,7 @@
 
         form {
             display: flex;
+            flex-wrap: wrap;
             gap: 40px;
 
             .search-box {
@@ -35,6 +36,7 @@
                     height: 28px;
                     border: none;
                     padding: 0;
+                    margin-bottom: 0;
                     font-weight: 400;
                     font-size: 20px;
                     color: $dark-gray;
@@ -192,5 +194,9 @@
         list-style: none;
         padding: 0;
         margin: 0;
+
+        @media all and (max-width: 768px) {
+            grid-template-columns: none;
+        }
     }
 }

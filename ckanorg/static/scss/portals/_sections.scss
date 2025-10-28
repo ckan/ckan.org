@@ -5,6 +5,12 @@
         padding-top: 40px;
         gap: 40px;
         opacity: 1;
+
+        @media all and (max-width: 375px) {
+            .container {
+                padding: 0;
+            }
+        }
     }
 
     .map-section {
@@ -12,11 +18,23 @@
         padding-bottom: 40px;
         gap: 40px;
         opacity: 1;
+
+        @media all and (max-width: 375px) {
+            .container {
+                padding: 0;
+            }
+        }
     }
 
     .search-section {
         padding-top: 40px;
         gap: 40px;
         opacity: 1;
+
+        @media all and (max-width: 375px) {
+            .container {
+                padding: 0;
+            }
+        }
     }
 }

@@ -7222,6 +7222,16 @@ img.linkdigital-logo {
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+.map-container #portal-map {
+  max-height: 600px;
+  width: 100%;
+  position: relative;
+}
+@media all and (max-width: 375px) {
+  .map-container #portal-map {
+    width: max-content;
+  }
+}
 
 /* Custom styles for Leaflet popups */
 .leaflet-popup-content-wrapper {
@@ -7293,8 +7303,17 @@ img.linkdigital-logo {
 .map-caption {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 8px;
   margin-top: 8px;
+}
+@media all and (max-width: 768px) {
+  .map-caption {
+    justify-content: center;
+  }
+  .map-caption p {
+    text-align: center;
+  }
 }
 .map-caption p {
   font-weight: 400;
@@ -7331,6 +7350,7 @@ img.linkdigital-logo {
 }
 .search-section .search-section-form form {
   display: flex;
+  flex-wrap: wrap;
   gap: 40px;
 }
 .search-section .search-section-form form .search-box {
@@ -7348,6 +7368,7 @@ img.linkdigital-logo {
   height: 28px;
   border: none;
   padding: 0;
+  margin-bottom: 0;
   font-weight: 400;
   font-size: 20px;
   color: #333;
@@ -7482,6 +7503,11 @@ img.linkdigital-logo {
   padding: 0;
   margin: 0;
 }
+@media all and (max-width: 768px) {
+  .search-section .search-section-results {
+    grid-template-columns: none;
+  }
+}
 
 .portals-container {
   padding: 20px;
@@ -7491,16 +7517,31 @@ img.linkdigital-logo {
   gap: 40px;
   opacity: 1;
 }
+@media all and (max-width: 375px) {
+  .portals-container .header-section .container, .portals-container .header-section .container-lg, .portals-container .header-section .container-md, .portals-container .header-section .container-sm {
+    padding: 0;
+  }
+}
 .portals-container .map-section {
   padding-top: 40px;
   padding-bottom: 40px;
   gap: 40px;
   opacity: 1;
 }
+@media all and (max-width: 375px) {
+  .portals-container .map-section .container, .portals-container .map-section .container-lg, .portals-container .map-section .container-md, .portals-container .map-section .container-sm {
+    padding: 0;
+  }
+}
 .portals-container .search-section {
   padding-top: 40px;
   gap: 40px;
   opacity: 1;
+}
+@media all and (max-width: 375px) {
+  .portals-container .search-section .container, .portals-container .search-section .container-lg, .portals-container .search-section .container-md, .portals-container .search-section .container-sm {
+    padding: 0;
+  }
 }
 
 .portal-item {
@@ -7553,6 +7594,7 @@ img.linkdigital-logo {
 }
 .portal-item .portal-statistics {
   display: flex;
+  gap: 8px;
   margin-top: 12px;
 }
 .portal-item .portal-statistics .statistic-item {
@@ -7567,6 +7609,12 @@ img.linkdigital-logo {
   opacity: 1;
   background-size: 24px 24px;
   padding-right: 64px;
+}
+@media all and (max-width: 375px) {
+  .portal-item .portal-statistics .statistic-item {
+    margin-right: 0;
+    padding-right: 34px;
+  }
 }
 .portal-item .portal-statistics .statistic-item.datasets {
   background: #f4f4f4 url("../img/fa-layer-group.svg") no-repeat;
@@ -7656,6 +7704,7 @@ img.linkdigital-logo {
   font-weight: 500;
 }
 .ui-autocomplete .ui-menu-item .portal-suggestion .portal-link .portal-title span {
+  max-height: fit-content;
   font-size: 14px;
   font-weight: 400;
   border: 1px solid #aaa;

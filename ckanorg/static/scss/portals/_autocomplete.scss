@@ -65,6 +65,7 @@
                     font-weight: 500;
 
                     span {
+                        max-height: fit-content;
                         font-size: 14px;
                         font-weight: 400;
                         border: 1px solid $light-gray;

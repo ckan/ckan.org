@@ -4,6 +4,16 @@
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    #portal-map {
+        max-height: 600px;
+        width: 100%;
+        position: relative;
+
+        @media all and (max-width: 375px) {
+            width: max-content;
+        }
+    }
 }
 
 /* Custom styles for Leaflet popups */
@@ -76,8 +86,17 @@
 .map-caption {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     gap: 8px;
     margin-top: 8px;
+
+    @media all and (max-width: 768px) {
+        justify-content: center;
+
+        p {
+            text-align: center;
+        }
+    }
 
     p {
         font-weight: 400;

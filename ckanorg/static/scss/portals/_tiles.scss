@@ -54,6 +54,7 @@
 
     .portal-statistics {
         display: flex;
+        gap: 8px;
         margin-top: 12px;
 
         .statistic-item {
@@ -68,6 +69,11 @@
             opacity: 1;
             background-size: 24px 24px;
             padding-right: 64px;
+
+            @media all and (max-width: 375px) {
+                margin-right: 0;
+                padding-right: 34px;
+            }
 
             &.datasets {
                 background: $gray-background url("../img/fa-layer-group.svg") no-repeat;
