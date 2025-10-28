@@ -27,10 +27,21 @@
         color: inherit;
 
         .portal-title {
+            display: flex;
+            justify-content: space-between;
             font-weight: 700;
             font-size: 24px;
             line-height: 28px;
             color: $dark-gray;
+
+            span {
+                font-size: 12px;
+                font-weight: 400;
+                border: 1px solid $light-gray;
+                border-radius: 4px;
+                padding: 0 8px;
+                max-height: fit-content;
+            }
         }
 
         .portal-url {

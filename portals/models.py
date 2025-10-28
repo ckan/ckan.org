@@ -1,5 +1,5 @@
-import requests
 import folium
+import requests
 from folium import plugins
 from numerize import numerize
 
@@ -7,10 +7,16 @@ from wagtail.models import Page
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 
-from django.core.paginator import Paginator
-from django.shortcuts import render
 from django.core.cache import cache
+from django.core.paginator import Paginator
+from django.http import JsonResponse
+from django.shortcuts import render
 from django.utils.safestring import mark_safe
+from django.views.decorators.http import require_GET
+
+
+
+
 
 
 class OpenDataPortalPage(Page):
@@ -25,6 +31,45 @@ class OpenDataPortalPage(Page):
     class Meta:
         verbose_name = "Open Data Portal Page"
         verbose_name_plural = "Open Data Portal Pages"
+
+    @staticmethod
+    def get_autocomplete_suggestions(query):
+        """Return autocomplete suggestions for portals matching the query."""
+        portals = cache.get("open_data_portals", [])
+        query = query.lower()
+        suggestions = []
+
+        for portal in portals:
+            site_info = portal.get("SiteInfo", {})
+            site_title = site_info.get("site_title", "")
+            site_description = site_info.get("site_description", "")
+            portal_country = portal.get("Coordinates", {}).get("country_name", "") or "Unknown"
+            if query in site_title.lower():
+                suggestions.append(
+                    {
+                        "label": site_title or site_description,
+                        "value": site_title,
+                        "description": site_description,
+                        "country": portal_country,
+                        "url": portal.get("Href", ""),
+                    }
+                )
+
+        # Sort by number of datasets and limit to top 10
+        suggestions = sorted(suggestions, key=lambda x: x["country"])
+        return suggestions
+
+    @staticmethod
+    @require_GET
+    def autocomplete_view(request):
+        """AJAX view for autocomplete suggestions."""
+        query = request.GET.get('term', '').strip()
+
+        if not query:
+            return JsonResponse([], safe=False)
+
+        suggestions = OpenDataPortalPage.get_autocomplete_suggestions(query)
+        return JsonResponse(suggestions, safe=False)
 
     def serve(self, request):
         query = request.GET.get("q", "")
