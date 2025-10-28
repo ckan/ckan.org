@@ -45,6 +45,9 @@
         }
 
         .portal-url {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            word-break: break-all;
             font-weight: 400;
             font-size: 15px;
             line-height: 24px;
@@ -54,8 +57,11 @@
 
     .portal-statistics {
         display: flex;
-        gap: 8px;
         margin-top: 12px;
+
+        @media all and (max-width: 375px) {
+            gap: 8px;
+        }
 
         .statistic-item {
             display: flex;

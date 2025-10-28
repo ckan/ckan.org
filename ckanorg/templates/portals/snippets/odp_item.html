@@ -4,10 +4,8 @@
             <h5 class="portal-title" title="{{ portal.SiteInfo.site_description }}">
                 {% if portal.SiteInfo.site_title %}
                     {{ portal.SiteInfo.site_title }}
-                {% elif portal.SiteInfo.site_description %}
-                    {{ portal.SiteInfo.site_description }}
                 {% else %}
-                    <trans>No title</trans>
+                    <trans>&nbsp;</trans>
                 {% endif %}
                 
                 {% if portal.Coordinates.country_name %}

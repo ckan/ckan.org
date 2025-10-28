@@ -7587,6 +7587,9 @@ img.linkdigital-logo {
   max-height: fit-content;
 }
 .portal-item .portal-info .portal-url {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-all;
   font-weight: 400;
   font-size: 15px;
   line-height: 24px;
@@ -7594,8 +7597,12 @@ img.linkdigital-logo {
 }
 .portal-item .portal-statistics {
   display: flex;
-  gap: 8px;
   margin-top: 12px;
+}
+@media all and (max-width: 375px) {
+  .portal-item .portal-statistics {
+    gap: 8px;
+  }
 }
 .portal-item .portal-statistics .statistic-item {
   display: flex;

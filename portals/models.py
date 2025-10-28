@@ -105,7 +105,6 @@ class OpenDataPortalPage(Page):
             portals = [
                 p for p in portals
                 if query.lower() in p.get("SiteInfo", {}).get("site_title", "").lower()
-                or query.lower() in p.get("SiteInfo", {}).get("site_description", "").lower()
             ]
 
         # Sort portals based on the selected criteria
