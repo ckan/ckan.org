@@ -24,6 +24,11 @@
             background-size: 24px 24px;
             padding-right: 64px;
 
+            @media all and (max-width: 768px) {
+                width: fit-content;
+                height: fit-content;
+            }
+
             &.dataportals {
                 background: transparent url("../img/fa-table.svg") no-repeat;
                 background-position: calc(100% - 12px) 12px;
@@ -45,13 +50,18 @@
                 font-size: 50px;
                 line-height: 54px;
                 color: $black;
+
+                @media all and (max-width: 768px) {
+                    font-size: 28px;
+                    line-height: 32px;
+                }
             }
 
             .statistic-label {
                 font-weight: 400;
                 font-size: 15px;
                 line-height: 18px;
-                color: $silver;
+                color: $taupe-gray;
             }
         }
     }

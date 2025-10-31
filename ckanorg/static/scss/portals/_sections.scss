@@ -2,9 +2,19 @@
     padding: 20px;
 
     .header-section {
-        padding-top: 40px;
-        gap: 40px;
+        padding-top: 0;
         opacity: 1;
+
+        .container-sm {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        @media all and (max-width: 768px) {
+            .container {
+                padding: 0;
+            }
+        }
 
         @media all and (max-width: 375px) {
             .container {
@@ -14,10 +24,16 @@
     }
 
     .map-section {
-        padding-top: 40px;
+        padding-top: 20px;
         padding-bottom: 40px;
         gap: 40px;
         opacity: 1;
+
+        @media all and (max-width: 768px) {
+            .container {
+                padding: 0;
+            }
+        }
 
         @media all and (max-width: 375px) {
             .container {
@@ -30,6 +46,12 @@
         padding-top: 40px;
         gap: 40px;
         opacity: 1;
+
+        @media all and (max-width: 768px) {
+            .container {
+                padding: 0;
+            }
+        }
 
         @media all and (max-width: 375px) {
             .container {
