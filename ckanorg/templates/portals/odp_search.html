@@ -12,6 +12,12 @@
                 <label for="order_by"><trans>Order by:</trans></label>
                 <div class="select-wrapper">
                     <select id="order_by" name="sort" onchange="this.form.submit()">
+                        <option value="name_asc" {% if sort == "name_asc" %}selected{% endif %}>
+                            <trans>Name ascending</trans>
+                        </option>
+                        <option value="name_desc" {% if sort == "name_desc" %}selected{% endif %}>
+                            <trans>Name descending</trans>
+                        </option>
                         <option value="datasets" {% if sort == "datasets" %}selected{% endif %}>
                             <trans>Most datasets</trans>
                         </option>
@@ -20,12 +26,6 @@
                         </option>
                         <option value="resources" {% if sort == "resources" %}selected{% endif %}>
                             <trans>Most resources</trans>
-                        </option>
-                        <option value="name_asc" {% if sort == "name_asc" %}selected{% endif %}>
-                            <trans>Name ascending</trans>
-                        </option>
-                        <option value="name_desc" {% if sort == "name_desc" %}selected{% endif %}>
-                            <trans>Name descending</trans>
                         </option>
                     </select>
                 </div>

@@ -22,36 +22,41 @@
     border: 1px solid $gray-border;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    padding: 16px;
     gap: 24px;
 
     .ui-menu-item {
         padding: 0;
-        border-bottom: 1px solid #eee;
         background-color: $white;
         color: $dark-gray;
+        list-style: none;
+        list-style-image: none;
+
+        &::marker {
+            display: none;
+        }
 
         &:hover, &:focus {
             background-color: $dark-gray;
             color: $white;
-            border: 1px solid $dark-gray;
-        }
-
-        .ui-menu-item:last-child {
-            border-bottom: none;
+            // border: 1px solid $dark-gray;
         }
 
         .portal-suggestion {
             padding: 12px 16px;
             background-color: $white;
             color: $dark-gray;
-            border-top: none;
-            border-bottom: 1px solid #eee;
+            border: none;
             cursor: pointer;
+
+            &.ui-state-active {
+                background-color: $dark-gray;
+                color: $white;
+            }
+
 
             &:hover {
                 background-color: $dark-gray;
-                border: 1px solid $dark-gray;
+                border: none;
                 color: $white;
             }
 
