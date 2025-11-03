@@ -7175,6 +7175,11 @@ img.linkdigital-logo {
   justify-content: center;
   margin-top: 40px;
 }
+@media all and (max-width: 375px) {
+  .container-sm .statistics-content {
+    justify-content: left;
+  }
+}
 .container-sm .statistics-content .statistic-item {
   display: flex;
   flex-direction: column;
@@ -7194,6 +7199,11 @@ img.linkdigital-logo {
   .container-sm .statistics-content .statistic-item {
     width: fit-content;
     height: fit-content;
+  }
+}
+@media all and (max-width: 375px) {
+  .container-sm .statistics-content .statistic-item {
+    min-width: 159px;
   }
 }
 .container-sm .statistics-content .statistic-item.dataportals {
@@ -7496,8 +7506,7 @@ img.linkdigital-logo {
   padding-bottom: 16px;
 }
 .search-section .search-section-form form .form-select-group .select-wrapper .custom-select-option:hover, .search-section .search-section-form form .form-select-group .select-wrapper .custom-select-option:focus {
-  background-color: #333333;
-  color: #fff;
+  background-color: #DDDDDD;
   outline: none;
 }
 .search-section .search-section-form form .form-select-group .select-wrapper select[name=sort] {
@@ -7511,7 +7520,7 @@ img.linkdigital-logo {
 .search-section .search-section-results {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 24px;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -7523,7 +7532,7 @@ img.linkdigital-logo {
 }
 .search-section .pagination-holder.indent {
   margin-top: 40px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .portals-container {
@@ -7631,6 +7640,7 @@ img.linkdigital-logo {
 }
 .portal-item .portal-statistics {
   display: flex;
+  flex-wrap: wrap;
   margin-top: 12px;
 }
 @media all and (max-width: 375px) {
@@ -7696,7 +7706,8 @@ img.linkdigital-logo {
 .ui-autocomplete {
   top: 64px !important;
   left: 0 !important;
-  width: 100%;
+  margin-left: -1px !important;
+  width: -webkit-fill-available !important;
   max-height: 400px;
   overflow-y: auto;
   overflow-x: hidden;
@@ -7718,8 +7729,8 @@ img.linkdigital-logo {
   display: none;
 }
 .ui-autocomplete .ui-menu-item:hover, .ui-autocomplete .ui-menu-item:focus {
-  background-color: #333333;
-  color: #fff;
+  background-color: #DDDDDD;
+  color: #333333;
 }
 .ui-autocomplete .ui-menu-item .portal-suggestion {
   padding: 12px 16px;
@@ -7729,22 +7740,24 @@ img.linkdigital-logo {
   cursor: pointer;
 }
 .ui-autocomplete .ui-menu-item .portal-suggestion.ui-state-active {
-  background-color: #333333;
-  color: #fff;
+  background-color: #DDDDDD;
+  color: #333333;
 }
 .ui-autocomplete .ui-menu-item .portal-suggestion:hover {
-  background-color: #333333;
+  background-color: #DDDDDD;
+  color: #333333;
   border: none;
-  color: #fff;
 }
 .ui-autocomplete .ui-menu-item .portal-suggestion .portal-link {
+  color: #333333;
   transition: none;
 }
 .ui-autocomplete .ui-menu-item .portal-suggestion .portal-link .portal-title {
   display: flex;
   justify-content: space-between;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
 }
 .ui-autocomplete .ui-menu-item .portal-suggestion .portal-link .portal-title span {
   max-height: fit-content;

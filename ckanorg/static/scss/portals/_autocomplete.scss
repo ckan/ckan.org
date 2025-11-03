@@ -13,7 +13,8 @@
 .ui-autocomplete {
     top: 64px !important;
     left: 0 !important;
-    width: 100%;
+    margin-left: -1px !important;
+    width: -webkit-fill-available !important; 
     max-height: 400px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -36,9 +37,8 @@
         }
 
         &:hover, &:focus {
-            background-color: $dark-gray;
-            color: $white;
-            // border: 1px solid $dark-gray;
+            background-color: $light-gray-hover;
+            color: $dark-gray;
         }
 
         .portal-suggestion {
@@ -49,25 +49,27 @@
             cursor: pointer;
 
             &.ui-state-active {
-                background-color: $dark-gray;
-                color: $white;
+                background-color: $light-gray-hover;
+                color: $dark-gray;
             }
 
 
             &:hover {
-                background-color: $dark-gray;
+                background-color: $light-gray-hover;
+                color: $dark-gray;
                 border: none;
-                color: $white;
             }
 
             .portal-link {
+                color: $dark-gray;
                 transition: none;
 
                 .portal-title {
                     display: flex;
                     justify-content: space-between;
-                    font-size: 16px;
-                    font-weight: 500;
+                    font-size: 20px;
+                    font-weight: 400;
+                    line-height: 28px;
 
                     span {
                         max-height: fit-content;
