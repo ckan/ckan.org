@@ -9,6 +9,10 @@
         justify-content: center;
         margin-top: 40px;
 
+        @media all and (max-width: 375px) {
+            justify-content: left;
+        }
+
         .statistic-item {
             display: flex;
             flex-direction: column;
@@ -27,6 +31,10 @@
             @media all and (max-width: 768px) {
                 width: fit-content;
                 height: fit-content;
+            }
+
+            @media all and (max-width: 375px) {
+                min-width: 159px;
             }
 
             &.dataportals {
