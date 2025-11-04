@@ -204,7 +204,7 @@ class OpenDataPortalPage(Page):
                             <p><strong>Datasets:</strong> {portal.get('DatasetsNumber', 0)}</p>
                             <p><strong>Resources:</strong> {portal.get('ResourcesNumber', 0)}</p>
                             <p><strong>Users:</strong> {portal.get('UsersNumber', 0)}</p>
-                            <a href="{portal.get('Href', '#')}" target="_blank" class="btn btn-md">
+                            <a href="{portal.get('Href', '#')}" target="_blank" class="btn btn-md btn-visit" style="padding: 0;">
                             Visit Portal</a>
                         </div>
                     """

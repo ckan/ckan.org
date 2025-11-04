@@ -22,7 +22,7 @@
         {% endblock map_content %}
 
         {% block search_content %}
-            <div class="search-section">
+            <div id="search-section" class="search-section">
                 {% include "portals/odp_search.html" with query=query sort=sort portals=portals page_obj=page_obj %}
             </div>
         {% endblock search_content %}
