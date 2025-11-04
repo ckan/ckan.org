@@ -18,7 +18,7 @@
             flex-direction: column;
             align-items: start;
             min-width: 100px;
-            width: 216px;
+            width: 236px;
             height: 96px;
             border: 1px solid $gray-border;
             border-radius: 8px;
@@ -35,6 +35,7 @@
 
             @media all and (max-width: 375px) {
                 min-width: 159px;
+                padding-right: 44px;
             }
 
             &.dataportals {

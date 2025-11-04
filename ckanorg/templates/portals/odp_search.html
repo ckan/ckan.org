@@ -47,7 +47,7 @@
                 {% if page_obj.paginator.num_pages > 1 %}
                     {% if page_obj.has_previous %}
                         <li class="prev">
-                            <a href="?q={{ query }}&sort={{ sort }}&page={{ page_obj.previous_page_number }}">
+                            <a href="?q={{ query }}&sort={{ sort }}&page={{ page_obj.previous_page_number }}#search-section">
                                 <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M2.00009 0.855957L0.590088 2.26596L5.17009 6.85596L0.590088 11.446L2.00009 12.856L8.00009 6.85596L2.00009 0.855957Z" fill="#0000EE"/>
                                 </svg>
@@ -55,22 +55,30 @@
                             </a>
                         </li>
                         <li>
-                            <a href="?q={{ query }}&sort={{ sort }}&page=1">...</a>
+                            <a href="?q={{ query }}&sort={{ sort }}&page=1#search-section">...</a>
                         </li>
                     {% endif %}
                     {% for page_num in page_obj.paginator.page_range %}
                         {% if page_num == page_obj.number %}
-                            <li><a href="?q={{ query }}&sort={{ sort }}&page={{ page_num }}" style="font-weight: bold;">{{ page_num }}</a></li>
+                            <li>
+                                <a href="?q={{ query }}&sort={{ sort }}&page={{ page_num }}#search-section" style="font-weight: bold;">
+                                    {{ page_num }}
+                                </a>
+                            </li>
                         {% elif page_num > page_obj.number|add:'-3' and page_num < page_obj.number|add:'3' %}
-                            <li><a href="?q={{ query }}&sort={{ sort }}&page={{ page_num }}">{{ page_num }}</a></li>
+                            <li>
+                                <a href="?q={{ query }}&sort={{ sort }}&page={{ page_num }}#search-section">
+                                    {{ page_num }}
+                                </a>
+                            </li>
                         {% endif %}
                     {% endfor %}
                     {% if page_obj.has_next %}
                         <li>
-                            <a href="?q={{ query }}&sort={{ sort }}&page={{ page_obj.paginator.num_pages }}">...</a>
+                            <a href="?q={{ query }}&sort={{ sort }}&page={{ page_obj.paginator.num_pages }}#search-section">...</a>
                         </li>
                         <li class="next">
-                            <a href="?q={{ query }}&sort={{ sort }}&page={{ page_obj.next_page_number }}">
+                            <a href="?q={{ query }}&sort={{ sort }}&page={{ page_obj.next_page_number }}#search-section">
                                 Next
                                 <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M2.00009 0.855957L0.590088 2.26596L5.17009 6.85596L0.590088 11.446L2.00009 12.856L8.00009 6.85596L2.00009 0.855957Z" fill="#0000EE"/>

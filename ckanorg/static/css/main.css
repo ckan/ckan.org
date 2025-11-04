@@ -7185,7 +7185,7 @@ img.linkdigital-logo {
   flex-direction: column;
   align-items: start;
   min-width: 100px;
-  width: 216px;
+  width: 236px;
   height: 96px;
   border: 1px solid #D9D9D9;
   border-radius: 8px;
@@ -7204,6 +7204,7 @@ img.linkdigital-logo {
 @media all and (max-width: 375px) {
   .container-sm .statistics-content .statistic-item {
     min-width: 159px;
+    padding-right: 44px;
   }
 }
 .container-sm .statistics-content .statistic-item.dataportals {
@@ -7256,41 +7257,25 @@ img.linkdigital-logo {
 }
 
 /* Custom styles for Leaflet popups */
+.leaflet-container a {
+  padding: 0 !important;
+}
+
 .leaflet-popup-content-wrapper {
   border-radius: 8px;
 }
-
-.leaflet-popup-content {
+.leaflet-popup-content-wrapper .leaflet-popup-content {
   margin: 13px;
 }
-
-.leaflet-popup-content h4 {
+.leaflet-popup-content-wrapper .leaflet-popup-content h4 {
   margin: 0 0 10px 0;
   color: #333;
   font-size: 16px;
   font-weight: 600;
 }
-
-.leaflet-popup-content p {
+.leaflet-popup-content-wrapper .leaflet-popup-content p {
   margin: 5px 0;
   color: #666;
-}
-
-.leaflet-popup-content .btn-primary {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 6px 12px;
-  background-color: #0000EE;
-  color: white;
-  text-decoration: none;
-  border-radius: 4px;
-  border: none;
-  transition: background-color 0.2s ease;
-}
-
-.leaflet-popup-content .btn-primary:hover {
-  background-color: #0000CC;
-  text-decoration: none;
 }
 
 /* Custom styles for marker clusters */
