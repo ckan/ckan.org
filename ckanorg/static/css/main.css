@@ -3571,6 +3571,10 @@ img.dpga-logo {
   width: 190px;
 }
 
+.grecaptcha-badge {
+  display: none;
+}
+
 #dropbtn-Solutions,
 #dropbtn-Support {
   background-color: transparent;
@@ -5080,6 +5084,11 @@ img.linkdigital-logo {
   top: 35%;
   right: 70px;
   z-index: 999;
+}
+@media all and (max-width: 768px) {
+  .social-sidebar {
+    display: none;
+  }
 }
 .social-sidebar ul {
   padding: 0px;
@@ -7261,6 +7270,11 @@ img.linkdigital-logo {
   padding: 0 !important;
 }
 
+@media all and (max-width: 375px) {
+  .leaflet-pane .leaflet-tooltip-pane {
+    display: none;
+  }
+}
 .leaflet-popup-content-wrapper {
   border-radius: 8px;
 }
@@ -7613,6 +7627,11 @@ img.linkdigital-logo {
   border-radius: 4px;
   padding: 0 8px;
   max-height: fit-content;
+}
+@media all and (max-width: 375px) {
+  .portal-item .portal-info .portal-title span {
+    display: none;
+  }
 }
 .portal-item .portal-info .portal-url {
   text-overflow: ellipsis;
