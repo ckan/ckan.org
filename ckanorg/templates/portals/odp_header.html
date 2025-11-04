@@ -1,0 +1,27 @@
+{% load static i18n wagtailcore_tags string_filters %}
+
+<div class="container-sm t-center">
+    <h1>{{ page.intro|richtext }}</h1>
+
+    <div class="statistics-content">
+        {# Icons are declared in the SCSS file according to the item type #}
+        <div class="statistic-item dataportals">
+            <h2 class="statistic-value">
+                {{ stats.total_portals }}{% if stats.total_portals|endswith:"M" %}+{% endif %}
+            </h2>
+            <p class="statistic-label"><trans>Data portals</trans></p>
+        </div>
+        <div class="statistic-item datasets">
+            <h2 class="statistic-value">
+                {{ stats.total_datasets }}{% if stats.total_datasets|endswith:"M" %}+{% endif %}
+            </h2>
+            <p class="statistic-label"><trans>Datasets</trans></p>
+        </div>
+        <div class="statistic-item users">
+            <h2 class="statistic-value">
+                {{ stats.total_users }}{% if stats.total_users|endswith:"M" %}+{% endif %}
+            </h2>
+            <p class="statistic-label"><trans>Active users</trans></p>
+        </div>
+    </div>
+</div>

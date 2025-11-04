@@ -1,0 +1,29 @@
+{% load static %}
+
+<div class="search-box">
+    <button type="submit" value="Search" class="search-button">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 13L10.1 10.1M11.6667 6.33333C11.6667 9.27885 9.27885 11.6667 6.33333 11.6667C3.38781 11.6667 1 9.27885 1 6.33333C1 3.38781 3.38781 1 6.33333 1C9.27885 1 11.6667 3.38781 11.6667 6.33333Z" stroke="#b6b6b6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+    <input 
+        type="text" 
+        id="portal-search"
+        name="q" 
+        placeholder="Search" 
+        value="{{ request.GET.q }}"
+        autocomplete="off"
+    >
+</div>
+
+{% block extra_css %}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="{% static 'scss/portals/_autocomplete.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+    <!-- Ensure jQuery core is loaded before jQuery UI and our script -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="{% static 'js/portal-autocomplete.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,35 @@
+<li class="portal-item">
+    <a class="portal-link" href="{{ portal.Href }}" target="_blank">
+        <div class="portal-info">
+            <h5 class="portal-title" title="{{ portal.SiteInfo.site_description }}">
+                {% if portal.SiteInfo.site_title %}
+                    {{ portal.SiteInfo.site_title }}
+                {% else %}
+                    <trans>&nbsp;</trans>
+                {% endif %}
+                
+                {% if portal.Coordinates.country_name %}
+                    <span class="portal-country">
+                        {{ portal.Coordinates.country_name }}
+                    </span>
+                {% endif %}
+            </h5>
+            <p class="portal-url">{{ portal.Href }}</p>
+        </div>
+
+        <div class="portal-statistics">
+            <div class="statistic-item datasets">
+                <span class="statistic-value">{{ portal.DatasetsNumber|floatformat:-3 }}</span>
+                <span class="statistic-label"><trans>Datasets</trans></span>
+            </div>
+            <div class="statistic-item users">
+                <span class="statistic-value">{{ portal.UsersNumber|floatformat:-3 }}</span>
+                <span class="statistic-label"><trans>Users</trans></span>
+            </div>
+            <div class="statistic-item resources">
+                <span class="statistic-value">{{ portal.ResourcesNumber|floatformat:-3 }}</span>
+                <span class="statistic-label"><trans>Resources</trans></span>
+            </div>
+        </div>
+    </a>
+</li>

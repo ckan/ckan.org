@@ -1,0 +1,117 @@
+/* Styles for the map container */
+
+.map-container {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    #portal-map {
+        max-height: 600px;
+        width: 100%;
+        position: relative;
+
+        @media all and (max-width: 375px) {
+            width: max-content;
+        }
+    }
+}
+
+/* Custom styles for Leaflet popups */
+.leaflet-container {
+    a {
+        padding: 0 !important;
+    }
+}
+
+@media all and (max-width: 375px) {
+    .leaflet-pane {
+        .leaflet-tooltip-pane {
+            display: none;
+        }
+    }
+}
+
+.leaflet-popup-content-wrapper {
+    border-radius: 8px;
+
+    .leaflet-popup-content {
+        margin: 13px;
+
+        h4 {
+            margin: 0 0 10px 0;
+            color: #333;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        p {
+            margin: 5px 0;
+            color: #666;
+        }
+    }
+}
+
+
+/* Custom styles for marker clusters */
+.marker-cluster {
+    background-clip: padding-box;
+    border-radius: 20px;
+}
+
+.marker-cluster div {
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+    margin-top: 5px;
+    text-align: center;
+    border-radius: 15px;
+    font-size: 12px;
+    color: white;
+    font-weight: bold;
+    background-color: #0000EE;
+}
+
+/* Fullscreen control styling */
+.leaflet-control-fullscreen a {
+    background-color: #fff;
+    border-radius: 4px;
+}
+
+.leaflet-control-fullscreen a:hover {
+    background-color: #f4f4f4;
+}
+
+.map-caption {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+
+    @media all and (max-width: 768px) {
+        justify-content: center;
+
+        p {
+            text-align: center;
+        }
+    }
+
+    p {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        padding: 0;
+        margin: 0;
+        color: $dark-gray;
+    }
+
+    a {
+        display: flex;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 24px;
+        color: $medium-gray;
+        gap: 6px;
+        align-items: center;
+    }
+}

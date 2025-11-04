@@ -1,0 +1,86 @@
+/* Search box styling */
+.search-box {
+    position: relative;
+    margin: 0 auto;
+
+    #portal-search {
+        width: 100%;
+        font-size: 20px;
+    }
+}
+
+/* Autocomplete dropdown styling */
+.ui-autocomplete {
+    top: 64px !important;
+    left: 0 !important;
+    margin-left: -1px !important;
+    width: -webkit-fill-available !important; 
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: $white;
+    color: $dark-gray;
+    border: 1px solid $gray-border;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    gap: 24px;
+
+    .ui-menu-item {
+        padding: 0;
+        background-color: $white;
+        color: $dark-gray;
+        list-style: none;
+        list-style-image: none;
+
+        &::marker {
+            display: none;
+        }
+
+        &:hover, &:focus {
+            background-color: $light-gray-hover;
+            color: $dark-gray;
+        }
+
+        .portal-suggestion {
+            padding: 12px 16px;
+            background-color: $white;
+            color: $dark-gray;
+            border: none;
+            cursor: pointer;
+
+            &.ui-state-active {
+                background-color: $light-gray-hover;
+                color: $dark-gray;
+            }
+
+
+            &:hover {
+                background-color: $light-gray-hover;
+                color: $dark-gray;
+                border: none;
+            }
+
+            .portal-link {
+                color: $dark-gray;
+                transition: none;
+
+                .portal-title {
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 20px;
+                    font-weight: 400;
+                    line-height: 28px;
+
+                    span {
+                        max-height: fit-content;
+                        font-size: 14px;
+                        font-weight: 400;
+                        border: 1px solid $light-gray;
+                        border-radius: 4px;
+                        padding: 0 8px;
+                    }
+                }
+            }
+        }
+    }
+}
