@@ -23,6 +23,14 @@
     }
 }
 
+@media all and (max-width: 375px) {
+    .leaflet-pane {
+        .leaflet-tooltip-pane {
+            display: none;
+        }
+    }
+}
+
 .leaflet-popup-content-wrapper {
     border-radius: 8px;
 

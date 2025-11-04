@@ -3,6 +3,11 @@
     top: 35%;
     right: 70px;
     z-index: 999;
+
+    @media all and (max-width: 768px) {
+        display: none;
+    }
+
     ul {
         padding: 0px;
         transform: translate(100%, 0);

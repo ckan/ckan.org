@@ -40,6 +40,10 @@
                 border-radius: 4px;
                 padding: 0 8px;
                 max-height: fit-content;
+
+                @media all and (max-width: 375px) {
+                    display: none;
+                }
             }
         }
 

@@ -213,7 +213,6 @@ class OpenDataPortalPage(Page):
                     folium.Marker(
                         location=[lat, lon],
                         popup=folium.Popup(popup_content, max_width=300),
-                        tooltip=site_info.get("site_title", "Unknown Portal")
                     ).add_to(marker_cluster)
                 except (ValueError, TypeError):
                     continue
