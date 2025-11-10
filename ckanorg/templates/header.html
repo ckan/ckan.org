@@ -12,50 +12,52 @@
                 <div class="nav-opener"><span></span></div>
                 <div class="nav-drop">
                     <ul class="nav-menu">
-                    {% with menu.menu_items.all as menu_items %}
-                        {% for item in menu_items %}
-                            {% is_active request item as active%}
-                            {% if item.link_title == "Solutions" or item.link_title == "Support" %}
-                                {% if item.link_title == "Solutions" %}
-                                    <div class="dropdown">
-                                    <button onclick="clickDropdown('{{item.link_title}}')" id="dropbtn-{{item.link_title}}" {% if request.path == "/enterprise" or request.path == "/government" %} class="active"{% endif %}>{{item.link_title}} <span class="support-arrow"></span></button>
-                                    <div id="{{item.link_title}}_dropdown" class="dropdown-content">
-                                            <a href="/government">CKAN for Government</a>
-                                            <a href="/enterprise">CKAN for Enterprise</a>
-                                        {%endif%}
-                                {% if item.link_title == "Support" %}
-                                    <div class="dropdown">
-                                    <button onclick="clickDropdown('{{item.link_title}}')" id="dropbtn-{{item.link_title}}" {% if request.path == "/community" or request.path == "/commercial" %} class="active"{% endif %}>{{item.link_title}} <span class="support-arrow"></span></button>
-                                    <div id="{{item.link_title}}_dropdown" class="dropdown-content">
-                                            <a href="/community">Community Support</a>
-                                            <a href="/commercial">Commercial Support</a>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            {% else %}
-                                <li {% if active%} class="active" {% endif %}>
-                                    <a href="{{ item.link }}"
-                                    {% if item.open_in_new_tab %}target="_blank"{% endif %}
-                                    {% if item.show_as_button == True %}class="btn btn-sm btn-grey btn-link"{% endif %}
-                                    >
-                                        {% if item.svg_icon and item.icon_before_text %}{{item.svg_icon|safe}}{% endif %}
-                                        {{ item.link_title }}{% if item.svg_icon and not item.icon_before_text %}
-                                        {{item.svg_icon|safe}}{%endif%}
-                                    </a>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-                    {% endwith %}
+                        {% with menu.menu_items.all as menu_items %}
+                            {% for item in menu_items %}
+                                {% is_active request item as active%}
+                                {% if item.link_title == "Solutions" or item.link_title == "Support" %}
+                                    {% if item.link_title == "Solutions" %}
+                                        <li class="dropdown dropdown-menu-item">
+                                            <button onclick="clickDropdown('{{item.link_title}}')" id="dropbtn-{{item.link_title}}" {% if request.path == "/enterprise" or request.path == "/government" %} class="active"{% endif %}>{{item.link_title}} <span class="support-arrow"></span></button>
+                                            <div id="{{item.link_title}}_dropdown" class="dropdown-content">
+                                                <a href="/government">CKAN for Government</a>
+                                                <a href="/enterprise">CKAN for Enterprise</a>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+                                    {% if item.link_title == "Support" %}
+                                        <li class="dropdown dropdown-menu-item">
+                                            <button onclick="clickDropdown('{{item.link_title}}')" id="dropbtn-{{item.link_title}}" {% if request.path == "/community" or request.path == "/commercial" %} class="active"{% endif %}>{{item.link_title}} <span class="support-arrow"></span></button>
+                                            <div id="{{item.link_title}}_dropdown" class="dropdown-content">
+                                                <a href="/community">Community Support</a>
+                                                <a href="/commercial">Commercial Support</a>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+                                {% else %}
+                                    <li {% if active%} class="active" {% endif %}>
+                                        <a href="{{ item.link }}"
+                                        {% if item.open_in_new_tab %}target="_blank"{% endif %}
+                                        {% if item.show_as_button == True %}class="btn btn-sm btn-grey btn-link"{% endif %}
+                                        >
+                                            {% if item.svg_icon and item.icon_before_text %}{{item.svg_icon|safe}}{% endif %}
+                                            {{ item.link_title }}{% if item.svg_icon and not item.icon_before_text %}
+                                            {{item.svg_icon|safe}}{%endif%}
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        {% endwith %}
 
-                    {% if request.user.is_authenticated %}
-                        <li>
-                            <a href="{% url 'account_logout' %}">Logout</a>
-                        </li>
-                    {% else %}
-                        <li>
-                            <a href="{% url 'account_login' %}">Login</a>
-                        </li>
-                    {% endif %}
+                        {% if request.user.is_authenticated %}
+                            <li>
+                                <a href="{% url 'account_logout' %}">Logout</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="{% url 'account_login' %}">Login</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
 

@@ -427,7 +427,7 @@ html {
 
 body {
   font: 400 20px/1.5 "SF Pro Display", sans-serif;
-  background: #fff;
+  background: #FFFFFF;
   min-width: 320px;
   color: #000;
 }
@@ -657,7 +657,7 @@ p:not(:last-child) {
 
 .btn {
   background: #333333;
-  color: #fff;
+  color: #FFFFFF;
   outline: none;
   border: 2px solid #333333;
   padding: 7px 20px;
@@ -674,7 +674,7 @@ p:not(:last-child) {
   border-radius: 6px;
 }
 .btn svg path {
-  fill: #fff;
+  fill: #FFFFFF;
   transition: fill 0.3s ease-in-out;
 }
 @media all and (max-width: 767px) {
@@ -692,7 +692,7 @@ p:not(:last-child) {
 }
 .btn:active, .btn:focus, .btn:hover {
   color: #0000EE;
-  background: #fff;
+  background: #FFFFFF;
 }
 .btn:active svg path, .btn:focus svg path, .btn:hover svg path {
   fill: #0000EE;
@@ -707,10 +707,10 @@ p:not(:last-child) {
 }
 .btn.btn-black:active, .btn.btn-black:focus, .btn.btn-black:hover {
   background: #000;
-  color: #fff;
+  color: #FFFFFF;
 }
 .btn.btn-black:active svg path, .btn.btn-black:focus svg path, .btn.btn-black:hover svg path {
-  fill: #fff;
+  fill: #FFFFFF;
 }
 .btn.btn-grey {
   background: transparent;
@@ -725,12 +725,12 @@ p:not(:last-child) {
   color: white;
 }
 .btn.btn-grey:active svg path, .btn.btn-grey:focus svg path, .btn.btn-grey:hover svg path {
-  fill: #fff;
+  fill: #FFFFFF;
 }
 .btn.btn-dark-grey {
   background: #333333;
   border: 2px solid #333333;
-  color: #fff;
+  color: #FFFFFF;
   letter-spacing: 1px;
 }
 .btn.btn-dark-grey.btn-standard {
@@ -742,10 +742,10 @@ p:not(:last-child) {
   justify-content: center;
 }
 .btn.btn-dark-grey svg path {
-  fill: #fff;
+  fill: #FFFFFF;
 }
 .btn.btn-dark-grey:hover {
-  background: #fff;
+  background: #FFFFFF;
   color: #333333;
 }
 .btn.btn-dark-grey:hover svg path {
@@ -1018,7 +1018,7 @@ label {
 
 .error-message {
   background: #ED5248;
-  color: #fff;
+  color: #FFFFFF;
   font-size: 11px;
   padding: 1px 8px;
   margin-top: 11px;
@@ -1081,7 +1081,7 @@ label {
   display: block;
   width: 6px;
   height: 12px;
-  border: solid #fff;
+  border: solid #FFFFFF;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
   position: absolute;
@@ -1093,7 +1093,7 @@ blockquote {
   font-size: 16px;
   font-family: "SF Pro Display Bold", sans-serif;
   text-align: center;
-  color: #fff;
+  color: #FFFFFF;
   margin: 0 0 43px;
   font-weight: 400;
   line-height: 1.7;
@@ -1688,7 +1688,7 @@ blockquote cite:not(:last-child) {
   .post {
     box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15);
     padding: 20px 14px;
-    background: #fff;
+    background: #FFFFFF;
     margin: 0 -14px 10px;
   }
 }
@@ -1722,7 +1722,7 @@ blockquote cite:not(:last-child) {
   font-family: "object-fit: cover;";
 }
 .post .post-info {
-  background: #fff;
+  background: #FFFFFF;
 }
 @media all and (min-width: 768px) {
   .post .post-info {
@@ -2110,7 +2110,7 @@ ul.blog-nav li.last {
 }
 
 .white-box {
-  background: #fff;
+  background: #FFFFFF;
   border: 1px solid #eee;
   border-radius: 12px;
   padding: 40px;
@@ -2207,10 +2207,10 @@ ul.blog-nav li.last {
   background: #333333;
   border: 2px solid #333333;
   border-radius: 100px;
-  color: #fff;
+  color: #FFFFFF;
 }
 .blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit] svg path, .blog-subscribe .blog-subscribe-content .blog-unsubscribe-form input[type=submit] svg path {
-  fill: #fff;
+  fill: #FFFFFF;
 }
 .blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:active, .blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:focus, .blog-subscribe .blog-subscribe-content .blog-subscribe-form input[type=submit]:hover, .blog-subscribe .blog-subscribe-content .blog-unsubscribe-form input[type=submit]:active, .blog-subscribe .blog-subscribe-content .blog-unsubscribe-form input[type=submit]:focus, .blog-subscribe .blog-subscribe-content .blog-unsubscribe-form input[type=submit]:hover {
   background: transparent;
@@ -2346,7 +2346,7 @@ ul.blog-nav li.last {
 }
 @media all and (min-width: 768px) {
   .image-to-corners {
-    background: #fff;
+    background: #FFFFFF;
     border-radius: 22px;
     overflow: hidden;
     box-shadow: 0 1px 20px rgba(0, 0, 0, 0.2);
@@ -2792,7 +2792,7 @@ ul.blog-nav li.last {
 .dark-black-bg {
   background: #111;
   padding: 48px 0;
-  color: #fff;
+  color: #FFFFFF;
 }
 @media all and (min-width: 1024px) {
   .dark-black-bg {
@@ -2802,7 +2802,7 @@ ul.blog-nav li.last {
 .dark-black-bg h4,
 .dark-black-bg h3,
 .dark-black-bg h2 {
-  color: #fff;
+  color: #FFFFFF;
 }
 
 .grey-bg {
@@ -3577,23 +3577,36 @@ img.dpga-logo {
   display: none;
 }
 
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 #dropbtn-Solutions,
 #dropbtn-Support {
-  background-color: transparent;
-  border: none;
-  width: 100%;
-  cursor: pointer;
-  color: #666;
-  font-family: "SF Pro Display Bold", sans-serif;
   display: flex;
-  align-items: center;
-  font-weight: 800;
-  transition: all 0.3s ease-in-out;
-  font-size: 15px;
-  text-decoration: none;
+  width: 100%;
   margin-right: 30px;
+  align-items: center;
+  color: #666666;
+  background-color: transparent;
   background: url("../img/arr-grey.png") no-repeat;
   background-position: right 20px bottom 3px;
+  border: none;
+  font-family: "SF Pro Display", sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 1;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 @media (max-width: 1024px) {
   #dropbtn-Solutions,
@@ -3648,7 +3661,7 @@ img.dpga-logo {
   margin-top: 10px;
   display: none;
   position: absolute;
-  background-color: #f1f1f1;
+  background-color: #F1F1F1;
   min-width: 190px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
@@ -3656,7 +3669,7 @@ img.dpga-logo {
 
 .dropdown-content a {
   cursor: pointer;
-  color: #666;
+  color: #666666;
   font-family: "SF Pro Display Bold", sans-serif;
   display: flex;
   align-items: center;
@@ -3670,8 +3683,8 @@ img.dpga-logo {
 }
 
 .dropdown-content a:hover {
-  background-color: #ddd;
-  color: black;
+  background-color: #DDDDDD;
+  color: #000;
 }
 
 .show {
@@ -3841,7 +3854,7 @@ img.dpga-logo {
   background: #333333;
   border: 1px solid #777;
   border-radius: 100px;
-  color: #fff;
+  color: #FFFFFF;
   flex: 1 0 auto;
 }
 @media all and (max-width: 950px) {
@@ -3851,7 +3864,7 @@ img.dpga-logo {
   }
 }
 .footer-subscribe input[type=submit] svg path {
-  fill: #fff;
+  fill: #FFFFFF;
 }
 .footer-subscribe input[type=submit]:active, .footer-subscribe input[type=submit]:focus, .footer-subscribe input[type=submit]:hover {
   background: #F4F4F4;
@@ -4086,7 +4099,7 @@ img.linkdigital-logo {
   left: 0;
   width: 100%;
   z-index: 999;
-  background: #fff;
+  background: #FFFFFF;
 }
 .header .header-holder {
   padding: 38px 0;
@@ -4136,6 +4149,10 @@ img.linkdigital-logo {
   margin: 0 0 0 25px;
   padding: 0;
   color: #666666;
+}
+.nav-menu li.dropdown-menu-item {
+  top: 1px;
+  margin-right: 10px !important;
 }
 .nav-menu li:not(:last-child) {
   margin-right: 30px;
@@ -4281,7 +4298,7 @@ img.linkdigital-logo {
     padding-top: 64px;
     overflow-y: auto;
     width: 100%;
-    background: #fff;
+    background: #FFFFFF;
     position: relative;
   }
 }
@@ -4444,7 +4461,7 @@ img.linkdigital-logo {
   padding-top: 64px;
   overflow-y: auto;
   width: 100%;
-  background: #fff;
+  background: #FFFFFF;
   position: relative;
 }
 .tablet .nav .nav-menu:before {
@@ -4592,7 +4609,7 @@ img.linkdigital-logo {
   padding-top: 84px;
   overflow-y: auto;
   width: 100%;
-  background: #fff;
+  background: #FFFFFF;
   position: relative;
 }
 .mobile .nav .nav-menu:before {
@@ -4768,7 +4785,7 @@ img.linkdigital-logo {
 }
 
 .extension-box {
-  background: #fff;
+  background: #FFFFFF;
   box-shadow: 0 1px 20px rgba(0, 0, 0, 0.2);
   border-radius: 22px;
   padding: 20px;
@@ -4898,7 +4915,7 @@ img.linkdigital-logo {
 .fancybox-content {
   max-width: 560px;
   width: 100%;
-  background: #fff;
+  background: #FFFFFF;
   padding: 48px 64px;
 }
 @media all and (max-width: 767px) {
@@ -4945,7 +4962,7 @@ img.linkdigital-logo {
 }
 .searchbar form input[type=submit]:hover {
   color: #000;
-  background: #fff;
+  background: #FFFFFF;
 }
 
 .search-sidebar {
@@ -4977,7 +4994,7 @@ img.linkdigital-logo {
   text-decoration: none;
 }
 .search-sidebar ul li:hover i {
-  color: #fff;
+  color: #FFFFFF;
   background: rgb(0, 0, 0);
   transform: rotate(360deg);
   transition: all 1s;
@@ -4985,13 +5002,13 @@ img.linkdigital-logo {
 .search-sidebar ul li i {
   margin-left: 10px;
   color: #000;
-  background: #fff;
+  background: #FFFFFF;
   padding: 10px;
   border-radius: 50%;
   width: 40px;
   height: 40px;
   font-size: 20px;
-  background: #fff;
+  background: #FFFFFF;
   transform: rotate(0deg);
 }
 .search-sidebar ul li button {
@@ -5007,7 +5024,7 @@ img.linkdigital-logo {
   margin: 6px;
   gap: 16px;
   border-radius: 16px;
-  background-color: #f3f3f3;
+  background-color: #F3F3F3;
 }
 .search-events .search-events-input {
   display: flex;
@@ -5015,7 +5032,7 @@ img.linkdigital-logo {
   padding: 16px;
   gap: 16px;
   border-radius: 8px;
-  background-color: #fff;
+  background-color: #FFFFFF;
   max-height: 60px;
 }
 .search-events .search-events-input input[type=text] {
@@ -5052,7 +5069,7 @@ img.linkdigital-logo {
   color: #757575;
 }
 .search-events .search-events-result .events-list .event-item {
-  background-color: #fff;
+  background-color: #FFFFFF;
   padding: 8px 16px;
 }
 .search-events .search-events-result .events-list .event-item .event-link {
@@ -5242,7 +5259,7 @@ img.linkdigital-logo {
   margin: 0 auto;
   gap: 0px;
   border-radius: 16px;
-  background-color: #f3f3f3;
+  background-color: #F3F3F3;
   padding-left: 0;
   padding-right: 0;
   flex-flow: row;
@@ -5265,7 +5282,7 @@ img.linkdigital-logo {
   padding: 16px 40px;
   gap: 16px;
   border-radius: 16px;
-  border: 1.5px solid #f3f3f3;
+  border: 1.5px solid #F3F3F3;
   color: #333333;
   font-size: 20px;
   font-weight: 400;
@@ -5295,7 +5312,7 @@ img.linkdigital-logo {
   background-color: #D5D5D5 !important;
 }
 .filters-wrapper .container-sm .filters .row .nav .nav-item .nav-link.active {
-  background-color: #f3f3f3;
+  background-color: #F3F3F3;
   border: 1.5px solid #333333;
   transition: border-color 0.5s;
 }
@@ -5304,7 +5321,7 @@ img.linkdigital-logo {
 }
 @media all and (max-width: 910px) {
   .filters-wrapper .container-sm .filters .row .nav .nav-item .nav-link.active:hover {
-    background-color: #f3f3f3 !important;
+    background-color: #F3F3F3 !important;
     border: 1.5px solid #333333;
   }
 }
@@ -5316,7 +5333,7 @@ img.linkdigital-logo {
   display: inline-block;
   padding: 4px 8px;
   border-radius: 200px;
-  background-color: #fff;
+  background-color: #FFFFFF;
   margin-right: 16px;
 }
 .filters-wrapper .container-sm .filters .row .nav .nav-item .nav-link.recent::before {
@@ -5324,7 +5341,7 @@ img.linkdigital-logo {
   display: inline-block;
   padding: 4px 8px;
   border-radius: 200px;
-  background-color: #fff;
+  background-color: #FFFFFF;
   margin-right: 16px;
 }
 .filters-wrapper .container-sm .filters .row .nav .nav-item .nav-link.archive::before {
@@ -5332,7 +5349,7 @@ img.linkdigital-logo {
   display: inline-block;
   padding: 4px 10px;
   border-radius: 200px;
-  background-color: #fff;
+  background-color: #FFFFFF;
   margin-right: 16px;
 }
 .filters-wrapper .container-sm .filters .row .btn-calendar {
@@ -5355,7 +5372,7 @@ img.linkdigital-logo {
   content: url("../img/events/calendar.svg");
   padding: 2px 8px;
   border-radius: 200px;
-  background-color: #fff;
+  background-color: #FFFFFF;
 }
 .filters-wrapper .container-sm .filters .row .btn-calendar:hover {
   background-color: #EFEE9A;
@@ -5830,7 +5847,7 @@ img.linkdigital-logo {
   display: inline-flex;
   width: 210px;
   height: 50px;
-  color: #fff;
+  color: #FFFFFF;
   background: #333333;
   outline: none;
   border: 2px solid #333333;
@@ -5845,7 +5862,7 @@ img.linkdigital-logo {
 }
 .recent-events #event-slider-recent .carousel-item .container .row .event-slider-info .event-action .btn-more-details:hover, .recent-events #event-slider-recent .carousel-item .container-lg .row .event-slider-info .event-action .btn-more-details:hover, .recent-events #event-slider-recent .carousel-item .container-md .row .event-slider-info .event-action .btn-more-details:hover, .recent-events #event-slider-recent .carousel-item .container-sm .row .event-slider-info .event-action .btn-more-details:hover {
   color: #333333;
-  background: #fff;
+  background: #FFFFFF;
 }
 .recent-events #event-slider-recent .carousel-item .container .row .event-slider-image, .recent-events #event-slider-recent .carousel-item .container-lg .row .event-slider-image, .recent-events #event-slider-recent .carousel-item .container-md .row .event-slider-image, .recent-events #event-slider-recent .carousel-item .container-sm .row .event-slider-image {
   display: grid;
@@ -6023,7 +6040,7 @@ img.linkdigital-logo {
   gap: 40px;
   border-radius: 16px;
   border: 1px solid #D9D9D9;
-  background-color: #f3f3f3;
+  background-color: #F3F3F3;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 @media all and (max-width: 425px) {
@@ -6701,7 +6718,7 @@ img.linkdigital-logo {
 }
 .row.event-details-agenda .col-12 .event-agenda-table .table-content .row .col-9 .accordion .accordion-item .accordion-header .video-session-links .watch-video path {
   fill: #D54A41;
-  stroke: #fff;
+  stroke: #FFFFFF;
 }
 .row.event-details-agenda .col-12 .event-agenda-table .table-content .row .col-9 .accordion .accordion-item .accordion-body {
   font-size: 15px;
@@ -6805,7 +6822,7 @@ img.linkdigital-logo {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background-color: #f3f3f3;
+  background-color: #F3F3F3;
 }
 .video-container .video-info .video-datetime .share-container .back svg {
   position: relative;
@@ -6916,7 +6933,7 @@ img.linkdigital-logo {
   margin: 6px;
   gap: 40px;
   border-radius: 16px;
-  background-color: #f3f3f3;
+  background-color: #F3F3F3;
   min-height: 530px;
 }
 .event-calendar .row {
@@ -7399,7 +7416,7 @@ img.linkdigital-logo {
   color: #BBBBBB;
 }
 .search-section .search-section-form form .search-box .search-button {
-  background-color: #fff;
+  background-color: #FFFFFF;
   color: #BBBBBB;
   border: none;
   border-radius: 4px;
@@ -7447,7 +7464,7 @@ img.linkdigital-logo {
   padding: 16px;
   border: 1px solid #BBBBBB;
   border-radius: 8px;
-  background: #fff;
+  background: #FFFFFF;
   cursor: pointer;
   min-width: 220px;
   transition: border-color 0.16s ease, box-shadow 0.16s ease;
@@ -7484,7 +7501,7 @@ img.linkdigital-logo {
   padding: 0;
   border: 1px solid #D9D9D9;
   border-radius: 8px;
-  background: #fff;
+  background: #FFFFFF;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   z-index: 998;
   max-height: 320px;
@@ -7712,7 +7729,7 @@ img.linkdigital-logo {
   max-height: 400px;
   overflow-y: auto;
   overflow-x: hidden;
-  background-color: #fff;
+  background-color: #FFFFFF;
   color: #333333;
   border: 1px solid #D9D9D9;
   border-radius: 8px;
@@ -7721,7 +7738,7 @@ img.linkdigital-logo {
 }
 .ui-autocomplete .ui-menu-item {
   padding: 0;
-  background-color: #fff;
+  background-color: #FFFFFF;
   color: #333333;
   list-style: none;
   list-style-image: none;
@@ -7735,7 +7752,7 @@ img.linkdigital-logo {
 }
 .ui-autocomplete .ui-menu-item .portal-suggestion {
   padding: 12px 16px;
-  background-color: #fff;
+  background-color: #FFFFFF;
   color: #333333;
   border: none;
   cursor: pointer;
