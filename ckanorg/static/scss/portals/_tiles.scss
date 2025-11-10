@@ -62,15 +62,11 @@
         display: flex;
         flex-wrap: wrap;
         margin-top: 12px;
-
-        @media all and (max-width: 375px) {
-            gap: 8px;
-        }
+        gap: 8px;
 
         .statistic-item {
             display: flex;
             flex-direction: column;
-            margin-right: 16px;
             width: 85;
             height: 52;
             border-radius: 8px;
@@ -80,7 +76,7 @@
             background-size: 24px 24px;
             padding-right: 64px;
 
-            @media all and (max-width: 375px) {
+            @media all and (max-width: 573px) {
                 margin-right: 0;
                 padding-right: 34px;
             }
