@@ -365,6 +365,7 @@ ul.blog-nav {
       svg{
         transform: rotate(180deg);
         margin-right: 6px;
+        vertical-align: baseline;
         path{
           fill: $dark-gray;
         }
@@ -382,6 +383,7 @@ ul.blog-nav {
     &.next{
       svg{
         margin-left: 6px;
+        vertical-align: baseline;
         path{
           fill: $dark-gray;
         }
