@@ -1,15 +1,16 @@
 {% extends "base.html" %}
 {% load wagtailmetadata_tags %}
+
+{% block head %}
+    <meta name="description" content="{{ page.title }} - {{ page.subtitle }}">
+{% endblock head %}
+
 {% block meta_tags %}{% meta_tags %}{% endblock %}
 
 {% block content %}
 
 <section class="section-banner">
     <div class="container-sm t-center">
-        {% comment %}<a href="{{ page.get_parent.url }}" class="link">Features <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2.00009 0.855957L0.590088 2.26596L5.17009 6.85596L0.590088 11.446L2.00009 12.856L8.00009 6.85596L2.00009 0.855957Z" fill="#0000EE"/>
-        </svg>
-        </a>{% endcomment %}
         <h1> {{ page.subtitle }}</h1>
     </div>
     <div class="photo">

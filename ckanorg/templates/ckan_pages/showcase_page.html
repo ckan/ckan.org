@@ -1,5 +1,10 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags page_tags wagtailmetadata_tags %}
+
+{% load wagtailcore_tags page_tags wagtailmetadata_tags i18n %}
+
+{% block head %}
+    <meta name="description" content="{{ page.title }} - {{ page.subtitle }}">
+{% endblock head %}
 
 {% block meta_tags %}{% meta_tags %}{% endblock %}
 
@@ -19,40 +24,31 @@
         <div>
             <div class="indent">
                 <div class="container-sm t-center">
-                    <span class="upper">Government</span>
+                    <span class="upper">{% translate "Government" %}</span>
                 </div>
             </div>
             <div class="container-lg">
-
                 <!-- SHOWCASE SECTION 1 -->
-
                     <div class="card">
                         <div class="two-columns">
-
                             {% for item in page.showcase_section_1.all %}
                                 {% include "../snippets/pow_by_ckan_card_block.html" with card=item.showcase %}
                             {% endfor %}
-
                         </div>
                     </div>
-
                 <!-- END SHOWCASE SECTION 1 -->
-
             </div>
         </div>
+
         <div class="indent">
             <div class="container-lg">
                 <div class="card">
                     <div class="two-columns">
-
                         <!-- SHOWCASE SECTION 2 -->
-
                             {% for item in page.showcase_section_2.all %}
                                 {% include "../snippets/pow_by_ckan_card_block.html" with card=item.showcase %}
                             {% endfor %}            
-
                         <!-- END SHOWCASE SECTION 2 -->
-
                     </div>
                 </div>
             </div>
@@ -70,19 +66,17 @@
             <div>
                 <div class="indent">
                     <div class="container-sm t-center">
-                        <span class="upper">Enterprise</span>
+                        <span class="upper">{% translate "Enterprise" %}</span>
                     </div>
                 </div>
                 <div class="container-lg">
                     <div class="card">
                         <div class="two-columns">
-
                             <!-- SHOWCASE SECTION 3 -->
                                 {% for item in page.showcase_section_3.all %}
                                     {% include "../snippets/pow_by_ckan_card_block.html" with card=item.showcase %}
                                 {% endfor %}                              
                             <!-- END SHOWCASE SECTION 3 -->
-
                         </div>
                     </div>
                 </div>
@@ -97,18 +91,20 @@
                 {% endfor %}
             </ul>
 
-            {% comment %} <div class="separator"></div>
-            <h2>
-                <trans>Discover hundreds of CKAN-powered data portals worldwide</trans>
-            </h2>
-            <p>
-                <trans>Interactive map and statistics of real-world CKAN implementations.</trans>
-            </p>
-            <div class="t-center mb-56">
-                <a href="{% slugurl 'portals' %}" target="_blank" rel="noopener" class="btn btn-dark-grey btn-lg">
-                    <trans>Explore the map</trans>
-                </a>
-            </div> {% endcomment %}
+            {% comment %}
+                <div class="separator"></div>
+                <h2>
+                    {% translate "Discover hundreds of CKAN-powered data portals worldwide" %}
+                </h2>
+                <p>
+                    {% translate "Interactive map and statistics of real-world CKAN implementations." %}
+                </p>
+                <div class="t-center mb-56">
+                    <a href="{% slugurl 'portals' %}" target="_blank" rel="noopener" class="btn btn-dark-grey btn-lg">
+                        {% translate "Explore the map" %}
+                    </a>
+                </div>
+            {% endcomment %}
         </div>
         <!-- END TESTIMONIAL SECTION 1 -->
 

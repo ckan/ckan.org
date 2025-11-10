@@ -7,14 +7,19 @@
     <div class="two-columns">
         <div class="two-columns-item">
             <div class="two-columns-item-info">
-                <a href="{{ feature.read_more_page.url }}"><img src="{{ icon.url }}" alt=""></a>
+                <a href="{{ feature.read_more_page.url }}">
+                    <span class="sr-only">{{ feature.title }}</span>
+                    <img src="{{ icon.url }}" alt="{{ feature.title }} icon">
+                </a>
                 <a href="{{ feature.read_more_page.url }}"><h2 class="h1">{{ feature.title }}</h2></a>
-                <a href="{{ feature.read_more_page.url }}"><h3 class="h3">{{ feature.subtitle }}</h3></a>
                 <p>{{ feature.text }}</p>
             </div>
         </div>
         <div class="two-columns-item {% if image_right %}order{% endif %}">
-            <a href="{{ feature.read_more_page.url }}"><img class="feature-img" src="{{ image.url }}" alt=""></a>
+            <a href="{{ feature.read_more_page.url }}">
+                <span class="sr-only">{{ feature.title }}</span>
+                <img class="feature-img" src="{{ image.url }}" alt="{{ feature.title }} image">
+            </a>
         </div>
     </div>
 </div>

@@ -15,7 +15,7 @@
         {% if image.url %}
             <img src="{{ image.url }}" alt="{{ image.alt }}">
         {% else %}
-            <img src="{% static 'img/Default_image.png' %}">
+            <img src="{% static 'img/Default_image.png' %}" alt="default image">
         {% endif %}
         </a>
     </div>

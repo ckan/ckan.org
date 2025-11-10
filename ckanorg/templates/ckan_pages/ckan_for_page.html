@@ -1,6 +1,10 @@
 {% extends "base.html" %}
-{% load static modal_tags %}
+{% load static modal_tags i18n %}
 {% load static wagtailimages_tags wagtailcore_tags page_tags wagtailmetadata_tags %}
+
+{% block head %}
+    <meta name="description" content="{{ page.title }} - {{ page.subtitle }}">
+{% endblock head %}
 
 {% block meta_tags %}{% meta_tags %}{% endblock %}
 
@@ -15,7 +19,11 @@
             <div class="container banner">
                 <div class="banner-info">
                     <p class="text">{{ page.subtitle }}</p>
-                    <p class="text"><strong>Schedule a chat</strong> to speak to a <a href="{% if community_page %}{{ community_page.url }}#stewards{% else %}#{% endif %}">CKAN steward</a> who specialises in open data portals for {{ page.page_for }}.</p>
+                    <p class="text">
+                        <strong>Schedule a chat</strong> to speak to a 
+                        <a href="{% if community_page %}{{ community_page.url }}#stewards{% else %}#{% endif %}">
+                        CKAN steward</a> who specializes in open data portals for {{ page.page_for }}.
+                    </p>
 
                     <div class="schedule-chat-contact">
                         {% form_modal %}
@@ -29,13 +37,15 @@
                 {{ page.upper_text|safe }}
             </div>
         </section>
+
         <div class="grey-bg">
             <div class="indent">
                 <div class="container-sm t-center">
-                    <h2>Powered by CKAN</h2>
-                    <p>Around the globe, {{ page.page_for }} organisations trust CKAN as their data management system of choice. </p>
+                    <h2>{% translate "Powered by CKAN" %}</h2>
+                    <p>Around the globe, {{ page.page_for }} organizations trust CKAN as their data management system of choice. </p>
                 </div>
             </div>
+
             <div class="container-lg">
                 <div class="card">
                     <div class="two-columns">
@@ -46,6 +56,7 @@
                 </div>
             </div>
         </div>
+
         <div class="indent">
             <div class="container-sm t-center">
                 <ul class="quotes-slider">
@@ -55,6 +66,7 @@
                 </ul>
                 <div class="separator"></div>
             </div>
+
             <div class="container-md">
                 <div class="text-block bottom-text">
                     {{ page.bottom_text }}
@@ -63,34 +75,36 @@
                 {% for post in blog_posts %}
                     {% include "../snippets/blog_post_block.html" with post=post %}
                 {% endfor %}
-                
+
                 {% for item in page.group_items.all %}
                         {% include "../snippets/working_group_block.html" with working_group=item.group_item page_for=page.page_for %}
                 {% endfor %}
-                    <div class="government-working-group">
-                        <div class="t-center partners inner-indent">
-                            <p>Powering open data at</p>
-                            <ul>
-                                <li><img src="{% static 'img/logo01.png'%}" alt=""></li>
-                                <li><img src="{% static 'img/logo02.png'%}" alt=""></li>
-                                <li><img src="{% static 'img/logo03.png'%}" alt=""></li>
-                                <li><img src="{% static 'img/logo04.png'%}" alt=""></li>
-                                <li><img src="{% static 'img/logo05.png'%}" alt=""></li>
-                            </ul>
-                            <ul>
-                                <li><img src="{% static 'img/logo06.png'%}" alt=""></li>
-                                <li><img src="{% static 'img/logo07.png'%}" alt=""></li>
-                                <li><img src="{% static 'img/logo08.png'%}" alt=""></li>
-                                <li><img src="{% static 'img/logo09.png'%}" alt=""></li>
-                                <li><img src="{% static 'img/logo10.png'%}" alt=""></li>
-                                <li><img src="{% static 'img/logo11.png'%}" alt=""></li>
-                            </ul>
-                        </div>
+
+                <div class="government-working-group">
+                    <div class="t-center partners inner-indent">
+                        <p>{% translate "Powering open data at" %}</p>
+                        <ul>
+                            <li><img src="{% static 'img/logo01.png'%}" alt=""></li>
+                            <li><img src="{% static 'img/logo02.png'%}" alt=""></li>
+                            <li><img src="{% static 'img/logo03.png'%}" alt=""></li>
+                            <li><img src="{% static 'img/logo04.png'%}" alt=""></li>
+                            <li><img src="{% static 'img/logo05.png'%}" alt=""></li>
+                        </ul>
+                        <ul>
+                            <li><img src="{% static 'img/logo06.png'%}" alt=""></li>
+                            <li><img src="{% static 'img/logo07.png'%}" alt=""></li>
+                            <li><img src="{% static 'img/logo08.png'%}" alt=""></li>
+                            <li><img src="{% static 'img/logo09.png'%}" alt=""></li>
+                            <li><img src="{% static 'img/logo10.png'%}" alt=""></li>
+                            <li><img src="{% static 'img/logo11.png'%}" alt=""></li>
+                        </ul>
                     </div>
+                </div>
+
                 <div class="indent speak-with">
                     <div class="container-sm t-center">
-                        <h2>Speak with a CKAN steward specialising in creating open data portals for {{page.page_for}}</h2>
-                        <p>Our <a href="{% if community_page %}{{ community_page.url }}#stewards{% else %}#{% endif %}" id="stewards_link">CKAN stewards</a> help organisations of all sizes around the globe learn more about implementing CKAN open data portals. The best way to get in touch is via the form below</p>
+                        <h2>Speak with a CKAN steward specializing in creating open data portals for {{page.page_for}}</h2>
+                        <p>Our <a href="{% if community_page %}{{ community_page.url }}#stewards{% else %}#{% endif %}" id="stewards_link">CKAN stewards</a> help organizations of all sizes around the globe learn more about implementing CKAN open data portals. The best way to get in touch is via the form below</p>
                         <div class="schedule-chat-contact">
                             {% form_modal %}
                         </div>
@@ -98,34 +112,38 @@
                     </div>
                 </div>
             </div>
+
             {% comment %} TODO: Bottom panels {% endcomment %}
             {% if page.page_for == 'enterprise' %}
-            <div class="container">
-                <div class="image-to-corners">
-                    <div class="image-to-corners-info">
-                        <h2 class="h2">CKAN for Government</h2>
-                        <p>CKAN has been adopted by National and regional Government organisations throughout the European Union, the Americas, Asia and Oceania to publish public data.</p>
-                        <a href="{{ bottom_block_page.url }}">A look at how governments use CKAN</a>
-                    </div>
-                    <div class="image-to-corners-img">
-                        <img src="{% static 'img/img10.png' %}" alt="">
+                <div class="container">
+                    <div class="image-to-corners">
+                        <div class="image-to-corners-info">
+                            <h2 class="h2">{% translate "CKAN for Government" %}</h2>
+                            <p>{% translate "CKAN has been adopted by National and regional Government organizations throughout the European Union, the Americas, Asia and Oceania to publish public data." %}</p>
+                            <a href="{{ bottom_block_page.url }}">{% translate "A look at how governments use CKAN" %}</a>
+                        </div>
+
+                        <div class="image-to-corners-img">
+                            <img src="{% static 'img/img10.png' %}" alt="">
+                        </div>
                     </div>
                 </div>
-            </div>
             {% else %}
-            <div class="container">
-                <div class="image-to-corners">
-                    <div class="image-to-corners-info">
-                        <h2 class="h2">CKAN for Enterprise</h2>
-                        <p>CKAN has been adopted by enterprise organisations in sectors such as resources, energy, pharmaceuticals and finance to publish and manage internal data assets.</p>
-                        <a href="{{ bottom_block_page.url }}">A look at how enterprise organisations use CKAN</a>
-                    </div>
-                    <div class="image-to-corners-img">
-                        <img src="{% static 'img/img14.png' %}" alt="">
+                <div class="container">
+                    <div class="image-to-corners">
+                        <div class="image-to-corners-info">
+                            <h2 class="h2">{% translate "CKAN for Enterprise" %}</h2>
+                            <p>{% translate "CKAN has been adopted by enterprise organizations in sectors such as resources, energy, pharmaceuticals and finance to publish and manage internal data assets." %}</p>
+                            <a href="{{ bottom_block_page.url }}">{% translate "A look at how enterprise organizations use CKAN" %}</a>
+                        </div>
+
+                        <div class="image-to-corners-img">
+                            <img src="{% static 'img/img14.png' %}" alt="">
+                        </div>
                     </div>
                 </div>
-            </div>
             {% endif %}
         </div>
+
         <div class="separator alt"></div>
 {% endblock content %}
