@@ -2067,6 +2067,7 @@ ul.blog-nav li.last {
 .pagination li.prev svg {
   transform: rotate(180deg);
   margin-right: 6px;
+  vertical-align: baseline;
 }
 .pagination li.prev svg path {
   fill: #333333;
@@ -2084,6 +2085,7 @@ ul.blog-nav li.last {
 }
 .pagination li.next svg {
   margin-left: 6px;
+  vertical-align: baseline;
 }
 .pagination li.next svg path {
   fill: #333333;
@@ -7201,7 +7203,7 @@ img.linkdigital-logo {
   justify-content: center;
   margin-top: 40px;
 }
-@media all and (max-width: 375px) {
+@media all and (max-width: 573px) {
   .container-sm .statistics-content {
     justify-content: left;
   }
@@ -7227,7 +7229,7 @@ img.linkdigital-logo {
     height: fit-content;
   }
 }
-@media all and (max-width: 375px) {
+@media all and (max-width: 573px) {
   .container-sm .statistics-content .statistic-item {
     min-width: 159px;
     padding-right: 44px;
@@ -7663,16 +7665,11 @@ img.linkdigital-logo {
   display: flex;
   flex-wrap: wrap;
   margin-top: 12px;
-}
-@media all and (max-width: 375px) {
-  .portal-item .portal-statistics {
-    gap: 8px;
-  }
+  gap: 8px;
 }
 .portal-item .portal-statistics .statistic-item {
   display: flex;
   flex-direction: column;
-  margin-right: 16px;
   width: 85;
   height: 52;
   border-radius: 8px;
@@ -7682,7 +7679,7 @@ img.linkdigital-logo {
   background-size: 24px 24px;
   padding-right: 64px;
 }
-@media all and (max-width: 375px) {
+@media all and (max-width: 573px) {
   .portal-item .portal-statistics .statistic-item {
     margin-right: 0;
     padding-right: 34px;
