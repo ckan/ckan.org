@@ -9,7 +9,7 @@
         justify-content: center;
         margin-top: 40px;
 
-        @media all and (max-width: 375px) {
+        @media all and (max-width: 573px) {
             justify-content: left;
         }
 
@@ -33,7 +33,7 @@
                 height: fit-content;
             }
 
-            @media all and (max-width: 375px) {
+            @media all and (max-width: 573px) {
                 min-width: 159px;
                 padding-right: 44px;
             }
