@@ -1,20 +1,22 @@
 #dropbtn-Solutions,
 #dropbtn-Support {
-  background-color: transparent;
-  border: none;
-  width: 100%;
-  cursor: pointer;
-  color: #666;
-  font-family: "SF Pro Display Bold", sans-serif;
   display: flex;
-  align-items: center;
-  font-weight: 800;
-  transition: all 0.3s ease-in-out;
-  font-size: 15px;
-  text-decoration: none;
+  width: 100%;
   margin-right: 30px;
+  align-items: center;
+  color: $medium-gray;
+  background-color: transparent;
   background: url("../img/arr-grey.png") no-repeat;
   background-position: right 20px bottom 3px;
+  border: none;
+  font-family: $base-font-sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 1;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+
   @media (max-width: 1024px) {
     font-size: 16px;
     line-height: 20px;
@@ -23,7 +25,7 @@
 
 #dropbtn-Solutions.active,
 #dropbtn-Support.active {
-    color: #111;
+    color: $dark-black;
     background: url("../img/arr-black.png") no-repeat;
     background-position: right 20px bottom 3px;
 }
@@ -32,17 +34,19 @@
 #dropbtn-Support.opened,
 #dropbtn-Solutions.opened:hover,
 #dropbtn-Support.opened:hover {
-    color: #111;
+    color: $dark-black;
     background: url("../img/arr-black-up.png") no-repeat;
     background-position: right 20px bottom 3px;
 }
 
 #dropbtn-Solutions:focus,
-#dropbtn-Support:focus {outline:0;}
+#dropbtn-Support:focus {
+  outline: 0;
+}
 
 #dropbtn-Solutions:hover,
 #dropbtn-Support:hover {
-  color: #111;
+  color: $dark-black;
   background: url("../img/arr-black.png") no-repeat;
   background-position: right 20px bottom 3px;
 }
@@ -50,20 +54,21 @@
 .dropdown {
   position: relative;
   display: inline-block;
+
   @media (max-width: 1024px) {
     padding: 13px 7vw;
+
     button {
       padding-left: 0px;
     }
   }
 }
 
-
 .dropdown-content {
   margin-top: 10px;
   display: none;
   position: absolute;
-  background-color: #f1f1f1;
+  background-color: $white-anti-flash;
   min-width: 190px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -71,8 +76,8 @@
 
 .dropdown-content a {
   cursor: pointer;
-  color: #666;
-  font-family: "SF Pro Display Bold", sans-serif;
+  color: $medium-gray;
+  font-family: $second-font-sans-serif;
   display: flex;
   align-items: center;
   font-weight: 800;
@@ -85,8 +90,8 @@
 }
 
 .dropdown-content a:hover {
-    background-color: #ddd;
-    color: black;
+    background-color: $light-gray-hover;
+    color: $black;
   }
-  
+
 .show {display:block;}

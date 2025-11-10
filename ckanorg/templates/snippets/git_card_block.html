@@ -9,18 +9,18 @@
                 <a href="{{ card.external_link }}" target="_blank" rel="noopener" class="ckan_git_link">
                     {% comment %}%<img src="{{ img_top.url }}" alt="{{ img_top.alt }}">{% endcomment %}
                      <div class="ckan-repo">
-                        <img src="{% static 'img/git-book.png' %}" />
+                        <img src="{% static 'img/git-book.png' %}" alt="git book" />
                         <span>ckan</span>
                     </div>
                     <div class="ckan-git-repo-text">
                         {{ card.text }}
                     </div>
                     <div class="ckan-git-repo-info">
-                        <img src="{% static 'img/python-dot.png' %}" />
+                        <img src="{% static 'img/python-dot.png' %}" alt="python dot" />
                         <span>Python</span>
-                        <img src="{% static 'img/star.png' %}" />
+                        <img src="{% static 'img/star.png' %}" alt="star" />
                         <span class="counter">{% stars_count %}</span>
-                        <img src="{% static 'img/fork.png' %}" />
+                        <img src="{% static 'img/fork.png' %}" alt="fork" />
                         <span class="counter">{% forks_count %}</span>
                     </div>
                 </a>

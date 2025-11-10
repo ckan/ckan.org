@@ -5,10 +5,9 @@
 <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
 
 {% if form %}
-
     <div class="row">
         <div class="col-xs-1 text-capitalize" align="center">
-            <a data-micromodal-trigger="modal-{{ random_id }}" href="javascript:void(0);" id="contact">{{ form_page.button_text }}</a>
+            <a data-micromodal-trigger="modal-{{ random_id }}" href="#" onclick="javascript:void(0);" id="contact">{{ form_page.button_text }}</a>
         </div>
     </div>
 
