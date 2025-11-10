@@ -1,15 +1,17 @@
-
-{% load static wagtailimages_tags %}
+{% load static wagtailimages_tags i18n %}
 
 {% image feature.icon scale-100 as icon %}
 
 <li>
     <div class="feature-list-icon">
-        <img src="{{ icon.url }}" alt="">
+        <img src="{{ icon.url }}" alt="{{ feature.title }} icon">
     </div>
     <div class="feature-list-info">
         <h2 class="h2">{{ feature.title }}</h2>
         <p>{{ feature.sub_title }}</p>
-        <a href="{{ feature.read_more_page.url }}" class="read-more">Read more <img src="{% static 'img/arrow-right.svg' %}" alt=""></a>
+        <a href="{{ feature.read_more_page.url }}" class="read-more">
+            <span class="sr-only">Read details about {{ feature.title }}</span>
+            {% translate "Read more" %} <img src="{% static 'img/arrow-right.svg' %}" alt="Arrow right icon">
+        </a>
     </div>
 </li>

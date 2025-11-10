@@ -1,4 +1,4 @@
-{% load static modal_tags page_tags %}
+{% load static modal_tags page_tags i18n%}
 
 {% load wagtailsettings_tags %}
 {% get_settings %}
@@ -7,13 +7,13 @@
     <div class="container-lg">
         <div class="two-columns">
             <div class="two-columns-item">
-                <span>CKAN stewards</span>
-                <p>Datopian and Link Digital are co-stewards of the CKAN project and some of the longest standing contributors to CKAN. They both play key roles in ensuring the CKAN project thrives and delivers the best results for CKAN’s end users and stakeholders.</p>
+                <span>{% translate "CKAN stewards" %}</span>
+                <p>{% translate "Datopian and Link Digital are co-stewards of the CKAN project and some of the longest standing contributors to CKAN. They both play key roles in ensuring the CKAN project thrives and delivers the best results for CKAN’s end users and stakeholders." %}</p>
                 <ul>
                     <li><a href="https://linkdigital.com.au/" target="_blank" rel="noopener"><img class="linkdigital-logo" src="{% static 'img/linkdigital-logo-footer.svg' %}" alt="LinkDigital"></a></li>
                     <li><a href="https://www.datopian.com/" target="_blank" rel="noopener"><img class="datopian-logo" src="{% static 'img/datopian-logo-footer.svg' %}" alt="Datopian"></a></li>
                 </ul>
-                <span>Held in trust by</span>
+                <span>{% translate "Held in trust by" %}</span>
                 <p>CKAN assets are held in trust by <strong>Open Knowledge Foundation</strong>, a non-profit organization, with best practice policies on governing openly and for use of the trademark.</p>
                 <ul>
                     <li><a href="https://okfn.org/en/" target="_blank" rel="noopener"><img class="okfn-logo" src="{% static 'img/logo-okfn.png' %}" alt="OpenKnowledge"></a></li>
@@ -21,8 +21,8 @@
             </div>
             
             <div class="two-columns-item social-container">
-                <span>Sign up for our newsletter</span>
-                <p>Sign up to receive news and updates from CKAN. Your information will be used in accordance with our privacy policy. You may opt out at any time.</p>
+                <span>{% translate "Sign up for our newsletter" %}</span>
+                <p>{% translate "Sign up to receive news and updates from CKAN. Your information will be used in accordance with our privacy policy. You may opt out at any time." %}</p>
                 <div class="footer-subscribe">
                     <form action="#" id="subscribe_form">
                         {% include "snippets/iframe.html" %}
@@ -30,28 +30,28 @@
                             <input type="text" id="subscribe_name" name="name" placeholder="your name" autocomplete="off"/>
                             <input type="text" id="subscribe_email" name="email" placeholder="your@email.com" autocomplete="off"/>
                             <div class="g-recaptcha"
-                                 data-sitekey="{{ settings.home.ReCaptchaSettings.public_key }}"
-                                 data-size="invisible">
+                                data-sitekey="{{ settings.home.ReCaptchaSettings.public_key }}"
+                                data-size="invisible">
                             </div>
                             <input type="submit" value="Subscribe" class="btn btn-sm"/>
                         </div>
                     </form>
                 </div>
 
-                <span>Connect with us</span>
-                <p>Join our vibrant community! Follow us on Twitter, LinkedIn, Gitter and GitHub for real-time updates, discussions and contributions.</p>
+                <span>{% translate "Connect with us" %}</span>
+                <p>{% translate "Join our vibrant community! Follow us on Twitter, LinkedIn, Gitter and GitHub for real-time updates, discussions and contributions." %}</p>
                 <div class="footer-btns">
                     <ul class="auth-links">
                         {% if request.user.is_authenticated %}
                             <li>
-                                <a href="{% add_blog_post_url %}">Add a blog post</a>
+                                <a href="{% add_blog_post_url %}">{% translate "Add a blog post" %}</a>
                             </li>
                             <li>
-                                <a href="{% url 'account_logout' %}">Logout</a>
+                                <a href="{% url 'account_logout' %}">{% translate "Logout" %}</a>
                             </li>
                         {% else %}
                             <li>
-                                <a href="{% url 'account_login' %}">Login</a>
+                                <a href="{% url 'account_login' %}">{% translate "Login" %}</a>
                             </li>
                         {% endif %}
                     </ul>
@@ -90,11 +90,10 @@
                     </ul>
                 </div>
 
-                <span>We are here to assist</span>
-                <p>Have questions or need support? Our team is ready to help you navigate and make the most of CKAN.</p>
+                <span>{% translate "We are here to assist" %}</span>
+                <p>{% translate "Have questions or need support? Our team is ready to help you navigate and make the most of CKAN." %}</p>
                 {% form_modal %}
             </div>
         </div>
-
     </div>
 </footer>

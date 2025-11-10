@@ -3933,6 +3933,8 @@ img.linkdigital-logo {
 }
 
 .st-menu {
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 0;
   left: 0;
@@ -3969,7 +3971,6 @@ img.linkdigital-logo {
 
 /* content style */
 .st-menu ul {
-  position: fixed;
   top: 100px;
   margin: 0;
   padding: 0;
@@ -4016,14 +4017,13 @@ img.linkdigital-logo {
 /* Individual effects */
 /* Effect: Slide in on top */
 .st-effect.st-menu {
-  position: fixed;
   visibility: visible;
   -webkit-transform: translate3d(-100%, 0, 0);
   transform: translate3d(-100%, 0, 0);
 }
 
 .st-effect.st-menu-open .st-effect.st-menu {
-  position: fixed;
+  position: absolute;
   visibility: visible;
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
@@ -4031,7 +4031,7 @@ img.linkdigital-logo {
 .st-effect.st-menu-open .st-effect.st-menu .st-btn-close {
   display: block;
   position: fixed;
-  top: 125px;
+  top: 25px;
   right: -40px;
   border: none;
   background-color: transparent;

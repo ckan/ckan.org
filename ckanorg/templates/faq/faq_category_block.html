@@ -4,10 +4,15 @@
 
 <li>
     <div class="faq-list-icon">
-        <a href="{{ category.url }}"><img src="{{ image.url }}" alt=""></a>
+        <a href="{{ category.url }}">
+            <span class="sr-only">{{ category.name }}</span>
+            <img src="{{ image.url }}" alt="{{ category.name }} image">
+        </a>
     </div>
     <div class="faq-list-info">
-        <a href="{{ category.url }}"><h2 class="h2">{{ category.name }}</h2></a>
+        <a href="{{ category.url }}">
+            <h2 class="h2">{{ category.name }}</h2>
+        </a>
         <p>{{ category.description }}</p>
     </div>
 </li>

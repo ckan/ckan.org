@@ -1,12 +1,17 @@
 {% extends "base.html" %}
 
-{% load static wagtailimages_tags wagtailcore_tags page_tags wagtailmetadata_tags %}
+{% load static wagtailimages_tags wagtailcore_tags page_tags wagtailmetadata_tags i18n %}
+
+{% block head %}
+    <meta name="description" content="Stay updated with the latest news, industry reports, and announcements from the CKAN community. Explore our blog for insights on open data trends, success stories, and upcoming events.">
+    <title>CKAN Blog - list of posts</title>
+{% endblock head %}
 
 {% block meta_tags %}{% meta_tags %}{% endblock %}
 
 {% block main_css %}
     {{ block.super }}
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 {% endblock main_css %}
 
 {% block content %}
@@ -64,7 +69,7 @@
                                         <ul>
                                             <li>
                                                 <button id="st-button">
-                                                    Search
+                                                    {% translate "Search" %}
                                                     <i class="fa fa-search"></i>
                                                 </button>
                                             </li>
@@ -76,10 +81,10 @@
                             <div class="container-md">
                                 <div class="blog-subscribe">
                                     <div class="blog-subscribe-content">
-                                        <p class="title">Newsletter</p>
-                                        <h2 class="h2">Ready to stay ahead of the curve?</h2>
-                                        <p>Join our CKAN Monthly Newsletter and get the inside scoop!</p>
-                                        <p>From new developmetns to upcoming events and everything in between, you'll find it all here!</p>
+                                        <p class="title">{% translate "Newsletter" %}</p>
+                                        <h2 class="h2">{% translate "Ready to stay ahead of the curve?" %}</h2>
+                                        <p>{% translate "Join our CKAN Monthly Newsletter and get the inside scoop!" %}</p>
+                                        <p>{% translate "From new developments to upcoming events and everything in between, you'll find it all here!" %}</p>
                                         <div class="blog-subscribe-form">
                                             <form action="#" id="blog_subscribe_form">
                                                 {% include "snippets/iframe.html" %}
@@ -97,6 +102,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="container-md">
                                 {% block featured %}
                                     {% if featured_post %}
@@ -128,7 +134,7 @@
                                                 <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M2.00009 0.855957L0.590088 2.26596L5.17009 6.85596L0.590088 11.446L2.00009 12.856L8.00009 6.85596L2.00009 0.855957Z" fill="#0000EE"/>
                                                 </svg>
-                                                Previous
+                                                {% translate "Previous" %}
                                             </a>
                                         </li>
                                         <li>
@@ -148,7 +154,7 @@
                                         </li>
                                         <li class="next">
                                             <a href="?page={{ posts.next_page_number }}">
-                                                Next
+                                                {% translate "Next" %}
                                                 <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M2.00009 0.855957L0.590088 2.26596L5.17009 6.85596L0.590088 11.446L2.00009 12.856L8.00009 6.85596L2.00009 0.855957Z" fill="#0000EE"/>
                                                 </svg>
