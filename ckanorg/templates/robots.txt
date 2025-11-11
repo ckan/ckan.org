@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /faq/
+Allow: /faq/essential/
+Allow: /faq/technical/
+Allow: /faq/administrative/
+Allow: /faq/general/
+Allow: /faq/features/
+Allow: /blog/

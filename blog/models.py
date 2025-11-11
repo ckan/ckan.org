@@ -293,8 +293,12 @@ class BlogPostPage(MetadataPageMixin, Page):
                         "ul",
                         "hr",
                         "image",
+                        "embed",
                         "code",
                         "blockquote",
+                        "superscript",
+                        "subscript",
+                        "strikethrough",
                     ]
                 ),
             ),

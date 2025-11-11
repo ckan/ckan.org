@@ -1,22 +1,20 @@
-{% load static %}
+{% load static i18n %}
 
 <nav class="st-menu st-effect" id="menu-1">
     <button id="st-button-close" class="st-btn-close">
-        <img src="{% static 'img/icon-close.png' %}" width="30px">
+        <img src="{% static 'img/icon-close.png' %}" alt="Close sidebar">
     </button>
+    <form action="{% url 'search_post_list' %}" method="get" class="sidebar-search">
+        <input type="text" name="query" placeholder="Search for posts. . .">
+        <button type="submit" value="Search" class="btn" aria-label="Search">
+            <i class="fa fa-search"></i>
+        </button>
+    </form>
+    <h3><i class="fa fa-tags"></i>&nbsp;&nbsp;{% translate "Categories" %}</h3>
     <ul>
-        <li>
-            <form action="{% url "search_post_list" %}" method="get" class="sidebar-search">
-                <input type="text" name="query" placeholder="Search for posts. . .">
-                <button type="submit" value="Search" class="btn">
-                    <i class="fa fa-search"></i>
-                </button>
-            </form>
-        </li>
-        <h3><i class="fa fa-tags"></i>&nbsp;&nbsp;Categories</h3>
         {% for category in categories %}
-           <li>
-                <a class="item" id="link" href="{% url "category_post_list" cat_id=category.id %}" rel="noopener">
+            <li>
+                <a class="item" id="link" href="{% url 'category_post_list' cat_id=category.id %}" rel="noopener">
                     {{ category.category_title }}
                 </a>
             </li>

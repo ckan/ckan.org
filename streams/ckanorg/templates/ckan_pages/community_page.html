@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static wagtailimages_tags wagtailcore_tags page_tags wagtailmetadata_tags %}
+{% load static wagtailimages_tags wagtailcore_tags page_tags wagtailmetadata_tags i18n %}
 
 {% block meta_tags %}{% meta_tags %}{% endblock %}
 
@@ -47,7 +47,7 @@
         </div>
             <div class="container-sm t-center speak-with-us">
                 <h2>Speak with us</h2>
-                <p>Our <a href="{% if community_page %}{{ community_page.url }}#stewards{% else %}#{% endif %}">CKAN stewards</a> help organisations of all sizes around the globe <br> learn more about implementing CKAN open data portals.
+                <p>Our <a href="{% if community_page %}{{ community_page.url }}#stewards{% else %}#{% endif %}">CKAN stewards</a> help organizations of all sizes around the globe <br> learn more about implementing CKAN open data portals.
                     <br class="mobile-hidden" />The best way to get in touch is via the form below</p>
                 <form action="#" id="stewardForm">
                     <iframe src="csrf/" style="display: none;"></iframe>
