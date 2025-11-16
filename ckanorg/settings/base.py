@@ -16,6 +16,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
+DEBUG = False
 
 
 # Application definition
@@ -38,7 +39,6 @@ INSTALLED_APPS = [
     #Core Wagtail apps
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
-    #'wagtail.contrib.modeladmin',
     'wagtail.contrib.search_promotions',
     'wagtail.contrib.settings',
     'wagtail.embeds',
@@ -73,8 +73,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'captcha',
-    'django_recaptcha'
-
+    'django_recaptcha',
 ]
 
 SITE_ID = 1
@@ -98,6 +97,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
     'wagtailcache.cache.FetchFromCacheMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 CACHES = {
@@ -196,7 +196,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
-# Wagtail settings
+# WAGTAIL SETTINGS
 
 WAGTAIL_SITE_NAME = "ckanorg"
 
@@ -212,9 +212,9 @@ EMAIL_HOST_USER = 'AKIAUWX42BAVQ3UFZFUU'
 DEFAULT_FROM_EMAIL = 'noreply@ckan.org'
 
 ACCOUNT_ADAPTER = 'ckan_pages.adapter.NoNewUsersAccountAdapter'
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_LOGIN_METHODS = {'email', 'username'}
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
-ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_LOGOUT_ON_GET = True
@@ -222,7 +222,6 @@ ACCOUNT_LOGIN_ON_PASSWORD_RESET = True
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_USERNAME_BLACKLIST = ['admin',]
 
-DEBUG = False
 
 GITHUB_CACHE_DIR = '{}/cache'.format(BASE_DIR)
 
@@ -267,6 +266,8 @@ WAGTAIL_CODE_BLOCK_LANGUAGES = (
     ('scss', 'SCSS'),
     ('yaml', 'YAML'),
 )
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10_000
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 

@@ -40,16 +40,8 @@ Source code for the ckan.org website
 |—— home
 |—— managers
 |—— menus
-|—— scss
-|    |—— base
-|    |—— components
-|    |—— layout
-|    |—— main.scss
-|    |—— sections
-|    |—— vendor
+|—— portals
 |—— search
-|    |—— templates
-|        |—— search
 |—— streams
 |—— Dockerfile
 |—— LICENSE.txt
@@ -61,36 +53,36 @@ Source code for the ckan.org website
 ```
 
 ## Install & Dependencies
-- Python 3.8 or higher
-- Django 4.2
-- Wagtail 5.0.2
+- Python 3.12
+- Django 5.2.8
+- Wagtail 7.2
 - all dependencies from `requirements.txt`
 
 ### Local environment setup
 #### 1. Create a virtual environment and activate it.
 ```
-#:~/wagtail$ python3 -m venv wagenv 
+python3 -m venv wagenv 
 ```
 ```
-#:~/wagtail$ source wagenv/bin/activate 
+source wagenv/bin/activate 
 ```
 
 #### 2. Clone repository and cd to the folder:
 
 ```
-(wagenv) #:~/wagtail$ git clone https://github.com/ckan/ckan.org.git
+git clone https://github.com/ckan/ckan.org.git
 ```
 
 #### 3. For local development: if will use sqlite db, comment `psycopg2` in `requirements.txt`.
 
 #### 4. Install `wheel` library 
 ```
-(wagenv) #:~/wagtail$ pip install wheel
+pip install wheel
 ```
 
 #### 5. Install all required dependencies from `requirements.txt` in project root folder. Be aware about versions of these dependencies!!!
 ```
-(wagenv) #:~/wagtail$ pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 #### 6. Remove `cache` and `media` links from ckan.org folder.
@@ -121,7 +113,7 @@ index be311ca..ec8777f 100644
      }
  }
 ```
-NOTE. Wagtail 5.0.2 uses PostgreSQL 12 or later
+NOTE. Wagtail 7.2 uses PostgreSQL 12 or later
 
 #### 10. To not create all pages from the scratch you can use existing dummy sqlite database.
 (Ask managers for `db.sqlite3` file and copy it into the `ckan.org` folder).
@@ -218,6 +210,9 @@ You will not see some images, as media folder is empty. If you need them, you ca
 
 to work with django models and styles.
 
+If you want to be ensured that outdated JS bundles are removed use:
+`python manage.py collectstatic --clear --noinput`
+
 #### 17. Populate reference table:
 
 Populate the references table and ensure that usage counts for images, documents and snippets are displayed accurately
@@ -236,13 +231,13 @@ If it was done earlier be sure you have cloned `main` branch of the repository w
 ### Tested Platform
 - software
   ```
-  OS: Ubuntu 22.04.2 LTS (Jammy)
-  Python: 3.8.17
+  OS: Ubuntu 22.04.5 LTS (Jammy)
+  Python: 3.12.12
   ```
 - hardware
   ```
-  CPU: Intel® Core™ i7
-  GPU: Intel® HD Graphics 4000
+  CPU: Intel® Core™ i5
+  GPU: Intel® Iris® Xe Graphics
   ```
 
 ## References
