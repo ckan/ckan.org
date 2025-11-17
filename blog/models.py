@@ -15,7 +15,6 @@ from wagtail.admin.panels import (
     TabbedInterface,
     ObjectList,
 )
-from wagtail.admin.widgets.slug import SlugInput
 from wagtail.models import Page
 from wagtail.fields import StreamField
 from wagtail import blocks
@@ -33,7 +32,7 @@ from .blocks import ImageWithCaption
 
 
 COMMON_PANELS = (
-    FieldPanel("slug", widget=SlugInput),
+    FieldPanel("slug"),
     FieldPanel("seo_title"),
     FieldPanel("search_description"),
     FieldPanel("keywords"),

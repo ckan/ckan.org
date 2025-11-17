@@ -8,7 +8,6 @@ from wagtail.admin.panels import (
     TabbedInterface,
     ObjectList,
 )
-from wagtail.admin.widgets.slug import SlugInput
 from wagtail.fields import StreamField
 from wagtail.models import Page
 
@@ -17,7 +16,7 @@ from wagtailmetadata.models import MetadataPageMixin
 
 
 COMMON_PANELS = (
-    FieldPanel("slug", widget=SlugInput),
+    FieldPanel("slug"),
     FieldPanel("seo_title"),
     FieldPanel("search_description"),
     FieldPanel("keywords"),
