@@ -47,15 +47,15 @@
     </div>
 
     <script type="text/javascript">
-        $('a[id=contact]').on("click", function() {
+        $("a[id=contact]").on("click", function() {
             var modal_trigger = $(this).attr("data-micromodal-trigger");
-            var modal_window = $('#' + modal_trigger);
+            var modal_window = $(document.getElementById(modal_trigger));
             var modal_form = modal_window.find("form");
-            var button = modal_form.find('.modal__btn');
-            var required = modal_form.find('input[required]:not([id="id_wagtailcaptcha"]), select[required], textarea[required]');
+            var button = modal_form.find(".modal__btn");
+            var required = modal_form.find("input[required]:not([id='id_wagtailcaptcha']), select[required], textarea[required]");
 
             // check whether all required fields are fulfilled
-            required.on('blur keyup change', function() {
+            required.on("blur keyup change", function() {
                 var all_required_filled = true;
                 required.each(function() {
                     if (!$(this).val()) {
@@ -68,14 +68,12 @@
                     button.prop("disabled", true).removeClass("modal__btn-primary");
                 };
             });
-
-            
         });
 
-        $('.captcha').click(function () {
+        $(".captcha").click(function () {
             $.getJSON("/captcha/refresh/", function (result) {
-                $('.captcha').attr('src', result['image_url']);
-                $('#id_captcha_0').val(result['key'])
+                $(".captcha").attr("src", result["image_url"]);
+                $("#id_captcha_0").val(result["key"]);
             });
         });
 
