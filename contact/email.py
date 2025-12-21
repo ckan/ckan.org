@@ -55,7 +55,7 @@ def send_subscription_email(email: str, current_site: str, token: str) -> bool:
         complete_email = EmailMessage(
             subject=subject,
             body=message,
-            from_email=EMAIL_FROM,
+            #from_email=EMAIL_FROM,
             to=[email]
         )
         complete_email.content_subtype = "html"
