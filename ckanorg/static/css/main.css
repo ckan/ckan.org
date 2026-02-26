@@ -1337,12 +1337,14 @@ blockquote cite:not(:last-child) {
 .count .h1 {
   color: #333333;
   margin-bottom: 4px;
-  display: inline-block;
 }
 @media all and (min-width: 768px) {
   .count .h1 {
     margin-bottom: 10px;
   }
+}
+.count .h1 {
+  display: inline-block;
 }
 .count li {
   margin-bottom: 20px;
@@ -2792,12 +2794,14 @@ ul.blog-nav li.last {
 .dark-black-bg {
   background: #111;
   padding: 48px 0;
-  color: #FFFFFF;
 }
 @media all and (min-width: 1024px) {
   .dark-black-bg {
     padding: 96px 0;
   }
+}
+.dark-black-bg {
+  color: #FFFFFF;
 }
 .dark-black-bg h4,
 .dark-black-bg h3,
@@ -2823,7 +2827,7 @@ ul.blog-nav li.last {
   background: -moz-linear-gradient(top, #ffffff 0%, #f4f4f4 100%);
   background: -webkit-linear-gradient(top, #ffffff 0%, #f4f4f4 100%);
   background: linear-gradient(to bottom, #ffffff 0%, #f4f4f4 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#ffffff", endColorstr="#f4f4f4",GradientType=0 );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f4f4f4',GradientType=0 );
 }
 
 .indent {
@@ -3299,11 +3303,11 @@ input.waiting[type=text] {
   font-weight: bold;
 }
 
-.ckanorg-auth-form {
-  margin: 70px 35%;
-}
 .ckanorg-auth-form .bad-token {
   margin: 70px 0;
+}
+.ckanorg-auth-form {
+  margin: 70px 35%;
 }
 .ckanorg-auth-form p a {
   font-size: 20px !important;
@@ -5152,6 +5156,68 @@ img.linkdigital-logo {
 .social-sidebar ul li a {
   color: #000;
   font: 400 20px/1.5 "SF Pro Display", sans-serif;
+}
+
+.anniversary-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+  border-radius: 40px;
+  padding: 8px 18px 8px 8px;
+  margin-bottom: 28px;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(15, 52, 96, 0.25);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.anniversary-pill:hover, .anniversary-pill:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(15, 52, 96, 0.32);
+  text-decoration: none;
+}
+.anniversary-pill:hover .pill-arrow, .anniversary-pill:focus .pill-arrow {
+  transform: translateX(3px);
+}
+.anniversary-pill .pill-num {
+  display: flex;
+  align-items: baseline;
+  gap: 1px;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1;
+}
+.anniversary-pill .pill-divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.2);
+}
+.anniversary-pill .pill-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+}
+.anniversary-pill .pill-text .pill-text-top {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.anniversary-pill .pill-text .pill-text-sub {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 400;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.anniversary-pill .pill-arrow {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  transition: transform 0.18s ease;
+  margin-left: 2px;
 }
 
 .page-header {
@@ -7441,7 +7507,6 @@ img.linkdigital-logo {
   display: flex;
   align-items: center;
   gap: 16px;
-  /* Custom select styles for portals page */
 }
 .search-section .search-section-form form .form-select-group label[for=order_by] {
   align-content: center;
@@ -7450,11 +7515,12 @@ img.linkdigital-logo {
   line-height: 28px;
   color: #333333;
 }
+.search-section .search-section-form form .form-select-group {
+  /* Custom select styles for portals page */
+}
 .search-section .search-section-form form .form-select-group .select-wrapper {
   position: relative;
   /* The visible control */
-  /* Dropdown list */
-  /* Keep native select visually hidden (we already set inline style in JS, but include fallback) */
 }
 .search-section .search-section-form form .form-select-group .select-wrapper .custom-select-control {
   display: flex;
@@ -7491,6 +7557,9 @@ img.linkdigital-logo {
 .search-section .search-section-form form .form-select-group .select-wrapper .custom-select-control.open .custom-select-arrow {
   transform: rotate(180deg);
 }
+.search-section .search-section-form form .form-select-group .select-wrapper {
+  /* Dropdown list */
+}
 .search-section .search-section-form form .form-select-group .select-wrapper .custom-select-list {
   display: none;
   position: absolute;
@@ -7526,6 +7595,9 @@ img.linkdigital-logo {
 .search-section .search-section-form form .form-select-group .select-wrapper .custom-select-option:hover, .search-section .search-section-form form .form-select-group .select-wrapper .custom-select-option:focus {
   background-color: #DDDDDD;
   outline: none;
+}
+.search-section .search-section-form form .form-select-group .select-wrapper {
+  /* Keep native select visually hidden (we already set inline style in JS, but include fallback) */
 }
 .search-section .search-section-form form .form-select-group .select-wrapper select[name=sort] {
   position: absolute !important;
