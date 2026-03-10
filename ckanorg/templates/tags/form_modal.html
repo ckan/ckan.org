@@ -1,27 +1,28 @@
 {% load static wagtailcore_tags %}
 {% load wagtailsettings_tags %}
-{% get_settings %}
 
 <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
 
 {% if form %}
     <div class="row">
         <div class="col-xs-1 text-capitalize" align="center">
-            <a data-micromodal-trigger="modal-{{ random_id }}" href="#" onclick="javascript:void(0);" id="contact">{{ form_page.button_text }}</a>
+            <a class="modal-link" data-micromodal-trigger="modal-{{ form_id }}" href="#" onclick="javascript:void(0);" id="modal-link-{{ form_id }}">
+                {{ form_page.button_text }}
+            </a>
         </div>
     </div>
 
-    <div class="modal micromodal-slide" id="modal-{{ random_id }}" aria-hidden="true">
+    <div class="modal micromodal-slide" id="modal-{{ form_id }}">
         <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-            <div class="modal__container" id="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+            <div class="modal__container" id="modal-container-{{ form_id }}" role="dialog" aria-modal="true" aria-labelledby="modal-title-{{ form_id }}">
                 <header class="modal__header">
-                    <h2 class="modal__title" id="modal-1-title">
+                    <h2 class="modal__title" id="modal-title-{{ form_id }}">
                         {{ form_page.title }}
                     </h2>
                     <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
                 </header>
-                <form action="{% pageurl form_page %}" method="POST" role="form" class="contact-modal" id="modal-form-{{ form_page.pk }}">
-                    <main class="modal__content" id="modal-1-content">
+                <form action="{% pageurl form_page %}" method="POST" role="form" class="contact-modal" id="modal-form-{{ form_id }}">
+                    <main class="modal__content" id="modal-content-{{ form_id }}">
                         {% csrf_token %}
                         <div class="modal-intro">
                             {{ form_page.intro|richtext }}
@@ -33,12 +34,9 @@
                     </main>
                     <footer class="modal__footer">
                         <input id="message-text" type="hidden" value="{{form_page.thank_you_text|safe}}">
-                        <button id="modal-btn-{{form_page.pk}}"
-                                class="modal__btn"
-                                data-callback="onContactSubmit_{{form_page.pk}}"
-                                data-action="submit"
-                                disabled>
-                                Submit
+                        <input type="submit" hidden>
+                        <button class="captcha-submit modal__btn" id="modal-button-{{ form_id }}" data-form-id="modal-form-{{ form_id }}">
+                            {{ _("Submit") }}
                         </button>
                     </footer>
                 </form>
@@ -47,21 +45,21 @@
     </div>
 
     <script type="text/javascript">
-        $("a[id=contact]").on("click", function() {
-            var modal_trigger = $(this).attr("data-micromodal-trigger");
-            var modal_window = $(document.getElementById(modal_trigger));
-            var modal_form = modal_window.find("form");
-            var button = modal_form.find(".modal__btn");
-            var required = modal_form.find("input[required]:not([id='id_wagtailcaptcha']), select[required], textarea[required]");
+        $("#modal-link-{{ form_id }}").on("click", function() {
+            var modal_form = $("#modal-form-{{ form_id }}");
+            var button = $("#modal-button-{{ form_id }}");
+            var required = modal_form.find("input[required], select[required], textarea[required]");
 
             // check whether all required fields are fulfilled
             required.on("blur keyup change", function() {
                 var all_required_filled = true;
+
                 required.each(function() {
                     if (!$(this).val()) {
                         all_required_filled = false;
                     };
                 });
+
                 if (all_required_filled) {
                     button.prop("disabled", false).addClass("modal__btn-primary");
                 } else {
@@ -69,21 +67,5 @@
                 };
             });
         });
-
-        $(".captcha").click(function () {
-            $.getJSON("/captcha/refresh/", function (result) {
-                $(".captcha").attr("src", result["image_url"]);
-                $("#id_captcha_0").val(result["key"]);
-            });
-        });
-
-        function onContactSubmit_{{form_page.pk}}(token) {
-            var id = "#modal-" + {{ form_page.pk }};
-            var message = $(id).find('#message-text').val();
-            $(id).find(".contact-modal").submit();
-            $(id).find("#modal-content")
-                .css("width", "100%")
-                .html("<div style='text-align: center; padding: 30px 0px 30px 0px' id='thanks-text'>"+message+"</div>");
-        };
     </script>
 {% endif %}

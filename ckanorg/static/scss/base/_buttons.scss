@@ -33,11 +33,11 @@
   &:active,
   &:focus,
   &:hover {
-    color: $blue;
+    color: $btn-grey-color;
     background: $white;
     svg{
       path{
-        fill: $blue;
+        fill: $btn-grey-color;
       }
     }
   }
