@@ -380,9 +380,6 @@ template {
 .modal__container .contact-modal main p.checkbox-container {
   display: flex;
 }
-.modal__container .contact-modal main > p:last-of-type {
-  display: inline-flex;
-}
 .modal__container .contact-modal main > div:not(.modal-intro) {
   display: inline-flex;
   float: inline-start;
@@ -691,11 +688,11 @@ p:not(:last-child) {
   }
 }
 .btn:active, .btn:focus, .btn:hover {
-  color: #0000EE;
+  color: #333333;
   background: #FFFFFF;
 }
 .btn:active svg path, .btn:focus svg path, .btn:hover svg path {
-  fill: #0000EE;
+  fill: #333333;
 }
 .btn.btn-black {
   border: 2px solid #000;
@@ -3005,7 +3002,7 @@ ul.blog-nav li.last {
 .footer {
   margin-bottom: -40px;
 }
-.footer #contact {
+.footer .modal-link {
   display: inline-block;
   text-transform: uppercase;
   font-size: 15px;
@@ -3146,10 +3143,10 @@ input[type=text]:-webkit-autofill {
   margin: 0 auto;
 }
 
-.schedule-chat-contact #contact,
-.speak-with-us-home #contact,
-.webinar-contact #contact,
-.ask-question #contact {
+.schedule-chat-contact .modal-link,
+.speak-with-us-home .modal-link,
+.webinar-contact .modal-link,
+.ask-question .modal-link {
   font-size: 0;
   display: inline-flex;
   width: 210px;
@@ -3169,35 +3166,35 @@ input[type=text]:-webkit-autofill {
   transition: border 0.3s ease-in-out, color 0.3s ease-in-out, background 0.3s ease-in-out;
   border-radius: 100px;
 }
-.schedule-chat-contact #contact:hover,
-.speak-with-us-home #contact:hover,
-.webinar-contact #contact:hover,
-.ask-question #contact:hover {
+.schedule-chat-contact .modal-link:hover,
+.speak-with-us-home .modal-link:hover,
+.webinar-contact .modal-link:hover,
+.ask-question .modal-link:hover {
   background: #fff;
   color: #333;
 }
-.schedule-chat-contact #contact:after,
-.speak-with-us-home #contact:after,
-.webinar-contact #contact:after,
-.ask-question #contact:after {
+.schedule-chat-contact .modal-link:after,
+.speak-with-us-home .modal-link:after,
+.webinar-contact .modal-link:after,
+.ask-question .modal-link:after {
   font-size: 16px;
   font-weight: 400;
   font-size: 20px;
 }
 
-.schedule-chat-contact #contact:after {
+.schedule-chat-contact .modal-link:after {
   content: "Schedule a chat";
 }
 
-.speak-with-us-home #contact:after {
+.speak-with-us-home .modal-link:after {
   content: "Schedule a meeting";
 }
 
-.webinar-contact #contact:after {
+.webinar-contact .modal-link:after {
   content: "Get an invite";
 }
 
-.ask-question #contact:after {
+.ask-question .modal-link:after {
   content: "Ask a question";
 }
 
@@ -3710,7 +3707,7 @@ img.dpga-logo {
     width: calc(50% - 15px);
   }
 }
-.footer #contact {
+.footer .modal-link {
   font-weight: bold;
   font-size: 18px;
 }
