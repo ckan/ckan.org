@@ -19,7 +19,6 @@ from wagtail.admin.panels import FieldPanel, InlinePanel, PageChooserPanel, Help
 from wagtailcache.cache import WagtailCacheMixin
 
 from managers.models import Manager
-from contact.forms import WagtailCaptchaEmailForm
 
 import mailchimp_marketing as MailchimpMarketing
 from mailchimp_marketing.api_client import ApiClientError
@@ -129,7 +128,7 @@ def send_contact_info(request, member_info: dict):
                 messages.error(request, message_content, extra_tags="safe")
 
 
-class ContactPage(WagtailCacheMixin, WagtailCaptchaEmailForm):
+class ContactPage(WagtailCacheMixin, AbstractEmailForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         send_to = [x.email for x in Manager.objects.all()]
