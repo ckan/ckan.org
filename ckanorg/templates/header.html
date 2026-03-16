@@ -8,10 +8,27 @@
             <div class="logo">
                 <a href="/"><img src="{% static 'img/CKAN-DPG-new.svg' %}" alt="Logotype" width="160" height="44"></a>
             </div>
+
+            <!-- 🎂 REMOVE AFTER 2026 -->
+            <a href="{% url 'anniversary_page' %}" class="ann-badge">
+                <span class="ann-badge__dot"></span>
+                <span class="ann-badge__text">{{ _("CKAN Turns 20") }}</span>
+            </a>
+            <!-- END 🎂 -->
+
             <nav class="nav justify-content-end">
                 <div class="nav-opener"><span></span></div>
                 <div class="nav-drop">
                     <ul class="nav-menu">
+                        <!-- 🎂 REMOVE AFTER 2026 -->
+                        <li class="dropdown dropdown-menu-item">
+                            <a href="{% url 'anniversary_page' %}" class="ann-badge ann-badge--menu">
+                                <span class="ann-badge__dot"></span>
+                                <span class="ann-badge__text">{{ _("CKAN Turns 20") }}</span>
+                                <span class="ann-badge__arrow">→</span>
+                            </a>
+                        </li>
+                        <!-- END 🎂 -->
                         {% with menu.menu_items.all as menu_items %}
                             {% for item in menu_items %}
                                 {% is_active request item as active%}
@@ -20,8 +37,8 @@
                                         <li class="dropdown dropdown-menu-item">
                                             <button onclick="clickDropdown('{{item.link_title}}')" id="dropbtn-{{item.link_title}}" {% if request.path == "/enterprise" or request.path == "/government" %} class="active"{% endif %}>{{item.link_title}} <span class="support-arrow"></span></button>
                                             <div id="{{item.link_title}}_dropdown" class="dropdown-content">
-                                                <a href="/government">CKAN for Government</a>
-                                                <a href="/enterprise">CKAN for Enterprise</a>
+                                                <a href="/government">{{ _("CKAN for Government") }}</a>
+                                                <a href="/enterprise">{{ _("CKAN for Enterprise") }}</a>
                                             </div>
                                         </li>
                                     {% endif %}
@@ -29,8 +46,8 @@
                                         <li class="dropdown dropdown-menu-item">
                                             <button onclick="clickDropdown('{{item.link_title}}')" id="dropbtn-{{item.link_title}}" {% if request.path == "/community" or request.path == "/commercial" %} class="active"{% endif %}>{{item.link_title}} <span class="support-arrow"></span></button>
                                             <div id="{{item.link_title}}_dropdown" class="dropdown-content">
-                                                <a href="/community">Community Support</a>
-                                                <a href="/commercial">Commercial Support</a>
+                                                <a href="/community">{{ _("Community Support") }}</a>
+                                                <a href="/commercial">{{ _("Commercial Support") }}</a>
                                             </div>
                                         </li>
                                     {% endif %}
@@ -51,11 +68,11 @@
 
                         {% if request.user.is_authenticated %}
                             <li>
-                                <a href="{% url 'account_logout' %}">Logout</a>
+                                <a href="{% url 'account_logout' %}">{{ _("Logout") }}</a>
                             </li>
                         {% else %}
                             <li>
-                                <a href="{% url 'account_login' %}">Login</a>
+                                <a href="{% url 'account_login' %}">{{ _("Login") }}</a>
                             </li>
                         {% endif %}
                     </ul>
