@@ -90,11 +90,10 @@
                                                 <div class="row">
                                                     <input type="text" id="blog_subscribe_name" name="name" placeholder="your name" autocomplete="off"/>
                                                     <input type="text" id="blog_subscribe_email" name="email" placeholder="your@email.com" autocomplete="off"/>
-                                                    <div class="g-recaptcha"
-                                                        data-sitekey="{{ recaptcha_sitekey }}"
-                                                        data-size="invisible">
-                                                    </div>
-                                                    <input type="submit" value="Subscribe" class="btn"/>
+                                                    <input type="submit" hidden>
+                                                    <button type="button" class="captcha-submit btn" id="subscribe-button" data-form-id="blog_subscribe_form">
+                                                        {{ _("Subscribe") }}
+                                                    </button>
                                                 </div>
                                             </form>
                                         </div>

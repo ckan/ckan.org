@@ -55,11 +55,6 @@
           display: flex;
         }
       }
-      & > p {
-        &:last-of-type {
-          display: inline-flex;
-        }
-      }
       & > div:not(.modal-intro) {
         display: inline-flex;
         float: inline-start;
