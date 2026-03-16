@@ -9,17 +9,17 @@
     <section class="section-banner">
         <div class="container-sm t-center">
             {# Add a clickable pill badge to celebrate CKAN's 20th anniversary. #}
-            <a href="#" class="anniversary-pill">
+            <a href="{% url 'anniversary_page' %}" class="anniversary-pill" aria-label="{{ _('Learn more about CKAN’s 20th anniversary') }}" target="_blank" rel="noopener">
                 <div class="pill-num">
                     <img src="{% static 'img/CKAN20-logo-transparent.png' %}" alt="Anniversary icon" width="64" height="64" class="pill-icon">
                 </div>
                 <div class="pill-divider"></div>
                 <div class="pill-text">
                     <span class="pill-text-top">
-                        {% translate "Years of Open Data" %}
+                        {{ _("Years of Open Data") }}
                     </span>
                     <span class="pill-text-sub">
-                        {% translate "Celebrating two decades of open source" %}
+                        {{ _("Celebrating two decades of open source") }}
                     </span>
                 </div>
                 <span class="pill-arrow">→</span>

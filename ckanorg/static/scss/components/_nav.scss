@@ -7,7 +7,7 @@
   z-index: 999;
   background: $white;
   .header-holder{
-    padding: 38px 0;
+    padding: 32px 0;
     @include animate(all);
     @media all and (max-width: 1024px){
       padding: 20px 0;
@@ -23,8 +23,12 @@
     display: flex;
     align-items: center;
     position: relative;
+    gap: 16px;
     @media all and (max-width: 1024px){
       justify-content: space-between;
+    }
+    .logo {
+      padding-bottom: 12px;
     }
   }
 }
@@ -48,7 +52,6 @@
   font-size: 15px;
   line-height: 1;
   list-style: none;
-  margin: 0 0 0 25px;
   padding: 0;
   color: $medium-gray;
 
@@ -62,7 +65,7 @@
       margin-right: 30px;
     }
 
-    a:not(.btn) {
+    a:not(.btn):not(.ann-badge) {
       color: $medium-gray;
       font-family: $second-font-sans-serif;
       display: flex;
