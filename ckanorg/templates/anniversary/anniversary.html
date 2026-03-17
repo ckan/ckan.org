@@ -1,0 +1,358 @@
+{% extends "base.html" %}
+
+{% load static i18n modal_tags %}
+{% load wagtailimages_tags wagtailcore_tags page_tags wagtailmetadata_tags %}
+{% load wagtailsettings_tags %}
+{% get_settings %}
+
+{% block head %}
+    <meta name="description" content="Celebrating 20 years of CKAN — the world's leading open data management system. Stories, milestones, and the global community behind two decades of open data infrastructure.">
+    <meta property="og:title" content="CKAN Turns 20 — Two Decades of Open Data">
+    <meta property="og:description" content="20 stories, 20 years. Celebrating the people, portals, and moments that shaped open data worldwide.">
+    <meta property="og:url" content="https://ckan.org/20-years-of-ckan">
+    <meta name="twitter:card" content="summary_large_image">
+{% endblock head %}
+
+{% block content %}
+    <div class="anniversary-content">
+        <!-- ══ HERO ══ -->
+        <div class="hero">
+            <div class="hero-watermark">20</div>
+            <a href="https://ckan.org/blog/ckan-turns-20-two-decades-of-open-data-infrastructure" target="_blank" class="hero-pill">
+                <span class="pill-badge">2006 – 2026</span>
+                {{ _("Celebrating 20 years of open data") }}
+                <span class="pill-arrow">→</span>
+            </a>
+            <div class="hero-num"><span class="n2">2</span><span class="n0">0</span></div>
+            <h1>{{ _("Twenty years of powering<br>open data worldwide") }}</h1>
+            <p class="hero-desc">{{ _("What started as a scrappy tool inspired by a Perl archive has become the world's leading open data infrastructure — powering governments, researchers, and NGOs on every continent.") }}</p>
+            <div class="hero-actions">
+                <a href="#join" class="btn-primary">{{ _("Take part in the celebration") }}</a>
+                <a href="#stories" class="btn-outline">{{ _("Read our stories") }}</a>
+            </div>
+        </div>
+
+        <!-- ══ STATS ══ -->
+        <div class="stats">
+            <div class="stat"><div class="stat-n">20</div><div class="stat-l">{{ _("Years open source") }}</div></div>
+            <div class="stat"><div class="stat-n">1,000+</div><div class="stat-l">{{ _("Data portals worldwide") }}</div></div>
+            <div class="stat"><div class="stat-n">5,000</div><div class="stat-l">{{ _("GitHub stars") }}</div></div>
+            <div class="stat"><div class="stat-n">200+</div><div class="stat-l">{{ _("Contributors") }}</div></div>
+        </div>
+
+        <!-- ══ STORY ══ -->
+        <div id="story" class="story-section">
+            <div class="story-inner">
+                <div class="story-text">
+                    <div class="section-label">{{ _("Our Story") }}</div>
+                    <div class="section-title">{{ _("From a frustrated student to global infrastructure") }}</div>
+                    <p>{{ _("In the early 2000s,") }} <a href="https://en.wikipedia.org/wiki/Rufus_Pollock" target="_blank">Rufus Pollock</a> {{ _("was trying to answer big questions — how many people can the Earth support? The data was either impossible to find or locked behind paywalls costing thousands of dollars.") }}</p>
+                    <p>{{ _("Inspired by CPAN — the Perl package archive — he built CKAN: a catalog for data. Two decades later, it powers national open data portals on every continent, from data.gov to open.canada.ca to datos.gob.mx.") }}</p>
+                    <p><strong>{{ _("CKAN is now recognized as a") }} <a href="https://ckan.org/blog/ckan-is-now-a-digital-public-good" target="_blank">{{ _("Digital Public Good") }}</a>, {{ _("helping achieve 9 of the 17 UN Sustainable Development Goals.") }}</strong></p>
+                </div>
+                <div class="story-visual">
+                    <div class="story-quote-text">{{ _("You'd read a book with loads of data... but when you went looking for the datasets, they just weren't available. The data existed — it just wasn't findable. That was the problem CKAN was built to solve.") }}</div>
+                    <div class="story-cite">— {{ _("Rufus Pollock, Founder of CKAN") }}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ TIMELINE ══ -->
+        <div id="timeline" class="tl-section">
+            <div class="tl-inner">
+                <div class="tl-header">
+                    <div class="section-label">{{ _("History") }}</div>
+                    <div class="section-title">{{ _("Twenty years, one milestone at a time") }}</div>
+                    <p class="section-sub" style="max-width:540px; margin-bottom:32px;">{{ _("Click any event to learn more.") }}</p>
+                </div>
+                <div class="legend">
+                    <div class="legend-item"><div class="legend-dot" style="background:rgba(237,82,72,0.5)"></div>{{ _("Major milestone") }}</div>
+                    <div class="legend-item"><div class="legend-dot" style="background:rgba(212,229,241,0.9)"></div>{{ _("Release") }}</div>
+                    <div class="legend-item"><div class="legend-dot" style="background:rgba(234,230,91,0.6)"></div>{{ _("Adoption") }}</div>
+                    <div class="legend-item"><div class="legend-dot" style="background:rgba(0,0,0,0.08)"></div>{{ _("Community") }}</div>
+                </div>
+                <div class="tl">
+                    <div class="tl-item">
+                        <div class="tl-trigger" onclick="tlToggle(this)"><span class="tl-year">2006</span><div class="tl-divider"></div><span class="tl-title">{{ _("CKAN v0.1 — the first commit") }}</span><span class="tl-tag tag-milestone">{{ _("Milestone") }}</span><span class="tl-chevron">▼</span></div>
+                        <div class="tl-body"><div class="tl-body-inner"><div class="tl-desc"><a href="https://rufuspollock.com/" target="_blank">Rufus Pollock</a> releases the first version of CKAN under the <a href="https://okfn.org/" target="_blank">Open Knowledge Foundation</a>. Inspired by <a href="https://www.cpan.org/" target="_blank">CPAN</a>, it was a simple catalog for open datasets, built to solve a personal frustration: public data was impossible to find.</div><div class="tl-quote">CKAN was never meant to become a big open source project. It started because I needed something that didn't exist — a CPAN for data.<cite>— Rufus Pollock, Founder</cite></div></div></div>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-trigger" onclick="tlToggle(this)"><span class="tl-year">2009</span><div class="tl-divider"></div><span class="tl-title">data.gov.uk launches on CKAN</span><span class="tl-tag tag-adoption">Adoption</span><span class="tl-chevron">▼</span></div>
+                        <div class="tl-body"><div class="tl-body-inner"><div class="tl-desc">The UK Government launches its official open data portal powered by CKAN — one of the first major government portals in the world to go live. It sets a precedent for national open data infrastructure and sparks global interest.</div></div></div>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-trigger" onclick="tlToggle(this)"><span class="tl-year">2010</span><div class="tl-divider"></div><span class="tl-title">CKAN 1.0 — production ready</span><span class="tl-tag tag-release">Release</span><span class="tl-chevron">▼</span></div>
+                        <div class="tl-body"><div class="tl-body-inner"><div class="tl-desc">The first stable release brings critical improvements to authorization, search, and resource previews — establishing CKAN as production-ready infrastructure for governments and institutions.</div></div></div>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-trigger" onclick="tlToggle(this)"><span class="tl-year">2011</span><div class="tl-divider"></div><span class="tl-title">CKAN 1.3 — harvesting & federation</span><span class="tl-tag tag-release">Release</span><span class="tl-chevron">▼</span></div>
+                        <div class="tl-body"><div class="tl-body-inner"><div class="tl-desc">CKAN 1.3 introduces harvesting capabilities, letting portals aggregate and import datasets from external sources. A pivotal step toward federated open data ecosystems.</div></div></div>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-trigger" onclick="tlToggle(this)"><span class="tl-year">2013</span><div class="tl-divider"></div><span class="tl-title">CKAN 2.0 & DATA.GOV migration</span><span class="tl-tag tag-milestone">Milestone</span><span class="tl-chevron">▼</span></div>
+                        <div class="tl-body"><div class="tl-body-inner"><div class="tl-desc">A major architectural overhaul brings scalability and a powerful plugin system. The US Government migrates Data.gov to CKAN, consolidating hundreds of thousands of federal datasets.</div><div class="tl-quote">The plugin architecture was a bet that the community would build things we hadn't thought of. That bet paid off.<cite>— Ian Ward, Lead Developer</cite></div></div></div>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-trigger" onclick="tlToggle(this)"><span class="tl-year">2015</span><div class="tl-divider"></div><span class="tl-title">Linked data, previews & visualizations</span><span class="tl-tag tag-release">Release</span><span class="tl-chevron">▼</span></div>
+                        <div class="tl-body"><div class="tl-body-inner"><div class="tl-desc">CKAN 2.3 and 2.4 bring support for linked data and in-browser data visualizations. Open data becomes genuinely accessible, not just technically available.</div></div></div>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-trigger" onclick="tlToggle(this)"><span class="tl-year">2018</span><div class="tl-divider"></div><span class="tl-title">1,000+ active portals worldwide</span><span class="tl-tag tag-milestone">Milestone</span><span class="tl-chevron">▼</span></div>
+                        <div class="tl-body"><div class="tl-body-inner"><div class="tl-desc">CKAN surpasses 1,000 active data portals worldwide, spanning every continent. <a href="https://datashades.info/" target="_blank">Datashades</a> index tracks some of them.</div></div></div>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-trigger" onclick="tlToggle(this)"><span class="tl-year">2021</span><div class="tl-divider"></div><span class="tl-title">Datopian & Link Digital become co-stewards</span><span class="tl-tag tag-community">Community</span><span class="tl-chevron">▼</span></div>
+                        <div class="tl-body"><div class="tl-body-inner"><div class="tl-desc">A new stewardship model is established. <a href="https://www.datopian.com/" target="_blank">Datopian</a> and <a href="https://linkdigital.com.au/" target="_blank">Link Digital</a> join as co-stewards. The <a href="https://okfn.org/" target="_blank">Open Knowledge Foundation</a> remains as purpose trustee, ensuring CKAN's open ethos endures.</div></div></div>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-trigger" onclick="tlToggle(this)"><span class="tl-year">2023</span><div class="tl-divider"></div><span class="tl-title">Recognized as a Digital Public Good</span><span class="tl-tag tag-milestone">Milestone</span><span class="tl-chevron">▼</span></div>
+                        <div class="tl-body"><div class="tl-body-inner"><div class="tl-desc"><a href="https://ckan.org/blog/ckan-is-now-a-digital-public-good" target="_blank">CKAN is officially recognized as a Digital Public Good</a> by the DPGA, reinforcing its role in achieving 9 of the 17 UN Sustainable Development Goals.</div></div></div>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-trigger" onclick="tlToggle(this)" style="border-color:var(--red);background:rgba(237,82,72,0.04);"><span class="tl-year" style="color:var(--red);">2026</span><div class="tl-divider"></div><span class="tl-title" style="color:var(--red);font-weight:700;">20th Anniversary — the celebration year</span><span class="tl-tag tag-milestone">Milestone</span><span class="tl-chevron">▼</span></div>
+                        <div class="tl-body"><div class="tl-body-inner" style="border-color:var(--red);background:rgba(237,82,72,0.02);"><div class="tl-desc">CKAN turns 20. The global community gathers to celebrate two decades of open source, open data, and open collaboration. <strong>You're part of this moment.</strong></div></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ GLOBAL REACH ══ -->
+        <div id="map" class="map-section">
+            <!-- HERO -->
+            <div class="gr-hero">
+                <div>
+                <div class="section-label">Global Reach</div>
+                <div class="section-title">Open data,<br>everywhere</div>
+                <p class="section-sub" style="max-width:460px;margin-top:12px;">CKAN is the backbone of open data infrastructure on every continent — powering national governments, intergovernmental bodies, and research institutions since 2006.</p>
+                </div>
+                <div class="gr-stat-grid">
+                <div class="gr-sg-item"><div class="gr-n" id="grC1">0<em>+</em></div><div class="gr-l">Active portals</div></div>
+                <div class="gr-sg-item"><div class="gr-n" id="grC3">0</div><div class="gr-l">Continents</div></div>
+                <div class="gr-sg-item"><div class="gr-n" id="grC2">0<em>+</em></div><div class="gr-l">Countries</div></div>
+                <div class="gr-sg-item"><div class="gr-n">20</div><div class="gr-l">Years running</div></div>
+                </div>
+            </div>
+            <!-- SCROLLING PORTAL STRIPS -->
+            <div class="gr-strip-section">
+                <div class="gr-strip-label">{{ _('Featured portals') }}</div>
+                <div class="gr-strip-rows" id="grStrips"></div>
+            </div>
+
+            <!-- REGION BREAKDOWN -->
+            <div class="gr-breakdown">
+                <div>
+                <div class="gr-bd-title">Portals by region</div>
+                <p class="gr-bd-sub">CKAN's reach spans every continent, with the strongest presence in Europe and Asia–Pacific.</p>
+                </div>
+                <div class="gr-hbars">
+                <div class="gr-hbar">
+                    <div class="gr-hbar-meta"><span class="gr-hbar-name">🌍 Europe</span><span class="gr-hbar-num">400+</span></div>
+                    <div class="gr-hbar-portals">data.gov.uk · data.gov.fr · govdata.de · opendata.swiss · and hundreds more</div>
+                    <div class="gr-hbar-track"><div class="gr-hbar-fill" style="width:100%;animation-delay:0.1s"></div></div>
+                </div>
+                <div class="gr-hbar">
+                    <div class="gr-hbar-meta"><span class="gr-hbar-name">🌏 Asia–Pacific</span><span class="gr-hbar-num">250+</span></div>
+                    <div class="gr-hbar-portals">data.gov.au · data.gov.sg · data.gov.in · data.govt.nz · and more</div>
+                    <div class="gr-hbar-track"><div class="gr-hbar-fill" style="width:62%;animation-delay:0.2s"></div></div>
+                </div>
+                <div class="gr-hbar">
+                    <div class="gr-hbar-meta"><span class="gr-hbar-name">🌎 Americas</span><span class="gr-hbar-num">200+</span></div>
+                    <div class="gr-hbar-portals">catalog.data.gov · open.canada.ca · dados.gov.br · datos.gob.mx · and more</div>
+                    <div class="gr-hbar-track"><div class="gr-hbar-fill" style="width:50%;animation-delay:0.3s"></div></div>
+                </div>
+                <div class="gr-hbar">
+                    <div class="gr-hbar-meta"><span class="gr-hbar-name">🌍 Africa</span><span class="gr-hbar-num">100+</span></div>
+                    <div class="gr-hbar-portals">data.humdata.org · opendata.go.ke · data.gov.za · data.gov.gh</div>
+                    <div class="gr-hbar-track"><div class="gr-hbar-fill" style="width:25%;animation-delay:0.4s"></div></div>
+                </div>
+                <div class="gr-hbar">
+                    <div class="gr-hbar-meta"><span class="gr-hbar-name">🕌 Middle East</span><span class="gr-hbar-num">50+</span></div>
+                    <div class="gr-hbar-portals">data.gov.ae · bayanat.ae · opendata.gov.qa</div>
+                    <div class="gr-hbar-track"><div class="gr-hbar-fill" style="width:12%;animation-delay:0.5s"></div></div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ ECOSYSTEM CTA ══ -->
+        <div id="ecosystem" class="ecosystem-section">
+        <div class="eco-cta-wrap">
+            <div class="eco-left">
+            <div class="section-label">{{ _('Ecosystem Catalogue') }}</div>
+            <div class="section-title">{{ _('Discover the CKAN ecosystem<br>in one place') }}</div>
+            <p class="section-sub" style="margin-top:10px;margin-bottom:32px;">{{ _('ecosystem.ckan.org is where the CKAN world comes together — a living catalog of CKAN-powered portals, extensions, and datasets from across the globe.') }}</p>
+            <a href="https://ecosystem.ckan.org/extension/" target="_blank" class="eco-btn">
+                {{ _("Explore ecosystem.ckan.org") }}
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+            </div>
+
+            <div class="eco-right">
+            <!-- Floating stat cards, inspired by ecosystem.ckan.org hero -->
+            <div style="position:relative;width:340px;height:180px;">
+                <!-- Card 1: 1k extensions -->
+                <div class="eco-float" style="left:0;top:0;width:150px;transform:rotate(-2deg);">
+                <div style="position:absolute;top:-14px;right:-14px;font-size:26px;">📊</div>
+                <div class="eco-float-n">1<em style="color:var(--red);font-style:normal">k</em></div>
+                <div class="eco-float-l">{{ _('Extensions') }}</div>
+                </div>
+                <!-- Card 2: 700 sites -->
+                <div class="eco-float" style="right:0;top:16px;width:150px;transform:rotate(1.5deg);">
+                <div style="position:absolute;top:-14px;left:-14px;font-size:26px;">🌐</div>
+                <div class="eco-float-n">700</div>
+                <div class="eco-float-l">{{ _('Sites') }}</div>
+                </div>
+                <!-- Small accent card -->
+                <div class="eco-float" style="left:80px;bottom:0;width:120px;transform:rotate(-1deg);padding:12px 18px;">
+                <div class="eco-float-n" style="font-size:32px;">60<em style="color:var(--red);font-style:normal">+</em></div>
+                <div class="eco-float-l">{{ _('Countries') }}</div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- ══ 20 STORIES ══ -->
+        <div id="stories" class="stories-section">
+            <div class="stories-header">
+                <div>
+                    <div class="section-label">{{ _('20 Stories for 20 Years') }}</div>
+                    <div class="section-title">{{ _('The stories that shaped open data') }}</div>
+                    <p class="section-sub" style="max-width:500px;">{{ _('One story published each month throughout 2026 — from the first commit to the portals that changed how citizens access public information.') }}</p>
+                </div>
+            </div>
+            <div class="stories-filter">
+                <button class="filter-btn active" onclick="storiesFilter('all',this)">All</button>
+                <button class="filter-btn" onclick="storiesFilter('origin',this)">Origin</button>
+                <button class="filter-btn" onclick="storiesFilter('adoption',this)">Adoption</button>
+                <button class="filter-btn" onclick="storiesFilter('community',this)">Community</button>
+                <button class="filter-btn" onclick="storiesFilter('impact',this)">Impact</button>
+                <button class="filter-btn" onclick="storiesFilter('technical',this)">Technical</button>
+            </div>
+
+            <div class="stories-grid" id="storiesGrid">
+                {% for story in stories %}
+                    {% if story.story_featured %}
+                        <a class="story-card featured" data-tag="{{ story.story_tag }}" href="{{ story.url }}">
+                            <span class="story-num">{% if forloop.counter < 10 %}0{% endif %}{{ forloop.counter }}</span>
+                            <span class="s-tag stag-{{ story.story_tag }}">{{ story.story_tag | capfirst }}</span>
+                            <div class="story-title">{{ story.title }}</div>
+                            <div class="story-excerpt">{{ story.post_subtitle }}</div>
+                            <div class="story-footer">
+                                <div class="story-author">
+                                    <div class="story-avatar" style="background:#ed5248;">{{ story.author | first | upper }}</div>
+                                    <div class="story-byline">
+                                        <strong>{{ story.author }}</strong>{{ story.first_published_at | date:"F Y" }}
+                                    </div>
+                                </div>
+                                <span class="story-read">{{ _('Read') }} →</span>
+                            </div>
+                        </a>
+                    {% else %}
+                        <a class="story-card {% if not story.first_published_at %}soon{% endif %}" data-tag="{{ story.story_tag }}" data-publish="{{ story.story_publish_date }}" href="{% if not story.first_published_at %}#{% else %}{{ story.url }}{% endif %}">
+                            <span class="story-num">{% if forloop.counter < 10 %}0{% endif %}{{ forloop.counter }}</span>
+                            <span class="s-tag stag-{{ story.story_tag }}">{{ story.story_tag|title }}</span>
+                            <div class="story-title">{{ story.title }}</div>
+                            {% if not story.first_published_at %}
+                                <div class="soon-label">{{ _('Coming') }} {{ story.story_publish_date|date:"F Y" }}</div>
+                            {% else %}
+                                <div class="story-footer">
+                                    <div class="story-author">
+                                        <div class="story-avatar" style="background:#1565c0;">
+                                            {{ story.author | first | upper }}
+                                        </div>
+                                        <div class="story-byline">
+                                            <strong>{{ story.author }}</strong>{{ story.first_published_at | date:"F Y" }}
+                                        </div>
+                                    </div>
+                                    <span class="story-read">{{ _('Read') }} →</span>
+                                </div>
+                            {% endif %}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="stories-cta">
+                <div class="stories-progress">Showing <strong id="publishedCount">1 published</strong> of 20 stories · All stories publishing throughout 2026</div>
+                <div style="display:flex;gap:10px;">
+                    <a href="https://ckan.org/newsletter/subscription/" target="_blank" class="btn-outline">{{ _('Subscribe for updates') }}</a>
+                    <a href="#join" class="btn-primary" onclick="prefillStoryForm()">{{ _('Submit your story') }}</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ COMMUNITY VOICES ══ -->
+        <div id="community" class="quotes-section">
+            <div class="quotes-head">
+                <div class="section-label">{{ _('Community Voices') }}</div>
+                <div class="section-title">{{ _('The people who built, shaped,<br>and championed CKAN') }}</div>
+            </div>
+            <div class="quotes-grid">
+                <div class="q-card featured"><div class="q-mark">"</div><div class="q-text">{{ _("I've spent years showing up for CKAN — at the White House Open Data Roundtable, building Datashades globally. I do it because I believe open data changes lives. CKAN is the infrastructure that makes it possible.") }}</div><div class="q-author"><div class="q-avatar" style="background:#0066cc;">SC</div><div><div class="q-name">Steven De Costa</div><div class="q-role">Co-Steward · Link Digital</div></div></div></div>
+                <div class="q-card"><div class="q-mark">"</div><div class="q-text">{{ _("What keeps me coming back to CKAN is the community. Twenty years in, it's still a place where a single motivated contributor can make a real difference. The codebase has grown enormously, but that spirit hasn't changed.") }}</div><div class="q-author"><div class="q-avatar" style="background:#1565c0;">AM</div><div><div class="q-name">Adrià Mercader</div><div class="q-role">Lead Developer · CKAN Tech Team</div></div></div></div>
+                <div class="q-card"><div class="q-mark">"</div><div class="q-text">{{ _("The plugin architecture we introduced in CKAN 2.0 was a bet that the community would build things we hadn't thought of. That bet paid off in ways we couldn't have predicted.") }}</div><div class="q-author"><div class="q-avatar" style="background:#2e7d32;">IW</div><div><div class="q-name">Ian Ward</div><div class="q-role">CKAN Tech Team · Link Digital</div></div></div></div>
+            </div>
+            <div class="quotes-grid-2">
+                <div class="q-card"><div class="q-mark">"</div><div class="q-text">{{ _("Open data is only as good as the infrastructure behind it. CKAN has been that bedrock — reliable, extensible, community-driven — for governments and organisations around the world for two decades.") }}</div><div class="q-author"><div class="q-avatar" style="background:#e65100;">JN</div><div><div class="q-name">Joel Natividad</div><div class="q-role">CEO · datHere</div></div></div></div>
+                <div class="q-card"><div class="q-mark">"</div><div class="q-text">{{ _("The most underrated thing about CKAN is its community. People from dozens of countries, different governments, different languages — all working toward the same goal. Coordinating that over 20 years is itself an extraordinary achievement.") }}</div><div class="q-author"><div class="q-avatar" style="background:#6a1fa2;">YP</div><div><div class="q-name">Yoana Popova</div><div class="q-role">Marketing & Comms Lead · Datopian</div></div></div></div>
+            </div>
+            <div class="quotes-grid">
+                <div class="q-card"><div class="q-mark">"</div><div class="q-text">{{ _("CKAN is proof that open source and open data go hand in hand. In Latin America, it's been a catalyst for transparency and civic participation. Twenty years later, it remains the tool we trust most.") }}</div><div class="q-author"><div class="q-avatar" style="background:#00695c;">PB</div><div><div class="q-name">Patricio del Boca</div><div class="q-role">CKAN Tech Team · OKF</div></div></div></div>
+                <div class="q-card"><div class="q-mark">"</div><div class="q-text">{{ _("Working on CKAN showed me how open source can genuinely serve the public good. Every line of code has real-world impact — datasets that governments publish, citizens that access public information. That's deeply motivating.") }}</div><div class="q-author"><div class="q-avatar" style="background:#37474f;">SM</div><div><div class="q-name">Sergey Motornyuk</div><div class="q-role">CKAN Tech Team · Link Digital</div></div></div></div>
+                <div class="q-card"><div class="q-mark">"</div><div class="q-text">{{ _("CKAN gave us the foundation to build open data portals that actually serve citizens. The extensibility is second to none — we've customized it for local needs without losing the benefits of a global community.") }}</div><div class="q-author"><div class="q-avatar" style="background:#558b2f;">ES</div><div><div class="q-name">Eric Soroos</div><div class="q-role">CKAN Tech Team · Derilinx</div></div></div></div>
+            </div>
+        </div>
+
+        <!-- ══ GET INVOLVED ══ -->
+        <div id="join" class="involve-section">
+            <div class="involve-inner">
+                <div class="involve-left">
+                    <div class="section-label">{{ _('Get Involved') }}</div>
+                    <h2>{{ _('Want to take part?') }}<br>{{ _('Write to us.') }}</h2>
+                    <p>{{ _("Whether you're a long-time contributor, a government partner, or simply a believer in open data — there's a place for you in this celebration.") }}</p>
+                    <div class="ways">
+                        <div class="way"><div class="way-icon">✍️</div><div class="way-text"><strong>{{ _('Share your story') }}</strong><span>{{ _('Contribute to our anniversary blog series') }}</span></div></div>
+                        <div class="way"><div class="way-icon">🌍</div><div class="way-text"><strong>{{ _('Represent your community') }}</strong><span>{{ _('Tell us about your portal and your impact') }}</span></div></div>
+                        <div class="way"><div class="way-icon">🤝</div><div class="way-text"><strong>{{ _('Partner with us') }}</strong><span>{{ _('Sponsor or co-organize anniversary activities') }}</span></div></div>
+                        <div class="way"><div class="way-icon">📣</div><div class="way-text"><strong>{{ _('Spread the word') }}</strong><span>{{ _("Share CKAN's story with your network") }}</span></div></div>
+                    </div>
+                </div>
+                <div class="involve-form">
+                    <h3>{{ _('Send us a message') }}</h3>
+                    <p>{{ _('We read every message and will get back to you personally.') }}</p>
+                    <form method="post" id="joinForm">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <input type="text" name="FNAME" placeholder="{{ _('Your name') }}" required/>
+                            <input type="text" name="ORG" placeholder="{{ _('Organization') }}"/>
+                        </div>
+                        <input type="email" name="EMAIL" placeholder="{{ _('Email address') }}" autocomplete="off" required/>
+                        <select name="CKANUSE">
+                            <option value="" disabled selected>{{ _('Your relationship to CKAN') }}</option>
+                            <option value="portal-manager">{{ _('I run or manage a CKAN portal') }}</option>
+                            <option value="contributor">{{ _('I contribute to CKAN (code, docs, community)') }}</option>
+                            <option value="evaluating">{{ _("I'm evaluating CKAN for a project") }}</option>
+                            <option value="portal-user">{{ _('I work with a CKAN-powered portal') }}</option>
+                            <option value="exploring">{{ _("I'm just learning about CKAN") }}</option>
+                        </select>
+                        <textarea name="MESSAGE" placeholder="{{ _('Tell us your story or how you`d like to get involved…') }}"></textarea>
+                        <button type="submit" class="submit-btn" id="join-button">{{ _('Send my message') }}</button>
+                        <div class="form-note">
+                            {{ _('No spam, ever. Your information is used in accordance with our Privacy Policy.') }}
+                        </div>
+                    </form>
+                    <div class="success-msg" id="successMsg">
+                        <div class="big">🎉</div>
+                        <h3>{{ _('Thank you!') }}</h3>
+                        <p>{{ _("We'll be in touch soon. Together we'll make this 20th anniversary unforgettable.") }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js_bottom %}
+    {{ block.super }}
+    <script src="{% static 'js/anniversary.js' %}"></script>
+{% endblock js_bottom %}

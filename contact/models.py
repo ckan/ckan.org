@@ -116,16 +116,17 @@ def send_contact_info(request, member_info: dict):
             client.lists.add_list_member(mailchimp_audience_id, member_info)
         except ApiClientError as error:
             if error.status_code == 400 and "is already a list member" in error.text:
-                message_content = (
-                    "<p>The member {} already exists in the subscription list.</p>".format(member_info.get("email_address", ""))
-                )
-                messages.success(request, message_content, extra_tags="safe")
+                logging.getLogger("error_logger").warning(traceback.format_exc())
+                # message_content = (
+                #     "<p>The member {} already exists in the subscription list.</p>".format(member_info.get("email_address", ""))
+                # )
+                # messages.success(request, message_content, extra_tags="safe")
             else:
                 logging.getLogger("error_logger").error(traceback.format_exc())
-                message_content = (
-                    "<p>Sorry, we could not add you to the subscription list at the moment. Please try again later.</p>"
-                )
-                messages.error(request, message_content, extra_tags="safe")
+                # message_content = (
+                #     "<p>Sorry, we could not add you to the subscription list at the moment. Please try again later.</p>"
+                # )
+                # messages.error(request, message_content, extra_tags="safe")
 
 
 class ContactPage(WagtailCacheMixin, AbstractEmailForm):
@@ -291,6 +292,10 @@ class Email(models.Model):
         max_length=254,
         blank=False,
         null=False,
+    )
+    message = models.TextField(
+        blank=True,
+        null=True,
     )
     subscribed = models.BooleanField(
         default=False,

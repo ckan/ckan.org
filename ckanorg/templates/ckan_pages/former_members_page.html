@@ -1,15 +1,13 @@
 {% extends "base.html" %}
+
 {% load static modal_tags i18n %}
-{% load static wagtailimages_tags wagtailcore_tags page_tags %}
+{% load wagtailimages_tags wagtailcore_tags wagtailmetadata_tags page_tags %}
 
 {% block head %}
     <meta name="description" content="{{ page.title }} - {{ page.subtitle }}">
 {% endblock head %}
 
-{% block meta_tags %}{% meta_tags %}{% endblock %}
-
 {% block content %}
-
     <div class="container-sm t-center">
         <h2 class="h1">{% translate "The Tech Team" %}</h2>
         <p class="body_extra_large">{% translate "Our former and honorary members" %}</p>
@@ -29,5 +27,4 @@
             </a>
         </div>
     </div>
-
 {% endblock content %}
