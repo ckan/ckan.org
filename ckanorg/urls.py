@@ -27,12 +27,10 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     path("blog/", include("blog.urls")),
     path("ckan/", include("ckan_pages.urls")),
-    path("captcha/", include("captcha.urls")),
     path("events/", include("events.urls")),
     path("portals/", include("portals.urls")),
-    path("robots.txt",
-        TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
-    ),
+    path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
+    path("20-years-of-ckan/", include("anniversary.urls")),
 ]
 
 # Serve static and media files

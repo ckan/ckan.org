@@ -264,6 +264,31 @@ class BlogPostPage(MetadataPageMixin, Page):
         related_name="post_category",
     )
     featured = models.BooleanField(null=True, default=False)
+    is_story = models.BooleanField(
+        null=True,
+        blank=True,
+        default=False,
+        help_text="Whether this post is part of the anniversary story and should be displayed on the anniversary page.",
+    )
+    story_featured = models.BooleanField(
+        null=True,
+        blank=True,
+        default=False,
+        help_text="""Whether this story should be featured on the anniversary page.
+        Featured stories are displayed more prominently at the top of the page.""",
+    )
+    story_tag = models.CharField(
+        max_length=50,
+        null=True,
+        blank=True,
+        help_text="Tag for story filtering on the anniversary page. For example: origin, impact, technical.",
+    )
+    story_publish_date = models.DateField(
+        null=True,
+        blank=True,
+        help_text="""Date when the story will be published on the anniversary page. Required for stories
+        that are part of the anniversary celebration.""",
+    )
     imported = models.BooleanField(null=True, default=False)
     post_subtitle = models.CharField(
         max_length=512,
@@ -344,10 +369,18 @@ class BlogPostPage(MetadataPageMixin, Page):
         FieldPanel("latest_revision_created_at", read_only=True),
         FieldPanel("show_in_menus"),
     ]
+    
+    story_panels = [
+        FieldPanel("is_story", widget=forms.CheckboxInput),
+        FieldPanel("story_featured", widget=forms.CheckboxInput),
+        FieldPanel("story_tag"),
+        FieldPanel("story_publish_date"),
+    ]
 
     edit_handler = TabbedInterface(
         [
             ObjectList(content_panels, heading="Content"),
+            ObjectList(story_panels, heading="Story"),
             ObjectList(promote_panels, heading="Promote"),
             ObjectList(settings_panels, heading="Settings"),
         ]
