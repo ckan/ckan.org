@@ -276,3 +276,9 @@ CSRF_TRUSTED_ORIGINS = ['https://ckan.org', 'https://devweb.ckan-org.links.com.a
 
 CAPTCHA_CHALLENGE_FUNCT = "captcha.helpers.math_challenge"
 CAPTCHA_NOISE_FUNCTIONS = ('captcha.helpers.noise_null',)
+
+SESSION_COOKIE_SECURE = True  # Set to True in production with HTTPS
+SESSION_COOKIE_SAMESITE = 'Lax'
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
