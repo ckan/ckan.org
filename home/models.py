@@ -7,17 +7,14 @@ from django.contrib.auth.models import Group
 
 from modelcluster.fields import ParentalKey
 
-from wagtail.fields import StreamField
 from wagtail import blocks
-from wagtail.models import Page, Orderable
-from wagtailmetadata.models import MetadataPageMixin
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
 from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
+from wagtail.fields import StreamField
+from wagtail.models import Page, Orderable
 
-from wagtail.admin.panels import (
-    FieldPanel,
-    MultiFieldPanel,
-    InlinePanel
-)
+from wagtailcache.cache import WagtailCacheMixin
+from wagtailmetadata.models import MetadataPageMixin
 
 from streams.models import GitCardBlock
 from ckan_pages.models import CkanForPage
@@ -70,8 +67,8 @@ class PoweringImages(Orderable):
     ]
 
 
-class HomePage(MetadataPageMixin, Page):
-
+class HomePage(WagtailCacheMixin, MetadataPageMixin, Page):
+    cache_control = 'no-cache'
     parent_page_types = ['wagtailcore.Page']
     subpage_types = [
         'contact.ContactPage',

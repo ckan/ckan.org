@@ -116,17 +116,17 @@ def send_contact_info(request, member_info: dict):
             client.lists.add_list_member(mailchimp_audience_id, member_info)
         except ApiClientError as error:
             if error.status_code == 400 and "is already a list member" in error.text:
-                logging.getLogger("error_logger").warning(traceback.format_exc())
-                # message_content = (
-                #     "<p>The member {} already exists in the subscription list.</p>".format(member_info.get("email_address", ""))
-                # )
-                # messages.success(request, message_content, extra_tags="safe")
+                logging.getLogger("error_logger").warning(error)
+                message_content = (
+                    "<p>The member {} already exists in the subscription list.</p>".format(member_info.get("email_address", ""))
+                )
+                messages.success(request, message_content, extra_tags="safe")
             else:
-                logging.getLogger("error_logger").error(traceback.format_exc())
-                # message_content = (
-                #     "<p>Sorry, we could not add you to the subscription list at the moment. Please try again later.</p>"
-                # )
-                # messages.error(request, message_content, extra_tags="safe")
+                logging.getLogger("error_logger").error(error)
+                message_content = (
+                    "<p>Sorry, we could not add you to the subscription list at the moment. Please try again later.</p>"
+                )
+                messages.error(request, message_content, extra_tags="safe")
 
 
 class ContactPage(WagtailCacheMixin, AbstractEmailForm):
@@ -243,16 +243,13 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
 
                 ##* Display confirmation message
                 try:
-                    if self.form_name == "Webinar Form":
-                        message = Message.objects.get(slug='webinar-form-confirmation')
-                        message_content = message.content
-                    else:
-                        message = Message.objects.get(slug='contact-form-confirmation')
-                        message_content = message.content
+                    slug = 'webinar-form-confirmation' if self.form_name == "Webinar Form" else 'contact-form-confirmation'
+                    message = Message.objects.get(slug=slug)
+                    message_content = getattr(message, "content", None) or _("Thank you for contacting us!")
                 except Message.DoesNotExist:
                     logging.getLogger("error_logger").error(traceback.format_exc())
                     message_content = _("Thank you for contacting us!")
-                messages.success(request, message_content, extra_tags="safe")
+                messages.success(request, str(message_content), extra_tags="safe")
 
                 return self.render_landing_page(
                     request, form_submission, *args, **kwargs
