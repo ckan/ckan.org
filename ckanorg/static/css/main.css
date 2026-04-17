@@ -3181,6 +3181,7 @@ hr.divider {
   border-color: var(--red);
   background: var(--red);
 }
+.anniversary-content .tl-item.anniversary::before { border-color: var(--red); }
 .anniversary-content .tl-trigger {
   display: flex;
   align-items: center;
