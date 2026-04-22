@@ -23,6 +23,8 @@ from managers.models import Manager
 import mailchimp_marketing as MailchimpMarketing
 from mailchimp_marketing.api_client import ApiClientError
 
+from .decorators import validate_captcha
+
 
 @register_setting
 class MailChimpSettings(BaseSiteSetting):
@@ -215,6 +217,9 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
             form = self.get_form(
                 request.POST, request.FILES, page=self, user=request.user
             )
+            if not validate_captcha(request):
+                return render(request, "recaptcha_error.html")
+            
             if form.is_valid():
                 form_submission = self.process_form_submission(form)
                 email = form.cleaned_data.get("your_e_mail_address", "")
@@ -254,8 +259,6 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
                 return self.render_landing_page(
                     request, form_submission, *args, **kwargs
                 )
-            elif form.errors.get("wagtailcaptcha", "") != "":
-                return render(request, "recaptcha_error.html")
         else:
             form = self.get_form(page=self, user=request.user)
 
