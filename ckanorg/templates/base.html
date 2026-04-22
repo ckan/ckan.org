@@ -70,8 +70,9 @@
             {% endblock message %}
 
             <!-- Implement Google reCAPTCHA v2 for all forms with button class "captcha-submit" -->
-            <script src="https://www.google.com/recaptcha/api.js" async defer ></script>
+            <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoadCallback&render=explicit" async defer></script>
             <div class="g-recaptcha" data-sitekey="{{ recaptcha_sitekey }}" data-callback="onSubmit" data-size="invisible"></div>
+            <script>window.RECAPTCHA_SITE_KEY = "{{ recaptcha_sitekey }}";</script>
             <script src="{% static 'js/captcha.js' %}"></script>
         {% endblock js_bottom %}
     </body>

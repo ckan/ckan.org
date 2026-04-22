@@ -33,6 +33,7 @@
                         {% endif %}
                     </main>
                     <footer class="modal__footer">
+                        <div id="recaptcha-container-{{ form_id }}"></div>
                         <input id="message-text" type="hidden" value="{{form_page.thank_you_text|safe}}">
                         <input type="submit" hidden>
                         <button class="captcha-submit modal__btn" id="modal-button-{{ form_id }}" data-form-id="modal-form-{{ form_id }}">
