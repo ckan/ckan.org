@@ -11,6 +11,6 @@ $('.captcha-submit').on('click', function (event) {
 });
 
 var onSubmit = function(token) {
-    $(form).append("<input type='hidden' name='captcha' value='" + token + "' />");
+    $(form).append("<input type='hidden' name='g-recaptcha-response' value='" + token + "' />");
     $(form).find('input[type="submit"]').click();
 };
