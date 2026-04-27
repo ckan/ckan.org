@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.views.generic import TemplateView
 
 from blog.models import BlogPostPage
@@ -26,6 +27,9 @@ class AnniversaryView(TemplateView):
         else:
             context["mailchimp_api_key"] = ""
             context["mailchimp_audience_id"] = ""
+            
+        # Add recaptcha site key to context
+        context['recaptcha_sitekey'] = settings.RECAPTCHA_PUBLIC_KEY
         return context
 
     def post(self, request, *args, **kwargs):
