@@ -15,13 +15,17 @@
                 <div class="banner-info">
                     <p class="text">{{ page.subtitle }}</p>
                     <p class="text"><strong>Schedule a chat</strong> to speak to a <a href="{% if community_page %}{{ community_page.url }}#stewards{% else %}#{% endif %}">CKAN steward</a> who specialises in open data portals for {{ page.page_for }}.</p>
-                        <form action="#" id="stewardFormSend">
-                            <iframe src="csrf/" style="display: none;"></iframe>
-                            <div class="row">
-                                <input type="text" id="steward_email_send" placeholder="Your email" autocomplete="off"/>
-                                <input type="submit" value="" class="btn send">
-                            </div>
-                        </form>
+                    <form action="#" id="stewardFormSend">
+                        <iframe src="csrf/" style="display: none;"></iframe>
+                        <div class="row">
+                            <input type="text" id="steward_email_send" placeholder="Your email" autocomplete="off"/>
+                            <div id="recaptcha-container-stewardFormSend"></div>
+                            <input type="submit" hidden>
+                            <button type="button" class="captcha-submit btn send" id="stewardFormSend-button" data-form-id="stewardFormSend">
+                                {{ _('Schedule a chat') }}
+                            </button>
+                        </div>
+                    </form>
                 </div>
                 <div class="banner-animation">
                     <img src="{{ image.url }}" alt="{{ image.alt }}">
@@ -97,7 +101,11 @@
                             <iframe src="csrf/" style="display: none;"></iframe>
                             <div class="row">
                                 <input type="text" id="steward_email" placeholder="Your email" autocomplete="off"/>
-                                <input type="submit" value="Schedule a meeting" class="btn">
+                                <div id="recaptcha-container-stewardForm"></div>
+                                <input type="submit" hidden>
+                                <button type="button" class="captcha-submit btn" id="stewardForm-button" data-form-id="stewardForm">
+                                    {{ _('Schedule a meeting') }}
+                                </button>
                             </div>
                         </form>
                         <div class="separator"></div>

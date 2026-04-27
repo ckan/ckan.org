@@ -336,7 +336,11 @@
                             <option value="exploring">{{ _("I'm just learning about CKAN") }}</option>
                         </select>
                         <textarea name="MESSAGE" placeholder="{{ _('Tell us your story or how you`d like to get involved…') }}"></textarea>
-                        <button type="submit" class="submit-btn" id="join-button">{{ _('Send my message') }}</button>
+                        <div id="recaptcha-container-joinForm"></div>
+                        <input type="submit" hidden>
+                        <button type="button" class="captcha-submit submit-btn" id="join-button" data-form-id="joinForm">
+                            {{ _('Send my message') }}
+                        </button>
                         <div class="form-note">
                             {{ _('No spam, ever. Your information is used in accordance with our Privacy Policy.') }}
                         </div>

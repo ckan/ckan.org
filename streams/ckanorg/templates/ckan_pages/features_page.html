@@ -69,7 +69,11 @@
                         <iframe src="csrf/" style="display: none;"></iframe>
                         <div class="row">
                             <input type="text" id="webinar_email" placeholder="Your email" autocomplete="off"/>
-                            <input type="submit" value="Get an invite" class="btn">
+                            <div id="recaptcha-container-webinarForm"></div>
+                            <input type="submit" hidden>
+                            <button type="button" class="captcha-submit btn" id="webinarForm-button" data-form-id="webinarForm">
+                                {{ _('Get an invite') }}
+                            </button>
                         </div>
                     </form>
             </div>

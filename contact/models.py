@@ -11,11 +11,12 @@ from django.utils.translation import gettext_lazy as _
 from modelcluster.models import ParentalKey
 
 from wagtail.admin.mail import send_mail
-from wagtail.models import Page
-from wagtail.fields import RichTextField
+from wagtail.admin.panels import FieldPanel, InlinePanel, PageChooserPanel, HelpPanel
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
-from wagtail.admin.panels import FieldPanel, InlinePanel, PageChooserPanel, HelpPanel
+from wagtail.fields import RichTextField
+from wagtail.models import Page
+
 from wagtailcache.cache import WagtailCacheMixin
 
 from managers.models import Manager
@@ -39,7 +40,7 @@ class MailChimpSettings(BaseSiteSetting):
         blank=True,
     )
 
-    class Meta:
+    class Meta: # type: ignore
         verbose_name = "MailChimp settings"
         verbose_name_plural = "MailChimp settings"
 
@@ -64,7 +65,7 @@ class CkanOrgSettings(BaseSiteSetting):
         verbose_name="Modal Form",
     )
 
-    class Meta:
+    class Meta: # type: ignore
         verbose_name = "CKAN.org settings"
 
     panels = [PageChooserPanel("modal_form_page", page_type="contact.ContactPage")]
@@ -174,7 +175,7 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
         default=_("Contact Us"),
     )
 
-    class Meta:
+    class Meta: # type: ignore
         verbose_name = "Contact form"
         verbose_name_plural = "Contact forms"
 
@@ -212,7 +213,7 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
             logging.getLogger("error_logger").error(traceback.format_exc())
 
 
-    def serve(self, request, *args, **kwargs):
+    def serve(self, request, *args, **kwargs): # type: ignore
         if request.method == "POST":
             form = self.get_form(
                 request.POST, request.FILES, page=self, user=request.user
@@ -220,7 +221,7 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
             if not validate_captcha(request):
                 return render(request, "recaptcha_error.html")
             
-            if form.is_valid():
+            if form.is_valid() and form.cleaned_data.get("how_you_heard_about_us", "") != "Google Advertisement":
                 form_submission = self.process_form_submission(form)
                 email = form.cleaned_data.get("your_e_mail_address", "")
                 name = form.cleaned_data.get("your_name", "")
@@ -267,7 +268,7 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
         return TemplateResponse(request, self.get_template(request), context)
 
 
-    def render_landing_page(self, request, form_submission=None, *args, **kwargs):
+    def render_landing_page(self, request, form_submission=None, *args, **kwargs): # type: ignore
         redirect_page = Page.objects.get(id=request.POST.get("source-page-id"))
         if redirect_page:
             request.session["form_page_success"] = True
