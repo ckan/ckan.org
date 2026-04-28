@@ -103,10 +103,11 @@ MIDDLEWARE = [
 
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': os.path.join(BASE_DIR, 'cache'),
-        'KEY_PREFIX': 'wagtailcache',
-        'TIMEOUT': 3600, # one hour (in seconds)
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        # 'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        # 'LOCATION': os.path.join(BASE_DIR, 'cache'),
+        # 'KEY_PREFIX': 'wagtailcache',
+        # 'TIMEOUT': 3600, # one hour (in seconds)
     }
 }
 
