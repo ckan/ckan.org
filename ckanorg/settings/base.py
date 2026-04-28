@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'faq',
     'portals',
     'anniversary',
+    'stories',
 
     #Core Wagtail apps
     'wagtail.contrib.forms',

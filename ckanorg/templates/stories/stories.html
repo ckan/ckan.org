@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+
+{% load static i18n modal_tags %}
+{% load wagtailimages_tags wagtailcore_tags page_tags wagtailmetadata_tags %}
+{% load wagtailsettings_tags %}
+{% get_settings %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ _("Success Stories · CKAN") }}</title>
+{% endblock head %}
+
+{% block content %}
+    <div class="stories-content">
+        <!-- ══ HERO ══ -->
+        <div class="page-hero">
+            <div class="page-hero-inner">
+                <div class="breadcrumb">
+                    <a href="https://ckan.org">ckan.org</a>
+                    <span class="breadcrumb-sep">/</span>
+                    <span>{{ _("Success Stories") }}</span>
+                </div>
+                <div class="section-label">{{ _("Case Studies") }}</div>
+                <h1>{{ _("Real portals.<br>Real <em>impact</em>.")|safe }}</h1>
+                <p class="page-hero-desc">{{ _("How governments, NGOs, and research institutions around the world have used CKAN to open up data and change how people access public information.") }}</p>
+                <div class="hero-actions">
+                    <a href="#submit" class="btn-primary">{{ _("Share your story") }}</a>
+                    <button class="btn-outline" onclick="openNotify()">{{ _("Get notified of new stories") }}</button>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-n">1,000<em>+</em></div>
+                        <div class="hero-stat-l">{{ _("Portals worldwide") }}</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-n">60<em>+</em></div>
+                        <div class="hero-stat-l">{{ _("Countries") }}</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-n">6</div>
+                        <div class="hero-stat-l">{{ _("Continents") }}</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-n">20</div>
+                        <div class="hero-stat-l">{{ _("Years running") }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ STORIES GRID ══ -->
+        <div class="stories-section">
+        <div class="stories-inner">
+            <div class="filters-row">
+            <div class="filters-bar">
+                <button class="filter-btn active" onclick="filterBy('all',this)">All stories</button>
+                <button class="filter-btn" onclick="filterBy('gov',this)">Government</button>
+                <button class="filter-btn" onclick="filterBy('ngo',this)">NGO / Humanitarian</button>
+                <button class="filter-btn" onclick="filterBy('research',this)">Research</button>
+                <button class="filter-btn" onclick="filterBy('civic',this)">Civic tech</button>
+            </div>
+            <div class="results-label">Showing <strong id="countLabel">6</strong> stories</div>
+            </div>
+            <div class="stories-grid" id="storiesGrid"></div>
+        </div>
+        </div>
+
+        <!-- ══ READER OVERLAY ══ -->
+        <div class="overlay" id="readerOverlay" onclick="overlayBgClose(event)">
+        <div class="reader" id="readerPanel">
+            <div class="reader-band" id="rBand">
+            <div class="reader-band-bg" id="rBandBg"></div>
+            <button class="reader-close" onclick="closeReader()">&#x2715;</button>
+            <div class="reader-band-meta">
+                <div class="reader-band-org" id="rOrg"></div>
+                <div class="reader-band-title" id="rTitle"></div>
+            </div>
+            </div>
+            <div class="reader-body">
+            <div class="reader-meta-row" id="rMeta"></div>
+            <div id="rContent"></div>
+            </div>
+            <div class="reader-footer">
+            <div class="reader-submit-nudge">Have a story like this? <a href="#submit" onclick="closeReader()">Share it</a></div>
+            <div class="reader-nav">
+                <button class="reader-nav-btn" id="rPrev" onclick="navReader(-1)">&#8592; Prev</button>
+                <button class="reader-nav-btn primary" id="rNext" onclick="navReader(1)">Next &#8594;</button>
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- ══ SUBMIT SECTION ══ -->
+        <div id="submit" class="submit-section">
+            <div class="submit-inner">
+                <div class="submit-left">
+                    <div class="section-label">{{ _('Share Your Story') }}</div>
+                    <h2>{{ _('Is your portal on CKAN?<br>Tell us about it.')|safe }}</h2>
+                    <p>{{ _('We publish case studies from CKAN-powered portals around the world — governments, NGOs, research institutions. If you\'ve built something on CKAN, we\'d love to share it.') }}</p>
+                    <div class="template-card">
+                        <div class="template-card-header">
+                            <div class="gdoc-icon">
+                                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg>
+                            </div>
+                            <span>{{ _('Story submission template') }}</span>
+                        </div>
+                        <div class="template-sections">
+                            <div class="tmpl-row"><div class="tmpl-num">1</div><div class="tmpl-row-label">{{ _('Who you are & what you built') }}</div><div class="tmpl-row-hint">~100 {{ _('words') }}</div></div>
+                            <div class="tmpl-row"><div class="tmpl-num">2</div><div class="tmpl-row-label">{{ _('The challenge you faced') }}</div><div class="tmpl-row-hint">~100 {{ _('words') }}</div></div>
+                            <div class="tmpl-row"><div class="tmpl-num">3</div><div class="tmpl-row-label">{{ _('How CKAN solved it') }}</div><div class="tmpl-row-hint">~150 {{ _('words') }}</div></div>
+                            <div class="tmpl-row"><div class="tmpl-num">4</div><div class="tmpl-row-label">{{ _('Measurable impact & outcomes') }}</div><div class="tmpl-row-hint">{{ _('Numbers welcome') }}</div></div>
+                            <div class="tmpl-row"><div class="tmpl-num">5</div><div class="tmpl-row-label">{{ _('A quote from your team') }}</div><div class="tmpl-row-hint">1-2 {{ _('sentences') }}</div></div>
+                            <div class="tmpl-row"><div class="tmpl-num">6</div><div class="tmpl-row-label">{{ _('Screenshots & portal link') }}</div><div class="tmpl-row-hint">{{ _('Optional but great') }}</div></div>
+                        </div>
+                    </div>
+                    <div class="template-cta">
+                        <a href="https://docs.google.com/document/d/1jr8eBGdXGkkxO9saL18is9I-RrCrOibhVS7HkMpVgn0/copy" target="_blank" class="template-cta-main">
+                            <div class="gdoc-icon-lg">&#x1F4C4;</div>
+                            {{ _('Open template in Google Docs') }}
+                        </a>
+                        <div class="template-cta-sub">
+                            {{ _('Click to get your own copy &rarr; fill it in &rarr; email to') }} <a href="mailto:comms&#64;ckan.org">comms&#64;ckan.org</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="submit-right">
+                    <div class="section-label">{{ _('How it works') }}</div>
+                    <div class="how-steps">
+                        <div class="how-step done">
+                            <div class="step-dot">1</div>
+                            <div class="step-text"><strong>{{ _("Open the template") }}</strong><span>{{ _("Click the button to get your own Google Doc copy. No account needed to view.") }}</span></div>
+                        </div>
+                        <div class="how-step">
+                            <div class="step-dot">2</div>
+                            <div class="step-text"><strong>{{ _("Fill it in") }}</strong><span>{{ _("Work through the six sections at your own pace. Notes and hints are included throughout.") }}</span></div>
+                        </div>
+                        <div class="how-step">
+                            <div class="step-dot">3</div>
+                            <div class="step-text"><strong>{{ _("Email it back") }}</strong><span>{{ _("Send your completed doc to") }} <a href="mailto:comms&#64;ckan.org">comms&#64;ckan.org</a>. {{ _("Attach screenshots if you have them.") }}</span></div>
+                        </div>
+                        <div class="how-step">
+                            <div class="step-dot">4</div>
+                            <div class="step-text"><strong>{{ _("We'll follow up") }}</strong><span>{{ _("We review every submission. If yours is a fit, we'll get back to you to discuss and edit together before publishing.") }}</span></div>
+                        </div>
+                        <div class="how-step">
+                            <div class="step-dot">5</div>
+                            <div class="step-text"><strong>{{ _("Published on ckan.org") }}</strong><span>{{ _("Your story goes live here, shared with the global CKAN community and open data network.") }}</span></div>
+                        </div>
+                    </div>
+                    <div style="margin-top:32px; padding:20px 24px; background:#fff; border:1.5px solid var(--border); border-radius:12px;">
+                        <div style="font-size:13px; font-weight:700; margin-bottom:6px;">{{ _("Questions?") }}</div>
+                        <div style="font-size:13px; color:var(--muted); line-height:1.65;">{{ _("Reach us at") }} <a href="mailto:comms&#64;ckan.org">comms&#64;ckan.org</a>. {{ _("We're happy to help shape your story if you're not sure where to start.") }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ NOTIFY MODAL ══ -->
+        <div class="notify-overlay" id="notifyOverlay" onclick="notifyBgClose(event)">
+            <div class="notify-modal">
+                <button class="notify-close" onclick="closeNotify()">&#x2715;</button>
+                <div id="notifyForm">
+                    <div class="notify-icon">&#x1F514;</div>
+                    <h3>{{ _("Get notified of new stories") }}</h3>
+                    <p>{{ _("New CKAN success stories are added regularly. Drop your email and we'll send you a short note when one goes live — nothing else.") }}</p>
+                    <div class="notify-form">
+                        <input type="email" class="notify-input" id="notifyEmail" placeholder="your@email.com"/>
+                        <button class="notify-submit" onclick="submitNotify()">{{ _("Notify me") }}</button>
+                        <div class="notify-note">{{ _("Stories updates only. Unsubscribe any time.") }}</div>
+                    </div>
+                </div>
+                <div class="notify-success" id="notifySuccess">
+                    <div class="big">&#x2705;</div>
+                    <h3>{{ _("You're on the list") }}</h3>
+                    <p>{{ _("We'll drop you a note when a new story goes live. That's it — no newsletters, no noise.") }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js_bottom %}
+    {{ block.super }}
+    <script src="{% static 'js/stories.js' %}"></script>
+{% endblock js_bottom %}
