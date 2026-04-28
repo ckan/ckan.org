@@ -53,7 +53,7 @@ class AnniversaryPage(Page):
 		else:
 			context['form'] = GetInvolvedForm()
 		# Stories
-		last_year_posts = BlogPostPage.objects.filter(created__year=2026, is_story=True)
+		last_year_posts = BlogPostPage.objects.filter(is_story=True)
 		context["stories"] = last_year_posts.order_by("story_publish_date")
 		# Mailchimp
 		mailchimp_settings = MailChimpSettings.for_request(request)
