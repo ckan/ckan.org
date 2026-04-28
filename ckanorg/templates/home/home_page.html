@@ -9,7 +9,7 @@
     <section class="section-banner">
         <div class="container-sm t-center">
             {# Add a clickable pill badge to celebrate CKAN's 20th anniversary. #}
-            <a href="{% url 'anniversary_page' %}" class="anniversary-pill" aria-label="{{ _('Learn more about CKAN’s 20th anniversary') }}" target="_blank" rel="noopener">
+            <a href="{% slugurl '20-years-of-ckan' %}" class="anniversary-pill" aria-label="{{ _('Learn more about CKAN’s 20th anniversary') }}" target="_blank" rel="noopener">
                 <div class="pill-num">
                     <img src="{% static 'img/CKAN20-logo-transparent.png' %}" alt="Anniversary icon" width="64" height="64" class="pill-icon">
                 </div>

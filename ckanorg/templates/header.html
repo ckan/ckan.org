@@ -1,4 +1,5 @@
 {% load static menu_tags page_tags modal_tags %}
+{% load wagtailcore_tags page_tags %}
 
 {% get_menu 'header-menu' as menu %}
 
@@ -10,7 +11,7 @@
             </div>
 
             <!-- 🎂 REMOVE AFTER 2026 -->
-            <a href="{% url 'anniversary_page' %}" class="ann-badge">
+            <a href="{% slugurl '20-years-of-ckan' %}" class="ann-badge">
                 <span class="ann-badge__dot"></span>
                 <span class="ann-badge__text">{{ _("CKAN Turns 20") }}</span>
             </a>
@@ -22,7 +23,7 @@
                     <ul class="nav-menu">
                         <!-- 🎂 REMOVE AFTER 2026 -->
                         <li class="dropdown dropdown-menu-item">
-                            <a href="{% url 'anniversary_page' %}" class="ann-badge ann-badge--menu">
+                            <a href="{% slugurl '20-years-of-ckan' %}" class="ann-badge ann-badge--menu">
                                 <span class="ann-badge__dot"></span>
                                 <span class="ann-badge__text">{{ _("CKAN Turns 20") }}</span>
                                 <span class="ann-badge__arrow">→</span>

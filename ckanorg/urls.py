@@ -30,7 +30,6 @@ urlpatterns = [
     path("events/", include("events.urls")),
     path("portals/", include("portals.urls")),
     path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
-    path("20-years-of-ckan/", include("anniversary.urls")),
 ]
 
 # Serve static and media files
