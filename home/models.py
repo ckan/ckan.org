@@ -81,6 +81,7 @@ class HomePage(WagtailCacheMixin, MetadataPageMixin, Page):
         'events.EventListingPage',
         'faq.FaqPage',
         'portals.OpenDataPortalPage',
+        'anniversary.AnniversaryPage',
     ]
     max_count = 1
 
