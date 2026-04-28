@@ -53,7 +53,11 @@
                     <iframe src="csrf/" style="display: none;"></iframe>
                     <div class="row">
                         <input type="text" id="steward_email" placeholder="Your email" autocomplete="off"/>
-                        <input type="submit" value="Schedule a meeting" class="btn">
+                        <div id="recaptcha-container-stewardForm"></div>
+                        <input type="submit" hidden>
+                        <button type="button" class="captcha-submit btn" id="stewardForm-button" data-form-id="stewardForm">
+                            {{ _('Schedule a meeting') }}
+                        </button>
                     </div>
                 </form>
             </div>

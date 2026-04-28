@@ -4,7 +4,7 @@
 {{ page.title }}
 {{ page.intro|richtext }}
 
-<form action='{% pageurl page %}' method='POST', role='form'>
+<form action='{% pageurl page %}' method='POST', role='form' id="contact-page-form">
     {% csrf_token %}
 
     {% for field in form %}
@@ -23,6 +23,9 @@
         </div>
         <br>
     {% endfor %}
-
-    <button type='submit'>Submit</button>
+    <div id="recaptcha-container-contact-page-form"></div>
+    <input type="submit" hidden>
+    <button type="button" class="captcha-submit submit-btn" id="contact-page-button" data-form-id="contact-page-form">
+        {{ _('Submit') }}
+    </button>
 </form>
