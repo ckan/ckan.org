@@ -51,6 +51,8 @@ class BlogPostPageAdmin(SnippetViewSet):
         "created",
         "first_published_at",
         "last_published_at",
+        "is_story",
+        "live",
     )
     list_export = (
         "post_title",
@@ -58,13 +60,17 @@ class BlogPostPageAdmin(SnippetViewSet):
         "created",
         "first_published_at",
         "last_published_at",
+        "is_story",
+        "live"
     )
     ordering = "-first_published_at"
     list_filter = (
         "category",
         "live",
         "created",
-        "last_published_at"
+        "last_published_at",
+        "first_published_at",
+        "is_story"
     )
     search_fields = (
         "post_title",

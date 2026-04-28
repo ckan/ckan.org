@@ -249,11 +249,11 @@
                             </div>
                         </a>
                     {% else %}
-                        <a class="story-card {% if not story.first_published_at %}soon{% endif %}" data-tag="{{ story.story_tag }}" data-publish="{{ story.story_publish_date }}" href="{% if not story.first_published_at %}#{% else %}{{ story.url }}{% endif %}">
+                        <a class="story-card {% if not story.live or not story.first_published_at %}soon{% endif %}" data-tag="{{ story.story_tag }}" data-publish="{{ story.story_publish_date }}" href="{% if not story.first_published_at %}#{% else %}{{ story.url }}{% endif %}">
                             <span class="story-num">{% if forloop.counter < 10 %}0{% endif %}{{ forloop.counter }}</span>
                             <span class="s-tag stag-{{ story.story_tag }}">{{ story.story_tag|title }}</span>
                             <div class="story-title">{{ story.title }}</div>
-                            {% if not story.first_published_at %}
+                            {% if not story.live or not story.first_published_at %}
                                 <div class="soon-label">{{ _('Coming') }} {{ story.story_publish_date|date:"F Y" }}</div>
                             {% else %}
                                 <div class="story-footer">
