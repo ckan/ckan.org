@@ -37,13 +37,15 @@
 @import "sections/section-banner";
 @import "sections/section-partners";
 @import "sections/section_community";
-@import "sections/feature";
-@import "sections/post";
 @import "sections/section-gwg";
-@import "sections/article";
-@import "sections/faq";
-@import "sections/subscribe";
-@import "sections/anniversary";
+
+@import "pages/feature";
+@import "pages/post";
+@import "pages/article";
+@import "pages/faq";
+@import "pages/subscribe";
+@import "pages/anniversary";
+@import "pages/stories";
 
 @import "layout/wrapper";
 @import "layout/main";
