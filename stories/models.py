@@ -18,6 +18,12 @@ class StoriesPage(Page):
     parent_page_types = ["home.HomePage"]
     template = "stories/stories.html"
     max_count = 1  # Only one stories page
+    
+    stories_order_by = models.CharField(
+        max_length=64,
+        default="-created",
+        help_text=_("Default ordering for story items (stories_order_by)")
+    )
 
     google_docs_template = models.URLField(
         max_length=512,
@@ -27,6 +33,7 @@ class StoriesPage(Page):
     )
 
     content_panels = Page.content_panels + [
+        FieldPanel("stories_order_by"),
         FieldPanel("google_docs_template"),
     ]
 
@@ -52,7 +59,7 @@ class StoriesPage(Page):
         # Get google docs template URL from settings
         context["google_docs_template"] = self.google_docs_template
         # Fetch all story items
-        stories_qs = StoryItem.objects.all() # type: ignore
+        stories_qs = StoryItem.objects.all().order_by(self.stories_order_by) # type: ignore
         stories = []
         for story in stories_qs:
             stories.append({
