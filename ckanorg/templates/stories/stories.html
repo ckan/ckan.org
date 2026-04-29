@@ -8,7 +8,7 @@
 {% block head %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ _("Success Stories · CKAN") }}</title>
+    <title>{{ _("Success Stories - CKAN") }}</title>
 {% endblock head %}
 
 {% block content %}
@@ -51,44 +51,44 @@
 
         <!-- ══ STORIES GRID ══ -->
         <div class="stories-section">
-        <div class="stories-inner">
-            <div class="filters-row">
-            <div class="filters-bar">
-                <button class="filter-btn active" onclick="filterBy('all',this)">All stories</button>
-                <button class="filter-btn" onclick="filterBy('gov',this)">Government</button>
-                <button class="filter-btn" onclick="filterBy('ngo',this)">NGO / Humanitarian</button>
-                <button class="filter-btn" onclick="filterBy('research',this)">Research</button>
-                <button class="filter-btn" onclick="filterBy('civic',this)">Civic tech</button>
+            <div class="stories-inner">
+                <div class="filters-row">
+                    <div class="filters-bar">
+                        <button class="filter-btn active" onclick="filterBy('all',this)">{{ _("All stories") }}</button>
+                        <button class="filter-btn" onclick="filterBy('gov',this)">{{ _("Government") }}</button>
+                        <button class="filter-btn" onclick="filterBy('ngo',this)">{{ _("NGO / Humanitarian") }}</button>
+                        <button class="filter-btn" onclick="filterBy('research',this)">{{ _("Research") }}</button>
+                        <button class="filter-btn" onclick="filterBy('civic',this)">{{ _("Civic tech") }}</button>
+                    </div>
+                    <div class="results-label">{{ _("Showing") }} <strong id="countLabel">6</strong> {{ _("stories") }}</div>
+                </div>
+                <div class="stories-grid" id="storiesGrid"></div>
             </div>
-            <div class="results-label">Showing <strong id="countLabel">6</strong> stories</div>
-            </div>
-            <div class="stories-grid" id="storiesGrid"></div>
-        </div>
         </div>
 
         <!-- ══ READER OVERLAY ══ -->
         <div class="overlay" id="readerOverlay" onclick="overlayBgClose(event)">
-        <div class="reader" id="readerPanel">
-            <div class="reader-band" id="rBand">
-            <div class="reader-band-bg" id="rBandBg"></div>
-            <button class="reader-close" onclick="closeReader()">&#x2715;</button>
-            <div class="reader-band-meta">
-                <div class="reader-band-org" id="rOrg"></div>
-                <div class="reader-band-title" id="rTitle"></div>
+            <div class="reader" id="readerPanel">
+                <div class="reader-band" id="rBand">
+                    <div class="reader-band-bg" id="rBandBg"></div>
+                    <button class="reader-close" onclick="closeReader()">&#x2715;</button>
+                    <div class="reader-band-meta">
+                        <div class="reader-band-org" id="rOrg"></div>
+                        <div class="reader-band-title" id="rTitle"></div>
+                    </div>
+                </div>
+                <div class="reader-body">
+                    <div class="reader-meta-row" id="rMeta"></div>
+                    <div id="rContent"></div>
+                </div>
+                <div class="reader-footer">
+                    <div class="reader-submit-nudge">{{ _('Have a story like this?') }} <a href="#submit" onclick="closeReader()">{{ _('Share it') }}</a></div>
+                    <div class="reader-nav">
+                        <button class="reader-nav-btn" id="rPrev" onclick="navReader(-1)">&#8592; {{ _('Prev') }}</button>
+                        <button class="reader-nav-btn primary" id="rNext" onclick="navReader(1)">{{ _('Next') }} &#8594;</button>
+                    </div>
+                </div>
             </div>
-            </div>
-            <div class="reader-body">
-            <div class="reader-meta-row" id="rMeta"></div>
-            <div id="rContent"></div>
-            </div>
-            <div class="reader-footer">
-            <div class="reader-submit-nudge">Have a story like this? <a href="#submit" onclick="closeReader()">Share it</a></div>
-            <div class="reader-nav">
-                <button class="reader-nav-btn" id="rPrev" onclick="navReader(-1)">&#8592; Prev</button>
-                <button class="reader-nav-btn primary" id="rNext" onclick="navReader(1)">Next &#8594;</button>
-            </div>
-            </div>
-        </div>
         </div>
 
         <!-- ══ SUBMIT SECTION ══ -->
@@ -115,7 +115,7 @@
                         </div>
                     </div>
                     <div class="template-cta">
-                        <a href="https://docs.google.com/document/d/1jr8eBGdXGkkxO9saL18is9I-RrCrOibhVS7HkMpVgn0/copy" target="_blank" class="template-cta-main">
+                        <a href="{{ google_docs_template }}" target="_blank" class="template-cta-main">
                             <div class="gdoc-icon-lg">&#x1F4C4;</div>
                             {{ _('Open template in Google Docs') }}
                         </a>
@@ -173,7 +173,11 @@
                 <div class="notify-success" id="notifySuccess">
                     <div class="big">&#x2705;</div>
                     <h3>{{ _("You're on the list") }}</h3>
-                    <p>{{ _("We'll drop you a note when a new story goes live. That's it — no newsletters, no noise.") }}</p>
+
+                    <p>
+                        {% trans "We'll drop you a note when a new story goes live." %}<br>
+                        {% trans "That's it — no newsletters, no noise." %}
+                    </p>
                 </div>
             </div>
         </div>
@@ -182,5 +186,6 @@
 
 {% block js_bottom %}
     {{ block.super }}
+    {{ stories|json_script:"stories-data" }}
     <script src="{% static 'js/stories.js' %}"></script>
 {% endblock js_bottom %}

@@ -1,7 +1,6 @@
 from django.urls import path
-from .views import  StoriesView
-
+from .views import subscribe_story_notifications
 
 urlpatterns = [
-    path("", StoriesView.as_view(), name="stories_page"),
+    path("notify/subscribe/", subscribe_story_notifications, name="stories-notify-subscribe"),
 ]

@@ -4783,7 +4783,7 @@ body {
 .stories-content .overlay {
   position: fixed;
   inset: 0;
-  z-index: 500;
+  z-index: 1500;
   background: rgba(10, 10, 10, 0.65);
   backdrop-filter: blur(5px);
   display: flex;
@@ -5372,6 +5372,7 @@ body {
 .stories-content .notify-success p {
   font-size: 14px;
   color: var(--muted);
+  text-align: center;
 }
 .stories-content {
   /* ══ RESPONSIVE ══ */

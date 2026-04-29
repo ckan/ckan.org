@@ -103,7 +103,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-se
 
     /* ══ READER OVERLAY ══ */
     .overlay {
-        position: fixed; inset: 0; z-index: 500;
+        position: fixed; inset: 0; z-index: 1500;
         background: rgba(10,10,10,0.65); backdrop-filter: blur(5px);
         display: flex; align-items: flex-start; justify-content: center;
         padding: 32px 24px 48px; overflow-y: auto;
@@ -203,7 +203,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-se
     .notify-success { display: none; text-align: center; padding: 16px 0; }
     .notify-success .big { font-size: 48px; margin-bottom: 14px; }
     .notify-success h3 { font-size: 20px; font-weight: 900; margin-bottom: 8px; }
-    .notify-success p { font-size: 14px; color: var(--muted); }
+    .notify-success p { font-size: 14px; color: var(--muted); text-align: center; }
 
     /* ══ RESPONSIVE ══ */
     @media (max-width: 1024px) {
