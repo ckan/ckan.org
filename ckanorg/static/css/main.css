@@ -4418,6 +4418,10 @@ body {
   color: var(--text);
 }
 
+.stories-content * {
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+}
+
 .stories-content a {
   color: var(--red);
   text-decoration: none;
@@ -5066,6 +5070,7 @@ body {
   font-weight: 900;
   letter-spacing: -0.8px;
   line-height: 1.15;
+  color: var(--text);
   margin: 12px 0 16px;
 }
 .stories-content .submit-left > p {
@@ -5073,6 +5078,9 @@ body {
   color: var(--muted);
   line-height: 1.8;
   margin-bottom: 32px;
+}
+.stories-content .submit-right {
+  font: initial;
 }
 .stories-content .template-card {
   border: 1.5px solid var(--border);

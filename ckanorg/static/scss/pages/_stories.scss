@@ -14,6 +14,8 @@
 html { scroll-behavior: smooth; overflow-x: hidden; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; background: var(--bg); color: var(--text); }
 
+.stories-content * { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; }
+
 .stories-content {
     a { color: var(--red); text-decoration: none; }
     a:hover { text-decoration: underline; text-underline-offset: 3px; }
@@ -156,8 +158,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-se
     /* ══ SUBMIT SECTION ══ */
     .submit-section { padding: 96px 48px; background: var(--bg-soft); border-top: 1px solid var(--border); }
     .submit-inner { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-    .submit-left h2 { font-size: clamp(26px, 3.5vw, 38px); font-weight: 900; letter-spacing: -0.8px; line-height: 1.15; margin: 12px 0 16px; }
+    .submit-left h2 { font-size: clamp(26px, 3.5vw, 38px); font-weight: 900; letter-spacing: -0.8px; line-height: 1.15; color: var(--text); margin: 12px 0 16px; }
     .submit-left > p { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 32px; }
+    .submit-right { font: initial; }
     .template-card { border: 1.5px solid var(--border); border-radius: 14px; overflow: hidden; background: #fff; margin-bottom: 24px; }
     .template-card-header { background: var(--text); padding: 14px 20px; display: flex; align-items: center; gap: 10px; }
     .template-card-header span { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.85); }
