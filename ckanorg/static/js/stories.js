@@ -8,11 +8,39 @@ var TAG_MAP = {
   health:   { cls: 'tag-health',   label: 'Health' }
 };
 
+function asArray(value) {
+  return Array.isArray(value) ? value : [];
+}
+
+function renderTags(tags) {
+  return asArray(tags).map(function(t) {
+    var tag = TAG_MAP[t];
+    if (!tag) return '';
+    return '<span class="tag ' + tag.cls + '">' + tag.label + '</span>';
+  }).join('');
+}
+
+function getPrimaryImpact(impact) {
+  return asArray(impact).find(function(item) {
+    return item && (item.val || item.label);
+  }) || null;
+}
+
+function renderPrimaryImpact(impact) {
+  var item = getPrimaryImpact(impact);
+  if (!item) return '';
+
+  var value = item.val || '';
+  var label = item.label || '';
+  return '<div class="card-impact"><strong>' + value + '</strong>' + (label ? ' ' + label : '') + '</div>';
+}
+
 function renderGrid(filter) {
-  var items = filter === 'all' ? STORIES : STORIES.filter(function(s){ return s.tags.indexOf(filter) > -1; });
+  var items = filter === 'all' ? STORIES : STORIES.filter(function(s){ return asArray(s.tags).indexOf(filter) > -1; });
   document.getElementById('countLabel').textContent = items.length;
   document.getElementById('storiesGrid').innerHTML = items.map(function(s) {
-    var tagsHtml = s.tags.map(function(t){ return '<span class="tag ' + TAG_MAP[t].cls + '">' + TAG_MAP[t].label + '</span>'; }).join('');
+    var tagsHtml = renderTags(s.tags);
+    var primaryImpactHtml = renderPrimaryImpact(s.impact);
     return '<a class="story-card" href="#" onclick="openReader(' + s.id + '); return false;">' +
       '<div class="card-header" style="background:' + s.color + ';">' +
         '<div class="card-header-bg">' + s.emoji + '</div>' +
@@ -25,7 +53,7 @@ function renderGrid(filter) {
         '<div class="card-tags">' + tagsHtml + '</div>' +
       '</div>' +
       '<div class="card-footer">' +
-        '<div class="card-impact"><strong>' + s.impact[0].val + '</strong> ' + s.impact[0].label + '</div>' +
+        primaryImpactHtml +
         '<span class="card-arrow">&#8594;</span>' +
       '</div>' +
     '</a>';
@@ -54,23 +82,25 @@ function openReader(id) {
   document.getElementById('rBandBg').textContent = s.emoji;
   document.getElementById('rOrg').textContent = s.org;
   document.getElementById('rTitle').textContent = s.title;
-  document.getElementById('rMeta').innerHTML = s.meta.map(function(m){
+  document.getElementById('rMeta').innerHTML = asArray(s.meta).map(function(m){
     return '<div class="reader-meta-item"><div class="reader-meta-label">' + m.label + '</div><div class="reader-meta-val">' + m.val + '</div></div>';
   }).join('');
+  var impactItems = asArray(s.impact);
+  var portalUrl = s.portal || '#';
+  var portalLabel = s.portal ? s.portal.replace('https://','').replace('http://', '') : 'Portal unavailable';
   document.getElementById('rContent').innerHTML =
-    '<h3>Who they are</h3><p>' + s.who + '</p>' +
-    '<h3>The challenge</h3><p>' + s.challenge + '</p>' +
-    '<h3>How CKAN solved it</h3><p>' + s.how + '</p>' +
-    '<h3>Impact &amp; outcomes</h3>' +
-    '<div class="impact-row">' + s.impact.map(function(i){
+    (s.who ? '<h3>Who they are</h3><p>' + s.who + '</p>' : '') +
+    (s.challenge ? '<h3>The challenge</h3><p>' + s.challenge + '</p>' : '') +
+    (s.how ? '<h3>How CKAN solved it</h3><p>' + s.how + '</p>' : '') +
+    (impactItems.length ? '<h3>Impact &amp; outcomes</h3>' +
+    '<div class="impact-row">' + impactItems.map(function(i){
       return '<div class="impact-box"><div class="impact-n">' + i.val + '</div><div class="impact-l">' + i.label + '</div></div>';
-    }).join('') + '</div>' +
-    '<p>' + s.outcome + '</p>' +
-    '<div class="reader-quote"><p>' + s.quote + '</p><cite>' + s.quoteAuthor + '</cite></div>' +
-    '<h3>Portal</h3>' +
-    '<a href="' + s.portal + '" target="_blank" class="reader-portal-link">&#x1F310; ' + s.portal.replace('https://','') + ' &#x2197;</a>';
-  document.getElementById('rPrev').disabled = id === 0;
-  document.getElementById('rNext').disabled = id === STORIES.length - 1;
+    }).join('') + '</div>' : '') +
+    (s.outcome ? '<p>' + s.outcome + '</p>' : '') +
+    (s.quote ? '<div class="reader-quote"><p>' + s.quote + '</p><cite>' + s.quoteAuthor + '</cite></div>' : '') +
+    (s.portal ? '<h3>Portal</h3>' + '<a href="' + portalUrl + '" target="_blank" class="reader-portal-link">&#x1F310; ' + portalLabel + ' &#x2197;</a>' : '');
+  document.getElementById('rPrev').disabled = currentIdx === 0;
+  document.getElementById('rNext').disabled = currentIdx === STORIES.length - 1;
   document.getElementById('readerOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
   document.getElementById('readerPanel').scrollTop = 0;

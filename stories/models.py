@@ -134,7 +134,7 @@ class StoryItem(ClusterableModel):
     tags = ClusterTaggableManager(
         through=StoryItemTag,
         blank=True,
-        help_text=_("The story item this tag is associated with, e.g. gov, ngo, research, civic, health (content_object)")
+        help_text=_("The story item this tag is associated with. To be filterable, it can be one of the following: gov, ngo, research, civic")
     )
     color = models.CharField(
         max_length=16,
