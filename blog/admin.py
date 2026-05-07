@@ -1,3 +1,5 @@
+from django.db.models import F
+
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.views.snippets import SnippetViewSet, SnippetViewSetGroup
 
@@ -63,7 +65,6 @@ class BlogPostPageAdmin(SnippetViewSet):
         "is_story",
         "live"
     )
-    ordering = "-first_published_at"
     list_filter = (
         "category",
         "live",
@@ -80,6 +81,9 @@ class BlogPostPageAdmin(SnippetViewSet):
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
+        if qs is None:
+            qs = self.model.objects.all()
+        qs = qs.order_by(F("first_published_at").desc(nulls_last=True))
         if request.user.is_superuser:
             return qs
         else:
