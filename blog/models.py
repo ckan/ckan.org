@@ -1,23 +1,23 @@
+from django import forms
 from django.conf import settings
-from django.utils.timezone import now
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.core.validators import MinValueValidator
+from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django import forms
-from django.db import models
-from django.core.exceptions import ValidationError
-from django.core.validators import MinValueValidator
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.utils.timezone import now
 
+from wagtail import blocks
 from wagtail.admin.panels import (
     FieldPanel,
     MultiFieldPanel,
     TabbedInterface,
     ObjectList,
 )
-from wagtail.models import Page
 from wagtail.fields import StreamField
-from wagtail import blocks
+from wagtail.models import Page
 from wagtail.search import index
 
 from wagtailcodeblock.blocks import CodeBlock
@@ -50,9 +50,7 @@ def check_username_exists(value):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(
-        User, null=True, blank=True, on_delete=models.CASCADE, related_name="profile"
-    )
+    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE, related_name="profile")
     bio = models.TextField(max_length=500, blank=True)
     company = models.CharField(max_length=100, blank=True)
     location = models.CharField(max_length=30, blank=True)
@@ -180,9 +178,7 @@ class BlogListingPage(MetadataPageMixin, Page):
         blank=True,
         help_text="Page caption. Goes under the page subtitle.",
     )
-    posts_per_page = models.PositiveIntegerField(
-        default=1, validators=[MinValueValidator(1)]
-    )
+    posts_per_page = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1)])
     keywords = models.CharField(max_length=512, blank=True, null=True)
 
     promote_panels = [
@@ -198,17 +194,10 @@ class BlogListingPage(MetadataPageMixin, Page):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         all_posts = BlogPostPage.objects.live().public().order_by("-first_published_at")
-        featured_posts = (
-            BlogPostPage.objects.live()
-            .public()
-            .filter(featured=True)
-            .order_by("-first_published_at")
-        )
+        featured_posts = BlogPostPage.objects.live().public().filter(featured=True).order_by("-first_published_at")
         featured_post = featured_posts[0] if featured_posts else all_posts[0]
         context["featured_post"] = featured_post
-        context["categories"] = PostCategoryPage.objects.all().order_by(
-            "category_title"
-        )
+        context["categories"] = PostCategoryPage.objects.all().order_by("category_title")
         all_posts = all_posts.exclude(
             id__in=[
                 featured_post.id,
@@ -340,7 +329,7 @@ class BlogPostPage(MetadataPageMixin, Page):
         index.AutocompleteField("post_subtitle"),
         index.SearchField("author"),
         index.AutocompleteField("author"),
-        index.FilterField('first_published_at'),
+        index.FilterField("first_published_at"),
     ]
 
     promote_panels = [
@@ -369,7 +358,7 @@ class BlogPostPage(MetadataPageMixin, Page):
         FieldPanel("latest_revision_created_at", read_only=True),
         FieldPanel("show_in_menus"),
     ]
-    
+
     story_panels = [
         FieldPanel("is_story", widget=forms.CheckboxInput),
         FieldPanel("story_featured", widget=forms.CheckboxInput),
