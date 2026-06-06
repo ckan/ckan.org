@@ -3181,7 +3181,6 @@ hr.divider {
   border-color: var(--red);
   background: var(--red);
 }
-.anniversary-content .tl-item.anniversary::before { border-color: var(--red); }
 .anniversary-content .tl-trigger {
   display: flex;
   align-items: center;
@@ -4765,7 +4764,7 @@ body {
   font-size: 12px;
   color: var(--muted);
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 6px;
 }
 .stories-content .card-impact strong {
@@ -4926,6 +4925,34 @@ body {
   line-height: 1.85;
   margin-bottom: 16px;
 }
+.stories-content .reader-body blockquote {
+  font-size: 17px;
+  color: #1a1a1a;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1.55;
+}
+.stories-content .reader-body blockquote {
+  border-inline-start: 0.25em solid var(--red);
+  margin: 28px 0;
+  padding: 4px 0 4px 24px;
+  text-align: start;
+}
+.stories-content .reader-body ul {
+  font-size: 15px;
+  color: #333;
+  line-height: 1.85;
+}
+.stories-content .reader-body li {
+  font-size: 15px;
+  color: #333;
+  line-height: 1.85;
+  margin-left: 16px;
+}
+.stories-content .reader-body a {
+  font-size: inherit;
+  line-height: 1.85;
+}
 .stories-content .impact-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -4959,7 +4986,8 @@ body {
   letter-spacing: 0.8px;
 }
 .stories-content .reader-quote {
-  border-left: 3px solid var(--red);
+  font-size: 17px;
+  border-left: 0.25em solid var(--red);
   padding: 4px 0 4px 24px;
   margin: 28px 0;
 }

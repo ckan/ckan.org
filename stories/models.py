@@ -67,16 +67,16 @@ class StoriesPage(Page):
                 "org": story.org,
                 "region": story.region,
                 "title": story.title,
-                "challenge": story.challenge,
+                "challenge": str(story.challenge),
                 "tags": list(story.tags.names()) if story.tags else [],
                 "color": story.color,
                 "emoji": story.emoji,
                 "meta": self._stream_to_repeated_fields(story.meta),
                 "impact": self._stream_to_repeated_fields(story.impact),
-                "who": story.who,
-                "how": story.how,
-                "outcome": story.outcome,
-                "quote": story.quote,
+                "who": str(story.who),
+                "how": str(story.how),
+                "outcome": str(story.outcome),
+                "quote": str(story.quote),
                 "quoteAuthor": story.quote_author,
                 "portal": story.portal,
             })
@@ -126,7 +126,35 @@ class StoryItem(ClusterableModel):
         blank=True,
         help_text=_("Region or continent (region)")
     )
-    challenge = models.TextField(
+    challenge = StreamField(
+        [
+            (
+                "paragraph",
+                blocks.RichTextBlock(
+                    features=[
+                        "h1",
+                        "h2",
+                        "h3",
+                        "h4",
+                        "h5",
+                        "h6",
+                        "bold",
+                        "italic",
+                        "ol",
+                        "ul",
+                        "hr",
+                        "image",
+                        "embed",
+                        "link",
+                        "document-link",
+                        "superscript",
+                        "subscript",
+                        "strikethrough",
+                        "blockquote",
+                    ]
+                ),
+            ),
+        ],
         null=True,
         blank=True,
         help_text=_("The challenge or problem addressed (challenge)")
@@ -164,22 +192,134 @@ class StoryItem(ClusterableModel):
         blank=True,
         help_text=_("Impact details (impact)")
     )
-    who = models.TextField(
+    who = StreamField(
+        [
+            (
+                "paragraph",
+                blocks.RichTextBlock(
+                    features=[
+                        "h1",
+                        "h2",
+                        "h3",
+                        "h4",
+                        "h5",
+                        "h6",
+                        "bold",
+                        "italic",
+                        "ol",
+                        "ul",
+                        "hr",
+                        "image",
+                        "embed",
+                        "link",
+                        "document-link",
+                        "superscript",
+                        "subscript",
+                        "strikethrough",
+                        "blockquote",
+                    ]
+                ),
+            ),
+        ],
         null=True,
         blank=True,
         help_text=_("Who they are (who)")
     )
-    how = models.TextField(
+    how = StreamField(
+        [
+            (
+                "paragraph",
+                blocks.RichTextBlock(
+                    features=[
+                        "h1",
+                        "h2",
+                        "h3",
+                        "h4",
+                        "h5",
+                        "h6",
+                        "bold",
+                        "italic",
+                        "ol",
+                        "ul",
+                        "hr",
+                        "image",
+                        "embed",
+                        "link",
+                        "document-link",
+                        "superscript",
+                        "subscript",
+                        "strikethrough",
+                        "blockquote",
+                    ]
+                ),
+            ),
+        ],
         null=True,
         blank=True,
         help_text=_("How CKAN solved it (how)")
     )
-    outcome = models.TextField(
+    outcome = StreamField(
+        [
+            (
+                "paragraph",
+                blocks.RichTextBlock(
+                    features=[
+                        "h1",
+                        "h2",
+                        "h3",
+                        "h4",
+                        "h5",
+                        "h6",
+                        "bold",
+                        "italic",
+                        "ol",
+                        "ul",
+                        "hr",
+                        "image",
+                        "embed",
+                        "link",
+                        "document-link",
+                        "superscript",
+                        "subscript",
+                        "strikethrough",
+                        "blockquote",
+                    ]
+                ),
+            ),
+        ],
         null=True,
         blank=True,
         help_text=_("Impact & outcomes (outcome)")
     )
-    quote = models.TextField(
+    quote = StreamField(
+        [
+            (
+                "paragraph",
+                blocks.RichTextBlock(
+                    features=[
+                        "h1",
+                        "h2",
+                        "h3",
+                        "h4",
+                        "h5",
+                        "h6",
+                        "bold",
+                        "italic",
+                        "ol",
+                        "ul",
+                        "hr",
+                        "image",
+                        "embed",
+                        "link",
+                        "document-link",
+                        "superscript",
+                        "subscript",
+                        "strikethrough",
+                        "blockquote",
+                    ]
+                ),
+            ),
+        ],
         null=True,
         blank=True,
         help_text=_("Quote (quote)")
