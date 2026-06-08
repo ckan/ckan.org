@@ -98,7 +98,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-se
     .tag-civic    { background: rgba(237,82,72,0.1);   color: var(--red); }
     .tag-health   { background: rgba(106,31,162,0.08); color: #6a1fa2; }
     .card-footer { padding: 14px 22px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-    .card-impact { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+    .card-impact { font-size: 12px; color: var(--muted); display: flex; align-items: baseline; gap: 6px; }
     .card-impact strong { color: var(--text); font-size: 14px; font-weight: 800; }
     .card-arrow { font-size: 12px; font-weight: 700; color: var(--red); transition: transform 0.15s; }
     .story-card:hover .card-arrow { transform: translateX(4px); }
@@ -134,12 +134,17 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-se
     .reader-body h3 { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin: 32px 0 12px; }
     .reader-body h3:first-of-type { margin-top: 0; }
     .reader-body p { font-size: 15px; color: #333; line-height: 1.85; margin-bottom: 16px; }
+    .reader-body blockquote { font-size: 17px; color: #1a1a1a; font-style: italic; font-weight: 700; line-height: 1.55; }
+    .reader-body blockquote { border-inline-start: .25em solid var(--red); margin: 28px 0; padding: 4px 0 4px 24px; text-align: start; }
+    .reader-body ul { font-size: 15px; color: #333; line-height: 1.85; }
+    .reader-body li { font-size: 15px; color: #333; line-height: 1.85; margin-left: 16px; }
+    .reader-body a { font-size: inherit; line-height: 1.85; }
     .impact-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin: 20px 0; }
     .impact-box { background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; padding: 18px 16px; text-align: center; }
     .impact-n { font-size: 28px; font-weight: 900; color: var(--text); letter-spacing: -1px; line-height: 1; }
     .impact-n em { color: var(--red); font-style: normal; }
     .impact-l { font-size: 11px; font-weight: 600; color: var(--muted); margin-top: 5px; text-transform: uppercase; letter-spacing: 0.8px; }
-    .reader-quote { border-left: 3px solid var(--red); padding: 4px 0 4px 24px; margin: 28px 0; }
+    .reader-quote { font-size: 17px; border-left: 0.25em solid var(--red); padding: 4px 0 4px 24px; margin: 28px 0; }
     .reader-quote p { font-size: 17px; font-weight: 700; color: var(--text); line-height: 1.55; font-style: italic; margin-bottom: 10px; }
     .reader-quote cite { font-size: 12px; color: var(--muted); font-style: normal; font-weight: 600; display: flex; align-items: center; gap: 8px; }
     .reader-quote cite::before { content: '—'; }

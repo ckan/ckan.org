@@ -35,12 +35,28 @@ function renderPrimaryImpact(impact) {
   return '<div class="card-impact"><strong>' + value + '</strong>' + (label ? ' ' + label : '') + '</div>';
 }
 
+function escapeHtml(text) {
+  return String(text || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function richTextToParagraphText(value) {
+  var wrapper = document.createElement('div');
+  wrapper.innerHTML = value || '';
+  return (wrapper.textContent || wrapper.innerText || '').trim();
+}
+
 function renderGrid(filter) {
   var items = filter === 'all' ? STORIES : STORIES.filter(function(s){ return asArray(s.tags).indexOf(filter) > -1; });
   document.getElementById('countLabel').textContent = items.length;
   document.getElementById('storiesGrid').innerHTML = items.map(function(s) {
     var tagsHtml = renderTags(s.tags);
     var primaryImpactHtml = renderPrimaryImpact(s.impact);
+    var challengeText = escapeHtml(richTextToParagraphText(s.challenge));
     return '<a class="story-card" href="#" onclick="openReader(' + s.id + '); return false;">' +
       '<div class="card-header" style="background:' + s.color + ';">' +
         '<div class="card-header-bg">' + s.emoji + '</div>' +
@@ -49,7 +65,7 @@ function renderGrid(filter) {
       '<div class="card-body">' +
         '<div class="card-org">' + s.org + '</div>' +
         '<div class="card-title">' + s.title + '</div>' +
-        '<div class="card-challenge">' + s.challenge + '</div>' +
+        '<p class="card-challenge">' + challengeText + '</p>' +
         '<div class="card-tags">' + tagsHtml + '</div>' +
       '</div>' +
       '<div class="card-footer">' +
@@ -89,15 +105,15 @@ function openReader(id) {
   var portalUrl = s.portal || '#';
   var portalLabel = s.portal ? s.portal.replace('https://','').replace('http://', '') : 'Portal unavailable';
   document.getElementById('rContent').innerHTML =
-    (s.who ? '<h3>Who they are</h3><p>' + s.who + '</p>' : '') +
-    (s.challenge ? '<h3>The challenge</h3><p>' + s.challenge + '</p>' : '') +
-    (s.how ? '<h3>How CKAN solved it</h3><p>' + s.how + '</p>' : '') +
+    (s.who ? '<h3>Who they are</h3>' + s.who : '') +
+    (s.challenge ? '<h3>The challenge</h3>' + s.challenge : '') +
+    (s.how ? '<h3>How CKAN solved it</h3>' + s.how : '') +
     (impactItems.length ? '<h3>Impact &amp; outcomes</h3>' +
     '<div class="impact-row">' + impactItems.map(function(i){
       return '<div class="impact-box"><div class="impact-n">' + i.val + '</div><div class="impact-l">' + i.label + '</div></div>';
     }).join('') + '</div>' : '') +
-    (s.outcome ? '<p>' + s.outcome + '</p>' : '') +
-    (s.quote ? '<div class="reader-quote"><p>' + s.quote + '</p><cite>' + s.quoteAuthor + '</cite></div>' : '') +
+    (s.outcome ? s.outcome : '') +
+    (s.quote ? '<div class="reader-quote">' + s.quote + '<cite>' + s.quoteAuthor + '</cite></div>' : '') +
     (s.portal ? '<h3>Portal</h3>' + '<a href="' + portalUrl + '" target="_blank" class="reader-portal-link">&#x1F310; ' + portalLabel + ' &#x2197;</a>' : '');
   document.getElementById('rPrev').disabled = currentIdx === 0;
   document.getElementById('rNext').disabled = currentIdx === STORIES.length - 1;
