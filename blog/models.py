@@ -353,7 +353,7 @@ class BlogPostPage(MetadataPageMixin, Page):
         FieldPanel("owner"),
         FieldPanel("content_type"),
         FieldPanel("locked", read_only=True),
-        FieldPanel("first_published_at", read_only=True),
+        FieldPanel("first_published_at", read_only=False),
         FieldPanel("last_published_at", read_only=True),
         FieldPanel("latest_revision_created_at", read_only=True),
         FieldPanel("show_in_menus"),
