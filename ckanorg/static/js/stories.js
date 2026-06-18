@@ -186,4 +186,24 @@ document.addEventListener('keydown', function(e){
   if (e.key === 'Escape') { closeReader(); closeNotify(); }
 });
 
+async function submitStoryForm() {
+  var email = (document.getElementById('sfEmail').value || '').trim();
+  if (!email) { document.getElementById('sfEmail').focus(); return; }
+  var payload = {
+    name: (document.getElementById('sfName').value || '').trim(),
+    org: (document.getElementById('sfOrg').value || '').trim(),
+    email: email,
+    portal_url: (document.getElementById('sfPortal').value || '').trim(),
+    message: (document.getElementById('sfMessage').value || '').trim(),
+  };
+  var res = await fetch('/success-stories/submit/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken') },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) return;
+  document.getElementById('submitFormFields').style.display = 'none';
+  document.getElementById('submitFormSuccess').style.display = 'block';
+}
+
 renderGrid('all');

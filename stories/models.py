@@ -379,6 +379,50 @@ class StoryItem(ClusterableModel):
         return self.title or _("Untitled Story")
 
 
+class StorySubmission(models.Model):
+    """A submission from the success stories page — stored for team follow-up."""
+    name = models.CharField(
+        verbose_name=_("Name"),
+        max_length=255,
+        blank=True,
+        help_text=_("Submitter's name")
+    )
+    org = models.CharField(
+        verbose_name=_("Organisation"),
+        max_length=255,
+        blank=True,
+        help_text=_("Organisation or portal name")
+    )
+    email = models.EmailField(
+        verbose_name=_("Email"),
+        max_length=254,
+        help_text=_("Contact email")
+    )
+    portal_url = models.URLField(
+        verbose_name=_("Portal URL"),
+        max_length=512,
+        blank=True,
+        help_text=_("URL of their CKAN portal")
+    )
+    message = models.TextField(
+        verbose_name=_("Message"),
+        blank=True,
+        help_text=_("Brief description of their story or any notes")
+    )
+    created = models.DateTimeField(
+        verbose_name=_("Submitted"),
+        auto_now_add=True,
+    )
+
+    class Meta:  # type: ignore
+        ordering = ["-created"]
+        verbose_name = _("Story Submission")
+        verbose_name_plural = _("Story Submissions")
+
+    def __str__(self):
+        return f"{self.name or self.email} — {self.org or 'unknown org'}"
+
+
 class StoriesNotificationEmail(models.Model):
     """Model representing an email submission from the Stories page."""
     email = models.EmailField(

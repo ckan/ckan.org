@@ -2,7 +2,7 @@ from wagtail.admin.ui.tables import BooleanColumn
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.views.snippets import SnippetViewSet, SnippetViewSetGroup
 
-from stories.models import StoriesNotificationEmail, StoryItem
+from stories.models import StoriesNotificationEmail, StoryItem, StorySubmission
 
 
 class StoryItemAdmin(SnippetViewSet):
@@ -51,9 +51,34 @@ class StoriesNotificationEmailAdmin(SnippetViewSet):
     search_fields: tuple[str, ...] = ("email",) # type: ignore
 
 
+class StorySubmissionAdmin(SnippetViewSet):
+    model = StorySubmission
+    menu_label = "Story Submissions"  # type: ignore
+    icon = "form"  # type: ignore
+    menu_order = 200  # type: ignore
+    list_display: tuple[str, ...] = (  # type: ignore
+        "name",
+        "org",
+        "email",
+        "portal_url",
+        "created",
+    )
+    list_export: tuple[str, ...] = (  # type: ignore
+        "name",
+        "org",
+        "email",
+        "portal_url",
+        "message",
+        "created",
+    )
+    ordering: str = "-created"
+    list_filter: tuple[str, ...] = ("created",)  # type: ignore
+    search_fields: tuple[str, ...] = ("name", "org", "email")  # type: ignore
+
+
 @register_snippet
 class StoriesGroup(SnippetViewSetGroup):
     menu_label = "Stories" # type: ignore
     icon = "folder-open-inverse"
     menu_order = 150
-    items = (StoryItemAdmin, StoriesNotificationEmailAdmin)
+    items = (StoryItemAdmin, StorySubmissionAdmin, StoriesNotificationEmailAdmin)

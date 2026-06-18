@@ -152,6 +152,48 @@
                         <div style="font-size:13px; font-weight:700; margin-bottom:6px;">{{ _("Questions?") }}</div>
                         <div style="font-size:13px; color:var(--muted); line-height:1.65;">{{ _("Reach us at") }} <a href="mailto:comms&#64;ckan.org">comms&#64;ckan.org</a>. {{ _("We're happy to help shape your story if you're not sure where to start.") }}</div>
                     </div>
+                    <div class="story-form-card" id="storySubmitForm">
+                        <div class="story-form-header">
+                            <div class="story-form-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            </div>
+                            <div>
+                                <div class="story-form-title">{{ _("Drop us a quick note") }}</div>
+                                <div class="story-form-sub">{{ _("Not ready for the full template? Leave your details and we'll reach out.") }}</div>
+                            </div>
+                        </div>
+                        <div id="submitFormFields">
+                            <div class="sf-row">
+                                <div class="sf-field">
+                                    <label class="sf-label" for="sfName">{{ _("Your name") }}</label>
+                                    <input class="sf-input" type="text" id="sfName" placeholder="Jane Smith" autocomplete="name" />
+                                </div>
+                                <div class="sf-field">
+                                    <label class="sf-label" for="sfOrg">{{ _("Organisation") }}</label>
+                                    <input class="sf-input" type="text" id="sfOrg" placeholder="City of Copenhagen" autocomplete="organization" />
+                                </div>
+                            </div>
+                            <div class="sf-field">
+                                <label class="sf-label" for="sfEmail">{{ _("Email") }} <span class="sf-required">*</span></label>
+                                <input class="sf-input" type="email" id="sfEmail" placeholder="you@yourorg.gov" required autocomplete="email" />
+                            </div>
+                            <div class="sf-field">
+                                <label class="sf-label" for="sfPortal">{{ _("Portal URL") }} <span class="sf-optional">{{ _("optional") }}</span></label>
+                                <input class="sf-input" type="url" id="sfPortal" placeholder="https://data.yourorg.gov" autocomplete="url" />
+                            </div>
+                            <div class="sf-field">
+                                <label class="sf-label" for="sfMessage">{{ _("Tell us about your portal") }} <span class="sf-optional">{{ _("optional") }}</span></label>
+                                <textarea class="sf-input sf-textarea" id="sfMessage" placeholder="{{ _('What does your CKAN portal do, who uses it, or what impact have you seen?') }}" rows="3"></textarea>
+                            </div>
+                            <button class="sf-submit" onclick="submitStoryForm()">{{ _("Send us a note") }} &rarr;</button>
+                            <div class="sf-privacy">{{ _("We'll follow up by email — no spam, no newsletters.") }}</div>
+                        </div>
+                        <div class="sf-success" id="submitFormSuccess" style="display:none;">
+                            <div class="sf-success-icon">&#x2713;</div>
+                            <div class="sf-success-title">{{ _("Got it — thanks!") }}</div>
+                            <div class="sf-success-sub">{{ _("We'll review your note and be in touch soon.") }}</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

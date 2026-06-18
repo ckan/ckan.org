@@ -209,6 +209,29 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-se
     .notify-submit:hover { background: var(--red-dark); }
     .notify-note { font-size: 11px; color: #bbb; text-align: center; }
     .notify-success { display: none; text-align: center; padding: 16px 0; }
+    .story-form-card { background: #fff; border: 1.5px solid var(--border); border-radius: 16px; padding: 24px 28px; margin-top: 28px; }
+    .story-form-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+    .story-form-icon { width: 38px; height: 38px; background: var(--bg-soft); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--muted); }
+    .story-form-icon svg { width: 16px; height: 16px; }
+    .story-form-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+    .story-form-sub { font-size: 12px; color: var(--muted); line-height: 1.5; }
+    .sf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .sf-field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
+    .sf-label { font-size: 12px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 5px; }
+    .sf-required { color: var(--red); font-size: 12px; }
+    .sf-optional { font-weight: 400; color: #bbb; font-size: 11px; }
+    .sf-input { background: var(--bg-soft); border: 1.5px solid transparent; border-radius: 8px; padding: 10px 13px; color: var(--text); font-size: 13px; font-family: inherit; width: 100%; transition: border-color 0.2s, background 0.2s; box-sizing: border-box; }
+    .sf-input:focus { outline: none; border-color: var(--red); background: #fff; }
+    .sf-input::placeholder { color: #bbb; }
+    .sf-textarea { resize: vertical; min-height: 80px; }
+    .sf-submit { width: 100%; margin-top: 6px; background: var(--red); color: white; border: none; border-radius: 8px; padding: 13px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit; transition: background 0.2s, transform 0.1s; letter-spacing: 0.01em; }
+    .sf-submit:hover { background: var(--red-dark); }
+    .sf-submit:active { transform: scale(0.99); }
+    .sf-privacy { font-size: 11px; color: #bbb; text-align: center; margin-top: 10px; }
+    .sf-success { text-align: center; padding: 28px 0; }
+    .sf-success-icon { width: 48px; height: 48px; background: #f0faf4; border-radius: 50%; margin: 0 auto 14px; display: flex; align-items: center; justify-content: center; font-size: 22px; color: #16a34a; font-weight: 700; }
+    .sf-success-title { font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+    .sf-success-sub { font-size: 13px; color: var(--muted); }
     .notify-success .big { font-size: 48px; margin-bottom: 14px; }
     .notify-success h3 { font-size: 20px; font-weight: 900; margin-bottom: 8px; }
     .notify-success p { font-size: 14px; color: var(--muted); text-align: center; }
@@ -228,6 +251,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-se
         .stories-grid { grid-template-columns: 1fr; gap: 16px; }
         .submit-section { padding: 56px 20px; }
         .submit-inner { grid-template-columns: 1fr; gap: 40px; }
+        .sf-row { grid-template-columns: 1fr; }
         .impact-row { gap: 8px; }
         .reader-body { padding: 0 24px 28px; }
         .reader-band { padding: 20px 24px; }
