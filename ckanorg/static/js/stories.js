@@ -120,7 +120,7 @@ function openReader(slug) {
     (s.outcome ? s.outcome : '') +
     (s.quote ? '<div class="reader-quote">' + s.quote + '<cite>' + s.quoteAuthor + '</cite></div>' : '') +
     (s.portal ? '<h3>Portal</h3>' + '<a href="' + portalUrl + '" target="_blank" class="reader-portal-link">&#x1F310; ' + portalLabel + ' &#x2197;</a>' : '') +
-    (s.youtubeUrl ? '<div class="reader-video"><iframe src="' + youtubeEmbedUrl(s.youtubeUrl) + '" title="Session recording" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>' : '');
+    (s.youtubeUrl ? '<div class="reader-video"><iframe src="' + youtubeEmbedUrl(s.youtubeUrl) + '" title="Session recording" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>' : '');
   document.getElementById('rPrev').disabled = currentIdx === 0;
   document.getElementById('rNext').disabled = currentIdx === STORIES.length - 1;
 
