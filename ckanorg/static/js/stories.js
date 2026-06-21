@@ -57,7 +57,7 @@ function renderGrid(filter) {
     var tagsHtml = renderTags(s.tags);
     var primaryImpactHtml = renderPrimaryImpact(s.impact);
     var challengeText = escapeHtml(richTextToParagraphText(s.challenge));
-    return '<a class="story-card" href="#" onclick="openReader(' + s.id + '); return false;">' +
+    return '<a class="story-card" href="#" onclick="openReader(\'' + s.slug + '\'); return false;">' +
       '<div class="card-header" style="background:' + s.color + ';">' +
         '<div class="card-header-bg">' + s.emoji + '</div>' +
         '<div class="card-region">' + s.region + '</div>' +
@@ -84,10 +84,15 @@ function filterBy(tag, btn) {
 
 var currentIdx = 0;
 
-function openReader(id) {
-  var s = STORIES.find(function(x){ return x.id === id; });
+function getStoryUrl(slug) {
+  return window.location.origin + window.location.pathname + '?story=' + slug;
+}
+
+function openReader(slug) {
+  var s = STORIES.find(function(x){ return x.slug === slug; });
   if (!s) return;
   currentIdx = STORIES.indexOf(s);
+  history.replaceState(null, '', '?story=' + slug);
   document.getElementById('rBand').style.background = s.color;
   var onDark = s.color === '#ed5248';
   document.getElementById('rOrg').style.color = onDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.45)';
@@ -114,9 +119,22 @@ function openReader(id) {
     }).join('') + '</div>' : '') +
     (s.outcome ? s.outcome : '') +
     (s.quote ? '<div class="reader-quote">' + s.quote + '<cite>' + s.quoteAuthor + '</cite></div>' : '') +
-    (s.portal ? '<h3>Portal</h3>' + '<a href="' + portalUrl + '" target="_blank" class="reader-portal-link">&#x1F310; ' + portalLabel + ' &#x2197;</a>' : '');
+    (s.portal ? '<h3>Portal</h3>' + '<a href="' + portalUrl + '" target="_blank" class="reader-portal-link">&#x1F310; ' + portalLabel + ' &#x2197;</a>' : '') +
+    (s.youtubeUrl ? '<div class="reader-video"><iframe src="' + youtubeEmbedUrl(s.youtubeUrl) + '" title="Session recording" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>' : '');
   document.getElementById('rPrev').disabled = currentIdx === 0;
   document.getElementById('rNext').disabled = currentIdx === STORIES.length - 1;
+
+  var storyUrl = getStoryUrl(s.slug);
+  var shareText = s.org + ' — ' + s.title + ' | CKAN Success Stories';
+  document.getElementById('shareLinkedIn').href =
+    'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(storyUrl);
+  document.getElementById('shareX').href =
+    'https://x.com/intent/tweet?url=' + encodeURIComponent(storyUrl) + '&text=' + encodeURIComponent(shareText);
+  document.getElementById('shareBluesky').href =
+    'https://bsky.app/intent/compose?text=' + encodeURIComponent(shareText + ' ' + storyUrl);
+  document.getElementById('shareEmail').href =
+    'mailto:?subject=' + encodeURIComponent(shareText) + '&body=' + encodeURIComponent('Check out this CKAN success story: ' + storyUrl);
+
   document.getElementById('readerOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
   document.getElementById('readerPanel').scrollTop = 0;
@@ -125,6 +143,28 @@ function openReader(id) {
 function closeReader() {
   document.getElementById('readerOverlay').classList.remove('open');
   document.body.style.overflow = '';
+  history.replaceState(null, '', window.location.pathname);
+  document.getElementById('shareDropdown').classList.remove('open');
+}
+
+function youtubeEmbedUrl(url) {
+  var m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([A-Za-z0-9_-]{11})/);
+  return m ? 'https://www.youtube.com/embed/' + m[1] : url;
+}
+
+function toggleShare(e) {
+  e.stopPropagation();
+  document.getElementById('shareDropdown').classList.toggle('open');
+}
+
+function shareCopyLink() {
+  var url = getStoryUrl(STORIES[currentIdx].slug);
+  navigator.clipboard.writeText(url).then(function() {
+    var label = document.getElementById('shareCopyLabel');
+    label.textContent = '✓ Copied!';
+    setTimeout(function(){ label.textContent = 'Copy link'; }, 2000);
+  });
+  document.getElementById('shareDropdown').classList.remove('open');
 }
 
 function overlayBgClose(e) {
@@ -133,7 +173,7 @@ function overlayBgClose(e) {
 
 function navReader(dir) {
   var next = currentIdx + dir;
-  if (next >= 0 && next < STORIES.length) openReader(STORIES[next].id);
+  if (next >= 0 && next < STORIES.length) openReader(STORIES[next].slug);
 }
 
 function openNotify() {
@@ -186,4 +226,17 @@ document.addEventListener('keydown', function(e){
   if (e.key === 'Escape') { closeReader(); closeNotify(); }
 });
 
+document.addEventListener('click', function(e) {
+  var dd = document.getElementById('shareDropdown');
+  if (dd && dd.classList.contains('open') && !dd.contains(e.target) && e.target.id !== 'shareBtn') {
+    dd.classList.remove('open');
+  }
+});
+
 renderGrid('all');
+
+// Open story from URL param on page load
+(function() {
+  var slug = new URLSearchParams(window.location.search).get('story');
+  if (slug) openReader(slug);
+})();
