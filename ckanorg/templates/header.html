@@ -56,7 +56,7 @@
                                         <li class="dropdown dropdown-menu-item">
                                             <button onclick="clickDropdown('{{item.link_title}}')" id="dropbtn-{{item.link_title}}" {% if request.path == "/showcase" or "/success-stories" in request.path %} class="active"{% endif %}>{{item.link_title}} <span class="support-arrow"></span></button>
                                             <div id="{{item.link_title}}_dropdown" class="dropdown-content">
-                                                <a href="/showcase">{{ _("Portal Showcase") }}</a>
+                                                <a href="/showcase">{{ _("Data Portals") }}</a>
                                                 <a href="/success-stories">{{ _("Success Stories") }}</a>
                                             </div>
                                         </li>
