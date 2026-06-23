@@ -33,7 +33,7 @@
                         {% with menu.menu_items.all as menu_items %}
                             {% for item in menu_items %}
                                 {% is_active request item as active%}
-                                {% if item.link_title == "Solutions" or item.link_title == "Support" %}
+                                {% if item.link_title == "Solutions" or item.link_title == "Support" or item.link_title == "Showcase" %}
                                     {% if item.link_title == "Solutions" %}
                                         <li class="dropdown dropdown-menu-item">
                                             <button onclick="clickDropdown('{{item.link_title}}')" id="dropbtn-{{item.link_title}}" {% if request.path == "/enterprise" or request.path == "/government" %} class="active"{% endif %}>{{item.link_title}} <span class="support-arrow"></span></button>
@@ -49,6 +49,15 @@
                                             <div id="{{item.link_title}}_dropdown" class="dropdown-content">
                                                 <a href="/community">{{ _("Community Support") }}</a>
                                                 <a href="/commercial">{{ _("Commercial Support") }}</a>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+                                    {% if item.link_title == "Showcase" %}
+                                        <li class="dropdown dropdown-menu-item">
+                                            <button onclick="clickDropdown('{{item.link_title}}')" id="dropbtn-{{item.link_title}}" {% if request.path == "/showcase" or "/success-stories" in request.path %} class="active"{% endif %}>{{item.link_title}} <span class="support-arrow"></span></button>
+                                            <div id="{{item.link_title}}_dropdown" class="dropdown-content">
+                                                <a href="/showcase">{{ _("Portal Showcase") }}</a>
+                                                <a href="/success-stories">{{ _("Success Stories") }}</a>
                                             </div>
                                         </li>
                                     {% endif %}
