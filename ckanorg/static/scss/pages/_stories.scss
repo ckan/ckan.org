@@ -153,12 +153,43 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-se
     .reader-footer { padding: 20px 44px 32px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
     .reader-submit-nudge { font-size: 13px; color: var(--muted); }
     .reader-submit-nudge a { color: var(--red); font-weight: 600; }
+    .reader-footer-right { display: flex; align-items: center; gap: 12px; }
     .reader-nav { display: flex; gap: 8px; }
     .reader-nav-btn { border: 1.5px solid var(--border); border-radius: 6px; padding: 8px 16px; font-size: 12px; font-weight: 600; cursor: pointer; background: #fff; font-family: inherit; transition: all 0.15s; }
     .reader-nav-btn:hover { border-color: #aaa; }
     .reader-nav-btn.primary { background: var(--red); border-color: var(--red); color: white; }
     .reader-nav-btn.primary:hover { background: var(--red-dark); }
     .reader-nav-btn:disabled { opacity: 0.3; cursor: default; pointer-events: none; }
+    .share-wrap { position: relative; }
+    .btn-share { display: inline-flex; align-items: center; gap: 7px; border: 1.5px solid var(--border); border-radius: 6px; padding: 8px 14px; font-size: 12px; font-weight: 600; cursor: pointer; background: #fff; font-family: inherit; transition: border-color 0.15s, background 0.15s; color: var(--text); }
+    .btn-share:hover { border-color: #bbb; background: var(--bg-soft); }
+    .share-btn-icon { width: 14px; height: 14px; flex-shrink: 0; color: var(--muted); }
+    .share-dropdown {
+        opacity: 0; pointer-events: none; transform: translateY(6px);
+        transition: opacity 0.15s, transform 0.15s;
+        position: absolute; bottom: calc(100% + 8px); right: 0;
+        background: #fff;
+        border: 1px solid rgba(0,0,0,0.09);
+        border-radius: 12px; padding: 5px;
+        min-width: 176px;
+        box-shadow: 0 8px 28px rgba(0,0,0,0.11), 0 2px 6px rgba(0,0,0,0.06);
+        z-index: 10;
+    }
+    .share-dropdown.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+    .share-divider { height: 1px; background: var(--border); margin: 4px 8px; }
+    .share-option {
+        display: flex; align-items: center; gap: 10px;
+        width: 100%; text-align: left;
+        padding: 9px 11px; font-size: 13px; font-weight: 500;
+        border: none; background: none; cursor: pointer;
+        border-radius: 8px; font-family: inherit;
+        text-decoration: none; color: var(--text);
+        transition: background 0.12s;
+    }
+    .share-option:hover { background: var(--bg-soft); text-decoration: none; color: var(--text); }
+    .share-option-icon { width: 15px; height: 15px; flex-shrink: 0; color: var(--muted); }
+    .reader-video { margin: 28px 0 0; aspect-ratio: 16/9; border-radius: 10px; overflow: hidden; background: #000; }
+    .reader-video iframe { width: 100%; height: 100%; border: none; }
 
     /* ══ SUBMIT SECTION ══ */
     .submit-section { padding: 96px 48px; background: var(--bg-soft); border-top: 1px solid var(--border); }

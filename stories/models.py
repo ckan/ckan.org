@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.utils.text import slugify
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 
@@ -64,6 +65,7 @@ class StoriesPage(Page):
         for story in stories_qs:
             stories.append({
                 "id": story.id, # type: ignore
+                "slug": story.slug or str(story.id),
                 "org": story.org,
                 "region": story.region,
                 "title": story.title,
@@ -79,6 +81,7 @@ class StoriesPage(Page):
                 "quote": str(story.quote),
                 "quoteAuthor": story.quote_author,
                 "portal": story.portal,
+                "youtubeUrl": story.youtube_url or "",
             })
         context["stories"] = stories
         # Add reCAPTCHA site key to context
@@ -330,11 +333,24 @@ class StoryItem(ClusterableModel):
         blank=True,
         help_text=_("Quote author (quoteAuthor)")
     )
+    slug = models.SlugField(
+        max_length=255,
+        null=True,
+        blank=True,
+        unique=True,
+        help_text=_("URL identifier used in share links — auto-generated from org + title if left blank (slug)")
+    )
     portal = models.URLField(
         max_length=512,
         null=True,
         blank=True,
         help_text=_("Portal URL (portal)")
+    )
+    youtube_url = models.URLField(
+        max_length=512,
+        null=True,
+        blank=True,
+        help_text=_("YouTube video URL for the session recording — embedded at the end of the story (youtube_url)")
     )
     # Optionally, keep legacy fields for compatibility
     created = models.DateTimeField(
@@ -358,7 +374,9 @@ class StoryItem(ClusterableModel):
         FieldPanel("outcome"),
         FieldPanel("quote"),
         FieldPanel("quote_author"),
+        FieldPanel("slug"),
         FieldPanel("portal"),
+        FieldPanel("youtube_url"),
     ]
 
     settings_panels = [
@@ -374,6 +392,17 @@ class StoryItem(ClusterableModel):
         ordering = ["title"]
         verbose_name = _("Story Item")
         verbose_name_plural = _("Story Items")
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base = slugify(f"{self.org or ''}-{self.title or ''}").strip('-') or 'story'
+            slug = base
+            counter = 1
+            while StoryItem.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f"{base}-{counter}"
+                counter += 1
+            self.slug = slug
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title or _("Untitled Story")

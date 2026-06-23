@@ -83,9 +83,40 @@
                 </div>
                 <div class="reader-footer">
                     <div class="reader-submit-nudge">{{ _('Have a story like this?') }} <a href="#submit" onclick="closeReader()">{{ _('Share it') }}</a></div>
-                    <div class="reader-nav">
-                        <button class="reader-nav-btn" id="rPrev" onclick="navReader(-1)">&#8592; {{ _('Prev') }}</button>
-                        <button class="reader-nav-btn primary" id="rNext" onclick="navReader(1)">{{ _('Next') }} &#8594;</button>
+                    <div class="reader-footer-right">
+                        <div class="share-wrap">
+                            <button class="btn-share" id="shareBtn" onclick="toggleShare(event)" aria-label="{{ _('Share this story') }}">
+                                <svg class="share-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                                {{ _('Share') }}
+                            </button>
+                            <div class="share-dropdown" id="shareDropdown">
+                                <button class="share-option" id="shareCopyBtn" onclick="shareCopyLink()">
+                                    <svg class="share-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+                                    <span id="shareCopyLabel">{{ _('Copy link') }}</span>
+                                </button>
+                                <div class="share-divider"></div>
+                                <a class="share-option" id="shareLinkedIn" href="#" target="_blank" rel="noopener">
+                                    <svg class="share-option-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                                    <span>{{ _('LinkedIn') }}</span>
+                                </a>
+                                <a class="share-option" id="shareX" href="#" target="_blank" rel="noopener">
+                                    <svg class="share-option-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                                    <span>{{ _('X') }}</span>
+                                </a>
+                                <a class="share-option" id="shareBluesky" href="#" target="_blank" rel="noopener">
+                                    <svg class="share-option-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 01-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.204-.659-.299-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z"/></svg>
+                                    <span>{{ _('Bluesky') }}</span>
+                                </a>
+                                <a class="share-option" id="shareEmail" href="#">
+                                    <svg class="share-option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+                                    <span>{{ _('Email') }}</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="reader-nav">
+                            <button class="reader-nav-btn" id="rPrev" onclick="navReader(-1)">&#8592; {{ _('Prev') }}</button>
+                            <button class="reader-nav-btn primary" id="rNext" onclick="navReader(1)">{{ _('Next') }} &#8594;</button>
+                        </div>
                     </div>
                 </div>
             </div>
