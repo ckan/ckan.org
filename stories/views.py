@@ -7,16 +7,21 @@ from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 
-from .models import StoriesNotificationEmail, StorySubmission
+from .models import StoriesNotificationEmail, StoriesRecipientsEmail, StorySubmission
 
 STORY_SUBMISSION_RECIPIENTS = [
     "comms@ckan.org",
-    "yoana.popova@datopian.com",
 ]
+
+def get_story_submission_recipients():
+    """Returns a list of email addresses to which story submissions should be sent."""
+    recipients = StoriesRecipientsEmail.objects.values_list("email", flat=True)
+    return list(recipients) if recipients else STORY_SUBMISSION_RECIPIENTS
 
 
 @require_POST
 def subscribe_story_notifications(request):
+    """Handles subscription requests for story notifications."""
     try:
         payload = json.loads(request.body.decode("utf-8"))
     except (json.JSONDecodeError, UnicodeDecodeError):
@@ -37,6 +42,7 @@ def subscribe_story_notifications(request):
 
 @require_POST
 def submit_story(request):
+    """Handles story submission requests."""
     try:
         payload = json.loads(request.body.decode("utf-8"))
     except (json.JSONDecodeError, UnicodeDecodeError):
@@ -79,7 +85,7 @@ def submit_story(request):
             subject=subject,
             message=body,
             from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=STORY_SUBMISSION_RECIPIENTS,
+            recipient_list=get_story_submission_recipients(),
             fail_silently=True,
         )
     except Exception:

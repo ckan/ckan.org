@@ -477,3 +477,26 @@ class StoriesNotificationEmail(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class StoriesRecipientsEmail(models.Model):
+    """Model representing an email address that should receive notifications about new stories."""
+    email = models.EmailField(
+        verbose_name="Email",
+        max_length=254,
+        blank=False,
+        null=False,
+        unique=True,
+        help_text=_("Email address that will receive notifications about new stories")
+    )
+    created = models.DateTimeField(
+        verbose_name=_("Submitted"),
+        auto_now_add=True,
+        help_text=_("Date and time when the email was submitted (created)")
+    )
+
+    class Meta:
+        ordering = ["-created"]
+
+    def __str__(self):
+        return self.email
