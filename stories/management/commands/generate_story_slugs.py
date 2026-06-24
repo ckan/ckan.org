@@ -10,6 +10,8 @@ SEO slug rules applied:
   - Existing slugs are never overwritten unless --force is passed
 """
 
+import re
+
 from django.core.management.base import BaseCommand
 from django.utils.text import slugify
 
@@ -29,7 +31,9 @@ MAX_WORDS = 6
 
 def seo_slug(title):
     """Return a short, keyword-rich slug from a story title."""
-    words = slugify(title).split("-")
+    # Strip possessives before slugifying so "India's" → "india" not "indias"
+    clean = re.sub(r"['’]s\b", "", title)
+    words = slugify(clean).split("-")
     # Remove stop words, but only if at least 2 meaningful words remain
     filtered = [w for w in words if w and w not in STOP_WORDS]
     if len(filtered) < 2:
