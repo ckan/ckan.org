@@ -47,7 +47,7 @@ class AnniversaryPage(Page):
 					subject=f"[CKAN 20th] New 'Get Involved' submission from {name}",
 					message=body,
 					from_email=settings.DEFAULT_FROM_EMAIL,
-					recipient_list=["comms@ckan.org", "yoana.popova@datopian.com"],
+					recipient_list=["comms@ckan.org"],
 					fail_silently=True,
 				)
 				context['success'] = True
