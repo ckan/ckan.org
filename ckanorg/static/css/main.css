@@ -5078,6 +5078,106 @@ body {
   cursor: default;
   pointer-events: none;
 }
+.stories-content .reader-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.stories-content .share-wrap {
+  position: relative;
+}
+.stories-content .btn-share {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #fff;
+  font-family: inherit;
+  transition: border-color 0.15s, background 0.15s;
+  color: var(--text);
+}
+.stories-content .btn-share:hover {
+  border-color: #bbb;
+  background: var(--bg-soft);
+}
+.stories-content .share-btn-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  color: var(--muted);
+}
+.stories-content .share-dropdown {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition: opacity 0.15s, transform 0.15s;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  right: 0;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  border-radius: 12px;
+  padding: 5px;
+  min-width: 176px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.11), 0 2px 6px rgba(0, 0, 0, 0.06);
+  z-index: 10;
+}
+.stories-content .share-dropdown.open {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+.stories-content .share-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 4px 8px;
+}
+.stories-content .share-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  padding: 9px 11px;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-family: inherit;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.12s;
+}
+.stories-content .share-option:hover {
+  background: var(--bg-soft);
+  text-decoration: none;
+  color: var(--text);
+}
+.stories-content .share-option-icon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  color: var(--muted);
+}
+.stories-content .reader-video {
+  margin: 28px 0 0;
+  aspect-ratio: 16/9;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #000;
+}
+.stories-content .reader-video iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
 .stories-content {
   /* ══ SUBMIT SECTION ══ */
 }
