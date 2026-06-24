@@ -12,7 +12,7 @@
         <title>{{ og_story.org }} — {{ og_story.title }} | CKAN Success Stories</title>
         <meta property="og:title" content="{{ og_story.org }} — {{ og_story.title }}">
         <meta property="og:description" content="How {{ og_story.org }} used CKAN to open up data and drive impact. A CKAN success story.">
-        <meta property="og:url" content="https://ckan.org/success-stories/?story={{ og_story.id }}">
+        <meta property="og:url" content="https://ckan.org/success-stories/?story={{ og_story.slug|default:og_story.id }}">
         <meta property="og:type" content="article">
         <meta property="og:image" content="https://ckan.org/static/img/ckan-stories-og.png">
         <meta name="twitter:card" content="summary_large_image">

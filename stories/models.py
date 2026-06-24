@@ -86,10 +86,13 @@ class StoriesPage(Page):
         context["stories"] = stories
         # Add reCAPTCHA site key to context
         context["recaptcha_sitekey"] = settings.RECAPTCHA_PUBLIC_KEY
-        # Detect ?story=<id> for per-story OG meta tags
-        story_id = request.GET.get("story")
-        if story_id:
-            og = next((s for s in stories if str(s["id"]) == str(story_id)), None)
+        # Detect ?story=<slug-or-id> for per-story OG meta tags
+        story_param = request.GET.get("story")
+        if story_param:
+            og = next(
+                (s for s in stories if s.get("slug") == story_param or str(s["id"]) == str(story_param)),
+                None,
+            )
             if og:
                 context["og_story"] = og
         return context
