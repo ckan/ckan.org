@@ -1,7 +1,10 @@
-from wagtail.models import Page
 from django.conf import settings
+from django.core.mail import send_mail
+
+from wagtail.models import Page
+
 from blog.models import BlogPostPage
-from contact.models import Email, MailChimpSettings, send_contact_info
+from contact.models import Email
 from .forms import GetInvolvedForm
 
 class AnniversaryPage(Page):
@@ -33,19 +36,20 @@ class AnniversaryPage(Page):
 					address=email,
 					message=message,
 				)
-				member_info = {
-					"email_address": email,
-					"status": "subscribed",
-					"merge_fields": {
-						"FNAME": name.split(" ")[0] if name else "",
-						"LNAME": name.split(" ")[-1] if name else "",
-						"FORM": "Get Involved Form",
-						"ORG": organization,
-						"CKANUSE": relation,
-						"MESSAGE": message,
-					}
-				}
-				send_contact_info(request, member_info)
+				body = (
+					f"Name: {name}\n"
+					f"Email: {email}\n"
+					f"Organization: {organization}\n"
+					f"Relationship to CKAN: {relation}\n\n"
+					f"Message:\n{message}"
+				)
+				send_mail(
+					subject=f"[CKAN 20th] New 'Get Involved' submission from {name}",
+					message=body,
+					from_email=settings.DEFAULT_FROM_EMAIL,
+					recipient_list=["comms@ckan.org", "yoana.popova@datopian.com"],
+					fail_silently=True,
+				)
 				context['success'] = True
 			else:
 				context['form_errors'] = form.errors
@@ -55,10 +59,6 @@ class AnniversaryPage(Page):
 		# Stories
 		last_year_posts = BlogPostPage.objects.filter(is_story=True)
 		context["stories"] = last_year_posts.order_by("story_publish_date")
-		# Mailchimp
-		mailchimp_settings = MailChimpSettings.for_request(request)
-		context["mailchimp_api_key"] = getattr(mailchimp_settings, "api_key", "")
-		context["mailchimp_audience_id"] = getattr(mailchimp_settings, "audience_id", "")
 		# Recaptcha
 		context['recaptcha_sitekey'] = settings.RECAPTCHA_PUBLIC_KEY
 		return context
