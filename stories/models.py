@@ -1,4 +1,7 @@
+import re
+
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.text import slugify
 from django.utils.timezone import now
@@ -8,11 +11,32 @@ from wagtail import blocks
 from wagtail.admin.panels import FieldPanel, ObjectList, TabbedInterface
 from wagtail.fields import StreamField
 from wagtail.models import Page
+from wagtail.rich_text import RichText
 
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.models import ClusterableModel
 from modelcluster.fields import ParentalKey
 from taggit.models import TaggedItemBase
+
+
+INVALID_RICHTEXT_PAGE_LINK_REGEX = re.compile(
+    r'<a[^>]*\slinktype=(?P<quote>["\"])page(?P=quote)[^>]*\sid=(?P<idquote>["\"])(?P<id>https?://[^"\']+)(?P=idquote)[^>]*>',
+    flags=re.IGNORECASE,
+)
+
+
+def _sanitize_richtext_page_links(html: str) -> str:
+    if not html:
+        return html
+
+    def replace_link(match):
+        url = match.group("id")
+        attrs = match.group(0)
+        attrs = re.sub(r'\slinktype=(?:"|\')page(?:"|\')', "", attrs, flags=re.IGNORECASE)
+        attrs = re.sub(r'\sid=(?:"|\')https?://[^"\']+(?:"|\')', f' href="{url}"', attrs, flags=re.IGNORECASE)
+        return attrs
+
+    return INVALID_RICHTEXT_PAGE_LINK_REGEX.sub(replace_link, html)
 
 
 class StoriesPage(Page):
@@ -393,7 +417,55 @@ class StoryItem(ClusterableModel):
         verbose_name = _("Story Item")
         verbose_name_plural = _("Story Items")
 
+    @classmethod
+    def _clean_richtext_field(cls, stream_value):
+        if not stream_value:
+            return stream_value
+
+        cleaned_blocks = []
+        changed = False
+
+        for block in stream_value:
+            if block.block_type == "paragraph":
+                html = block.value.source
+                sanitized_html = _sanitize_richtext_page_links(html)
+                if sanitized_html != html:
+                    changed = True
+                    cleaned_blocks.append((block.block_type, RichText(sanitized_html)))
+                else:
+                    cleaned_blocks.append((block.block_type, block.value))
+            else:
+                cleaned_blocks.append((block.block_type, block.value))
+
+        return cleaned_blocks if changed else stream_value
+
+    @classmethod
+    def _validate_richtext_field(cls, stream_value, field_name):
+        if not stream_value:
+            return
+
+        for block in stream_value:
+            if block.block_type == "paragraph":
+                html = block.value.source
+                if INVALID_RICHTEXT_PAGE_LINK_REGEX.search(html):
+                    raise ValidationError(
+                        {field_name: _(
+                            "Please remove or re-add invalid links in this rich text field."
+                        )}
+                    )
+
+    def clean(self):
+        super().clean()
+        for field_name in ("challenge", "who", "how", "outcome", "quote"):
+            self._validate_richtext_field(getattr(self, field_name), field_name)
+
     def save(self, *args, **kwargs):
+        for field_name in ("challenge", "who", "how", "outcome", "quote"):
+            field_value = getattr(self, field_name)
+            cleaned = self._clean_richtext_field(field_value)
+            if cleaned is not field_value:
+                setattr(self, field_name, cleaned)
+
         if not self.slug:
             base = slugify(f"{self.org or ''}-{self.title or ''}").strip('-') or 'story'
             slug = base
