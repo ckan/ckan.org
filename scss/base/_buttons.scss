@@ -12,6 +12,7 @@
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
+  white-space: nowrap;
   @include animate(border color background);
   font-size: $btn-font-size;
   border-radius: $btn-border-radius;
