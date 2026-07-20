@@ -188,7 +188,7 @@ class ReCaptchaSettings(BaseSiteSetting):
         blank=True,
     )
 
-    class Meta:
+    class Meta: # type: ignore
         verbose_name = 'ReCaptcha settings'
         verbose_name_plural = "ReCaptcha settings"
 
@@ -210,11 +210,25 @@ class PostHogSettings(BaseSiteSetting):
         blank=True,
     )
 
-    class Meta:
+    class Meta: # type: ignore
         verbose_name = 'PostHog settings'
         verbose_name_plural = "PostHog settings"
 
     panels = [
         FieldPanel('api_key'),
         FieldPanel('host'),
+    ]
+
+
+@register_setting
+class AnalyticsSettings(BaseSiteSetting):
+    ga_tracking_id = models.CharField(
+        verbose_name='Google Analytics Tracking ID',
+        max_length=255, 
+        blank=True, 
+        help_text='Your Google Analytics Tracking ID (e.g., G-XXXXXXXXXX)'
+    )
+
+    panels = [
+        FieldPanel('ga_tracking_id'),
     ]
