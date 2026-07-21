@@ -638,6 +638,43 @@ class CkanForPage(MetadataPageMixin, Page):
         return context
 
 
+class PrivacyPolicyPage(MetadataPageMixin, Page):
+
+    parent_page_types = ["home.HomePage"]
+    subpage_types = []
+    max_count = 1
+
+    last_updated = models.DateField(
+        blank=True,
+        null=True,
+        help_text="Date the policy was last reviewed (shown in the page header)",
+    )
+
+    jurisdiction = models.CharField(
+        max_length=256,
+        blank=True,
+        null=False,
+        default="UK GDPR & EU GDPR",
+        help_text="Jurisdiction label shown in the page header",
+    )
+
+    keywords = models.CharField(max_length=512, blank=True, null=True)
+
+    promote_panels = [
+        MultiFieldPanel(COMMON_PANELS, heading="Common page configuration"),
+    ]
+
+    content_panels = Page.content_panels + [
+        FieldPanel("last_updated"),
+        FieldPanel("jurisdiction"),
+    ]
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context["recaptcha_sitekey"] = settings.RECAPTCHA_PUBLIC_KEY
+        return context
+
+
 class FeatureDetailPage(MetadataPageMixin, Page):
 
     parent_page_types = ["ckan_pages.FeaturesPage"]
