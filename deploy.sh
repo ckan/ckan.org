@@ -21,7 +21,7 @@ function pull_latest_ckan_code {
         echo "Beginning code update process..."
         
         # Set permissions to allow pipeline user to run the deployment
-        sudo chown -R jumpbox-pipelines:ckan $VENV/
+        sudo chown -R jumpbox-pipelines:nginx $VENV/
 
         # Check to see if the extension directory exists or not
         if [ -d $VENV/$EXT_NAME ]; then
