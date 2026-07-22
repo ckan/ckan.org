@@ -1,6 +1,7 @@
 image: atlassian/default-image:3
 
 pipelines:
+  branches:
     develop:
       - step:
           name: Deploy to DEV environment
