@@ -8,6 +8,7 @@ pipelines:
           runs-on:
             - self.hosted
             - linux
+            - aujumpbox
           script:
             - echo "Running deployment on Web instance..."
             - pipe: atlassian/ssh-run:0.8.1
