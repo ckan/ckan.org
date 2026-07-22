@@ -1,0 +1,35 @@
+image: atlassian/default-image:3
+
+pipelines:
+  branches:
+    develop:
+      - step:
+          name: Deploy to DEV environment
+          runs-on:
+            - self.hosted
+            - linux
+            - aujumpbox
+          script:
+            - echo "Running deployment on Web instance..."
+            - pipe: atlassian/ssh-run:0.8.1
+              variables:
+                SSH_USER: 'jumpbox-pipelines'
+                SERVER: 'devweb.$DOMAIN'
+                MODE: 'script'
+                EXTRA_ARGS: "-o ServerAliveInterval=60 -o ServerAliveCountMax=3"
+                SSH_KEY: $SSH_KEY
+                COMMAND: 'deploy.sh'
+                ENV_VARS: >-
+                  BRANCH=${BITBUCKET_BRANCH}
+                  BB_SSH_ORIGIN=${BITBUCKET_GIT_SSH_ORIGIN}
+                  INSTANCE_TYPE='WEB'
+
+    main:
+      - step:
+          clone:
+            depth: full
+          script:
+            - git remote add ClientGitHub git@github.com:ckan/ckan.org.git
+            - git checkout main
+            - git pull
+            - git push ClientGitHub main
