@@ -10,17 +10,17 @@ pipelines:
           script:
             - echo "Running deployment on Web instance..."
             - pipe: atlassian/ssh-run:0.8.1
-          variables:
-            SSH_USER: 'jumpbox-pipelines'
-            SERVER: 'devweb.$DOMAIN'
-            MODE: 'script'
-            EXTRA_ARGS: "-o ServerAliveInterval=60 -o ServerAliveCountMax=3"
-            SSH_KEY: $SSH_KEY
-            COMMAND: 'deploy.sh'
-            ENV_VARS: >-
-            BRANCH=${BITBUCKET_BRANCH}
-            BB_SSH_ORIGIN=${BITBUCKET_GIT_SSH_ORIGIN}
-            INSTANCE_TYPE='WEB'
+              variables:
+                SSH_USER: 'jumpbox-pipelines'
+                SERVER: 'devweb.$DOMAIN'
+                MODE: 'script'
+                EXTRA_ARGS: "-o ServerAliveInterval=60 -o ServerAliveCountMax=3"
+                SSH_KEY: $SSH_KEY
+                COMMAND: 'deploy.sh'
+                ENV_VARS: >-
+                  BRANCH=${BITBUCKET_BRANCH}
+                  BB_SSH_ORIGIN=${BITBUCKET_GIT_SSH_ORIGIN}
+                  INSTANCE_TYPE='WEB'
 
     main:
       - step:
