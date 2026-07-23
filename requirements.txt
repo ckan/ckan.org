@@ -22,7 +22,6 @@ idna==3.11
 l18n==2021.3
 oauthlib==3.3.1
 openpyxl==3.1.5
-posthog==3.5.0
 prettytable==3.16.0
 psycopg2==2.9.9
 pycparser==2.23
