@@ -1,14 +1,9 @@
+from typing import ClassVar
+
 from django.db import models
-
 from wagtail import blocks
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel, TitleFieldPanel
 from wagtail.images.blocks import ImageChooserBlock
-
-from wagtail.admin.panels import (
-    FieldPanel,
-    MultiFieldPanel,
-    TitleFieldPanel
-)
-
 from wagtail.snippets.models import register_snippet
 
 
@@ -51,7 +46,7 @@ class GeneralFeature(models.Model):
     def __str__(self):
         return self.title
 
-    panels = [
+    panels: ClassVar[list[MultiFieldPanel]] = [
         MultiFieldPanel(
             [
                 FieldPanel('icon'),
@@ -99,7 +94,7 @@ class Feature(models.Model):
     def __str__(self):
         return self.title
 
-    panels = [
+    panels: ClassVar[list[MultiFieldPanel]] = [
         MultiFieldPanel(
             [
                 FieldPanel('icon'),
@@ -142,7 +137,7 @@ class Extension(models.Model):
     def __str__(self):
         return self.title
 
-    panels = [
+    panels: ClassVar[list[MultiFieldPanel]] = [
         MultiFieldPanel(
             [
                 TitleFieldPanel('title'),
@@ -199,7 +194,7 @@ class SoftwareEngineer(models.Model):
     def __str__(self):
         return self.name
 
-    panels = [
+    panels: ClassVar[list[MultiFieldPanel]] = [
         MultiFieldPanel(
             [
                 FieldPanel('photo'),
@@ -269,7 +264,7 @@ class Steward(models.Model):
     def __str__(self):
         return self.name
 
-    panels = [
+    panels: ClassVar[list[MultiFieldPanel]] = [
         MultiFieldPanel(
             [
                 FieldPanel('photo'),
@@ -327,7 +322,7 @@ class CkanForCard(models.Model):
     def __str__(self):
         return self.title
 
-    panels = [
+    panels: ClassVar[list[MultiFieldPanel]] = [
         MultiFieldPanel(
             [
                 TitleFieldPanel('title'),
@@ -368,7 +363,7 @@ class PoweredCard(models.Model):
     def __str__(self):
         return self.title
 
-    panels = [
+    panels: ClassVar[list[MultiFieldPanel]] = [
         MultiFieldPanel(
             [
                 TitleFieldPanel('title'),
@@ -398,9 +393,9 @@ class GitCardBlock(blocks.StructBlock):
         )
     )
 
-    class Meta:
-        template = 'snippets/git_card_block.html',
-        icon = "placeholder",
+    class Meta: # type: ignore
+        template = 'snippets/git_card_block.html'
+        icon = "placeholder"
         label = "CKAN Git Card"
 
 
@@ -415,8 +410,8 @@ class PoweringOpendataBlock(blocks.StructBlock):
         )
     )
 
-    class Meta:
-        icon = "image",
+    class Meta: # type: ignore
+        icon = "image"
         label = "Powering Opendata Images"
 
 
@@ -493,7 +488,7 @@ class WorkingGroup(models.Model):
     def __str__(self):
         return self.name
 
-    panels = [
+    panels: ClassVar[list[MultiFieldPanel]] = [
         MultiFieldPanel(
             [
                 FieldPanel('image'),
@@ -554,11 +549,11 @@ class Feedback(models.Model):
         on_delete=models.SET_NULL,
     )
     text = models.TextField(
-        max_length='2056',
+        max_length=2056,
         help_text='What was told',
     )
 
-    panels = [
+    panels: ClassVar[list[MultiFieldPanel]] = [
         MultiFieldPanel(
             [
                 FieldPanel('name'),
@@ -595,7 +590,7 @@ class PoweringImage(models.Model):
     def __str__(self):
         return self.title
 
-    panels = [
+    panels: ClassVar[list[MultiFieldPanel]] = [
         MultiFieldPanel(
             [
                 TitleFieldPanel('title'),
@@ -635,7 +630,7 @@ class Commercial(models.Model):
     def __str__(self):
         return self.name
 
-    panels = [
+    panels: ClassVar[list[MultiFieldPanel]] = [
         MultiFieldPanel(
             [
                 FieldPanel('image'),
