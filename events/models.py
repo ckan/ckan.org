@@ -1,31 +1,28 @@
 import calendar
 import datetime
+import typing
 
+from blog.blocks import ImageWithCaption
+from blog.models import BlogListingPage
 from django import forms
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from modelcluster.fields import ParentalKey
-
 from wagtail import blocks
 from wagtail.admin.forms import WagtailAdminPageForm
 from wagtail.admin.panels import (
     FieldPanel,
-    MultiFieldPanel,
-    TabbedInterface,
-    ObjectList,
     InlinePanel,
+    MultiFieldPanel,
+    ObjectList,
+    TabbedInterface,
 )
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.fields import StreamField
-from wagtail.models import Page, Orderable
-
+from wagtail.models import Orderable, Page
 from wagtailmetadata.models import MetadataPageMixin
-
-from blog.models import BlogListingPage
-from blog.blocks import ImageWithCaption
-
 
 COMMON_PANELS = (
     FieldPanel("slug"),
@@ -76,7 +73,7 @@ class EventPageSpeaker(Orderable):
         "info",
     )
 
-    panels = [
+    panels: typing.ClassVar[list] = [
         FieldPanel("first_name"),
         FieldPanel("last_name"),
         FieldPanel("image"),
@@ -103,9 +100,9 @@ class EventListingPage(BlogListingPage):
             - Adds all relevant event lists and calendar to the context.
     """
     template = "events/event_list.html"
-    parent_page_types = ["home.HomePage"]
-    subpage_types = ["events.EventPostPage"]
-    max_count = 1
+    parent_page_types: typing.ClassVar[list] = ["home.HomePage"]
+    subpage_types: typing.ClassVar[list] = ["events.EventPostPage"]
+    max_count: typing.ClassVar[int] = 1
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
@@ -191,7 +188,7 @@ class EventPageForm(WagtailAdminPageForm):
         return cleaned_data
 
 
-class EventPostPage(MetadataPageMixin, Page):
+class EventPostPage(MetadataPageMixin, Page): # type: ignore
     """
     EventPostPage represents a detailed event page within the CKAN.org site.
 
@@ -227,11 +224,11 @@ class EventPostPage(MetadataPageMixin, Page):
         get_event_status(): Returns "upcoming" if the event's start_date is in the future.
     """
     template = "events/event_details.html"
-    parent_page_types = ["events.EventListingPage"]
-    subpage_types = []
+    parent_page_types: typing.ClassVar[list] = ["events.EventListingPage"]
+    subpage_types: typing.ClassVar[list] = []
     base_form_class = EventPageForm
 
-    EVENT_TYPE_CHOICES = [
+    EVENT_TYPE_CHOICES: typing.ClassVar[list] = [
         ("Webinar", "Webinar"),
         ("Presentation", "Presentation"),
         ("Meeting", "Meeting"),
@@ -244,7 +241,7 @@ class EventPostPage(MetadataPageMixin, Page):
         blank=True,
         null=True,
         related_name="+",
-        help_text=_("Image"),
+        help_text=_("Image will be displayed on the event page if no video is provided"),
         on_delete=models.SET_NULL,
     )
 
@@ -337,17 +334,17 @@ class EventPostPage(MetadataPageMixin, Page):
     )
 
     attendies = models.IntegerField(
-        verbose_name=_("Attendies"),
+        verbose_name=_("Attendees"),
         help_text=_("Number of event's visitors"),
         null=True,
         blank=True
     )
 
-    promote_panels = [
+    promote_panels: typing.ClassVar[list] = [
         MultiFieldPanel(COMMON_PANELS, heading=_("Common page configuration")),
     ]
 
-    content_panels = Page.content_panels + [
+    content_panels: typing.ClassVar[list] = Page.content_panels + [
         FieldPanel("post_title"),
         FieldPanel("post_subtitle"),
         FieldPanel("main_image"),

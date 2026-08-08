@@ -1,23 +1,19 @@
+import typing
 from datetime import datetime
 
 from django.db import models
+from django.shortcuts import redirect
 from django.template.loader import render_to_string
-
+from managers.models import Manager
 from modelcluster.models import ParentalKey
-
 from wagtail.admin.mail import send_mail
-from wagtail.fields import RichTextField
+from wagtail.admin.panels import FieldPanel, InlinePanel, PageChooserPanel
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
+from wagtail.fields import RichTextField
+from wagtail.models import Page
 from wagtail.snippets.models import register_snippet
-from wagtail.admin.panels import (
-    FieldPanel,
-    InlinePanel,
-    PageChooserPanel
-)
 from wagtailcache.cache import WagtailCacheMixin
-
-from managers.models import Manager
 
 
 @register_setting
@@ -31,7 +27,7 @@ class CkanOrgSettings(BaseSiteSetting):
         verbose_name='Modal Form'
     )
 
-    panels = [
+    panels: typing.ClassVar[list] = [
         PageChooserPanel('modal_form_page', page_type='contact.ContactPage')
     ]
 
@@ -47,11 +43,13 @@ def parse_contact_form(message):
     out = {}
     items = message.split("\n")
     for item in items:
-        i = item.split(": ")
-        out[i[0].split("/")[0].replace(
+        if ": " not in item:
+            continue
+        key, value = item.split(": ", 1)
+        out[key.split("/")[0].replace(
             " ", "_").replace(
             "-", "_").replace(
-            ".", "_").strip("_").lower()] = i[1]
+            ".", "_").strip("_").lower()] = value
     return out
 
 class ContactPage(WagtailCacheMixin, AbstractEmailForm):
@@ -63,7 +61,7 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
 
     template = 'contact/contact_page.html'
     landing_page_template = 'contact/contact_page_landing.html'
-    subpage_types =[]
+    subpage_types: typing.ClassVar[list] = []
     max_count = 1
     cache_control = 'no-cache'
 
@@ -89,9 +87,7 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
         send_mail(self.subject, plain_message, addresses, self.from_address, html_message=html_message)
 
 
-    def render_landing_page(self, request, form_submission=None, *args, **kwargs):
-        from wagtail.models import Page
-        from django.shortcuts import redirect
+    def render_landing_page(self, request, form_submission=None, *args, **kwargs): # type: ignore
         redirect_page = Page.objects.get(id=request.POST.get('source-page-id'))
         if redirect_page:
             request.session['form_page_success'] = True

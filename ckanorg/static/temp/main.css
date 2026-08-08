@@ -6201,6 +6201,7 @@ input[type=text]:-webkit-autofill {
 .ask-question .modal-link {
   font-size: 0;
   display: inline-flex;
+  width: 210px;
   height: 50px;
   text-decoration: none;
   color: white;
@@ -7212,9 +7213,6 @@ img.linkdigital-logo {
 }
 .nav-menu li:not(:last-child) {
   margin-right: 30px;
-}
-.nav-menu li.active a {
-  color: #000 !important;
 }
 .nav-menu li a:not(.btn):not(.ann-badge) {
   color: #666666;

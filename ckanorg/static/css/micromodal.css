@@ -71,6 +71,7 @@
   border-style: none;
   border-width: 0;
   cursor: pointer;
+  appearance: button;
   -webkit-appearance: button;
   text-transform: none;
   overflow: visible;
