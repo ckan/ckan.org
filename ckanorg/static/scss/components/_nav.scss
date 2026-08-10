@@ -65,6 +65,12 @@
       margin-right: 30px;
     }
 
+    &.active {
+      a {
+        color: $black !important;
+      }
+    }
+
     a:not(.btn):not(.ann-badge) {
       color: $medium-gray;
       font-family: $second-font-sans-serif;

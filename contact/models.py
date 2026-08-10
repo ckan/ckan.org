@@ -1,28 +1,24 @@
 import logging
 import traceback
+import typing
 
+import mailchimp_marketing as MailchimpMarketing
 from django.contrib import messages
 from django.db import models
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.template.response import TemplateResponse
 from django.utils.translation import gettext_lazy as _
-
+from mailchimp_marketing.api_client import ApiClientError
+from managers.models import Manager
 from modelcluster.models import ParentalKey
-
 from wagtail.admin.mail import send_mail
-from wagtail.admin.panels import FieldPanel, InlinePanel, PageChooserPanel, HelpPanel
+from wagtail.admin.panels import FieldPanel, HelpPanel, InlinePanel, PageChooserPanel
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.fields import RichTextField
 from wagtail.models import Page
-
 from wagtailcache.cache import WagtailCacheMixin
-
-from managers.models import Manager
-
-import mailchimp_marketing as MailchimpMarketing
-from mailchimp_marketing.api_client import ApiClientError
 
 from .decorators import validate_captcha
 
@@ -44,7 +40,7 @@ class MailChimpSettings(BaseSiteSetting):
         verbose_name = "MailChimp settings"
         verbose_name_plural = "MailChimp settings"
 
-    panels = [
+    panels: typing.ClassVar[list[FieldPanel | HelpPanel]] = [
         FieldPanel("api_key"),
         FieldPanel("audience_id"),
         HelpPanel(
@@ -68,7 +64,9 @@ class CkanOrgSettings(BaseSiteSetting):
     class Meta: # type: ignore
         verbose_name = "CKAN.org settings"
 
-    panels = [PageChooserPanel("modal_form_page", page_type="contact.ContactPage")]
+    panels: typing.ClassVar[list[PageChooserPanel]] = [
+        PageChooserPanel("modal_form_page", page_type="contact.ContactPage")
+    ]
 
 
 class FormField(AbstractFormField):
@@ -83,9 +81,11 @@ def parse_contact_form(message):
     out = {}
     items = message.split("\n")
     for item in items:
-        i = item.split(": ")
+        if ": " not in item:
+            continue
+        key, value = item.split(": ", 1)
         out[
-            i[0]
+            key
             .split("/")[0]
             .replace(" ", "_")
             .replace("-", "_")
@@ -93,7 +93,7 @@ def parse_contact_form(message):
             .replace("?", "")
             .strip("_")
             .lower()
-        ] = i[1]
+        ] = value
     return out
 
 
@@ -140,7 +140,7 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
 
     template = "contact/contact_page.html"
     landing_page_template = "contact/contact_page_landing.html"
-    subpage_types = []
+    subpage_types: typing.ClassVar[list[str]] = []
     max_count = 5
     cache_control = "no-cache"
 
@@ -186,7 +186,7 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
         FieldPanel("subject"),
         FieldPanel("from_address"),
         FieldPanel("button_text"),
-        InlinePanel("form_fields", label=_("Form Fields")),
+        InlinePanel("form_fields", label=_('Form Fields')),
     ]
 
 

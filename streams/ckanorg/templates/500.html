@@ -1,10 +1,43 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Internal server error</title>
+        <style>
+            body {
+                margin: 0;
+                min-height: 100vh;
+                display: grid;
+                place-items: center;
+                font-family: Arial, sans-serif;
+                background: #f5f5f5;
+                color: #222;
+            }
 
-{% block body_class %}template-404{% endblock %}
+            .message_404_500 {
+                max-width: 36rem;
+                padding: 2rem;
+                text-align: center;
+            }
 
-{% block content %}
-    <div class="message_404_500">
-        <h1>Internal server error</h1>
-        <h2>Sorry, there seems to be an error. Please try again soon.</h2>
-    </div>
-{% endblock %}
+            h1 {
+                margin: 0 0 0.75rem;
+                font-size: 2rem;
+            }
+
+            h2 {
+                margin: 0;
+                font-size: 1rem;
+                font-weight: normal;
+                line-height: 1.5;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="message_404_500">
+            <h1>Internal server error</h1>
+            <h2>Sorry, there seems to be an error. Please try again soon.</h2>
+        </div>
+    </body>
+</html>
