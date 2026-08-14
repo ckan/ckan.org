@@ -120,16 +120,8 @@ def send_contact_info(request, member_info: dict):
         except ApiClientError as error:
             if error.status_code == 400 and "is already a list member" in error.text:
                 logging.getLogger("error_logger").warning(error)
-                message_content = (
-                    "<p>The member {} already exists in the subscription list.</p>".format(member_info.get("email_address", ""))
-                )
-                messages.success(request, message_content, extra_tags="safe")
             else:
                 logging.getLogger("error_logger").error(error)
-                message_content = (
-                    "<p>Sorry, we could not add you to the subscription list at the moment. Please try again later.</p>"
-                )
-                messages.error(request, message_content, extra_tags="safe")
 
 
 class ContactPage(WagtailCacheMixin, AbstractEmailForm):
@@ -172,7 +164,7 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
         max_length=50,
         blank=True,
         help_text=_("Submit button text for this form."),
-        default=_("Contact Us"),
+        default=str(_("Contact Us")),
     )
 
     class Meta: # type: ignore
@@ -186,7 +178,7 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
         FieldPanel("subject"),
         FieldPanel("from_address"),
         FieldPanel("button_text"),
-        InlinePanel("form_fields", label=_('Form Fields')),
+        InlinePanel("form_fields", label=str(_('Form Fields'))),
     ]
 
 
@@ -209,7 +201,7 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
                 self.from_address,
                 html_message=html_message,
             )
-        except Exception:
+        except Exception:  # noqa: BLE001
             logging.getLogger("error_logger").error(traceback.format_exc())
 
 
@@ -218,6 +210,7 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
             form = self.get_form(
                 request.POST, request.FILES, page=self, user=request.user
             )
+
             if not validate_captcha(request):
                 return render(request, "recaptcha_error.html")
             
@@ -256,6 +249,13 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
                     logging.getLogger("error_logger").error(traceback.format_exc())
                     message_content = _("Thank you for contacting us!")
                 messages.success(request, str(message_content), extra_tags="safe")
+                
+                ##* Redirect to source page if source-page-id is provided in the POST data
+                source_page_id = request.POST.get("source-page-id")
+                redirect_page = Page.objects.filter(id=source_page_id).first()
+                if redirect_page:
+                    request.session["form_page_success"] = True
+                    return redirect(redirect_page.url, permanent=False)
 
                 return self.render_landing_page(
                     request, form_submission, *args, **kwargs
@@ -266,15 +266,6 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
         context = self.get_context(request)
         context["form"] = form
         return TemplateResponse(request, self.get_template(request), context)
-
-
-    def render_landing_page(self, request, form_submission=None, *args, **kwargs): # type: ignore
-        redirect_page = Page.objects.get(id=request.POST.get("source-page-id"))
-        if redirect_page:
-            request.session["form_page_success"] = True
-            return redirect("/", permanent=False)
-
-        return super().render_landing_page(request, form_submission, *args, **kwargs)
 
 
 class Email(models.Model):

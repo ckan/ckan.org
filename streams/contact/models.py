@@ -83,14 +83,17 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
         addresses = [x.strip() for x in self.to_address.split(',')]
         plain_message = self.render_email(form).replace('Your', 'Sender')
         fields = parse_contact_form(plain_message)
-        html_message = render_to_string('contact_us_mail.html', fields)
+        html_message = render_to_string('contact/contact_us_mail.html', fields)
         send_mail(self.subject, plain_message, addresses, self.from_address, html_message=html_message)
 
 
     def render_landing_page(self, request, form_submission=None, *args, **kwargs): # type: ignore
-        redirect_page = Page.objects.get(id=request.POST.get('source-page-id'))
+        source_page_id = request.POST.get('source-page-id')
+        redirect_page = Page.objects.filter(id=source_page_id).first() if source_page_id else None
+
         if redirect_page:
             request.session['form_page_success'] = True
+            request.session.modified = True
             return redirect(redirect_page.url, permanent=False)
 
         return super().render_landing_page(request, form_submission, *args, **kwargs)

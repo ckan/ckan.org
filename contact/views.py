@@ -3,7 +3,7 @@ import traceback
 
 from django.conf import settings
 from django.contrib import messages
-from django.http import JsonResponse, HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.utils.encoding import force_str
@@ -11,9 +11,8 @@ from django.utils.http import urlsafe_base64_decode
 from django.views.generic import TemplateView
 
 from .email import send_subscription_email
-from .models import Email, send_contact_info, Message
+from .models import Email, Message, send_contact_info
 from .token import user_activation_token
-
 
 form_mapping = {
     "#subscribe_form": "Subscribe Form",
@@ -156,6 +155,6 @@ class SubscriptionPage(TemplateView):
     template_name = "contact/subscription_page.html"
 
     def get_context_data(self, **kwargs):
-        context = super(SubscriptionPage, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["recaptcha_sitekey"] = settings.RECAPTCHA_PUBLIC_KEY
         return context

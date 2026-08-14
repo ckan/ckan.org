@@ -4,7 +4,6 @@ import json
 
 from django.http import HttpResponse
 from django.views.generic.detail import DetailView
-
 from wagtail.log_actions import log
 from wagtail.snippets.views.snippets import CreateView
 
@@ -29,7 +28,7 @@ class EventCreateView(CreateView):
             # and make sure the live field is set to False.
             if self.view_name == "create":
                 instance.live = False
-                parent.add_child(instance=instance)
+                parent.add_child(instance=instance) if parent else instance.save()
                 self.form.save_m2m()
         else:
             instance = self.form.save()
@@ -75,20 +74,25 @@ def get_events_data(request):
         month = 12
         direction = 0
     next_month = month + direction
-    firstweekday = datetime.datetime(year, next_month, 1, 0, 0, 0).strftime("%A")
+    firstweekday = datetime.datetime(year, next_month, 1, 0, 0, 0, tzinfo=datetime.timezone.utc).strftime("%A")
 
     html_calendar = calendar.HTMLCalendar(firstweekday=-1)
-    html_calendar.cssclasses = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+    html_calendar.cssclasses = [ # type: ignore
+        "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"
+    ]
     new_calendar = html_calendar.formatmonth(year, next_month, withyear=True)
 
-    try:
-        events = EventPostPage.objects.filter(start_date__year=year) \
-            .filter(start_date__month=next_month).order_by("start_date")
-
-    except Exception as e:
-        data = f'Fail: {e}'
-
+    events = []
     events_data = []
+    try:
+        events = (
+            EventPostPage.objects.filter(start_date__year=year)
+            .filter(start_date__month=next_month)
+            .order_by("start_date")
+        )
+    except (ValueError, TypeError) as e:
+        data = f"Fail: {e}"
+
     for event in events:
         event_data = {
             "title": event.post_title,
@@ -103,6 +107,6 @@ def get_events_data(request):
     results = {"calendar": new_calendar, "firstweekday": firstweekday, "calendar_events": events_data}
     data = json.dumps(results)
 
-    mimetype = 'application/json'
+    mimetype = "application/json"
 
     return HttpResponse(data, mimetype)
