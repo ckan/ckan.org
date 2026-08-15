@@ -84,7 +84,8 @@ joinForm.addEventListener('submit', function (event) {
     event.preventDefault();
     joinForm.style.display = 'none';
     document.getElementById('successMsg').style.display = 'block';
-    setTimeout(function() {
-        joinForm.submit()
-    }, 3000);
+    fetch(window.location.pathname, {
+        method: 'POST',
+        body: new FormData(joinForm),
+    }).catch(console.error);
 });
