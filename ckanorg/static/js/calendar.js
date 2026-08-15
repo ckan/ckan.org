@@ -1,4 +1,9 @@
 $(document).ready(function() {
+    function getFirstClassName(element) {
+        var className = $(element).attr("class") || "";
+        return className.split(" ")[0] || "";
+    }
+
     function getData(currentDate, direction) {
         var currentMonth = currentDate[0];
         var currentYear = currentDate[1];
@@ -76,7 +81,7 @@ $(document).ready(function() {
             return $(this).text() === "1";
         }).addClass("selected");
 
-        var weekday = $("td.selected").attr("class").split(" ")[0];
+        var weekday = getFirstClassName($("td.selected"));
 
         $(".info-date-day").text("1");
         $(".info-date-weekday").text(weekday);
@@ -115,7 +120,7 @@ $(document).ready(function() {
 
     $("body").on("click", "td", function() {
         var day = $(this).text();
-        var weekday = $(this).attr("class").split(" ")[0];
+        var weekday = getFirstClassName(this);
 
         $("td").removeClass("selected");
         $(this).addClass("selected");

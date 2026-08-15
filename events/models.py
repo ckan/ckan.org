@@ -5,6 +5,7 @@ import typing
 from blog.blocks import ImageWithCaption
 from blog.models import BlogListingPage
 from django import forms
+from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.utils.timezone import now
@@ -107,17 +108,17 @@ class EventListingPage(BlogListingPage):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         _now = now()
-        recently = datetime.datetime.now().date() - datetime.timedelta(days=183)
-        current_year = datetime.datetime.now().year
-        current_month = datetime.datetime.now().month
+        recently = datetime.datetime.now(tz=datetime.timezone.utc).date() - datetime.timedelta(days=183)
+        current_year = datetime.datetime.now(tz=datetime.timezone.utc).year
+        current_month = datetime.datetime.now(tz=datetime.timezone.utc).month
         html_calendar = calendar.HTMLCalendar(firstweekday=-1)
-        html_calendar.cssclasses = [
+        html_calendar.cssclasses = [ # type: ignore
             "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"
         ]
-        all_events = EventPostPage.objects.live().public().order_by("start_date")
+        all_events = EventPostPage.objects.live().public().order_by("start_date") # type: ignore
 
         featured_events = (
-            EventPostPage.objects.live()
+            EventPostPage.objects.live() # type: ignore
             .public()
             .filter(featured=True)
             .order_by("-start_date")
@@ -179,7 +180,7 @@ class EventPageForm(WagtailAdminPageForm):
         Adds a validation error to 'end_date' if this condition is not met.
     """
     def clean(self):
-        cleaned_data = super(EventPageForm, self).clean()
+        cleaned_data = super().clean()
         start_date = cleaned_data["start_date"]
         end_date = cleaned_data["end_date"]
         if start_date and end_date and start_date > end_date:
@@ -380,6 +381,7 @@ class EventPostPage(MetadataPageMixin, Page): # type: ignore
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         context["start_date"] = self.start_date.strftime("%d %B %Y - %H:%M")
+        context["recaptcha_sitekey"] = settings.RECAPTCHA_PUBLIC_KEY
         return context
 
     def get_event_duration(self):
