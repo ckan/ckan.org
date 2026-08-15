@@ -35,6 +35,11 @@ class MailChimpSettings(BaseSiteSetting):
         help_text=_("MailChimp list ID"),
         blank=True,
     )
+    stories_audience_id = models.CharField(
+        max_length=255,
+        help_text=_("Mailchimp audience ID for success story notification subscribers"),
+        blank=True,
+    )
 
     class Meta: # type: ignore
         verbose_name = "MailChimp settings"
@@ -43,6 +48,7 @@ class MailChimpSettings(BaseSiteSetting):
     panels: typing.ClassVar[list[FieldPanel | HelpPanel]] = [
         FieldPanel("api_key"),
         FieldPanel("audience_id"),
+        FieldPanel("stories_audience_id"),
         HelpPanel(
             template="contact/mailchimp_info.html",
             heading="Important info",
