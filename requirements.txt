@@ -6,7 +6,7 @@ whitenoise==6.11.0
 wagtail-cache==3.0.0
 wagtail-metadata==5.0.0
 wagtail-django-recaptcha==2.1.1
-wagtailcodeblock==1.29.0.2
+wagtailcodeblock==1.30.0.0
 mailchimp-marketing==3.0.80
 asgiref==3.10.0
 certifi==2025.10.5
