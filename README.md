@@ -53,7 +53,7 @@ Source code for the ckan.org website
 ```
 
 ## Install & Dependencies
-- Python 3.12
+- Python 3.11+
 - Django 5.2.8
 - Wagtail 7.2
 - all dependencies from `requirements.txt`
@@ -168,7 +168,6 @@ index be311ca..d0b68dc 100644
 +EMAIL_HOST = 'smtp.gmail.com'
  EMAIL_USE_TLS = True
  EMAIL_PORT = 587
--EMAIL_HOST_USER = 'AKIAUWX42BAVQ3UFZFUU'
 -DEFAULT_FROM_EMAIL = 'noreply@ckan.org'
 +EMAIL_HOST_USER = 'linkdigitaltest@gmail.com'
 +DEFAULT_FROM_EMAIL = 'linkdigitaltest@gmail.com'
@@ -192,7 +191,10 @@ index be311ca..d0b68dc 100644
 -    EMAIL_HOST_PASSWORD = data[1]
 -    DB_HOST = data[2]
 -    DB_PASS = data[3]
-+SECRET_KEY = "qwerty"
+-    RECAPTCHA_PUBLIC_KEY = data[4]
+-    RECAPTCHA_PRIVATE_KEY = data[5]
+-    EMAIL_HOST_USER = data[6]
++SECRET_KEY = 'my-secret-key'
 ```
 
 #### 14. Start the local server: `python manage.py runserver`.

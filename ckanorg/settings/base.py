@@ -211,7 +211,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'email-smtp.eu-central-1.amazonaws.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'AKIAUWX42BAVQ3UFZFUU'
 DEFAULT_FROM_EMAIL = 'noreply@ckan.org'
 
 ACCOUNT_ADAPTER = 'ckan_pages.adapter.NoNewUsersAccountAdapter'
@@ -242,6 +241,7 @@ with open(BASE_DIR + '/../config/secret.txt') as f:
     DB_PASS = data[3]
     RECAPTCHA_PUBLIC_KEY = data[4]
     RECAPTCHA_PRIVATE_KEY = data[5]
+    EMAIL_HOST_USER = data[6]
 
 
 DATABASES = {
