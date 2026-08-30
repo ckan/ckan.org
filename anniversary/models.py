@@ -1,11 +1,16 @@
-from wagtail.models import Page
-from django.conf import settings
+import typing
+
 from blog.models import BlogPostPage
+from contact.decorators import validate_captcha
 from contact.models import Email, MailChimpSettings, send_contact_info
+from django.conf import settings
+from wagtail.models import Page
+
 from .forms import GetInvolvedForm
 
+
 class AnniversaryPage(Page):
-	parent_page_types = ["home.HomePage"]
+	parent_page_types: typing.ClassVar[list[str]] = ["home.HomePage"]
 	template = "anniversary/anniversary.html"
 	max_count = 1  # Only one anniversary page
 
@@ -21,7 +26,10 @@ class AnniversaryPage(Page):
 		# Add the form
 		if request.method == "POST":
 			form = GetInvolvedForm(request.POST)
-			if form.is_valid():
+
+			if not validate_captcha(request):
+				context['form_errors'] = {'captcha': ['Please complete the captcha.']}
+			elif form.is_valid():
 				name = request.POST.get('FNAME', None)
 				organization = request.POST.get('ORG', None)
 				email = request.POST.get('EMAIL', None)

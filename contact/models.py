@@ -1,3 +1,4 @@
+import hashlib
 import logging
 import traceback
 import typing
@@ -79,31 +80,39 @@ class FormField(AbstractFormField):
 
 def parse_contact_form(message):
     out = {}
-    items = message.split("\n")
-    for item in items:
-        if ": " not in item:
+    for item in message.splitlines():
+        item = item.strip()
+        if not item or ": " not in item:
             continue
-        key, value = item.split(": ", 1)
-        out[
+
+        key, separator, value = item.partition(": ")
+        if not key or not separator:
+            continue
+
+        normalized_key = (
             key
             .split("/")[0]
             .replace(" ", "_")
             .replace("-", "_")
             .replace(".", "_")
             .replace("?", "")
+            .replace(":", "_")
             .strip("_")
             .lower()
-        ] = value
+        )
+        out[normalized_key] = value
     return out
 
 
-def send_contact_info(request, member_info: dict):
+def send_contact_info(request, member_info: dict, tags: list[str] | None = None):
     """Send contact info to MailChimp audience/list.
 
     Args:
         request (_type_): _description_
         member_info (dict): contains the following keys 'email_address', 'status',
         'merged_fields' ('FNAME', 'LNAME', 'PHONE', 'COMPANY', 'FORM')
+        tags (list[str] | None): optional audience tags for segmentation within the
+            same Mailchimp list.
     """
     mailchimp_api_key = MailChimpSettings.for_request(request).api_key
     mailchimp_audience_id = MailChimpSettings.for_request(request).audience_id
@@ -116,12 +125,20 @@ def send_contact_info(request, member_info: dict):
                     "server": mailchimp_api_key.split("-")[-1],
                 }
             )
-            client.lists.add_list_member(mailchimp_audience_id, member_info)
+            info_body = dict(member_info)
+            if tags:
+                info_body["tags"] = [{"name": tag, "status": "active"} for tag in tags]
+            member_email_hash = hashlib.md5(
+                info_body["email_address"].lower().encode("utf-8")
+            ).hexdigest()
+
+            client.lists.set_list_member(
+                mailchimp_audience_id,
+                member_email_hash,
+                info_body,
+            )
         except ApiClientError as error:
-            if error.status_code == 400 and "is already a list member" in error.text:
-                logging.getLogger("error_logger").warning(error)
-            else:
-                logging.getLogger("error_logger").error(error)
+            logging.getLogger("error_logger").error(error)
 
 
 class ContactPage(WagtailCacheMixin, AbstractEmailForm):
