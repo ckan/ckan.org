@@ -222,3 +222,21 @@ class FormModalTagTests(TestCase):
 
         self.assertNotIn("micromodal", html)
         self.assertNotIn("modal-link", html)
+
+    def test_failed_modal_ignores_parent_form_context(self):
+        # Regression: inclusion tags render with (and inherit) the parent
+        # context. Pages such as AnniversaryPage/ContactPage already put
+        # `form` in their context, so the fail-soft path must be detected via
+        # `form_page` -- a key only modal_tags sets -- rather than `form`.
+        # Otherwise a missing modal renders with an unset `form_page`, and
+        # {% pageurl form_page %} raises ValueError, 500-ing the page.
+        template = Template(
+            "{% load modal_tags %}{% form_modal form_name='Missing Form' %}"
+        )
+
+        html = template.render(
+            Context({"request": self.make_request(), "form": "PARENT_FORM_SENTINEL"})
+        )
+
+        self.assertNotIn("micromodal", html)
+        self.assertNotIn("modal-link", html)
