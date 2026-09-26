@@ -1,6 +1,6 @@
 {% load static modal_tags page_tags i18n%}
 
-{% load wagtailsettings_tags %}
+{% load wagtailsettings_tags wagtailcore_tags %}
 {% get_settings %}
 
 <footer class="footer">
@@ -22,7 +22,7 @@
             
             <div class="two-columns-item social-container">
                 <span>{% translate "Sign up for our newsletter" %}</span>
-                <p>{% translate "Sign up to receive news and updates from CKAN. Your information will be used in accordance with our privacy policy. You may opt out at any time." %}</p>
+                <p>{% blocktranslate trimmed %}Sign up to receive news and updates from CKAN. Your information will be used in accordance with our{% endblocktranslate %} <a href="{% slugurl 'privacy-policy' %}">{% translate "privacy policy" %}</a>. {% blocktranslate trimmed %}You may opt out at any time.{% endblocktranslate %}</p>
                 <div class="footer-subscribe">
                     <form action="#" id="subscribe_form">
                         {% include "snippets/iframe.html" %}
@@ -94,6 +94,13 @@
                 <p>{% translate "Have questions or need support? Our team is ready to help you navigate and make the most of CKAN." %}</p>
                 {% form_modal %}
             </div>
+        </div>
+
+        <div class="footer-legal">
+            <ul class="footer-legal-links">
+                <li><a href="{% slugurl 'privacy-policy' %}">{% translate "Privacy Policy" %}</a></li>
+            </ul>
+            <p class="footer-copyright">{% blocktranslate trimmed %}CKAN assets are held in trust by Open Knowledge Foundation.{% endblocktranslate %}</p>
         </div>
     </div>
 </footer>
