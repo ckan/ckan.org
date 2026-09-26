@@ -8,7 +8,29 @@
 {% block head %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ _("Success Stories - CKAN") }}</title>
+    {% if og_story %}
+        <title>{{ og_story.org }} — {{ og_story.title }} | CKAN Success Stories</title>
+        <meta property="og:title" content="{{ og_story.org }} — {{ og_story.title }}">
+        <meta property="og:description" content="How {{ og_story.org }} used CKAN to open up data and drive impact. A CKAN success story.">
+        <meta property="og:url" content="https://ckan.org/success-stories/?story={{ og_story.slug|default:og_story.id }}">
+        <meta property="og:type" content="article">
+        <meta property="og:image" content="https://ckan.org/static/img/ckan-stories-og.png">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="{{ og_story.org }} — {{ og_story.title }}">
+        <meta name="twitter:description" content="How {{ og_story.org }} used CKAN to open up data and drive impact.">
+        <meta name="twitter:image" content="https://ckan.org/static/img/ckan-stories-og.png">
+    {% else %}
+        <title>{{ _("Success Stories - CKAN") }}</title>
+        <meta property="og:title" content="CKAN Success Stories">
+        <meta property="og:description" content="How governments, NGOs, and research institutions around the world have used CKAN to open up data and change how people access public information.">
+        <meta property="og:url" content="https://ckan.org/success-stories/">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="https://ckan.org/static/img/ckan-stories-og.png">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="CKAN Success Stories">
+        <meta name="twitter:description" content="How governments, NGOs, and research institutions around the world have used CKAN to open up data.">
+        <meta name="twitter:image" content="https://ckan.org/static/img/ckan-stories-og.png">
+    {% endif %}
 {% endblock head %}
 
 {% block content %}
@@ -21,7 +43,7 @@
                     <span class="breadcrumb-sep">/</span>
                     <span>{{ _("Success Stories") }}</span>
                 </div>
-                <div class="section-label">{{ _("Case Studies") }}</div>
+                <div class="section-label">{{ _("Success Stories") }}</div>
                 <h1>{{ _("Real portals.<br>Real <em>impact</em>.")|safe }}</h1>
                 <p class="page-hero-desc">{{ _("How governments, NGOs, and research institutions around the world have used CKAN to open up data and change how people access public information.") }}</p>
                 <div class="hero-actions">
