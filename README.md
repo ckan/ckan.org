@@ -67,7 +67,7 @@ ckan-org/
 
 </details>
 
-> ⚠️ **Note:** `streams/` is tracked in this repo but is a **legacy parallel copy** of the project, not the live tree. Always make changes in the repo-root apps (`contact/`, `blog/`, `home/`, `ckanorg/templates/`, …).
+> ℹ️ **Note:** `streams/` is a **live Wagtail app**, not a duplicate tree. It provides the shared snippet/block models used elsewhere — e.g. `CkanForCard`, `PoweredCard`, `PoweringImage`, `GitCardBlock` and `PoweringOpendataBlock` (referenced by `home/` and `ckan_pages/`). A previously duplicated project tree that had accumulated under `streams/` was removed to prevent stale-template drift.
 
 ## Install & Dependencies
 
