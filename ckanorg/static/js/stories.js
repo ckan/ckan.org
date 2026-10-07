@@ -198,10 +198,36 @@ function getCookie(name) {
   return "";
 }
 
+async function getStoriesRecaptchaToken() {
+  if (typeof getRecaptchaToken !== "function") return "";
+  try {
+    return await getRecaptchaToken("#stories-recaptcha");
+  } catch (e) {
+    return "";
+  }
+}
+
+function showStoriesFormError(containerId, message) {
+  var container = document.getElementById(containerId);
+  if (!container) return;
+  var el = container.querySelector(".stories-form-error");
+  if (!el) {
+    el = document.createElement("div");
+    el.className = "stories-form-error";
+    el.style.color = "#c0392b";
+    el.style.marginTop = "8px";
+    el.style.fontSize = "14px";
+    container.appendChild(el);
+  }
+  el.textContent = message;
+}
+
 async function submitNotify() {
   var input = document.getElementById("notifyEmail");
   var email = (input.value || "").trim();
   if (!email) return;
+
+  var token = await getStoriesRecaptchaToken();
 
   var res = await fetch("/success-stories/notify/subscribe/", {
     method: "POST",
@@ -209,10 +235,13 @@ async function submitNotify() {
       "Content-Type": "application/json",
       "X-CSRFToken": getCookie("csrftoken")
     },
-    body: JSON.stringify({ email: email })
+    body: JSON.stringify({ email: email, "g-recaptcha-response": token })
   });
 
-  if (!res.ok) return;
+  if (!res.ok) {
+    showStoriesFormError("notifyForm", "Something went wrong. Please try again.");
+    return;
+  }
 
   document.getElementById("notifyForm").style.display = "none";
   document.getElementById("notifySuccess").style.display = "block";
@@ -236,12 +265,16 @@ async function submitStoryForm() {
     portal_url: (document.getElementById('sfPortal').value || '').trim(),
     message: (document.getElementById('sfMessage').value || '').trim(),
   };
+  payload["g-recaptcha-response"] = await getStoriesRecaptchaToken();
   var res = await fetch('/success-stories/submit/', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken') },
     body: JSON.stringify(payload),
   });
-  if (!res.ok) return;
+  if (!res.ok) {
+    showStoriesFormError('submitFormFields', 'Something went wrong. Please try again.');
+    return;
+  }
   document.getElementById('submitFormFields').style.display = 'none';
   document.getElementById('submitFormSuccess').style.display = 'block';
 }

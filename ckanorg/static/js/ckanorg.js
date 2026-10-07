@@ -37,6 +37,7 @@ function submitAction(e, url, form_id){
     var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     var valid_email = re.test(email.val());
     var token = $(form_id).find('iframe').contents().find('#iframe-csrf').attr('value');
+    var recaptchaResponse = $(form_id).find('input[name="g-recaptcha-response"]').val() || '';
 
     if (!valid_name) {
         showError('Please enter your name', name);
@@ -58,6 +59,7 @@ function submitAction(e, url, form_id){
                 csrfmiddlewaretoken: token,
                 url: window.location.href,
                 dataType: "json",
+                'g-recaptcha-response': recaptchaResponse,
             },
             success: function(data){
                 email.val('');
@@ -76,10 +78,17 @@ function submitAction(e, url, form_id){
                 } else {
                     $("#thanks-text").html(data.message_content);
                 }
+                $(form_id).find('input[name="g-recaptcha-response"]').remove();
                 $('#thanks-modal').fadeIn();
             },
-            error: function(){
-                $("#thanks-text").html(message_error);
+            error: function(xhr){
+                $('#loading-spinner').html('');
+                var error_content = message_error;
+                if (xhr.responseJSON && xhr.responseJSON.message_content) {
+                    error_content = xhr.responseJSON.message_content;
+                }
+                $("#thanks-text").html(error_content);
+                $(form_id).find('input[name="g-recaptcha-response"]').remove();
                 $('#thanks-modal').fadeIn();
             }
         });

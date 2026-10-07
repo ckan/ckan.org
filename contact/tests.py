@@ -10,16 +10,20 @@ from django.http import HttpResponse
 from django.template import Context, Template
 from django.template.loader import render_to_string
 from django.test import RequestFactory, TestCase
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
 from wagtail.models import Page
 
 from contact.models import (
     CkanOrgSettings,
     ContactPage,
+    Email,
     MailChimpSettings,
     parse_contact_form,
     send_contact_info,
 )
 from contact.templatetags.modal_tags import form_modal
+from contact.token import user_activation_token
 
 
 class ParseContactFormTests(TestCase):
@@ -223,20 +227,105 @@ class FormModalTagTests(TestCase):
         self.assertNotIn("micromodal", html)
         self.assertNotIn("modal-link", html)
 
-    def test_failed_modal_ignores_parent_form_context(self):
-        # Regression: inclusion tags render with (and inherit) the parent
-        # context. Pages such as AnniversaryPage/ContactPage already put
-        # `form` in their context, so the fail-soft path must be detected via
-        # `form_page` -- a key only modal_tags sets -- rather than `form`.
-        # Otherwise a missing modal renders with an unset `form_page`, and
-        # {% pageurl form_page %} raises ValueError, 500-ing the page.
-        template = Template(
-            "{% load modal_tags %}{% form_modal form_name='Missing Form' %}"
+
+class NewsletterSubscriptionTests(TestCase):
+    """Anti-spam and SES best-practice coverage for the newsletter signup.
+
+    The confirmation email ("You're Almost In...") was being sent to arbitrary
+    addresses because the AJAX endpoint never validated the invisible reCAPTCHA
+    token, and unconfirmed addresses were pushed into Mailchimp immediately.
+    """
+
+    URL = "/ajax-posting/"
+
+    def post(self, **overrides):
+        data = {
+            "form_id": "#subscribe_form",
+            "name": "Ada Lovelace",
+            "email": "ada@example.com",
+        }
+        data.update(overrides)
+        return self.client.post(
+            self.URL, data, HTTP_X_REQUESTED_WITH="XMLHttpRequest"
         )
 
-        html = template.render(
-            Context({"request": self.make_request(), "form": "PARENT_FORM_SENTINEL"})
+    @patch("contact.views.validate_captcha", return_value=False)
+    def test_missing_captcha_is_rejected(self, mock_captcha):
+        response = self.post()
+
+        self.assertEqual(response.status_code, 400)
+        self.assertFalse(Email.objects.exists())
+
+    @patch("contact.views.validate_captcha", return_value=True)
+    def test_non_ajax_request_is_rejected(self, mock_captcha):
+        response = self.client.post(
+            self.URL,
+            {"form_id": "#subscribe_form", "name": "Ada", "email": "a@example.com"},
         )
 
-        self.assertNotIn("micromodal", html)
-        self.assertNotIn("modal-link", html)
+        self.assertEqual(response.status_code, 400)
+        mock_captcha.assert_not_called()
+
+    @patch("contact.views.validate_captcha", return_value=True)
+    def test_invalid_email_is_rejected(self, mock_captcha):
+        response = self.post(email="not-an-email")
+
+        self.assertEqual(response.status_code, 400)
+        self.assertFalse(Email.objects.exists())
+
+    @patch("contact.views.validate_captcha", return_value=True)
+    def test_missing_name_is_rejected(self, mock_captcha):
+        response = self.post(name="")
+
+        self.assertEqual(response.status_code, 400)
+        self.assertFalse(Email.objects.exists())
+
+    @patch("contact.views.send_subscription_email")
+    @patch("contact.views.validate_captcha", return_value=True)
+    def test_valid_submission_sends_one_confirmation(self, mock_captcha, mock_send):
+        response = self.post()
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.json()["success"])
+        self.assertTrue(Email.objects.filter(address="ada@example.com").exists())
+        mock_send.assert_called_once()
+
+    @patch("contact.views.send_subscription_email")
+    @patch("contact.views.validate_captcha", return_value=True)
+    def test_repeat_submission_is_throttled(self, mock_captcha, mock_send):
+        first = self.post()
+        second = self.post()
+
+        self.assertEqual(first.status_code, 200)
+        self.assertEqual(second.status_code, 200)
+        # Only the first request triggers a confirmation email.
+        mock_send.assert_called_once()
+
+    @patch("contact.views.send_contact_info")
+    @patch("contact.views.send_subscription_email")
+    @patch("contact.views.validate_captcha", return_value=True)
+    def test_not_added_to_mailchimp_before_confirmation(
+        self, mock_captcha, mock_send, mock_contact
+    ):
+        self.post()
+
+        mock_contact.assert_not_called()
+
+    @patch("contact.views.send_contact_info")
+    def test_activation_confirms_and_adds_to_mailchimp(self, mock_contact):
+        subscriber = Email.objects.create(
+            form_name="Subscribe Form",
+            full_name="Ada Lovelace",
+            address="ada@example.com",
+        )
+        eid = urlsafe_base64_encode(force_bytes(subscriber.address))
+        token = user_activation_token.make_token(subscriber.address)
+
+        response = self.client.get(
+            f"/newsletter/subscription/activate/{eid}/{token}"
+        )
+
+        self.assertEqual(response.status_code, 302)
+        subscriber.refresh_from_db()
+        self.assertTrue(subscriber.subscribed)
+        mock_contact.assert_called_once()

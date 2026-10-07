@@ -1,18 +1,17 @@
-import datetime
-from email.mime.image import MIMEImage
 import logging
 import os
+import smtplib
 import traceback
+from email.mime.image import MIMEImage
 
 from django.conf import settings
-from django.template.loader import render_to_string
-from django.utils.http import urlsafe_base64_encode
-from django.utils.encoding import force_bytes
 from django.core.mail import EmailMessage, send_mail
+from django.template.loader import render_to_string
+from django.utils import timezone
+from django.utils.encoding import force_bytes
 from django.utils.html import strip_tags
-
+from django.utils.http import urlsafe_base64_encode
 from managers.models import Manager
-
 
 EMAIL_FROM = "comms@ckan.org"
 EMAIL_SUBJECT = "Form submission from ckan.org"
@@ -55,18 +54,26 @@ def send_subscription_email(email: str, current_site: str, token: str) -> bool:
         complete_email = EmailMessage(
             subject=subject,
             body=message,
-            #from_email=EMAIL_FROM,
-            to=[email]
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[email],
+            # The From address is unmonitored ("noreply@"), so point replies at a
+            # mailbox the team actually reads. Giving mailbox providers a working
+            # unsubscribe path (and a real reply channel) reduces the chance a
+            # recipient hits "Report spam", which is what damages SES reputation.
+            reply_to=[EMAIL_FROM],
+            headers={
+                "List-Unsubscribe": f"<mailto:{EMAIL_FROM}?subject=Unsubscribe>",
+            },
         )
         complete_email.content_subtype = "html"
         for f in EMAIL_IMAGES:
-            fp = open(os.path.join(settings.BASE_DIR, f"static/img/{f}"), "rb")
+            fp = open(os.path.join(settings.BASE_DIR, f"static/img/{f}"), "rb")  # noqa: SIM115
             msg_img = MIMEImage(fp.read())
             fp.close()
-            msg_img.add_header("Content-ID", "<{}>".format(f))
-            complete_email.attach(msg_img)
+            msg_img.add_header("Content-ID", f"<{f}>")
+            complete_email.attach(msg_img) # type: ignore
         complete_email.send()
-    except Exception:
+    except (OSError, smtplib.SMTPException):
         logging.getLogger("error").error(traceback.format_exc())
         return False
 
@@ -90,7 +97,7 @@ def send_managers_email(form_name: str, email: str) -> bool:
     send_to = [x.email for x in Manager.objects.all()]
     html_message = render_to_string("mail.html", {
         "form_name": form_name,
-        "time": datetime.now().strftime("%A, %d %B %Y, %I:%M%p"),
+        "time": timezone.now().strftime("%A, %d %B %Y, %I:%M%p"),
         "email": email,
     })
     plain_message = strip_tags(html_message)
@@ -104,7 +111,7 @@ def send_managers_email(form_name: str, email: str) -> bool:
             fail_silently=False,
             html_message=html_message
         )
-    except Exception:
+    except (OSError, smtplib.SMTPException):
         logging.getLogger("error").error(traceback.format_exc())
         return False
 
