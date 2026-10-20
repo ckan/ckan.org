@@ -1,0 +1,12 @@
+{% comment %}
+Hidden honeypot field shared by the public forms (see contact/antispam.py).
+
+Humans never see or focus it. A real browser always submits it empty; a bot
+script either fills it in or omits it completely - both are silently dropped
+server side. Pass `antispam_uid` when a page contains the form more than once so
+the element ids stay unique.
+{% endcomment %}
+<div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
+    <label for="id_website_{{ antispam_uid|default:'form' }}">Website</label>
+    <input type="text" name="website" id="id_website_{{ antispam_uid|default:'form' }}" value="" tabindex="-1" autocomplete="off">
+</div>

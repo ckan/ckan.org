@@ -24,6 +24,7 @@
         <br>
     {% endfor %}
     <div id="recaptcha-container-contact-page-form"></div>
+    {% include "snippets/honeypot_field.html" with antispam_uid="contact-page-form" %}
     <input type="submit" hidden>
     <button type="button" class="captcha-submit submit-btn" id="contact-page-button" data-form-id="contact-page-form">
         {{ _('Submit') }}

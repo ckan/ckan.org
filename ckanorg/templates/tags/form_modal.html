@@ -28,6 +28,7 @@
                             {{ form_page.intro|richtext }}
                         </div>
                         {{ form.as_p }}
+                        {% include "snippets/honeypot_field.html" with antispam_uid=form_id %}
                         {% if page.pk != form_page.pk %}
                             <input name="source-page-id" type="hidden" value="{{ page.pk }}">
                         {% endif %}

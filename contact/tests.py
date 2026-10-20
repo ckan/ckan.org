@@ -12,12 +12,14 @@ from django.template.loader import render_to_string
 from django.test import RequestFactory, TestCase
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
+from managers.models import Manager
 from wagtail.models import Page
 
 from contact.models import (
     CkanOrgSettings,
     ContactPage,
     Email,
+    FormField,
     MailChimpSettings,
     parse_contact_form,
     send_contact_info,
@@ -243,6 +245,8 @@ class NewsletterSubscriptionTests(TestCase):
             "form_id": "#subscribe_form",
             "name": "Ada Lovelace",
             "email": "ada@example.com",
+            # Present and empty, exactly like a real browser submission.
+            "website": "",
         }
         data.update(overrides)
         return self.client.post(
@@ -329,3 +333,122 @@ class NewsletterSubscriptionTests(TestCase):
         subscriber.refresh_from_db()
         self.assertTrue(subscriber.subscribed)
         mock_contact.assert_called_once()
+
+
+class HoneypotTests(TestCase):
+    """The hidden honeypot is the real bot gate for the public forms.
+
+    reCAPTCHA alone did not stop the spam: an automated browser obtains a valid
+    token without solving any challenge. A browser always submits the hidden
+    "website" field empty, while bot scripts either fill it in or leave it out.
+    """
+
+    def setUp(self):
+        Manager.objects.create(name="Admin", email="admin@example.com")
+        self.home = Page.objects.get(slug="home")
+        self.page = ContactPage(
+            title="Contact us",
+            slug=f"contact-{uuid.uuid4().hex}",
+            form_name="Steward Form",
+            subject="New contact",
+        )
+        self.home.add_child(instance=self.page)
+
+        fields = [
+            ("Your name", "your_name"),
+            ("Your e-mail address", "your_e_mail_address"),
+        ]
+        for order, (label, clean_name) in enumerate(fields, 1):
+            # ``page.form_fields.create()`` only defers to the page's cluster
+            # state; create the row directly so the request sees it.
+            FormField.objects.create(
+                page=self.page,
+                label=label,
+                clean_name=clean_name,
+                field_type="singleline",
+                required=True,
+                sort_order=order,
+            )
+
+    def form_data(self, **overrides):
+        data = {
+            "your_name": "Ada Lovelace",
+            "your_e_mail_address": "ada@example.com",
+            "website": "",
+        }
+        data.update(overrides)
+        return data
+
+    def subscribe(self, **overrides):
+        data = {
+            "form_id": "#subscribe_form",
+            "name": "Ada Lovelace",
+            "email": "ada@example.com",
+            "website": "",
+        }
+        data.update(overrides)
+        return self.client.post(
+            "/ajax-posting/", data, HTTP_X_REQUESTED_WITH="XMLHttpRequest"
+        )
+
+    @patch("contact.models.send_mail")
+    @patch("contact.models.validate_captcha", return_value=True)
+    def test_real_submission_is_accepted(self, mock_captcha, mock_send_mail):
+        response = self.client.post(self.page.url, self.form_data())
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(Email.objects.filter(address="ada@example.com").exists())
+        mock_send_mail.assert_called_once()
+
+    @patch("contact.models.send_mail")
+    @patch("contact.models.validate_captcha", return_value=True)
+    def test_filled_honeypot_is_dropped(self, mock_captcha, mock_send_mail):
+        response = self.client.post(
+            self.page.url, self.form_data(website="https://spam.example")
+        )
+
+        # The bot gets a success-looking landing page...
+        self.assertEqual(response.status_code, 200)
+        # ...but nothing is stored or e-mailed.
+        self.assertFalse(Email.objects.exists())
+        mock_send_mail.assert_not_called()
+
+    @patch("contact.models.send_mail")
+    @patch("contact.models.validate_captcha", return_value=True)
+    def test_missing_honeypot_is_dropped(self, mock_captcha, mock_send_mail):
+        data = self.form_data()
+        data.pop("website")
+
+        response = self.client.post(self.page.url, data)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse(Email.objects.exists())
+        mock_send_mail.assert_not_called()
+
+    @patch("contact.views.send_subscription_email")
+    @patch("contact.views.validate_captcha", return_value=True)
+    def test_subscribe_with_filled_honeypot_is_dropped(self, mock_captcha, mock_send):
+        response = self.subscribe(website="https://spam.example")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.json()["success"])
+        self.assertFalse(Email.objects.exists())
+        mock_send.assert_not_called()
+
+    @patch("contact.views.send_subscription_email")
+    @patch("contact.views.validate_captcha", return_value=True)
+    def test_subscribe_without_honeypot_is_dropped(self, mock_captcha, mock_send):
+        data = {
+            "form_id": "#subscribe_form",
+            "name": "Ada Lovelace",
+            "email": "ada@example.com",
+        }
+
+        response = self.client.post(
+            "/ajax-posting/", data, HTTP_X_REQUESTED_WITH="XMLHttpRequest"
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.json()["success"])
+        self.assertFalse(Email.objects.exists())
+        mock_send.assert_not_called()

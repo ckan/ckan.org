@@ -21,6 +21,7 @@ from wagtail.fields import RichTextField
 from wagtail.models import Page
 from wagtailcache.cache import WagtailCacheMixin
 
+from .antispam import honeypot_triggered
 from .decorators import validate_captcha
 
 
@@ -227,6 +228,13 @@ class ContactPage(WagtailCacheMixin, AbstractEmailForm):
             form = self.get_form(
                 request.POST, request.FILES, page=self, user=request.user
             )
+
+            # reCAPTCHA is not a reliable bot gate: invisible reCAPTCHA hands
+            # out valid tokens to automated browsers, so spam passed it. The
+            # hidden honeypot is filled in (or omitted) by bot scripts and
+            # dropped silently - an error response only makes them retry.
+            if honeypot_triggered(request.POST):
+                return self.render_landing_page(request, None, *args, **kwargs)
 
             if not validate_captcha(request):
                 return render(request, "recaptcha_error.html")
