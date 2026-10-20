@@ -38,6 +38,8 @@ function submitAction(e, url, form_id){
     var valid_email = re.test(email.val());
     var token = $(form_id).find('iframe').contents().find('#iframe-csrf').attr('value');
     var recaptchaResponse = $(form_id).find('input[name="g-recaptcha-response"]').val() || '';
+    // Hidden honeypot field (see contact/antispam.py). Empty for humans.
+    var honeypot = $(form_id).find('input[name="website"]').val() || '';
 
     if (!valid_name) {
         showError('Please enter your name', name);
@@ -60,6 +62,7 @@ function submitAction(e, url, form_id){
                 url: window.location.href,
                 dataType: "json",
                 'g-recaptcha-response': recaptchaResponse,
+                'website': honeypot,
             },
             success: function(data){
                 email.val('');

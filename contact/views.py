@@ -13,6 +13,7 @@ from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_decode
 from django.views.generic import TemplateView
 
+from .antispam import honeypot_triggered
 from .decorators import validate_captcha
 from .email import send_subscription_email
 from .models import Email, Message, send_contact_info
@@ -130,6 +131,18 @@ def ajax_unsubscribe(request):
 def ajax_email(request):
     if request.headers.get("x-requested-with") != "XMLHttpRequest":
         return _error("Invalid request.")
+
+    # Invisible reCAPTCHA hands valid tokens to automated browsers (see
+    # contact/antispam.py), so the hidden honeypot is the real bot gate here.
+    # Answer like a successful signup so a bot does not retry; nothing is
+    # stored and no confirmation e-mail is sent.
+    if honeypot_triggered(request.POST):
+        return JsonResponse({
+            "success": True,
+            "message_content": _get_message(
+                "thanks-message", "<p>We have sent you a confirmation email!</p>"
+            ),
+        })
 
     # The newsletter form renders an invisible reCAPTCHA client-side, but until
     # now the token was never checked server-side, so bots could POST directly
