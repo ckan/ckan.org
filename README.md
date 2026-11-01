@@ -152,11 +152,9 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-> 💡 **Helpful — avoid first-run `DoesNotExist` crashes on a fresh database**
+> 💡 **Helpful — first run on a fresh database**
 >
-> If you start from an empty database, the front end crashes with `Page.DoesNotExist` on the very first load: the footer template tag `{% add_blog_post_url %}` in `ckanorg/templates/footer.html` calls `Page.objects.get(slug='blog')`, which requires the Wagtail page tree to already exist.
->
-> To avoid this, use the shared dummy `db.sqlite3` above, **or**, when migrating from scratch, run `python manage.py createsuperuser` and create the core top-level pages (at minimum a Blog listing page with slug `blog`, the home page and the Wagtail site record) in the admin **before** opening `http://127.0.0.1:8000/`.
+> The `{% add_blog_post_url %}` footer tag no longer raises `Page.DoesNotExist` when the Blog listing page is missing: it falls back to `/admin/`. You can still create the core top-level pages (at minimum a Blog listing page with slug `blog`, the home page and the Wagtail site record) in the admin after `python manage.py createsuperuser` to get fully populated navigation.
 
 #### 9. Disable the Wagtail cache for local development:
 

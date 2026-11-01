@@ -76,8 +76,10 @@ def forks_count():
 
 @register.simple_tag()
 def add_blog_post_url():
-    blog_listing_page_id = Page.objects.get(slug='blog').id
-    return f'/admin/pages/{blog_listing_page_id}/add_subpage/'
+    blog_listing_page = Page.objects.filter(slug='blog').first()
+    if blog_listing_page:
+        return f'/admin/pages/{blog_listing_page.id}/add_subpage/' # type: ignore
+    return '/admin/'
 
 @register.simple_tag()
 def is_editor_or_stronger(request):
