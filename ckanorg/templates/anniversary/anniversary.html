@@ -320,7 +320,7 @@
                         <div class="way"><div class="way-icon">📣</div><div class="way-text"><strong>{{ _('Spread the word') }}</strong><span>{{ _("Share CKAN's story with your network") }}</span></div></div>
                     </div>
                 </div>
-                <div class="involve-form">
+                <div class="involve-form{% if success %} is-sent{% endif %}">
                     <h3>{{ _('Send us a message') }}</h3>
                     <p>{{ _('We read every message and will get back to you personally.') }}</p>
                     <form method="post" id="joinForm">
@@ -339,6 +339,10 @@
                             <option value="exploring">{{ _("I'm just learning about CKAN") }}</option>
                         </select>
                         <textarea name="MESSAGE" placeholder="{{ _('Tell us your story or how you`d like to get involved…') }}"></textarea>
+                        {% include "snippets/honeypot_field.html" with antispam_uid="anniversary" %}
+                        <p class="form-error" id="joinFormError" role="alert"{% if not form_errors %} hidden{% endif %}>
+                            {% if form_errors.captcha %}{{ form_errors.captcha.0 }}{% elif form_errors %}{{ _("Please check your name and email address and try again.") }}{% endif %}
+                        </p>
                         <div id="recaptcha-container-joinForm"></div>
                         <input type="submit" hidden>
                         <button type="button" class="captcha-submit submit-btn" id="join-button" data-form-id="joinForm">
@@ -348,7 +352,7 @@
                             {{ _('No spam, ever. Your information is used in accordance with our Privacy Policy.') }}
                         </div>
                     </form>
-                    <div class="success-msg" id="successMsg">
+                    <div class="success-msg" id="successMsg" role="status">
                         <div class="big">🎉</div>
                         <h3>{{ _('Thank you!') }}</h3>
                         <p>{{ _("We'll be in touch soon. Together we'll make this 20th anniversary unforgettable.") }}</p>
