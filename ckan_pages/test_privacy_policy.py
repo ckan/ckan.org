@@ -44,6 +44,8 @@ class PrivacyPolicyTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Google Analytics 4")
-        self.assertContains(response, "<strong>_ga</strong>", html=False)
+        self.assertContains(response, "<td>_ga, _ga_&lt;ID&gt;</td>", html=False)
+        self.assertNotContains(response, "Performance of a contract")
+        self.assertContains(response, "Send success story notification emails")
         self.assertNotContains(response, "Plausible")
         self.assertContains(response, "6 November 2026")

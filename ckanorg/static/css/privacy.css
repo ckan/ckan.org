@@ -393,3 +393,9 @@
   .privacy a,
   .privacy-toc a { transition: none; }
 }
+
+/* Summary box at the top (uses .privacy-note styling) */
+.privacy-summary { margin-bottom: 24px; }
+.privacy-summary ul { margin: 8px 0 0; padding-left: 20px; list-style: disc; }
+.privacy-summary li { margin: 4px 0; }
+.privacy-section .privacy-prose + .privacy-subsection { margin-top: 28px; }
