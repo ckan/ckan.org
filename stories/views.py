@@ -3,6 +3,7 @@ import logging
 import smtplib
 
 from contact.decorators import verify_recaptcha_token
+from contact.models import MailChimpSettings
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
@@ -11,6 +12,7 @@ from django.db import DatabaseError
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 
+from .mailchimp import sync_story_subscriber
 from .models import StoriesNotificationEmail, StoriesRecipientsEmail, StorySubmission
 
 logger = logging.getLogger("error_logger")
@@ -54,6 +56,9 @@ def subscribe_story_notifications(request):
         return JsonResponse({"ok": False, "error": "Invalid email"}, status=400)
 
     _, created = StoriesNotificationEmail.objects.get_or_create(email=email)
+    # Also on repeat sign-ups: the upsert is idempotent and retries a sync
+    # that failed the first time.
+    sync_story_subscriber(MailChimpSettings.for_request(request), email)
     return JsonResponse({"ok": True, "created": created})
 
 

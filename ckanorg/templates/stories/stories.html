@@ -245,10 +245,18 @@
                 </div>
                 <div class="notify-success" id="notifySuccess">
                     <div class="big">&#x2705;</div>
+                    {% if settings.contact.MailChimpSettings.stories_audience_id %}
+                    {# Mailchimp double opt-in: a confirmation e-mail is on its way. #}
+                    <h3>{{ _("Check your inbox") }}</h3>
+
+                    <p>
+                        {% trans "Confirm your email and we'll drop you a note when a new story goes live." %}<br>
+                    {% else %}
                     <h3>{{ _("You're on the list") }}</h3>
 
                     <p>
                         {% trans "We'll drop you a note when a new story goes live." %}<br>
+                    {% endif %}
                         {% trans "That's it — no newsletters, no noise." %}
                     </p>
                 </div>

@@ -7,4 +7,5 @@
 <ol>
     <li>1. Create the following two additional merged fields in your MailChimp audience: COMPANY, FORM</li>
     <li>2. Use segmentation MailChimp functionality (for example, by FORM field) for contacts groupping</li>
+    <li>3. "Success stories audience ID" must be a separate audience: "Get notified of new stories" sign-ups were promised story updates only, no newsletters. New sign-ups are added as "pending" and confirm via Mailchimp's own opt-in email. To sync sign-ups collected before this was set, run <code>python manage.py sync_story_subscribers</code>.</li>
 </ol>
