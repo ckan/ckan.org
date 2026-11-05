@@ -1,5 +1,6 @@
 #dropbtn-Solutions,
-#dropbtn-Support {
+#dropbtn-Support,
+#dropbtn-Showcase {
   display: flex;
   gap: 8px;
   width: 100%;
@@ -25,7 +26,8 @@
 }
 
 #dropbtn-Solutions.active,
-#dropbtn-Support.active {
+#dropbtn-Support.active,
+#dropbtn-Showcase.active {
     color: $dark-black;
     background: url("../img/arr-black.png") no-repeat;
     background-position: right 20px bottom 3px;
@@ -33,20 +35,24 @@
 
 #dropbtn-Solutions.opened,
 #dropbtn-Support.opened,
+#dropbtn-Showcase.opened,
 #dropbtn-Solutions.opened:hover,
-#dropbtn-Support.opened:hover {
+#dropbtn-Support.opened:hover,
+#dropbtn-Showcase.opened:hover {
     color: $dark-black;
     background: url("../img/arr-black-up.png") no-repeat;
     background-position: right 20px bottom 3px;
 }
 
 #dropbtn-Solutions:focus,
-#dropbtn-Support:focus {
+#dropbtn-Support:focus,
+#dropbtn-Showcase:focus {
   outline: 0;
 }
 
 #dropbtn-Solutions:hover,
-#dropbtn-Support:hover {
+#dropbtn-Support:hover,
+#dropbtn-Showcase:hover {
   color: $dark-black;
   background: url("../img/arr-black.png") no-repeat;
   background-position: right 20px bottom 3px;

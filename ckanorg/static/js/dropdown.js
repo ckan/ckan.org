@@ -1,33 +1,35 @@
-var support_dropdown = document.getElementById("Support_dropdown");
-var support_btn = document.getElementById("dropbtn-Support");
-var solutions_dropdown = document.getElementById("Solutions_dropdown");
-var solutions_btn = document.getElementById("dropbtn-Solutions");
+// Header nav dropdowns (Solutions, Support, Showcase). Each button
+// "#dropbtn-<Name>" toggles "#<Name>_dropdown". Only one menu is open at a
+// time, and a click anywhere outside a dropdown button closes them all.
 
-function clickDropdown(inp) {
-    if(inp == "Support") {
-      support_dropdown.classList.toggle("show");
-      support_btn.classList.toggle("opened");
-      solutions_dropdown.classList.remove("show");
-      solutions_btn.classList.remove("opened");
-    } else if (inp = "Solutions"){
-      solutions_dropdown.classList.toggle("show");
-      solutions_btn.classList.toggle("opened");
-      support_dropdown.classList.remove("show");
-      support_btn.classList.remove("opened");
+function setDropdownOpen(button, open) {
+    var menu = document.getElementById(button.id.replace(/^dropbtn-/, '') + '_dropdown');
+    if (menu) {
+        menu.classList.toggle('show', open);
     }
-  }
+    button.classList.toggle('opened', open);
+    button.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
 
-  window.addEventListener("click", function(event) {
-    if (!event.target.matches('#dropbtn-Solutions') && !event.target.matches('#dropbtn-Support')) {
-      var dropdowns = document.getElementsByClassName("dropdown-content");
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')) {
-          openDropdown.classList.remove('show');
+function closeDropdowns(except) {
+    document.querySelectorAll('.dropdown-menu-item > button[id^="dropbtn-"]').forEach(function (button) {
+        if (button !== except) {
+            setDropdownOpen(button, false);
         }
-      }
-      support_btn.classList.remove("opened");
-      solutions_btn.classList.remove("opened");
+    });
+}
+
+function clickDropdown(name) {
+    var button = document.getElementById('dropbtn-' + name);
+    if (!button) {
+        return;
+    }
+    closeDropdowns(button);
+    setDropdownOpen(button, !button.classList.contains('opened'));
+}
+
+window.addEventListener('click', function (event) {
+    if (!event.target.closest('.dropdown-menu-item > button[id^="dropbtn-"]')) {
+        closeDropdowns(null);
     }
 });
