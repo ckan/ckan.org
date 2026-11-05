@@ -391,6 +391,7 @@ hr.divider { border: none; border-top: 1px solid var(--border); }
     .involve-form { background: var(--bg-soft); border: 1px solid var(--border); border-radius: 16px; padding: 36px; }
     .involve-form h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
     .involve-form p { font-size: 13px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
+    .involve-form .form-error { color: var(--red-dark); margin-bottom: 0; }
     form { display: flex; flex-direction: column; gap: 12px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     input, textarea, select { background: #fff; border: 1.5px solid var(--border); border-radius: 8px; padding: 11px 14px; color: var(--text); font-size: 14px; font-family: inherit; width: 100%; transition: border-color 0.2s; -webkit-appearance: none; }
@@ -401,11 +402,14 @@ hr.divider { border: none; border-top: 1px solid var(--border); }
     input[type=email]:-webkit-autofill:active, input[type=email]:-webkit-autofill:focus, input[type=email]:-webkit-autofill:hover, input[type=email]:-webkit-autofill { box-shadow: unset; -webkit-text-fill-color: var(--text); }
     .submit-btn { background: var(--red); color: white; border: none; border-radius: 8px; padding: 13px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; transition: background 0.2s; width: 100%; }
     .submit-btn:hover { background: var(--red-dark); }
+    .submit-btn:disabled { opacity: 0.6; cursor: progress; }
     .form-note { font-size: 11px; color: #bbb; text-align: center; }
     .success-msg { display: none; text-align: center; padding: 32px 0; }
     .success-msg .big { font-size: 44px; margin-bottom: 12px; }
     .success-msg h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
     .success-msg p { font-size: 14px; color: var(--muted); }
+    .involve-form.is-sent form { display: none; }
+    .involve-form.is-sent .success-msg { display: block; }
 
 
     /* ══════════════════════════════════

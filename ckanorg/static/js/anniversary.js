@@ -79,12 +79,53 @@ function prefillStoryForm() {
 }
 
 
+// Submitted in the background so the visitor stays on the form and only sees
+// "Thank you" once the server has actually accepted the message. captcha.js
+// fires this submit event after it has attached a fresh reCAPTCHA token.
+// Without JS the form still posts normally and the page renders the result.
 const joinForm = document.getElementById('joinForm');
-joinForm.addEventListener('submit', function (event) {
-    event.preventDefault();
-    joinForm.style.display = 'none';
-    document.getElementById('successMsg').style.display = 'block';
-    setTimeout(function() {
-        joinForm.submit()
-    }, 3000);
-});
+if (joinForm) {
+    const joinButton = document.getElementById('join-button');
+    const joinError = document.getElementById('joinFormError');
+
+    function showJoinError(message) {
+        joinError.textContent = message;
+        joinError.hidden = false;
+        joinButton.disabled = false;
+        // reCAPTCHA tokens are single-use: get a new one for the retry.
+        if (typeof grecaptcha !== 'undefined' && typeof recaptchaWidgets !== 'undefined'
+                && recaptchaWidgets.joinForm !== undefined) {
+            grecaptcha.reset(recaptchaWidgets.joinForm);
+        }
+    }
+
+    joinForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        joinButton.disabled = true;
+        joinError.hidden = true;
+
+        fetch(window.location.pathname, {
+            method: 'POST',
+            body: new FormData(joinForm),
+            headers: { 'X-Requested-With': 'XMLHttpRequest' },
+            credentials: 'same-origin',
+        })
+            .then(function (response) {
+                return response.json()
+                    .catch(function () { return {}; })
+                    .then(function (data) {
+                        if (response.ok && data.ok) {
+                            joinForm.closest('.involve-form').classList.add('is-sent');
+                            return;
+                        }
+                        const captchaError = data.errors && data.errors.captcha;
+                        showJoinError(captchaError
+                            ? captchaError[0]
+                            : 'Please check your name and email address and try again.');
+                    });
+            })
+            .catch(function () {
+                showJoinError('Your message could not be sent. Please check your connection and try again.');
+            });
+    });
+}
