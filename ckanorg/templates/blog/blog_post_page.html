@@ -103,8 +103,7 @@
         </div>
 
         {% if page.main_image.file.name != "original_images/default" and not page.imported %}
-            {% image page.main_image fill-1440x600 as image %}
-            <img src="{{ image.url }}" alt="{{ image.alt }}">
+            {% srcset_image page.main_image fill-{1440x600,2880x1200} sizes="(min-width: 1440px) 1440px, 100vw" %}
         {% endif %}
     </section>
 
