@@ -103,7 +103,7 @@
 
       <div class="privacy-subsection">
         <p class="privacy-subsection-title">Analytics data</p>
-        <p class="privacy-prose-p">We collect aggregated, anonymised information about how visitors use ckan.org. This does not include personally identifiable information. See <a href="#analytics-cookies">Section 5</a> for details.</p>
+        <p class="privacy-prose-p">We use Google Analytics to understand how visitors use ckan.org: pages visited, how you arrived, approximate location (country/city), and device and browser type, linked to a random identifier stored in a cookie. It does not include your name or email address. See <a href="#analytics-cookies">Section 5</a> for details.</p>
       </div>
     </section>
 
@@ -151,7 +151,7 @@
             </tr>
             <tr>
               <td>Understand how the site is used</td>
-              <td>Anonymised analytics data</td>
+              <td>Google Analytics usage data (cookie identifier, pages visited, device, approximate location)</td>
               <td>Legitimate interests</td>
             </tr>
             <tr>
@@ -192,12 +192,12 @@
 
       <div class="privacy-subsection">
         <p class="privacy-subsection-title">Analytics</p>
-        <p class="privacy-prose-p">ckan.org uses <strong>Plausible Analytics</strong>, a privacy-friendly analytics tool that does not use cookies, does not collect personally identifiable information, and does not track visitors across websites. Plausible is compliant with GDPR, CCPA, and PECR. Aggregated usage data (such as page views and referral sources) helps us understand how the site is used and improve it.</p>
+        <p class="privacy-prose-p">ckan.org uses <strong>Google Analytics 4</strong> to understand how the site is used and to improve it. Google Analytics sets two first-party cookies, <strong>_ga</strong> and <strong>_ga_&lt;ID&gt;</strong>, which store a random identifier so that visits from the same browser can be counted together; they expire after up to 2 years. It collects pages visited, referring sites, approximate location (derived from your IP address, which Google Analytics 4 does not store), and device and browser information. Google processes this data on our behalf; see <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>. You can opt out with the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics opt-out browser add-on</a> or by blocking cookies in your browser.</p>
       </div>
 
       <div class="privacy-subsection">
         <p class="privacy-subsection-title">Essential cookies</p>
-        <p class="privacy-prose-p">We use session cookies that are strictly necessary for the website to function — for example, to maintain a logged-in session for site administrators. These cookies are deleted when you close your browser and do not track you.</p>
+        <p class="privacy-prose-p">We set two cookies that are strictly necessary for the website to work: <strong>csrftoken</strong>, which protects our forms against cross-site request forgery (expires after 1 year), and, for site administrators only, <strong>sessionid</strong>, which keeps you logged in (expires after 2 weeks). They are not used to track you.</p>
       </div>
 
       <div class="privacy-subsection">
@@ -205,8 +205,13 @@
         <p class="privacy-prose-p">Our contact and subscription forms use Google reCAPTCHA to protect against automated spam submissions. reCAPTCHA may set cookies and collect information about your device and interactions with the form. This processing is governed by <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</p>
       </div>
 
+      <div class="privacy-subsection">
+        <p class="privacy-subsection-title">Embedded videos</p>
+        <p class="privacy-prose-p">Some success stories include embedded YouTube videos. When you open a story with a video, YouTube (Google) may set cookies and collect information about your device and viewing. This processing is governed by <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</p>
+      </div>
+
       <div class="privacy-note">
-        <strong>No cross-site tracking.</strong> We do not use advertising cookies, social media tracking pixels, or any third-party cookies that monitor your activity across other websites.
+        <strong>No advertising tracking.</strong> We do not use advertising cookies or social media tracking pixels, and we do not sell or share your data for advertising.
       </div>
     </section>
 
@@ -241,14 +246,34 @@
               <td>Your IP address / browser headers</td>
             </tr>
             <tr>
-              <td>Plausible Analytics</td>
-              <td>Anonymised website analytics</td>
-              <td>No personal data</td>
+              <td>Google Analytics</td>
+              <td>Website usage analytics</td>
+              <td>Cookie identifier, pages visited, device &amp; approximate location</td>
+            </tr>
+            <tr>
+              <td>Google Fonts</td>
+              <td>Web fonts</td>
+              <td>Your IP address / browser headers</td>
+            </tr>
+            <tr>
+              <td>BootstrapCDN</td>
+              <td>Icon font</td>
+              <td>Your IP address / browser headers</td>
+            </tr>
+            <tr>
+              <td>YouTube</td>
+              <td>Videos embedded in success stories</td>
+              <td>Device &amp; viewing data, when a video is shown</td>
             </tr>
             <tr>
               <td>Mailchimp</td>
-              <td>Newsletter and CKAN Monthly Live email delivery</td>
+              <td>Newsletter, CKAN Monthly Live and success story notification emails</td>
               <td>Name, email address</td>
+            </tr>
+            <tr>
+              <td>Amazon Web Services (SES)</td>
+              <td>Sending confirmation and notification emails</td>
+              <td>Email address, message content</td>
             </tr>
           </tbody>
         </table>
@@ -299,8 +324,8 @@
               <td>Up to 90 days</td>
             </tr>
             <tr>
-              <td>Analytics data</td>
-              <td>Aggregated and anonymised; retained indefinitely</td>
+              <td>Google Analytics data</td>
+              <td>Up to 14 months (Google Analytics data retention setting)</td>
             </tr>
           </tbody>
         </table>
@@ -368,8 +393,7 @@
         <h2 class="privacy-section-title">International transfers</h2>
       </div>
       <div class="privacy-prose">
-        <p>As a global open-source project, some of the third-party services we use (such as Google reCAPTCHA) may process data outside the United Kingdom or the European Economic Area. Where this occurs, we ensure that appropriate safeguards are in place — such as Standard Contractual Clauses or adequacy decisions — as required by UK GDPR and EU GDPR.</p>
-        <p>Plausible Analytics is based in the European Union and processes all data within the EU, in compliance with GDPR.</p>
+        <p>As a global open-source project, some of the third-party services we use, including Google (Analytics, reCAPTCHA, Fonts, YouTube) and Mailchimp, which are based in the United States, may process data outside the United Kingdom or the European Economic Area. Where this occurs, we ensure that appropriate safeguards are in place — such as Standard Contractual Clauses or adequacy decisions — as required by UK GDPR and EU GDPR.</p>
       </div>
     </section>
 

@@ -22,7 +22,9 @@
             
             <div class="two-columns-item social-container">
                 <span>{% translate "Sign up for our newsletter" %}</span>
-                <p>{% blocktranslate trimmed %}Sign up to receive news and updates from CKAN. Your information will be used in accordance with our{% endblocktranslate %} <a href="{% slugurl 'privacy-policy' %}">{% translate "privacy policy" %}</a>. {% blocktranslate trimmed %}You may opt out at any time.{% endblocktranslate %}</p>
+                {% slugurl 'privacy-policy' as privacy_url %}
+                {# Link only once the Privacy Policy page exists, so nothing points to "None" before it is published. #}
+                <p>{% blocktranslate trimmed %}Sign up to receive news and updates from CKAN. Your information will be used in accordance with our{% endblocktranslate %} {% if privacy_url %}<a href="{{ privacy_url }}">{% translate "privacy policy" %}</a>{% else %}{% translate "privacy policy" %}{% endif %}. {% blocktranslate trimmed %}You may opt out at any time.{% endblocktranslate %}</p>
                 <div class="footer-subscribe">
                     <form action="#" id="subscribe_form">
                         {% include "snippets/iframe.html" %}
@@ -98,9 +100,11 @@
         </div>
 
         <div class="footer-legal">
+            {% if privacy_url %}
             <ul class="footer-legal-links">
-                <li><a href="{% slugurl 'privacy-policy' %}">{% translate "Privacy Policy" %}</a></li>
+                <li><a href="{{ privacy_url }}">{% translate "Privacy Policy" %}</a></li>
             </ul>
+            {% endif %}
             <p class="footer-copyright">{% blocktranslate trimmed %}CKAN assets are held in trust by Open Knowledge Foundation.{% endblocktranslate %}</p>
         </div>
     </div>
