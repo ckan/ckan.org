@@ -1,9 +1,13 @@
+import html
 import re
+from urllib.parse import urlencode
 
 from django.conf import settings
+from django.templatetags.static import static
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.utils.text import slugify
+from django.utils.html import strip_tags
+from django.utils.text import Truncator, slugify
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 
@@ -18,6 +22,11 @@ from modelcluster.models import ClusterableModel
 from modelcluster.fields import ParentalKey
 from taggit.models import TaggedItemBase
 
+
+SHARE_DESCRIPTION = _(
+    "How governments, NGOs and research institutions around the world use CKAN "
+    "to open up data and change how people access public information."
+)
 
 INVALID_RICHTEXT_PAGE_LINK_REGEX = re.compile(
     r'<a[^>]*\slinktype=(?P<quote>["\"])page(?P=quote)[^>]*\sid=(?P<idquote>["\"])(?P<id>https?://[^"\']+)(?P=idquote)[^>]*>',
@@ -110,7 +119,40 @@ class StoriesPage(Page):
         context["stories"] = stories
         # Add reCAPTCHA site key to context
         context["recaptcha_sitekey"] = settings.RECAPTCHA_PUBLIC_KEY
+        context.update(self.get_share_meta(request, stories))
         return context
+
+    def get_share_meta(self, request, stories):
+        """Link-preview (Open Graph / Twitter) data for <head>.
+
+        Social crawlers don't run JavaScript, so a shared ``?story=<slug>``
+        link must get that story's title and summary in the server-rendered
+        HTML. Matching mirrors stories.js (``slug`` falls back to the id).
+        URLs are built from WAGTAILADMIN_BASE_URL so they are always the
+        public https URL, whatever the proxy passes to Django.
+        """
+        base_url = settings.WAGTAILADMIN_BASE_URL.rstrip("/")
+        page_url = base_url + self.get_url_parts(request)[2]
+        meta = {
+            # The body is the same for every ?story= variant (stories render
+            # client side), so search engines get one canonical URL.
+            "canonical_url": page_url,
+            "share_title": _("CKAN Success Stories"),
+            "share_description": self.search_description or SHARE_DESCRIPTION,
+            "share_url": page_url,
+            "share_image": base_url + static("img/ckan-stories-og.png"),
+        }
+        story_slug = request.GET.get("story")
+        story = next((s for s in stories if s["slug"] == story_slug), None) if story_slug else None
+        if story:
+            summary = html.unescape(strip_tags(story["challenge"])).strip()
+            meta.update({
+                "share_story": story,
+                "share_title": " — ".join(part for part in (story["org"], story["title"]) if part) or meta["share_title"],
+                "share_description": Truncator(" ".join(summary.split())).chars(200) or meta["share_description"],
+                "share_url": f"{page_url}?{urlencode({'story': story['slug']})}",
+            })
+        return meta
 
 
 class StoryItemTag(TaggedItemBase):
