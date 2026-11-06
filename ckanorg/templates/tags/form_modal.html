@@ -1,8 +1,6 @@
 {% load static wagtailcore_tags %}
 {% load wagtailsettings_tags %}
 
-<script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
-
 {% if form_page %}
     <div class="row">
         <div class="col-xs-1" align="center">
@@ -46,26 +44,29 @@
     </div>
 
     <script type="text/javascript">
-        $("#modal-link-{{ form_id }}").on("click", function() {
-            var modal_form = $("#modal-form-{{ form_id }}");
-            var button = $("#modal-button-{{ form_id }}");
-            var required = modal_form.find("input[required], select[required], textarea[required]");
+        // jQuery loads once, at the end of base.html, so wait for the DOM.
+        document.addEventListener("DOMContentLoaded", function() {
+            $("#modal-link-{{ form_id }}").on("click", function() {
+                var modal_form = $("#modal-form-{{ form_id }}");
+                var button = $("#modal-button-{{ form_id }}");
+                var required = modal_form.find("input[required], select[required], textarea[required]");
 
-            // check whether all required fields are fulfilled
-            required.on("blur keyup change", function() {
-                var all_required_filled = true;
+                // check whether all required fields are fulfilled
+                required.on("blur keyup change", function() {
+                    var all_required_filled = true;
 
-                required.each(function() {
-                    if (!$(this).val()) {
-                        all_required_filled = false;
+                    required.each(function() {
+                        if (!$(this).val()) {
+                            all_required_filled = false;
+                        };
+                    });
+
+                    if (all_required_filled) {
+                        button.prop("disabled", false).addClass("modal__btn-primary");
+                    } else {
+                        button.prop("disabled", true).removeClass("modal__btn-primary");
                     };
                 });
-
-                if (all_required_filled) {
-                    button.prop("disabled", false).addClass("modal__btn-primary");
-                } else {
-                    button.prop("disabled", true).removeClass("modal__btn-primary");
-                };
             });
         });
     </script>
