@@ -1,6 +1,21 @@
 {% extends "wagtailmetadata/parts/tags.html" %}
+{% load l10n %}
 
 {% block tags %}
     {{ block.super }}
     <meta name="keywords" content="{{ object.keywords }}">
 {% endblock %}
+
+{% block opengraph %}
+<meta property="og:url" content="{{ object.get_meta_url }}">
+<meta property="og:title" content="{{ object.get_meta_title }}">
+<meta property="og:description" content="{{ object.get_meta_description }}">
+<meta property="og:site_name" content="{{ site_name }}">
+{% if meta_image %}
+<meta property="og:image" content="{{ meta_image }}">
+{% if meta_image_width and meta_image_height %}
+<meta property="og:image:width" content="{{ meta_image_width|unlocalize }}">
+<meta property="og:image:height" content="{{ meta_image_height|unlocalize }}">
+{% endif %}
+{% endif %}
+{% endblock opengraph %}

@@ -1,8 +1,7 @@
 User-agent: *
-Allow: /faq/
-Allow: /faq/essential/
-Allow: /faq/technical/
-Allow: /faq/administrative/
-Allow: /faq/general/
-Allow: /faq/features/
-Allow: /blog/
+Disallow: /admin/
+Disallow: /django-admin/
+Disallow: /accounts/
+Disallow: /search/
+
+Sitemap: https://ckan.org/sitemap.xml
