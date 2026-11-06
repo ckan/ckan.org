@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     #Core Wagtail apps
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
+    'wagtail.contrib.sitemaps',
     'wagtail.contrib.search_promotions',
     'wagtail.contrib.settings',
     'wagtail.embeds',
@@ -55,6 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.auth',
     'django.contrib.sites',
+    'django.contrib.sitemaps',
 
     #Additional apps
     'wagtailmetadata',

@@ -8,6 +8,7 @@ from django.views.generic.base import TemplateView
 from wagtail import urls as wagtail_urls
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.documents import urls as wagtaildocs_urls
+from wagtail.contrib.sitemaps.views import sitemap
 
 from contact.views import ajax_email, ajax_unsubscribe
 from home.views import csrf
@@ -29,6 +30,7 @@ urlpatterns = [
     path("ckan/", include("ckan_pages.urls")),
     path("events/", include("events.urls")),
     path("portals/", include("portals.urls")),
+    path("sitemap.xml", sitemap, name="sitemap"),
     path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
     path("success-stories/", include("stories.urls")),
 ]

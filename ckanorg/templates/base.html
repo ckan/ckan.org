@@ -24,6 +24,12 @@
 
         {% block meta_tags %}{% endblock %}
 
+        {% block canonical %}
+            {% if page and page.url %}
+                <link rel="canonical" href="https://ckan.org{{ request.path }}{% if request.GET.page %}?page={{ request.GET.page|urlencode }}{% endif %}">
+            {% endif %}
+        {% endblock canonical %}
+
         {% block main_css %}
             <link href="{% static 'css/main.css' %}" rel="stylesheet">
             <link rel="stylesheet" href="{% static 'css/slick.css' %}">
