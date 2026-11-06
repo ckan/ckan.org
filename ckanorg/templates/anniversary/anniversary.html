@@ -6,6 +6,7 @@
 {% get_settings %}
 
 {% block head %}
+    <title>{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }} - CKAN{% endif %}</title>
     <meta name="description" content="Celebrating 20 years of CKAN — the world's leading open data management system. Stories, milestones, and the global community behind two decades of open data infrastructure.">
     <meta property="og:title" content="CKAN Turns 20 — Two Decades of Open Data">
     <meta property="og:description" content="20 stories, 20 years. Celebrating the people, portals, and moments that shaped open data worldwide.">
