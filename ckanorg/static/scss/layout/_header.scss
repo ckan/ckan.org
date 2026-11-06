@@ -44,9 +44,9 @@
     background-position: right 20px bottom 3px;
 }
 
-#dropbtn-Solutions:focus,
-#dropbtn-Support:focus,
-#dropbtn-Showcase:focus {
+#dropbtn-Solutions:focus:not(:focus-visible),
+#dropbtn-Support:focus:not(:focus-visible),
+#dropbtn-Showcase:focus:not(:focus-visible) {
   outline: 0;
 }
 
@@ -84,7 +84,7 @@
 .dropdown-content a {
   cursor: pointer;
   color: $medium-gray;
-  font-family: $second-font-sans-serif;
+  font-family: $base-font-sans-serif;
   display: flex;
   align-items: center;
   font-weight: 800;
@@ -102,3 +102,12 @@
   }
 
 .show {display:block;}
+
+// Keyboard focus indicator for the main nav (links and dropdown buttons).
+.nav-menu a:focus-visible,
+.nav-menu button:focus-visible,
+.dropdown-content a:focus-visible {
+  outline: 2px solid $red;
+  outline-offset: 4px;
+  border-radius: 2px;
+}

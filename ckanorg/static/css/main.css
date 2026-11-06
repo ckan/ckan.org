@@ -6690,9 +6690,9 @@ img.dpga-logo {
   background-position: right 20px bottom 3px;
 }
 
-#dropbtn-Solutions:focus,
-#dropbtn-Support:focus,
-#dropbtn-Showcase:focus {
+#dropbtn-Solutions:focus:not(:focus-visible),
+#dropbtn-Support:focus:not(:focus-visible),
+#dropbtn-Showcase:focus:not(:focus-visible) {
   outline: 0;
 }
 
@@ -6730,7 +6730,7 @@ img.dpga-logo {
 .dropdown-content a {
   cursor: pointer;
   color: #666666;
-  font-family: "SF Pro Display Bold", sans-serif;
+  font-family: "SF Pro Display", sans-serif;
   display: flex;
   align-items: center;
   font-weight: 800;
@@ -6749,6 +6749,14 @@ img.dpga-logo {
 
 .show {
   display: block;
+}
+
+.nav-menu a:focus-visible,
+.nav-menu button:focus-visible,
+.dropdown-content a:focus-visible {
+  outline: 2px solid #ED5248;
+  outline-offset: 4px;
+  border-radius: 2px;
 }
 
 .footer {
@@ -7215,7 +7223,6 @@ img.linkdigital-logo {
   color: #666666;
 }
 .nav-menu li.dropdown-menu-item {
-  top: 1px;
   margin-right: 10px !important;
 }
 .nav-menu li:not(:last-child) {
@@ -7226,7 +7233,7 @@ img.linkdigital-logo {
 }
 .nav-menu li a:not(.btn):not(.ann-badge) {
   color: #666666;
-  font-family: "SF Pro Display Bold", sans-serif;
+  font-family: "SF Pro Display", sans-serif;
   display: flex;
   align-items: center;
   font-weight: 800;

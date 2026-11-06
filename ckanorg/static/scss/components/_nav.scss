@@ -58,7 +58,6 @@
 
   li {
     &.dropdown-menu-item {
-      top: 1px;
       margin-right: 10px !important;
     }
 
@@ -74,7 +73,7 @@
 
     a:not(.btn):not(.ann-badge) {
       color: $medium-gray;
-      font-family: $second-font-sans-serif;
+      font-family: $base-font-sans-serif;
       display: flex;
       align-items: center;
       font-weight: 800;
