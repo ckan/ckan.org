@@ -33,10 +33,10 @@
                         {% with menu.menu_items.all as menu_items %}
                             {% for item in menu_items %}
                                 {% is_active request item as active%}
-                                {% if item.link_title == "Solutions" or item.link_title == "Support" %}
+                                {% if item.link_title == "Solutions" or item.link_title == "Support" or item.link_title == "Showcase" %}
                                     {% if item.link_title == "Solutions" %}
                                         <li class="dropdown dropdown-menu-item">
-                                            <button onclick="clickDropdown('{{item.link_title}}')" id="dropbtn-{{item.link_title}}" {% if request.path == "/enterprise" or request.path == "/government" %} class="active"{% endif %}>{{item.link_title}} <span class="support-arrow"></span></button>
+                                            <button onclick="clickDropdown('{{item.link_title}}')" id="dropbtn-{{item.link_title}}" aria-expanded="false" aria-controls="{{item.link_title}}_dropdown" {% if request.path == "/enterprise" or request.path == "/government" %} class="active"{% endif %}>{{item.link_title}} <span class="support-arrow"></span></button>
                                             <div id="{{item.link_title}}_dropdown" class="dropdown-content">
                                                 <a href="/government">{{ _("CKAN for Government") }}</a>
                                                 <a href="/enterprise">{{ _("CKAN for Enterprise") }}</a>
@@ -45,10 +45,20 @@
                                     {% endif %}
                                     {% if item.link_title == "Support" %}
                                         <li class="dropdown dropdown-menu-item">
-                                            <button onclick="clickDropdown('{{item.link_title}}')" id="dropbtn-{{item.link_title}}" {% if request.path == "/community" or request.path == "/commercial" %} class="active"{% endif %}>{{item.link_title}} <span class="support-arrow"></span></button>
+                                            <button onclick="clickDropdown('{{item.link_title}}')" id="dropbtn-{{item.link_title}}" aria-expanded="false" aria-controls="{{item.link_title}}_dropdown" {% if request.path == "/community" or request.path == "/commercial" %} class="active"{% endif %}>{{item.link_title}} <span class="support-arrow"></span></button>
                                             <div id="{{item.link_title}}_dropdown" class="dropdown-content">
                                                 <a href="/community">{{ _("Community Support") }}</a>
                                                 <a href="/commercial">{{ _("Commercial Support") }}</a>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+                                    {% if item.link_title == "Showcase" %}
+                                        {# "Data Portals" keeps the URL set on the Showcase menu item in the admin. #}
+                                        <li class="dropdown dropdown-menu-item">
+                                            <button onclick="clickDropdown('{{item.link_title}}')" id="dropbtn-{{item.link_title}}" aria-expanded="false" aria-controls="{{item.link_title}}_dropdown" {% if request.path|slice:":9" == "/showcase" or request.path|slice:":16" == "/success-stories" %} class="active"{% endif %}>{{item.link_title}} <span class="support-arrow"></span></button>
+                                            <div id="{{item.link_title}}_dropdown" class="dropdown-content">
+                                                <a href="{{ item.link }}">{{ _("Data Portals") }}</a>
+                                                <a href="/success-stories">{{ _("Success Stories") }}</a>
                                             </div>
                                         </li>
                                     {% endif %}
