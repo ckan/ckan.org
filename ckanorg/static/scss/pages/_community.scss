@@ -1,0 +1,80 @@
+// Community page: "Want to get involved?" / "Need help with CKAN?"
+// (templates/snippets/contribute_help_block.html)
+.community-help {
+  padding-top: 56px;
+  padding-bottom: 24px;
+
+  .community-help-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+
+    @media (max-width: 767px) {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+  }
+
+  h3 {
+    font-size: 30px;
+    line-height: 1.15;
+    letter-spacing: -0.3px;
+    color: $dark-black;
+    margin: 0 0 22px;
+
+    &::before {
+      content: "";
+      display: block;
+      width: 28px;
+      height: 3px;
+      background: $red;
+      margin-bottom: 22px;
+    }
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: $davys-gray;
+    text-align: left; // the global justify leaves gaps on narrow screens
+    margin: 0 0 16px;
+  }
+
+  .community-help-links {
+    list-style: none;
+    margin: 28px 0 0;
+    padding: 20px 0 0;
+    border-top: 1px solid $gray-background;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 0;
+      font-size: 16px;
+      color: $dark-black;
+      text-decoration: none;
+      transition: color 0.12s;
+
+      &::before {
+        content: "→";
+        color: $red;
+        font-size: 13px;
+        transition: transform 0.12s;
+      }
+
+      &:hover {
+        color: $red;
+
+        &::before {
+          transform: translateX(3px);
+        }
+      }
+    }
+
+    .is-featured a {
+      font-family: $second-font-sans-serif;
+      color: $red-border;
+    }
+  }
+}
