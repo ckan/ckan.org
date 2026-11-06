@@ -4,6 +4,7 @@
 {% load wagtailimages_tags wagtailcore_tags wagtailmetadata_tags page_tags %}
 
 {% block head %}
+    <title>{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }} - CKAN{% endif %}</title>
     <meta name="description" content="{{ page.title }} - {{ page.subtitle }}">
 {% endblock head %}
 

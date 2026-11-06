@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags %}
 
+{% block head %}
+    <title>{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }} - CKAN{% endif %}</title>
+{% endblock head %}
+
 {% block content %}
 <div class="container py-lg-5">
     <div class="row">
