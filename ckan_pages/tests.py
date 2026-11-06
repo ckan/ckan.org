@@ -40,7 +40,7 @@ class CommunityHelpBlockTests(TestCase):
 
     def test_docs_link_points_to_the_documentation(self):
         # It used to point at "/", the ckan.org home page.
-        self.assertContains(self.response, '<a href="https://docs.ckan.org/en/" target="_blank" rel="noopener">CKAN docs</a>', html=True)
+        self.assertContains(self.response, '<a href="https://docs.ckan.org/en/" target="_blank" rel="noopener noreferrer">CKAN docs</a>', html=True)
 
     def test_rockstar_tickets_use_the_current_github_projects_url(self):
         self.assertContains(self.response, "https://github.com/orgs/ckan/projects/9")
