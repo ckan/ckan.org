@@ -1,10 +1,6 @@
 {% extends "base.html" %}
 {% load wagtailmetadata_tags %}
 
-{% block head %}
-    <meta name="description" content="{{ page.title }} - {{ page.subtitle }}">
-{% endblock head %}
-
 {% block meta_tags %}{% meta_tags %}{% endblock %}
 
 {% block content %}

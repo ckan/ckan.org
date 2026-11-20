@@ -2,10 +2,6 @@
 
 {% load static i18n wagtailimages_tags wagtailcore_tags page_tags wagtailmetadata_tags %}
 
-{% block head %}
-    <meta name="description" content="{{ page.title }} - {{ page.subtitle }}">
-{% endblock head %}
-
 {% block meta_tags %}{% meta_tags %}{% endblock %}
 
 {% block main_css %}

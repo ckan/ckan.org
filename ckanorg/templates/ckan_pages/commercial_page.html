@@ -2,10 +2,6 @@
 {% load static wagtailimages_tags wagtailcore_tags page_tags wagtailmetadata_tags %}
 {% image steward.photo scale-100 as photo %}
 
-{% block head %}
-    <meta name="description" content="{{ page.title }} - {{ page.subtitle }}">
-{% endblock head %}
-
 {% block meta_tags %}{% meta_tags %}{% endblock %}
 
 {% block content %}

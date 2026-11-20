@@ -10,6 +10,8 @@ from wagtail.models import Page, Orderable
 from modelcluster.fields import ParentalKey
 from wagtailmetadata.models import MetadataPageMixin
 
+from ckanorg.metadata import MetaDescriptionFallbackMixin
+
 from blog.models import BlogPostPage
 
 
@@ -70,7 +72,7 @@ class CkanForFeatures(Orderable):
     ]
 
 
-class FeaturesPage(MetadataPageMixin, Page):
+class FeaturesPage(MetaDescriptionFallbackMixin, MetadataPageMixin, Page):
 
     parent_page_types = ["home.HomePage"]
     subpage_types = ["ckan_pages.FeatureDetailPage"]
@@ -185,7 +187,7 @@ class FeedbackSection2(Orderable):
     ]
 
 
-class ShowcasePage(MetadataPageMixin, Page):
+class ShowcasePage(MetaDescriptionFallbackMixin, MetadataPageMixin, Page):
 
     parent_page_types = ["home.HomePage"]
     subpage_types = []
@@ -286,7 +288,7 @@ class WorkingGroups(Orderable):
     ]
 
 
-class CommunityPage(MetadataPageMixin, Page):
+class CommunityPage(MetaDescriptionFallbackMixin, MetadataPageMixin, Page):
 
     parent_page_types = ["home.HomePage"]
     subpage_types = []
@@ -447,7 +449,7 @@ class CommercialSupportItem(Orderable):
     ]
 
 
-class CommercialPage(MetadataPageMixin, Page):
+class CommercialPage(MetaDescriptionFallbackMixin, MetadataPageMixin, Page):
 
     parent_page_types = ["home.HomePage"]
     subpage_types = []
@@ -524,7 +526,7 @@ class WorkingGroupItems(Orderable):
     ]
 
 
-class CkanForPage(MetadataPageMixin, Page):
+class CkanForPage(MetaDescriptionFallbackMixin, MetadataPageMixin, Page):
 
     parent_page_types = ["home.HomePage"]
     subpage_types = []
@@ -638,7 +640,7 @@ class CkanForPage(MetadataPageMixin, Page):
         return context
 
 
-class FeatureDetailPage(MetadataPageMixin, Page):
+class FeatureDetailPage(MetaDescriptionFallbackMixin, MetadataPageMixin, Page):
 
     parent_page_types = ["ckan_pages.FeaturesPage"]
     subpage_types = []
