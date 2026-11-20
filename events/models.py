@@ -25,6 +25,8 @@ from wagtail.fields import StreamField
 from wagtail.models import Orderable, Page
 from wagtailmetadata.models import MetadataPageMixin
 
+from ckanorg.metadata import MetaDescriptionFallbackMixin
+
 COMMON_PANELS = (
     FieldPanel("slug"),
     FieldPanel("seo_title"),
@@ -189,7 +191,7 @@ class EventPageForm(WagtailAdminPageForm):
         return cleaned_data
 
 
-class EventPostPage(MetadataPageMixin, Page): # type: ignore
+class EventPostPage(MetaDescriptionFallbackMixin, MetadataPageMixin, Page): # type: ignore
     """
     EventPostPage represents a detailed event page within the CKAN.org site.
 

@@ -14,6 +14,8 @@ from wagtail.models import Page
 from wagtailcodeblock.blocks import CodeBlock
 from wagtailmetadata.models import MetadataPageMixin
 
+from ckanorg.metadata import MetaDescriptionFallbackMixin
+
 
 COMMON_PANELS = (
     FieldPanel("slug"),
@@ -24,7 +26,7 @@ COMMON_PANELS = (
 )
 
 
-class FaqPage(MetadataPageMixin, Page):
+class FaqPage(MetaDescriptionFallbackMixin, MetadataPageMixin, Page):
     """Frequently Asked Questions Base Page"""
 
     parent_page_types = ["home.HomePage"]
@@ -72,7 +74,7 @@ class FaqPage(MetadataPageMixin, Page):
         return context
 
 
-class FaqCategoryPage(MetadataPageMixin, Page):
+class FaqCategoryPage(MetaDescriptionFallbackMixin, MetadataPageMixin, Page):
     """FAQ Category Model"""
 
     parent_page_types = ["faq.FaqPage"]
@@ -134,7 +136,7 @@ class FaqCategoryPage(MetadataPageMixin, Page):
         return context
 
 
-class FaqQuestionPage(MetadataPageMixin, Page):
+class FaqQuestionPage(MetaDescriptionFallbackMixin, MetadataPageMixin, Page):
     """FAQ Question with Answer Model"""
 
     parent_page_types = ["faq.FaqPage"]
