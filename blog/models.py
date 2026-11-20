@@ -23,6 +23,8 @@ from wagtail.search import index
 from wagtailcodeblock.blocks import CodeBlock
 from wagtailmetadata.models import MetadataPageMixin
 
+from ckanorg.metadata import MetaDescriptionFallbackMixin
+
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey
 
@@ -161,7 +163,7 @@ class BlogPageTag(TaggedItemBase):
     )
 
 
-class BlogListingPage(MetadataPageMixin, Page):
+class BlogListingPage(MetaDescriptionFallbackMixin, MetadataPageMixin, Page):
     parent_page_types = ["home.HomePage"]
     subpage_types = ["blog.BlogPostPage"]
     max_count = 1
@@ -222,7 +224,7 @@ class RadioSelectBlock(blocks.ChoiceBlock):
         self.field.widget = forms.RadioSelect(choices=self.field.widget.choices)
 
 
-class BlogPostPage(MetadataPageMixin, Page):
+class BlogPostPage(MetaDescriptionFallbackMixin, MetadataPageMixin, Page):
     parent_page_types = ["blog.BlogListingPage"]
     subpage_types = []
 
